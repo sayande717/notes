@@ -1,11 +1,10 @@
-STATUS: in-progress
 # Notes
 A place to store my notes.
 
 ## Contents
 I. **Cheat Sheets**
 - GitHub 
-- Markdown [IN PROGRESS]
+- Markdown
 
 <hr>
 

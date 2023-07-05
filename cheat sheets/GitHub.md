@@ -1,5 +1,4 @@
-**STATUS**: in-progress
-# **GitHub Cheat Sheet**
+# **GitHub** Cheat Sheet
 ## I. Steps to Contribute to a repository.
 1. Fork the Repository to your own account. This creates a clone of the repository **in your own GitHub account**.
    ![Fork](res/00-GitHub-fork.png)
