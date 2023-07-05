@@ -1,0 +1,5 @@
+> Good First Issue Finder (EddieHub): https://finder.eddiehub.io/
+> Kimo.ai: 
+>> Linux Fundamentals : https://kimo.ai/paths/645384221a94162647918bd7
+> FreeCodeCamp: https://www.freecodecamp.org/
+>> Markdown: 

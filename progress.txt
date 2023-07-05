@@ -1,0 +1,10 @@
+Tasks:
+> LeetCode :: 1 hour :: 1-2 questions
+> Aptitude :: 45 minutes :: 10 questions
+
+> Backend Engineer (KIMO.ai) :: 1.5 hours :: 2 sections
+>> Link: https://kimo.ai/paths/645384221a94162647918bd7
+>> CURRENT :: Linux Fundamentals :: 11 sections :: https://kimo.ai/courses/63aac26c348a49f7e7c2f16c
+
+{PROGRESS}
+[05.07.23]
