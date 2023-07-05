@@ -23,7 +23,7 @@
 
 6. You can't push your changes directly in the main branch of the repository, since it will lead to a lot of errors & conflicts. So, you need to create a new branch. Here's how you do it: <br>
    ```bash
-   git branch -M <BRANCH-NAME> # Name can be anything as long as you can identify it.
+   git branch -m <BRANCH-NAME> # Name can be anything as long as you can identify it.
    ```
 
 7. Finally, push your changes to the branch you created. <br>
