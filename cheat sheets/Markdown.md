@@ -1,20 +1,36 @@
 # **Markdown** Cheat Sheet
-## Notes:
+# Index
+- [**General Notes**](#general-notes)
+- [**Headings**](#headings)
+- [**Text Formatting**](#text-formatting)
+- [**Lists**](#lists)
+- [**Check-lists**](#check-lists)
+- [**Links / URL's**](#links--urls)
+- [**Image \& HTML**](#image--html)
+- [**Code Blocks**](#code-blocks)
+- [**Inline Code Block**](#inline-code-block)
+- [**Tables**](#tables)
+- [**Quotes**](#quotes)
+- [**Detail pane** (collapsible)](#detail-pane-collapsible)
+- [**Link to a section**](#link-to-a-section)
+
+## **General Notes**
 - In most cases, you can use HTML tags to define the style of markdown text.
 - Listed here are the basic elements of Markdown. **This is not an exhaustive list**.
 
 ## **Headings**
+<!-- Ignore the comments -->
 - Default
   # Heading 1
-  ## Heading 2
-  ### Heading 3
+  ## Heading 2      <!-- omit from toc -->
+  ### Heading 3     <!-- omit from toc -->
   #### Heading 4
   ##### Heading 5
   ###### Heading 6
 - With formatting
   # **Heading 1**
-  ## *Heading 2*
-  ### ~~Heading 3~~
+  ## *Heading 2*    <!-- omit from toc -->
+  ### ~~Heading 3~~ <!-- omit from toc -->
 
 <hr>
 
@@ -47,34 +63,24 @@
     - Unordered item 1
     - Unordered item 2
     - Unordered item 3
-
 <hr>
 
 ## **Check-lists**
 * [x] Checked item 1
 * [ ] Unchecked item 2
-
 <hr>
 
 ## **Links / URL's**
 Link 1 - [DuckDuckGo](https://duckduckgo.com/) <br>
 Link 2 - [GitHub](https://github.com/)
-
 <hr>
 
 ## **Image & HTML**
 ![Image](res/05-Markdown-Unsplash.png) <br>
 Photo by <a href="https://unsplash.com/@wilstewart3?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Wil Stewart</a> on <a href="https://unsplash.com/images/nature?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
 <hr>
 
-## **Inline Code Block**
-`<hr> Everything within a code block is printed as-is on the screen.` <br>
-`<br> Hello, World! <br>`
-
-<hr>
-
-## Code Blocks
+## **Code Blocks**
 - Bash
   ```bash
   pacman -Sy
@@ -102,7 +108,11 @@ Photo by <a href="https://unsplash.com/@wilstewart3?utm_source=unsplash&utm_medi
   + This line was added
   - This line was removed
   ```
+<hr>
 
+## **Inline Code Block**
+`<hr> Everything within a code block is printed as-is on the screen.` <br>
+`<br> Hello, World! <br>`
 <hr>
 
 ## **Tables**
@@ -137,3 +147,15 @@ Photo by <a href="https://unsplash.com/@wilstewart3?utm_source=unsplash&utm_medi
 </details>
 
 <hr>
+
+## **Link to a section**
+- This allows us to create a hyperlink that links to a particular portion of the same document. <br>
+  <details>
+    <summary>Rules</summary>
+    - The link must start with a #. <br>
+    - All the words must be in lowercase. <br>
+    - Use `-` for all delimiters like spaces, symbols, etc.
+  </details>
+
+[Image](#image--html) <br>
+[Go back to Topic #1](#markdown-cheat-sheet)

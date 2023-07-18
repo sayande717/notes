@@ -6,3 +6,4 @@ Tasks:
 > Getting Started with ML (FreeCodeCamp) :: 2 hours, 20 minutes/day [2 weeks]
 
 {PROGRESS}
+> Getting Started with ML (FreeCodeCamp) - till 27:46
