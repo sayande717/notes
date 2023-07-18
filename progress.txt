@@ -1,10 +1,8 @@
 Tasks:
 > LeetCode :: 1 hour :: 1-2 questions
-> Aptitude :: 45 minutes :: 10 questions
-
-> Backend Engineer (KIMO.ai) :: 1.5 hours :: 2 sections
->> Link: https://kimo.ai/paths/645384221a94162647918bd7
->> CURRENT :: Linux Fundamentals :: 11 sections :: https://kimo.ai/courses/63aac26c348a49f7e7c2f16c
+> Aptitude :: 1 hour :: 15 questions
+> ML (College) :: 2 hours // Research (College) :: 2 hours
+> Portfolio using React.js :: 2 hours, 15 minutes/day [1 week]
+> Getting Started with ML (FreeCodeCamp) :: 2 hours, 20 minutes/day [2 weeks]
 
 {PROGRESS}
-[05.07.23]
