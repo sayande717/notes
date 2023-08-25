@@ -3,12 +3,11 @@ A place to store my notes.
 
 ## Contents
 I. **Cheat Sheets**
-- GitHub 
+- Git & GitHub 
 - Markdown
 
-<hr>
-
-II. **Courses**
-- Linux Fundamentals [IN PROGRESS]
+II. Topics
+- DevOps
+  - Cloud Computing
 
 <hr>

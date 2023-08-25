@@ -1,9 +1,0 @@
-Tasks:
-> LeetCode :: 1 hour :: 1-2 questions
-> Aptitude :: 1 hour :: 15 questions
-> ML (College) :: 2 hours // Research (College) :: 2 hours
-> Portfolio using React.js :: 2 hours, 15 minutes/day [1 week]
-> Getting Started with ML (FreeCodeCamp) :: 2 hours, 20 minutes/day [2 weeks]
-
-{PROGRESS}
-> Getting Started with ML (FreeCodeCamp) - till 27:46
