@@ -16,6 +16,15 @@ Tasks:
 - Blog
 - DSA: GeeksForGeeks, LeetCode, DSA Bootcamp till 35:15
 - NPTEL, till **Summary - Cloud Computing**
-- 
+- DuoLingo
+
+### 26.08.23
+- DSA: GeeksForGeeks, LeetCode
+- DuoLingo
+
+## 27.08.23
+- DSA: GeeksForGeeks x2, LeetCode
+- DuoLingo
+- NPTEL, till **Week 1**
 
 
