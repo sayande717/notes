@@ -14,7 +14,8 @@ Tasks:
 ## Progress
 ### 25.08.23
 - Blog
-- DSA: GeeksForGeeks, LeetCode, DSA Bootcamp till 35:15
+- DSA: GeeksForGeeks, LeetCode
+- DSA Bootcamp `Complete Git and GitHub Tutorial` till **35:15**
 - NPTEL, till **Summary - Cloud Computing**
 - DuoLingo
 
@@ -27,4 +28,11 @@ Tasks:
 - DuoLingo
 - NPTEL, till **Week 1**
 
+## 28.08.23
+- DSA: GeeksForGeeks, LeetCode
+- DSA Bootcamp `Complete Git and GitHub Tutorial` **complete**
+- Blog
 
+## 29.08.23
+- DSA: GeeksForGeeks
+- NPTEL, till **Exploring PaaS with App Engine**

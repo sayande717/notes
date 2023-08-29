@@ -1,17 +1,13 @@
 # **Git & Github** Cheat Sheet
 - [Why Git?](#why-git)
-- [General git commands](#general-git-commands)
 - [Contribute to a repository](#contribute-to-a-repository)
 - [Create your own repository and commit to it](#create-your-own-repository-and-commit-to-it)
+- [Things to remember](#things-to-remember)
 
 ## Why Git?
 1. You can maintain the history of your project. Afterwards, you can go back in time to check which person made which kind of change to which file in the project, what kinds of changes were made, etc.
 2. It's a version control system, where you basically capture a snapshot of a project and store it as a 'version'.
 3. `Git` is a version control system, and `Github` is the front-end platform that allows us to see & manage the repositories.
-
-## General git commands
-- `git status`: Use this to check the current status at any time, as long as you're in the repository.
-- `git log`: Use this to get a history of all commits you made, in your local machine.
 
 ## Contribute to a repository
 1. Fork the Repository to your own account. This creates a clone of the repository **in your own GitHub account**.
@@ -37,12 +33,13 @@
 
 6. You can't push your changes directly in the main branch of the repository, since it will lead to a lot of errors & conflicts. So, you need to create a new branch. Here's how you do it: <br>
    ```bash
-   $ git branch -m <BRANCH-NAME> # Name can be anything as long as you can identify it.
+   $ git branch <BRANCH-NAME> # Try to keep the branch name relevant.
+   $ git checkout <BRANCH-NAME> # Optional, this tells git to push all future commits to this branch.
    ```
 
 7. Finally, push your changes to the branch you created. <br>
    ```bash
-   $ git push -u origin changes # Assuming the branch name is 'changes'.
+   $ git push origin changes # Assuming the branch name is 'changes'.
    ```
 
 8. The final step is to submit a pull-request. You need to do this on the Github page.
@@ -95,3 +92,10 @@
    To https://github.com/sayande717/temp.git
    * [new branch]      main -> main
    ```
+
+## Things to remember
+- `git status`: Use this to check the current status at any time, as long as you're in the repository.
+- `git log`: Use this to get a history of all commits you made, in your local machine.
+- If you're contributing to a repository that's not yours, make sure you create a separate branch before committing (i.e. never commit to the main branch). Also, if you're working on distinct features/files within the same repositories, create separate branches for each of them.
+- A pull request can be associated with only 1 branch, so if you make further changes on the same branch, git will auto-link it to your current pull request.
+- Make sure you sync your forked repository from time to time to stay up-to-date with the upstream repository.
