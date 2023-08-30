@@ -34,5 +34,12 @@ Tasks:
 - Blog
 
 ## 29.08.23
-- DSA: GeeksForGeeks
+- DSA: GeeksForGeeks, LeetCode
 - NPTEL, till **Exploring PaaS with App Engine**
+- Blog: Medium
+- DuoLingo
+
+## 30.08.23
+- DuoLingo
+- DSA: GeeksForGeeks, LeetCode, DSA Bootcamp `Introduction to Programming - Types of Languages, Memory Management` **complete**
+- Blog: Hashnode
