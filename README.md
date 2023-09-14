@@ -1,17 +1,16 @@
-# Notes
-A place to store my notes.
+# Notes [WIP]
 
-## Contents
-I. **Cheat Sheets**
-- Git & GitHub 
-- Markdown
+## Contains everything I've learnt so far.
 
-II. Topics
-- **DSA** (Data Structures & Algorithms)
-- **DSA Bootcamp** by Kunal Kushwaha
+To clone this repository to your local system, run:
+```bash
+https://github.com/sayande717/notes.git
+```
+
+- [Coding Logic](./topics/00-Coding%20Logic.md)
+- [DSA (Data Structures & Algorithms)](./topics/01-DSA.md)
+- [DSA Bootcamp](./topics/02-DSA%20Bootcamp.md) `by Kunal Kushwaha`
   -  Git & Github
   -  Introduction to Programming
-- **DevOps**
+- [DevOps](./topics/03-DevOps.md)
   - Cloud Computing
-
-<hr>
