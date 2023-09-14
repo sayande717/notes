@@ -1,4 +1,4 @@
-# Notes on **- DSA (Data Structures & Algorithms)**
+# Notes on **DSA (Data Structures & Algorithms)**
 
 - [Data Structures](#data-structures)
     - [Sliding Window](#sliding-window)
