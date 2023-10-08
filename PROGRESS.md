@@ -102,3 +102,6 @@
 ## 18.09.23
 - Duolingo
 - Discord Bot Temperature API
+
+## 08.10.22
+- DSA: LeetCode (2), GeeksForGeeks (1)
