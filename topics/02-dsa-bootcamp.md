@@ -5,6 +5,8 @@
 - [Introduction to Programming](#introduction-to-programming)
     - [Types of Languages](#types-of-languages)
     - [How variables \& objects are stored.](#how-variables--objects-are-stored)
+- [Binary Trees](#binary-trees)
+    - [The data structure has been detailed in this section.](#the-data-structure-has-been-detailed-in-this-section)
 
 
 ## Git & Github
@@ -42,3 +44,8 @@ System.out.print(a); // This will print 20.
 ```
 Here, since both a & b are pointing to the same object i.e. `10`, when we're assigning the value of `20` to b, the original object is being modified. <br>
 If there is an object that does have a reference variable pointing to it, the garbage collector will remove those objects from memory automatically.
+
+
+## Binary Trees
+
+### The data structure has been detailed in [this](./01-DSA.md#binary-tree) section.

@@ -1,22 +1,35 @@
 # Tasks:
+## Placement
 - DSA
-  - [Kunal Kushwaha](https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ) :: 1h
-  - [LeetCode](https://leetcode.com/problemset/all/?page=1&sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJBQ19SQVRFIn1d&difficulty=EASY&listId=wpwgkgt) :: 1h
-- [GeeksForGeeks](https://practice.geeksforgeeks.org/problem-of-the-day) :: 1h
-- [Discord Bot ChatGPT](https://www.youtube.com/watch?v=BP-w99ZINTc) :: 30 minutes
-- Duolingo - Spanish :: 0.5h
+    - [Kunal Kushwaha](https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ) :: 1h
+    - [LeetCode](https://leetcode.com/problemset/all/?page=1&sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJBQ19SQVRFIn1d&difficulty=EASY&listId=wpwgkgt) :: 1h
+    - [GeeksForGeeks](https://practice.geeksforgeeks.org/problem-of-the-day) :: 1h
 - Aptitude - [IndiaBix](https://www.indiabix.com/aptitude/problems-on-trains/) :: 1h
+
+[IT Development]
 - Blog - [Hashnode](https://hashnode.com/@sayan713) :: 1h
+- Cybersecurity - [HackTheBox](https://app.hackthebox.com/starting-point) :: 2h
+- [Github](https://github.com/notifications) :: 
 
-<br> Total: 7h
+[Just for fun]
+- [Typing.com](https://www.typing.com/student/lessons) :: 20 minutes
+- [Duolingo](https://www.duolingo.com/learn) :: 0.5h
 
-# Targets
-## September
-- Discord bot integration with ChatGPT - https://www.youtube.com/watch?v=BP-w99ZINTc :: September 15 to 20
-- Git CI/CD - https://youtu.be/R8_veQiYBjI :: September 21 to 23
-- Github Page & Resume - September 24 to 25
-- JavaScript - https://youtu.be/qrFjd-NH0CU :: September 26 to October 5
-- Basic bot tasks - October 6 to 8
+[Projects]
+- Github Pages & Resume
+- Git CI/CD :: https://youtu.be/R8_veQiYBjI
+
+
+# Timings
+## Daily
+1. Morning 0: DSA, Aptitude
+2. Morning 1: Blog, Typing
+3. Afternoon: HackTheBox, Github/Personal projects
+4. Evening: Duolingo
+5. Night: Read books
+## Not Daily
+1. **Monday** to **Thursday**: Personal projects
+2. **Friday** to **Sunday**: Github
 
 # Lists
 ## **DSA BootCamp** by Kunal Kushwaha (!COMPLETE)
@@ -71,3 +84,21 @@
 - Setup VIM
 - Duolingo
 
+## 15.09.23
+- Duolingo
+- DSA: DSA Bootcamp `Binary Trees Tutorial - Introduction + Traversals + Code ｜ Binary Search Trees (BST)` till 1:01:31
+- Discord Bot Temperature API
+
+## 16.09.23
+- Duolingo
+- Typing
+- Blog: Hashnode
+
+## 17.09.23
+- Duolingo
+- Discord Bot Temperature API
+- DSA: DSA Bootcamp `Binary Trees Tutorial - Introduction + Traversals + Code ｜ Binary Search Trees (BST)` till 1:27:45
+
+## 18.09.23
+- Duolingo
+- Discord Bot Temperature API
