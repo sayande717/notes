@@ -7,12 +7,12 @@
 - Aptitude - [IndiaBix](https://www.indiabix.com/aptitude/problems-on-trains/) :: 1h
 
 [IT Development]
-- Blog - [Hashnode](https://hashnode.com/@sayan713) :: 1h
+- Blog - [Hashnode](https://hashnode.com/draft/64ec7748ce91e7000f30bdfa) :: 1h
 - Cybersecurity - [HackTheBox](https://app.hackthebox.com/starting-point) :: 2h
 - [Github](https://github.com/notifications) :: 
 
 [Just for fun]
-- [Typing.com](https://www.typing.com/student/lessons) :: 20 minutes
+- [MonkeyType](https://monkeytype.com/) :: 10 minutes
 - [Duolingo](https://www.duolingo.com/learn) :: 0.5h
 
 [Projects]
@@ -105,3 +105,5 @@
 
 ## 08.10.22
 - DSA: LeetCode (2), GeeksForGeeks (1)
+- Blog: Hashnode
+- Typing
