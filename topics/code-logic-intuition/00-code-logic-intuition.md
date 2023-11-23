@@ -2,9 +2,6 @@
 
 - [Points to remember:](#points-to-remember)
 - [Problems: **LeetCode**](#problems-leetcode)
-    - [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
-    - [26. Remove Duplicates from Sorted Array](#26-remove-duplicates-from-sorted-array)
-    - [121. Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)
 - [Problems: **GeeksForGeeks**](#problems-geeksforgeeks)
     - [Q. Insert in a Sorted List](#q-insert-in-a-sorted-list)
     - [Q. Insert in a Sorted List](#q-insert-in-a-sorted-list-1)
@@ -29,42 +26,7 @@
 
 
 ## Problems: **LeetCode**
-### 387. First Unique Character in a String
-- **Problem Statement**: [External Link](https://leetcode.com/problems/first-unique-character-in-a-string/description/)
-- **Description**: Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
-- **Data Structure**: `Hashmap`
-- **Logic**:
-    1. Use the hashmap to store the frequency of all the elements.
-    2. Traverse the hashmap. Return the first element whose frequency is 1.
-- **Implementation**: [Code](./code/leetcode/1.java)
 
-### 26. Remove Duplicates from Sorted Array
-- **Problem Statement**: [External Link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
-- **Description**: Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums. Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
-    - Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
-    - Return k.
-- **Data Structure**: `Array`
-- **Logic**:
-    1. If length of array is 1, return 1.
-    2. Initialize index where unique elements should be placed, `addIndex`, as `1`. It it set to 1 to accomodate the first element (at index 0) of the array.
-    3. Traverse through the array in the range (0 to nums.length-2).
-        1. If nums[index] is less than nums[index+1], the elements are unique. In this case, place nums[index+1] in index `addIndex`.
-        2. Increment `addIndex` by 1.
-    4. Return `addIndex`.
-- **Implementation**: [Code](./code/leetcode/2.java)
-
-### 121. Best Time to Buy and Sell Stock
-- **Problem Statement**: [External Link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
-- **Description**: You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return `0`.
-- **Data Structure**: `Array`
-- **Logic**:
-    1. Assume lowest price to be the `current price` at `day 1`.
-    2. Traverse through the `price[]` array.
-        1. If the `price at the current index` is less than `lowest price`, replace it.
-        2. Calculate the current profit at every step. It is the difference between the `price at the current index` & the `current lowest price`.
-        3. If `current profit` is higher than `highest profit`, replace it.
-    3. At the end, we will have the `highest profit` we can earn, which is the value to be returned.
-- **Implementation**: [Code](./code/leetcode/3.java)
 
 ## Problems: **GeeksForGeeks**
 ### Q. Insert in a Sorted List
