@@ -1,5 +1,0 @@
-# Tasks:
-## Placement
-
-# Important Dates:
-
