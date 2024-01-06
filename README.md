@@ -8,3 +8,6 @@ git clone https://github.com/sayande717/notes.git
 ```
 
 ## Topics:
+- Code
+    - [LeetCode](./code/leetcode/)
+    - [GeeksForGeeks](./code/geeksforgeeks/)
