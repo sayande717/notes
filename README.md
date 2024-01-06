@@ -1,3 +1,7 @@
+---
+title: Notes
+---
+
 # Notes
 
 ## Contains everything I've learnt so far.
