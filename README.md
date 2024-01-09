@@ -1,20 +1,18 @@
----
-title: Notes
----
-
-# Notes
-
-## Contains everything I've learnt so far.
 
 To clone this repository to your local system (using HTTPS), run:
+
 ```bash
 git clone https://github.com/sayande717/notes.git
 ```
 
-## Topics:
-- Code
-    - [LeetCode](./code/leetcode/README.md)
-    - [GeeksForGeeks](./code/geeksforgeeks/README.md)
+# Topics:
+| **Name** | **Notes** | **References** | **Progress (Self)** | **Status** |
+| :--- | :---: | :---: | :---: | :---: |
+| Computer Networks | [link](./topics/Computer-Networks.md) | [Gate Smashers](https://www.youtube.com/watch?v=JFF2vJaN0Cw&list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_&pp=iAQB) \| [Kunal Kushwaha](https://www.youtube.com/watch?v=IPvYjXCsTg8&pp=ygUNa3VuYWwgbmV0d29yaw%3D%3D) | null | `Not Started` |
+| Discreet Mathematics | [link](./topics/Discreet-Mathematics.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiH2wwES9vPWsEL6ipTaUSl3) | null | `Not Started` |
+| Database Systems | [link](./topics/Database-Systems.md) | [Gate Smashers](https://www.youtube.com/watch?v=kBdlM6hNDAE&list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y&pp=iAQB) | null | `Not Started` |
+| Operating Systems | [link](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/watch?v=bkSWJJZNgf8&list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p&pp=iAQB) | null | `Not Started` |
+| Compiler Design | [link](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/watch?v=XUsw5igq4DM&list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc&pp=iAQB) | null | `Not Started` |
+| Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/watch?v=u8JZ9gU5o4g&list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa&pp=iAQB) | null | `Not Started` |
 
-- Theory
-    - [Computer Networks](./theory/Computer-Networks.md)
+<hr>
