@@ -62,8 +62,6 @@
 - The entire string within inverted comma is taken as a single token, assuming " " (space) is the separator. Also, the inverted commas themselves are not counted as tokens.
 - (DFA or NFA) Finite Automata (DFA, NFA) is used here.
 
-
-
 # Parser (Syntax Analyzer) \[VVI\]
 # Semantic Analysis
 # Intermediate Code Generation \[VI\]
