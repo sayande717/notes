@@ -15,4 +15,6 @@ git clone https://github.com/sayande717/notes.git
 | Operating Systems | [link](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | null | `Not Started` |
 | Compiler Design | [link](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | null | `Not Started` |
 | Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | null | `Not Started` |
+
 <hr>
+
