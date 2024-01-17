@@ -9,7 +9,7 @@
 
 ## Null/Empty set
 ### A set with no elements, denoted by Φ or {}.
-- Cardinality of an empty is 0.
+- Cardinality of an empty set is 0.
 - {Φ} is not an empty set.
 - Φ is present in every set.
 
