@@ -4,27 +4,27 @@
 ## Algorithm Analysis
 ### The process of comparing two algorithms with respect to time, space, etc.
 - Priori analysis:
-    - Analysizing before execution, is not dependent on hardware.
+    - Analyzing before execution, is not dependent on hardware.
     - We count the number of times a line of code executes.
     - Preferred, because it has an uniform value.
     - We use Asymptotic notation, like Big O to denote the time complexity.
 - Posterior Analysis:
-    - Analysizing after execution, is dependent on hardware.
+    - Analyzing after execution, is dependent on hardware.
     - We determine the amount of time an algorithm takes to execute on a particular hardware platform.
 
 ## Asymptotic Notation, also check [Algorithm Analysis](algorithm-analysis)
 - It is a mathematical way of representing the time complexity.
-- Logic, let' s take the example of a notebook.
+- Example: Let' s take the example of a notebook.
     - Best-case: I find the topic right on the first page, just after opening the notebook.
     - Worst-case: I find the topic on the last page of the notebook.
     - Average-case: I find the topic somewhere in the middle of the notebook, after traversing the pages one by one.
 
 ### Big-oh (O)
 - Worst-case | Upper Bound
-- f(n) = O g(n), f(n) \leq c.g(n)$
+- $f(n) = O g(n), f(n) \leq c.g(n)$
     - c is the constant, $c > 0$
     - k is the point where $f(n)$ and $g(n)$ intercept, $k \geq 0$
-    - $n \geq k $
+    - $n \geq k$
 - **Example**: $f(n)=2n^2+n$
     - Find the **closest largest** term such that $g(n)  \geq f(n)=2n^2+n$. The term is $n^2$.
     - So, $(2n^2+n) \leq c.g(n^2)$
@@ -56,7 +56,6 @@
     - So, $2n^2 \leq (2n^2+n) \leq 3n^2$
     - This means that between the values $c=2$ & $c=3$ and $g(n)=n^2$, the condition will hold true.
 
-# Asymptotic Notation (Big O)
 # Time & Space Complexity (VVI)
 # The Algorithms themselves
 # 

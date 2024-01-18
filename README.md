@@ -14,7 +14,8 @@ git clone https://github.com/sayande717/notes.git
 | Database Systems | [link](./topics/Database-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y) | till Lec-3 | `In Progress` |
 | Operating Systems | [link](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | null | `Not Started` |
 | Compiler Design | [link](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
-| Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | null | `Not Started` |
+| Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-1.3 | `In Progress` |
+| Digital Logic | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till Implement all Gates ... | `In Progress` |
 
 <hr>
 
