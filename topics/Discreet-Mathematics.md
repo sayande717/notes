@@ -1,5 +1,22 @@
 # Set Theory
 
+## Formulae
+### FRL Reflexive Relations
+- Total number of relations: $n^2$
+- Total number of Diagonal elements: $n$
+- Total number of Non-Diagonal elements: Total number of elements in AxA - Total number of diagonal elements = $n^2-n$
+- Total number of reflexive relations: $2^{Non-Diagonal}$ = $2^{n^2-n}$
+- Total number of non-reflexive relations: $2^{n^2}-2^{n^2-n}$
+- Smallest possible size: $n$
+- Largest possible size: $n^2$
+
+### FRL Irreflexive Relations
+- Total number of Non-Diagonal elements: Total number of elements in AxA - Total number of diagonal elements = $n^2-n$
+- All non-reflexive relations are not irreflexive relations.
+- Total number of irreflexive relations: $2^{n^2-n}$
+- Smallest possible size: 0 ($\{\}$)
+- Largest possible size: $n^2-n$
+
 ## Set
 ### A **well-defined** **unordered** collection of distinct elements.
 - Unordered: Set {1,2,3,4} is same as {2,3,4,1}.
@@ -46,8 +63,44 @@
 ## Relations, also check [Cartesian Product](#cartesian-product)
 ### If A and B are two sets and AxB is their cartesian product, then **any subset of AxB can form a relation from A to B**.
 - **Example**:
-    - {(a,1),(a,2)}         | Valid
-    - {(b,1),(b,2),(a,1)}   | Valid
-    - {(1,a),(2,a)}         | Not Valid
+    - $\{(a,1),(a,2)\}$         | Valid
+    - $\{(b,1),(b,2),(a,1)\}$   | Valid
+    - $\{(1,a),(2,a)\}$         | Not Valid
 - Total number of relations: 2^(mxn).
 
+### Reflexive Relation:
+- [Formulae](frl-reflexive-relations)
+- A Relation 'R' on a set 'A' is said to be Reflexive if $(x,x)∊R ∀ x∊A$
+- Every element of a set is related to itself.
+- Points to remember:
+    1. All elements must be present. 
+    2. All of them must be related to themselves.
+    3. After putting in all valid elements, we can put extra elements.
+    4. The difference between a diagonal relation is that a reflexive relation may also contain extra elements.
+- Example 0: $A = \{1,2,3\}$
+    - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
+    - Possible Reflexive relations:
+        - {(1,1),(2,2),(3,3)}: *Smallest*
+        - {(1,1),(2,2),(3,3),(2,1)}: *We may also put extra elements as long as the original condition has been satisfied.*
+        - {(1,1),(2,2),(3,3),(2,1),(2,3)}
+        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1)}
+        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2)}
+        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2),(3,3)}: *Largest*
+- Example 1: Check for reflexive relation: {$(x,y)$, $x-y$ is an integer}
+    - (2,3) cannot be in an answer, since it doesn't satisfy point 2.
+    - (1,1),(2,2),(3,3), etc. will satisfy the equation, as $1-1=0$, which is an integer. So **it is a reflexive relation**.
+- Example 2: Check for reflexive relation: {$(x,y)$, $x-y$ is an odd number}
+    - (1,1),(2,2),(3,3), etc. will not satisfy the equation, as $1-1=0$, which is not an odd number. So **it is not a reflexive relation**.
+
+### Irreflexive Relation:
+- [Formulae](frl-irreflexive-relations)
+- A Relation 'R' on a set 'A' is said to be Irreflexive if $(x,x)∉R\ ∀\ x∊A$
+- No element of the set should be related to itself.
+- Points to remember:
+    1. We exclude all diagonal elements, and include the non-diagonal elements.
+    2. A not reflexive relation is not the same as an Irreflexive relation. Example:
+        - $A=\{1,2,3\}$, $R=\{(1,1),(2,2)\}$
+        - Here, R is not a reflexive relation since it does not include (3,3). But, R is not in Irreflexive relation either, because it includes (1,1) & (2,2). So, it is just not a reflexive relation.
+- Example 0: $A = \{1,2,3\}$
+    - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
+    - $R = \{(1,2),(1,3),(2,1),(2,3),(3,1),(3,2)\}$
