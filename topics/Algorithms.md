@@ -47,12 +47,12 @@
 
 ### Theta (θ)
 - Average-case | Between Upper & Lower Bound
-    - $f(n) = θ g(n)$, $c$<sub>1</sub>$.g(n) \leq f(n) \leq c$<sub>2</sub>$.g(n)$
+    - $f(n) = θ g(n)$, $c_1.g(n) \leq f(n) \leq c_2.g(n)$
 - **Example**: $f(n)=2n^2+n$
     - Find both the **closest smallest** term and **closest largest** term, for $g(n)$. **Both the terms are same**, $n^2$.
-    - So, $c$<sub>1</sub>$.n^2 \leq (2n^2+n) \leq c$<sub>2</sub>$.n^2$
-    - For $c$<sub>1</sub>$n^2 \leq (2n^2+n)$, c = 2.
-    - For $(2n^2+n) \leq c$<sub>2</sub>$.n^2$, c = 3.
+    - So, $c_1.n^2 \leq (2n^2+n) \leq c_2.n^2$
+    - For $c_1 n^2 \leq (2n^2+n)$, c = 2.
+    - For $(2n^2+n) \leq c_2.n^2$, c = 3.
     - So, $2n^2 \leq (2n^2+n) \leq 3n^2$
     - This means that between the values $c=2$ & $c=3$ and $g(n)=n^2$, the condition will hold true.
 
