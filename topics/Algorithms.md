@@ -21,7 +21,7 @@
 
 ### Big-oh (O)
 - Worst-case | Upper Bound
-- $f(n) = O g(n), f(n) \leq c.g(n)$
+- $f(n) = O g(n), f(n) \leq c \cdot g(n)$
     - c is the constant, $c > 0$
     - k is the point where $f(n)$ and $g(n)$ intercept, $k \geq 0$
     - $n \geq k$
@@ -36,7 +36,7 @@
 
 ### Big-Omega (Ω)
 - Best-case | Lower Bound
-- $f(n) = Ω g(n)$, $f(n) \geq c.g(n)$
+- $f(n) = Ω\ g(n)$, $f(n) \geq c.g(n)$
 - **Example**: $f(n)=2n^2+n$
     - Find the **closest smallest** term such that $g(n)  \leq f(n)=2n^2+n$. The term is $n^2$.
     - So, $(2n^2+n) \geq c.g(n^2)$
@@ -56,6 +56,37 @@
     - So, $2n^2 \leq (2n^2+n) \leq 3n^2$
     - This means that between the values $c=2$ & $c=3$ and $g(n)=n^2$, the condition will hold true.
 
+### Properties of Asymptotic Notation
+
+| Asymptotic Notation | Representation as `f(n)` | Representation as $a \& b$ | Reflexive | Symmetric | Transitive |
+|-------------------------------|------------------------------------------------------------|--------------------------------------------------------|------------|-----------|------------|
+| Big O (O)                         | $f(n) \leq c \cdot g(n)$                                   | $a \leq b$                              | 1          | 0         | 1          |
+| Big Omega (Ω)                    | $f(n) \geq c \cdot g(n)$                                   | $a \geq b$                              | 1          | 0         | 1          |
+| Theta (θ)                        | $c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$            | $a=b$ | 1          | 1         | 1          |
+| Small O (o)                       | $f(n) < c \cdot g(n)$                                     | $a < b$                                | 0          | 0         | 1          |
+| Small Omega (Ω)                   | $f(n) > c \cdot g(n)$                                     | $a > b$                                | 0          | 0         | 1          |
+
+- Reflexive: If $a\ (operator)\ a$ is valid.
+- Symmetric: if $a\ (operator)\ b$ is valid, then $b\ (operator)\ a$ should also be valid.
+- Transitive: If $a\ (operator)\ b$ is valid and $b\ (operator)\ c$ is valid, then $a\ (operator)\ c$ should also be valid.
+
+## Comparison of Time complexities
+
+$1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! < 2^{2^n}$
+
+| Time Complexity | Notation | Time complexity, taking $n = 10000$ |
+|-----------------|:---------:|:----------------------------------:|
+| Constant        | $O(c)$ / $O(1)$  | $1$                                  |
+| null            | $O(\log (\log (n)))$ | $1.1461$                |
+| Logarithmic     | $O(\log n)$ | $14$                             |
+| Linear          | $O(n)$  | $10000$                              |
+| Linearithmic    | $O(n \log n)$ | $132877$                       |
+| Quadratic       | $O(n^2)$ | $100000000$                         |
+| Cubic           | $O(n^3)$ | $10000000000000$                    |
+| Polynomial      | $O(n^k)$ | null                                |
+| Exponential     | $O(2^n)$ | Very large number                   |
+| Factorial       | $O(n!)$  | Very large number                   |
+| Double Exponential | $O(2^{2^n})$ | Very large number            |
+
 # Time & Space Complexity (VVI)
-# The Algorithms themselves
-# 
+# The Algorithms themselves 

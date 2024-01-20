@@ -14,7 +14,7 @@ git clone https://github.com/sayande717/notes.git
 | Database Systems | [link](./topics/Database-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y) | till Lec-7 | `In Progress` |
 | Operating Systems | [link](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | till L-1.5 | `In Progress` |
 | Compiler Design | [link](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
-| Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-1.3 | `In Progress` |
+| Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-1.5 | `In Progress` |
 | Digital Logic | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till Canonical Sum of Product ... | `In Progress` |
 | TIL-Coding | [link](./topics/TIL-Coding.md) | [Kunal Kushwaha](https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ) | null | `Not Started` |
 
