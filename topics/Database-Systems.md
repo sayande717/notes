@@ -109,8 +109,130 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
     - Changes made in the Physical Schema don't affect the Conceptual Schema or the External Schema.
     - Example: Changing file structure, physical storage, Indexing, etc don't affect the Conceptual Schema.
 
-# Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
+# Keys
+- Any piece of data within a tuple in a database, can be called a key.
+- Keys are of many types: Primary Key, Candidate Key, etc.
 
+## Primary & Candidate Key
+- Any key that can be used to uniquely identify data tuples (or rows) in a database, is called a primary key.
+- The primary key must be unique. Also, it must not be wrong or have any default value.
+- It must not be null.
+- There must only be 1 primary key in a database table (in case of RDB).
+- Usually, if there's a possibility that the user cannot provide the data for a primary key at this time, it is auto-generated and assigned to the user. For example, registration number, roll number, etc.
+
+- The set of all possible keys that can be used as a primary key, is called Candidate Key.
+- We can have keys who value is null, in the set of Candidate Keys. However, the `Unique` property must be maintained.
+- Example:
+    | Roll Number | Registration Number  |   SName   |  City  | Age | Phone Number  |
+    |-------------|----------------------|-----------|--------|-----|---------------|
+    |   101       |     REG2022001       |   Alice   |  Paris |  20 | 555-1234-5678 |
+    |   102       |     REG2022002       |   Bob     |  London|  22 | 555-1234-5678 |
+    |   103       |     REG2022003       |   Charlie |  Berlin|  21 | 555-3456-7890 |
+    |   104       |     REG2022004       |   David   |  Tokyo |  23 |     null      |
+    |   105       |     REG2022005       |   Emily   |  Rome  |  20 | 555-5678-9012 |
+    - Here, the candidate keys are: <Roll No, Registration Number, Phone Number>
+    - Among these, Phone number can be null, so it can't be used as a primary key. Any 1 of the other 2 can be used for the purpose.
+
+## Foreign Key
+- An attribute or set of attributes that references to `Primary Key` of the same table or another table.
+- It maintains referential integrity.
+- If 2 tables are related, there will be atleast 1 common column between them. However, it's not necessary for this column to have the same name in both the tables.
+- Example:
+    **Table 1**: Student Information
+    | Roll No |   Name   |  Address  |
+    |---------|----------|-----------|
+    |   101   |  Alice   |   Paris   |
+    |   102   |   Bob    |  London   |
+    |   103   | Charlie  |  Berlin   |
+    |   104   |  David   |   Tokyo   |
+
+    **Table 2**: Course Information
+    | Course ID | Course Name | Roll Number |
+    |-----------|-------------|-------------|
+    |    201    | Math        |     101     |
+    |    202    | Science     |     102     |
+    |    203    | English     |     103     |
+    |    204    | History     |     104     |
+
+    - Here, `Roll Number` of Table 2 is a foreign key, referencing `Roll No` in Table 1.
+    - The names of the columns may or may not be unique.
+    - SQL query for setting a foreign key during table creation:
+        ```sql
+        CREATE TABLE StudentInformation (
+            RollNo INT PRIMARY KEY,
+            Name VARCHAR(20),
+            Address VARCHAR(20)
+        );
+
+        CREATE TABLE CourseInformation (
+            CourseID INT PRIMARY KEY,
+            CourseName VARCHAR(20),
+            RollNumber INT,
+            FOREIGN KEY (RollNumber) REFERENCES StudentInformation(RollNo)
+        );
+        ```
+
+    - SQL query for setting a foreign key after table creation (CONSTRAINT name can be anything as it's the name of the constraint):
+        ```sql
+        ALTER TABLE CourseInformation
+            ADD CONSTRAINT FK_StudentInfo_RollNo
+            FOREIGN KEY (RollNumber) REFERENCES StudentInformation(RollNo);
+        ```
+### **Referential Integrity**
+
+#### Integrity means consistency of the data across multiple tables. By preserving referential integrity, we aim to ensure consistency among the data across both the referenced (base) & referencing table.
+
+- Now, let's check if INSERT, DELETE & UPDATE operations on either of the tables disturbs the Referential Integrity of the data.
+
+- Example:
+    **Referenced (Base) Table 1**: Student Information
+    | Roll No |   Name   |  Address  |
+    |---------|----------|-----------|
+    |   101   |  Alice   |   Paris   |
+    |   102   |   Bob    |  London   |
+    |   103   | Charlie  |  Berlin   |
+    |   104   |  David   |   Tokyo   |
+
+
+
+    **Referencing Table 2**: Course Information
+    | Course ID | Course Name | Roll Number |
+    |-----------|-------------|-------------|
+    |    201    | Math        |     101     |
+    |    202    | Science     |     102     |
+    |    203    | English     |     103     |
+    |    204    | History     |     104     |
+
+- Operations performed on `Referenced (Base) Table 1`:
+    - **INSERT**: No violation
+
+    - **UPDATE**: Possible violation.
+        - Updating the `Roll No` on `Table 1` can introduce inconsistency, because the tuple in `Table 2` that was referencing to it, now links to nothing.
+        - Solution:
+            1. Update manually: Recommended.
+            1. $onUpdateCascade()$: When `Roll No` is updated, delete the corresponding row on `Table 2`. This can result in loss of data.
+            1. $onUpdateSetNull()$: When `Roll No` is updated, set the `Roll Number` of the corresponding row on `Table 2`, to null. However, this may cause issues if the foreign key is also a primary key of `Table 2`.
+
+    - **DELETE**: Possible violation.
+        - We may accidentally delete a tuple whose `Roll No` has been referenced by `Table 2`.
+        - Solution:
+            1. No action: Do nothing, this is not recommended for obvious reasons.
+            1. $onDeleteCascade()$: When the tuple is deleted, delete the corresponding row on `Table 2`. This can result in loss of data.
+            1. $onDeleteSetNull()$: When the tuple is deleted, set the `Roll Number` of the corresponding row on `Table 2`, to `null`.
+
+
+- Operations performed on `Referencing Table 2`:
+    - **INSERT**: Possible violation.
+        - We cannot insert a tuple in this table with a `Roll Number` that doesn't reference to any tuple in `Table 1`.
+        - Solution: Ensure that the corrensponding tuple exists in `Table 1`.
+
+    - **UPDATE**: Possible violation.
+        - Updating the foreign key, `Roll Number` on `Table 2` can introduce inconsistency, while it's fine to update other columns.
+        - Solution:
+            1. Before updating the foreign key, ensure that it's not referencing to any primary key in `Table 1`.
+
+    - **DELETE**: No violation.
+# Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
 # Basics of keys
 # Basics of Keys (especially foreign keys)
 # Normalization
