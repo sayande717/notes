@@ -18,7 +18,7 @@
 - Largest possible size: $n^2-n$
 
 ## Set
-### A **well-defined** **unordered** collection of distinct elements.
+### A **well-defined** **unordered** collection of **distinct** elements.
 - Unordered: Set {1,2,3,4} is same as {2,3,4,1}.
 - Distinct: Set {1,2,3,4} is same as {1,1,2,2,3,4}.
 
@@ -45,16 +45,16 @@
 
 ## Power Set
 ### If 'A' is a finite set, then it is the set of all subsets of 'A'.
-- **Example**: If A = {1,2,3}, P(A) = {Φ, {1}, {2}, {3}, {1,2}, {2,3}, {1,3}, {1,2,3}}.
-- If cardinality of a set is n, the number of elements in the power set is 2^n = 8, ie |P(a)| = |2^n|
+- **Example**: If $A = \{1,2,3\},\ P(A) = \{\{Φ\}, \{1\}, \{2\}, \{3\}, \{1,2\}, \{2,3\}, \{1,3\}, \{1,2,3\}\}$.
+- If cardinality of a set is n, the number of elements in the power set is $2^n = 8$, ie $|P(a)| = |2^n|$
 - Write all the sets starting with cardinality 0, then 1, then 2 ... and so on.
 
 
 ## Cartesian product
 ### Product of all elements of 1 set, with all elements of the other set.
 - **Example**: If A={a,b} and B={1,2,3}, then:
-    - AxB = {(a,1),{a,2},(a,3),(b,1),(b,2),(b,3)} | If an element is (m,n), then m∈A & n∈B.
-    - BxA = {(1,a),(1,b),(2,a),(2,b),(3,a),(3,b)}
+    - $AxB = \{(a,1),{a,2},(a,3),(b,1),(b,2),(b,3)\}$ | If an element is (m,n), then m∈A & n∈B.
+    - $BxA = \{(1,a),(1,b),(2,a),(2,b),(3,a),(3,b)\}$
 - Total number of products, assuming Cardinality(A)=m & Cardinality(B)=n, is mxn.
 - First multiply element 1 of A with element 1 of B, then element 1 of A with element 2 of B ... and so on.
 - The order needs to be maintained, as is apparent in the example.
@@ -66,9 +66,9 @@
     - $\{(a,1),(a,2)\}$         | Valid
     - $\{(b,1),(b,2),(a,1)\}$   | Valid
     - $\{(1,a),(2,a)\}$         | Not Valid
-- Total number of relations: 2^(mxn).
+- Total number of relations: $2^{mxn}$.
 
-### Reflexive Relation:
+### Reflexive Relation
 - [Formulae](frl-reflexive-relations)
 - A Relation 'R' on a set 'A' is said to be Reflexive if $(x,x)∊R ∀ x∊A$
 - Every element of a set is related to itself.
@@ -80,27 +80,62 @@
 - Example 0: $A = \{1,2,3\}$
     - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
     - Possible Reflexive relations:
-        - {(1,1),(2,2),(3,3)}: *Smallest*
-        - {(1,1),(2,2),(3,3),(2,1)}: *We may also put extra elements as long as the original condition has been satisfied.*
-        - {(1,1),(2,2),(3,3),(2,1),(2,3)}
-        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1)}
-        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2)}
-        - {(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2),(3,3)}: *Largest*
+        - $\{(1,1),(2,2),(3,3)\}$: *Smallest*
+        - $\{(1,1),(2,2),(3,3),(2,1)\}$: *We may also put extra elements as long as the original condition has been satisfied.*
+        - $\{(1,1),(2,2),(3,3),(2,1),(2,3)\}$
+        - $\{(1,1),(2,2),(3,3),(2,1),(2,3),(3,1)\}$
+        - $\{(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2)\}$
+        - $\{(1,1),(2,2),(3,3),(2,1),(2,3),(3,1),(3,2),(3,3)\}$: *Largest*
 - Example 1: Check for reflexive relation: {$(x,y)$, $x-y$ is an integer}
-    - (2,3) cannot be in an answer, since it doesn't satisfy point 2.
-    - (1,1),(2,2),(3,3), etc. will satisfy the equation, as $1-1=0$, which is an integer. So **it is a reflexive relation**.
+    - $(2,3)$ cannot be in an answer, since it doesn't satisfy point 2.
+    - $(1,1),(2,2),(3,3)$, etc. will satisfy the equation, as $1-1=0$, which is an integer. So **it is a reflexive relation**.
 - Example 2: Check for reflexive relation: {$(x,y)$, $x-y$ is an odd number}
-    - (1,1),(2,2),(3,3), etc. will not satisfy the equation, as $1-1=0$, which is not an odd number. So **it is not a reflexive relation**.
+    - $(1,1),(2,2),(3,3)$, etc. will not satisfy the equation, as $1-1=0$, which is not an odd number. So **it is not a reflexive relation**.
 
-### Irreflexive Relation:
+### Irreflexive Relation
 - [Formulae](frl-irreflexive-relations)
-- A Relation 'R' on a set 'A' is said to be Irreflexive if $(x,x)∉R\ ∀\ x∊A$
+- A Relation 'R' on a set 'A' is said to be Irreflexive if $(x,y)∉R\ ∀\ (x,y)∊A$
 - No element of the set should be related to itself.
 - Points to remember:
     1. We exclude all diagonal elements, and include the non-diagonal elements.
-    2. A not reflexive relation is not the same as an Irreflexive relation. Example:
+    2. **A not reflexive relation is not the same as an Irreflexive relation**. Example:
         - $A=\{1,2,3\}$, $R=\{(1,1),(2,2)\}$
         - Here, R is not a reflexive relation since it does not include (3,3). But, R is not in Irreflexive relation either, because it includes (1,1) & (2,2). So, it is just not a reflexive relation.
 - Example 0: $A = \{1,2,3\}$
     - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
     - $R = \{(1,2),(1,3),(2,1),(2,3),(3,1),(3,2)\}$
+
+### Symmetric Relation
+- A Relation 'R' is symmetric, if for every $(x,y)∈R,\ (y,x)∈R\ ∀\ (x,y)∊A$.
+- If $(x,y)$ is present in a Relation 'R' on a set 'A', then $(y,x)$ must also be present in the set.
+- We first check if $(x,y)$ is present. We check for $(y,x)$ only if $(x,y)$ is present. It is not necessary for all possible relations to be present.
+- Example 0: $A = \{1,2,3\}$
+    - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
+    - $\{(1,2),(2,1),(1,3),(3,1),(1,1)\}$: for $(1,1)$, it's Symmetric pair will also be $(1,1)$, which is a duplicate.
+    - $\{(1,2),(1,3),(1,1)\}$: This is NOT a symmetric relation, because $(3,1)$ is not present for $(1,3)$.
+- Example 1: Check: 'perpendicular-to' on a set of all lines.
+    > Solution: If a line $L1 ⊥ L2$, then obviously $L2 ⊥ L1$. So, **this is a symmetric relation**.
+- Example 2: Check: 'brother of' of all humans on Earth.
+    > Solution: If X is a brother of Y, Y may be a sister of X. So, **it's not symmetric**.
+- Example 3: Check: 'complement of', on a set of numbers.
+    > Solution: If `X` is a complement of `Y`, then `Y` is also a complement of `X`. So, **the relation is symmetric**.
+
+### Anti-symmetric Relation
+- A Relation 'R' is anti-symmetric, if for every $(x,y)∈R,\ (y,x)∈R\ ∀\ (x,y)∊A, only\ if\ (x=y)$.
+- If $(x,y)$ is present in a Relation 'R' on a set 'A', then $(y,x)$ should only also be present in the relationsif $x=y$. Otherwise, it must not be present.
+- We first check if $(x,y)$ is present. We check for $(y,x)$ only if $(x,y)$ is present. It is not necessary for all possible relations to be present.
+- Example 0: $A = \{1,2,3\}$
+    - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
+    - $\{(2,1),(3,1),(1,1)\}$: TRUE, for $(2,1)$, $(1,2)$ must not be present since $(2≠1)$. For $(1,1)$, it's Symmetric pair is $(1,1)$, which is fine since $(1=1)$.
+    - $\{(1,2),(2,1),(1,3),(1,1)\}$: FALSE, because $(2,1)$ is present.
+
+### Asymmetric Relation
+- A Relation 'R' is asymmetric, if for every $(x,y)∈R,\ (y,x)∉R\ ∀\ (x,y)∊A$.
+- If $(x,y)$ is present in a Relation 'R' on a set 'A', then $(y,x)$ should only also be present in the relationsif $x=y$. Otherwise, it must not be present.
+- We first check if $(x,y)$ is present. We check for $(y,x)$ only if $(x,y)$ is present. It is not necessary for all possible relations to be present.
+- Example 0: $A = \{1,2,3\}$
+    - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
+    - $\{(2,1),(3,1),(2,3)\}$: TRUE, for all $(x,y)$, $(y,x)$ is not present in the relation.
+    - $\{(2,2),(3,1),(2,3),(1,1)\}$: FALSE, because $(1,1)$ is present, and it's duplicate ie $(1,1)$ should not be present.
+- Every Asymmetric relation is anti-symmetric. An Asymmetric relation is more restrictive than an anti-symmetric relation, since an asymmetric relation does not allow $(y,x)$ (for every $(x,y)$) to be present even if $(x=y)$.
+- Every Anti-symmetric relations is not asymmetric. An anti-symmetric relation allows $(y,x)$ to be present if $(x=y)$.
