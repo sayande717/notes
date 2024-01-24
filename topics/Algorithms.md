@@ -88,5 +88,67 @@ $1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! < 
 | Factorial       | $O(n!)$  | Very large number                   |
 | Double Exponential | $O(2^{2^n})$ | Very large number            |
 
+## Common Time Complexities
+- Legend:
+    - V = Number of vertices
+    - E = Number of edges
+
+| Algorithm           | Best Case | Average Case | Worst Case |
+|---------------------|:---------:|:------------:|:----------:|
+| Binary Search       |   $O(1)$   |   $O(\log n)$   |   $O(\log n)$  |
+| Sequential Search   |   $O(1)$   |     $O(n)$      |     $O(n)$    |
+| Quick Sort          | $O(n \log n)$ |   $O(n \log n)$  |   $O(n^2)$    |
+| Merge Sort          | $O(n \log n)$ |   $O(n \log n)$  | $O(n \log n)$  |
+| Insertion Sort      |   $O(n)$   |     $O(n^2)$    |   $O(n^2)$    |
+| Bubble Sort         |   $O(n)$   |     $O(n^2)$    |   $O(n^2)$    |
+| Heap Sort           | $O(n \log n)$ |   $O(n \log n)$  | $O(n \log n)$  |
+| Selection Sort      |  $O(n^2)$  |     $O(n^2)$    |   $O(n^2)$    |
+|Height of Complete Binary Tree| $O(\log n)$ | $O(\log n)$ | $O(\log n)$ |
+| Insert in Heap      |  $O(\log n)$  |    $O(\log n)$   |   $O(\log n)$  |
+| Construct Heap      |   $O(n)$   |      $O(n)$     |     $O(n)$    |
+| Delete from Heap    |  $O(\log n)$  |    $O(\log n)$   |   $O(\log n)$  |
+| Huffman Coding      | $O(n \log n)$ |   $O(n \log n)$  | $O(n \log n)$  |
+| Prims (Matrix)      |$O((V + E) \log V)$|$O((V + E) \log V)$|$O((V + E) \log V)$|
+| Prims (Heap)        |$O(n^2)$       |$O(n^2)$          |$O(n^2)$        |
+| Kruskal             | $O(E \log V)$ |   $O(E \log V)$  | $O(E \log V)$  |
+| BFS                 |  $O(V + E)$  |    $O(V + E)$   |   $O(V + E)$  |
+| DFS                 |  $O(V + E)$  |    $O(V + E)$   |   $O(V + E)$  |
+| Floyd Warshall      |   $O(V^3)$   |     $O(V^3)$    |   $O(V^3)$    |
+| Dijkstra            |$O((V + E) \log V)$|$O((V + E) \log V)$|$O((V + E) \log V)$|
+
+- Example 1: $f_1=n^2\ \log n$ vs $f_2=n\ {\log n}^{10}$
+    - Method 1: Put a large value of n. Let $n=10^9$
+        - $10^9\ x\ 10^9\ x\ \log_{10} 10^9$ vs $10^9\ {(\log_{10} 10^9)}^{10}$
+        - $10^9\ x\ 9$ vs $9^{10}$
+        - $10^9\ x\ 9$ vs $9\ x\ 9^9$
+        - $10^9$ vs $9^9$
+        - So, $f_1 > f_2$
+    - Method 2: Simplify the equations.
+        - $n\ x\ n \log n$ vs $n\ \log n\ x\ \log n^{9}$
+        - $n$ vs ${(\log n)}^9$
+        - $\log n$ vs $\log (\log n)^9$
+        - $\log n$ vs $9\ x\ \log (\log n)$
+        - $\log n$ vs $\log (\log n)$ # 9 is constant, can be neglected
+        - So, $f_1 > f_2$
+- Example 2: $f_1(n) = 2^n$, $f_2(n) = n^{3/2}$, $f_3 (n) = n\ \log_{2} n$, $f_4(n) = n^{\log_{2} n}$
+    - (1): $f_2<f_3<f_4<f_1$
+    - (2): $f_2<f_1<f_3<f_4$
+    - (3): $f_1<f_2<f_3<f_4$
+    - **(4)**: $f_3<f_2<f_4<f_1$
+
+    - Method 1: Put a large value of n. Let $n=256$
+        - First of all, $2^n = 2^{256}$ will be largest, since it increases `exponentially`. This leaves us with options (2) & (3).
+        - $f_1=2^{256}$
+        - $f_2=256^{3/2}=2^{8x{3/2}}=2^{12}$
+        - $f_3=256\ x \log_{2} 256=2^8\ x\ \log_{2} 2^8=2^8\ x\ 8=2^8$
+        - $f_4=256\ x\ 256^{\log_{2} 256}$=$2^8\ x\ 2^{8x8}$=$2^{24}$
+        - So, $f_3<f_2<f_4<f_1$
+    - Method 2: Simply the equations
+        - $f_1=2^n$
+        - $f_2=n^{3/2}=n\ x\ n^{1/2}=n \sqrt n$
+        - $f_3=n \ log_{2} n$
+        - In $f_2$ & $f_3$, we can remove `n` as it is common between both. So, $f_3<f_2$.
+        - $f_4=n^{\log_{2} n}=n^k$, which is greater than $f_2$.
+        - So, $f_3<f_2<f_4<f_1$
 # Time & Space Complexity (VVI)
 # The Algorithms themselves 
