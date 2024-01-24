@@ -1,7 +1,5 @@
-# Set Theory
-
-## Formulae
-### FRL Reflexive Relations
+# Formulae
+## FRL Reflexive Relations
 - Total number of relations: $n^2$
 - Total number of Diagonal elements: $n$
 - Total number of Non-Diagonal elements: Total number of elements in AxA - Total number of diagonal elements = $n^2-n$
@@ -10,12 +8,14 @@
 - Smallest possible size: $n$
 - Largest possible size: $n^2$
 
-### FRL Irreflexive Relations
+## FRL Irreflexive Relations
 - Total number of Non-Diagonal elements: Total number of elements in AxA - Total number of diagonal elements = $n^2-n$
 - All non-reflexive relations are not irreflexive relations.
 - Total number of irreflexive relations: $2^{n^2-n}$
 - Smallest possible size: 0 ($\{\}$)
 - Largest possible size: $n^2-n$
+
+# Set Theory
 
 ## Set
 ### A **well-defined** **unordered** collection of **distinct** elements.
@@ -69,7 +69,7 @@
 - Total number of relations: $2^{mxn}$.
 
 ### Reflexive Relation
-- [Formulae](frl-reflexive-relations)
+- [Formulae](#frl-reflexive-relations)
 - A Relation 'R' on a set 'A' is said to be Reflexive if $(x,x)∊R ∀ x∊A$
 - Every element of a set is related to itself.
 - Points to remember:
@@ -93,7 +93,7 @@
     - $(1,1),(2,2),(3,3)$, etc. will not satisfy the equation, as $1-1=0$, which is not an odd number. So **it is not a reflexive relation**.
 
 ### Irreflexive Relation
-- [Formulae](frl-irreflexive-relations)
+- [Formulae](#frl-irreflexive-relations)
 - A Relation 'R' on a set 'A' is said to be Irreflexive if $(x,y)∉R\ ∀\ (x,y)∊A$
 - No element of the set should be related to itself.
 - Points to remember:
