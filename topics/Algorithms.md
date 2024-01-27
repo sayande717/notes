@@ -14,7 +14,7 @@
 
 ## Asymptotic Notation, also check [Algorithm Analysis](algorithm-analysis)
 - It is a mathematical way of representing the time complexity.
-- Example: Let' s take the example of a notebook.
+- Example: Let's take the example of a notebook.
     - Best-case: I find the topic right on the first page, just after opening the notebook.
     - Worst-case: I find the topic on the last page of the notebook.
     - Average-case: I find the topic somewhere in the middle of the notebook, after traversing the pages one by one.
@@ -72,11 +72,11 @@
 
 ## Comparison of Time complexities
 
-$1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! < 2^{2^n}$
+$c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! < 2^{2^n}$
 
 | Time Complexity | Notation | Time complexity, taking $n = 10000$ |
 |-----------------|:---------:|:----------------------------------:|
-| Constant        | $O(c)$ / $O(1)$  | $1$                                  |
+| Constant        | $O(c)$ / $O(1)$  | $1$                         |
 | null            | $O(\log (\log (n)))$ | $1.1461$                |
 | Logarithmic     | $O(\log n)$ | $14$                             |
 | Linear          | $O(n)$  | $10000$                              |
@@ -150,5 +150,81 @@ $1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! < 
         - In $f_2$ & $f_3$, we can remove `n` as it is common between both. So, $f_3<f_2$.
         - $f_4=n^{\log_{2} n}=n^k$, which is greater than $f_2$.
         - So, $f_3<f_2<f_4<f_1$
+
+## Recurrence Relation
+- Example:
+    ```javascript
+    val start = 0
+    val end = arr.length-1
+    function binarySearch(start, end, arr[], target) {
+        while(start<=end) {
+            val mid = i+j/2
+            if(arr[mid] == target) {
+                return mid
+            } else if(arr[mid] < target) {
+                binarySearch(mid+1,end,arr,target)
+            } else { // if (arr[mid] > target)
+                binarySearch(start,mid-1,arr,target)
+            }
+        }
+    }
+    ```
+    - Binary Search only works on sorted arrays.
+    - Steps, example: $\{10,20,30,40,50,60,70\}$:
+        1. Here, we're first finding the middle index of the array.
+        1. We're checking if the middle element is same as the target. If `true`, we're returning the element.
+        1. If the middle element is less than the target, the target will be on the right half of the array, ie amongst $\{50,60,70\}$.
+        1. If the middle element is greater than the target, the target will be on the left half of the array, ie amongst $\{10,20,30\}$.
+        1. In essence, we're dividing our problem into half with each iteration, from $n → n/2 → n/4$ and so on. We're only solving one half at a time. This is called recurrence relation.
+    - Relation: $T(n/2)+c$
+    - We solve recurrence relations using:
+        1. Back Substitution Method
+
+### Back Substitution Method
+- Example 0:
+    > Recurrence Relation: $T(n)=\{T(n/2)+c\}\ if\ n>1$ <br>
+    > Termination condition: $T(n)=1\ if\ n=1$
+    - Step 1: Substitute `n` with `n/2`, because the function is decreasing from $T(n)$ to $T(n/2)$
+        - $T(n)={T(n/2)+c}$
+        - $T(n/2)={T((n/2)/2)+c}$ = $T(n/4)+c$ # Substitute `n` by `n/2`
+        - $T((n/2)/2)$ ie $T(n/4)={T((n/4)/2)+c}$ = $T(n/8)+c$
+    - Step 2: Substitute `T(n/2)`, etc. with their RHS
+        - $T(n)=[T(n/2)]+c=[T(n/4)+c]+c=T(n/4)+2c=T(n/2^{2})+2c$ # Substitute `T(n/2)` with `T(n/4)+c`
+        - $T(n)=[T(n/4)]+2c=[T(n/8)+c]+2c=T(n/8)+3c=T(n/2^{3})+3c$
+        - We see a pattern here. $2^k$ & $kc$ are increasing by 1, with each iteration.
+        - So, after `k` iterations, $T(n)=T(n/2^{k})+kc$
+    - Step 3: Try to get $n/2^k=1$, so that the equation can be terminated
+        - Equation: $T(n)=T(n/2^{k})+kc$. If we take $n=2^{k}$,
+        - $T(n/n)+kc=T(1)+kc=1+kc$
+    - Step 4: Write `k` in terms of `n`
+        - We've taken $n=2^{k}$
+        - $\log n = \log 2^{k}$
+        - $\log n = k \log 2$
+        - $\log n = k$ ie $k=\log n$
+    - Substitute the value of `k` in the equation, to find the time complexity.
+        - $1+kc$ = $1+ \log n.c$ = $\log n$. Time Complexity: $O(\log n)$
+
+- Example 1:
+    > Recurrence Relation: $T(n)=\{n*T(n-1)\}\ if\ n>1$ <br>
+    > Termination condition: $T(n)=1\ if\ n=1$
+    - Step 1: Substitute `n` with `n/2`, because the function is decreasing from $T(n)$ to $T(n-1)$
+        - $T(n)=\{n*T(n-1)\}$
+        - $T(n-1)=(n-1)*T((n-1)-1)=(n-1)*T(n-2)$
+        - $T(n-2)=(n-2)*T((n-2)-1)=(n-2)*T(n-3)$
+    - Step 2: Substitute `T(n-1)`, etc. with their RHS
+        - $T(n)=n*[(n-1)*T(n-2)]$ # Substitute $T(n-1)$ with $(n-1)*T(n-2)$
+        - $T(n)=n*(n-1)*[(n-2)*T(n-3)] = n*(n-1)*(n-2)*T(n-3)$
+        - We see a pattern here.
+        - So, after `k` iterations, $n*(n-1)*(n-2)*(n-3)...*T(n-k)$
+    - Step 3: Try to get $(n-k)=1$, so that the equation can be terminated
+        - Equation: $n*(n-1)*(n-2)*(n-3)...*T(n-k)$. If we take $k=(n-1)$,
+        - $T(n-(n-1))=T(n-n+1)=T(1)=1$
+        - So, $T(n)=n*(n-1)*(n-2)*(n-3)* ... *3*2*1$
+    - Step 4: Simplify the equation
+        - $T(n)=n*(n-1)*(n-2)*(n-3)* ... *3*2*1$
+        - $n*n(n-1/n)*n(n-2/n)*n(n-3/n)* ... *n(3/n)*n(2/n)*n(1/n)$
+        - $n^{n}*(n-1/n)*(n-2/n)*(n-3/n)* ... * (3/n) * (2/n) * (1/n)$
+        - So, $n^{n}$ is the most significant term. Time complexity: $O(n!)$, or Factorial.
+
 # Time & Space Complexity (VVI)
 # The Algorithms themselves 
