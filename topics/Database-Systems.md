@@ -1,3 +1,17 @@
+# Questions
+
+## qs-UGC_NET-2018, Check [Referential Integrity](#referential-integrity)
+Let $R_1 (a,b,c)$ and $R_2 (x,y,z)$ be 2 relations in which 'a' is a foreign key in $R_1$ that refers to the primary key (unspecified) of $R_2$. Consider 4 options:
+1. Insert into $R_1$
+1. Insert into $R_2$
+1. Delete from $R_1$
+1. Delete from $R_2$
+
+Which of theses options is true?
+- Option 'a' & 'c' will cause violation.
+- Option 'b' & 'c' will cause violation.
+- Option 'c' & 'd' will cause violation.
+- **Option 'd' & 'a' will cause violation.**
 
 # Basics
 
@@ -192,8 +206,7 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
     |   102   |   Bob    |  London   |
     |   103   | Charlie  |  Berlin   |
     |   104   |  David   |   Tokyo   |
-
-
+    - Primary Key: `Roll No`
 
     **Referencing Table 2**: Course Information
     | Course ID | Course Name | Roll Number |
@@ -202,7 +215,8 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
     |    202    | Science     |     102     |
     |    203    | English     |     103     |
     |    204    | History     |     104     |
-
+    - Foreign Key: `Roll Number` REFERENCES `Roll No`.
+    
 - Operations performed on `Referenced (Base) Table 1`:
     - **INSERT**: No violation
 
@@ -232,6 +246,24 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
             1. Before updating the foreign key, ensure that it's not referencing to any primary key in `Table 1`.
 
     - **DELETE**: No violation.
+
+## Super Key
+- It is a combination of all possible attributes which can uniquely identify 2 tuples in a table. We pair the candidate key with any other key, to uniquely identify the tuple.
+- A super-set of any candidate key is called a super key.
+- Example 0: IF $R(A_1,A_2,A_3,...A_n)$:
+    - If $A_1$ is a candidate key, then how many super keys are possible?
+        - Usually, per key, we have 2 choices. We can either include it in our set, or exclude it.
+            > Total number of possible choices: $2^n$
+        - But, here $A_1$ is said to be the candidate key, and must be included. For the rest, they may or may not be included.
+            > Total number of possible choices: $2^{n-1}$
+    - If $A_1$ & $A_2$ are candidate keys:
+        - If we just take $A_1$, we have $2^{n-1}$ possible choices.
+        - If we just take $A_2$, we have $2^{n-1}$ possible choices.
+        - **However**, both these super sets will have some elements in common. For $A_1$ set, we will have elements which contain $A_2$ in them, and vice versa. So, we need to exclude them. We intend to exclude elements which contain both $A_1$ & $A_2$ in them, which is $2^{n-2}$.
+            > Number of possible sets: $2^{n-1}+2^{n-1}-2^{n-2}$
+    - If $A_1 A_2$ & $A_3 A_4$  are candidate keys:
+        > Similarly, the number of possible sets: $2^{n-2}+2^{n-2}-2^{n-4}$
+
 # Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
 # Basics of keys
 # Basics of Keys (especially foreign keys)
