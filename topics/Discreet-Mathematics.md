@@ -122,7 +122,7 @@
 
 ### Anti-symmetric Relation
 - A Relation 'R' is anti-symmetric, if for every $(x,y)∈R,\ (y,x)∈R\ ∀\ (x,y)∊A, only\ if\ (x=y)$.
-- If $(x,y)$ is present in a Relation 'R' on a set 'A', then $(y,x)$ should only also be present in the relationsif $x=y$. Otherwise, it must not be present.
+- If $(x,y)$ is present in a Relation 'R' on a set 'A', then $(y,x)$ should only also be present in the relations if $x=y$. Otherwise, it must not be present.
 - We first check if $(x,y)$ is present. We check for $(y,x)$ only if $(x,y)$ is present. It is not necessary for all possible relations to be present.
 - Example 0: $A = \{1,2,3\}$
     - $AxA = \{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)\}$
@@ -139,3 +139,35 @@
     - $\{(2,2),(3,1),(2,3),(1,1)\}$: FALSE, because $(1,1)$ is present, and it's duplicate ie $(1,1)$ should not be present.
 - Every Asymmetric relation is anti-symmetric. An Asymmetric relation is more restrictive than an anti-symmetric relation, since an asymmetric relation does not allow $(y,x)$ (for every $(x,y)$) to be present even if $(x=y)$.
 - Every Anti-symmetric relations is not asymmetric. An anti-symmetric relation allows $(y,x)$ to be present if $(x=y)$.
+
+### Transitive Relation
+- A Relation 'R' is Transitive, if for every $(x,y)∈R\ \&\ (y,z)∈R$, $(x,z)∈R$ ∀ $(x,y)∊A$.
+- If $(x,y)$ & $(y,z)$ is present in a Relation 'R' on a set 'A', then $(x,z)$ should also be present in the relation.
+- If any or x,y or z is not present in the relation, then the relation is transitive by default.
+- Example 0: $A = \{1,2,3\}$
+    - $\{(1,1),(2,2)\}$: TRUE, x,y & z are not present together.
+    - $\{Φ\}: TRUE, none of the elements are present.
+    - $\{(1,2),(2,3)\}$: FALSE, since $(x,z)$ ie $(1,3)$ is not present.
+        > x = 1, y = 2, z = 3
+    - $\{(1,1),(1,2),(2,1)\}: TRUE, since in both cases the conditions are matching.
+        > x = 1, y = 1, z = 2
+        > z = 1, y = 2, z = 1
+
+### Equivalence Relation
+- A Relation 'R' is equivalence, if it is `reflexive`, `symmetric` or `transitive`.
+- Example 0: $A = \{1,2,3\}$
+    - $\{(1,1),(2,2),(3,3)\}$: TRUE
+    - $\{(1,1),(2,2),(3,3),(2,1),(1,2)\}$: TRUE
+    - $\{(1,1),(2,2),(3,3),(3,2),(1,3)\}$: FALSE, because $(2,3)$ is not present for $(3,2)$, so it's not symmetric.
+    - $\{\ \}$: FALSE, since $(1,1),(2,2),(3,3)$ is not present, so it is not a reflexive relation.
+
+### Partial-Ordering Relation
+- A Relation 'R' is said to be a partial-ordering relation if R is `reflexive`, `anti-symmetric` as well as `transitive`.
+- Partially odered set: A set 'A' with Partial-Ordering relation 'R' defined on 'A' is called POSET, defined by [A;R]
+- Example 0: $A = \{1,2,3\}$
+    - $\{(1,1),(2,2),(3,3)\}$: TRUE
+    - $\{(1,1),(2,2),(3,3),(1,2),(2,3),(1,3)\}$: TRUE
+    - [A,$\leq$] is a POSET: TRUE,
+        > $(1 \leq 1)$ is true, so relation is reflexive. <br>
+        > $(1 \leq 1)$ is true, and for $(1.5 \leq 2.5)$, $(2.5 \leq 1,5)$ is not true. So, relation is anti-symmetric. <br>
+        > $(1 \leq 2.5)$, $(2.5 \leq 3)$, then $(1 \leq 3)$ is also true. So, the relation is transitive.
