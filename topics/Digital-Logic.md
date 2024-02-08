@@ -225,22 +225,22 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
          - 2 variables, $AB$:
             |$↓A\ \|\ B→$|$\bar B$|$B$
             |:---:|:---:|:---:|
-            |$\bar A$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|
-            |$A$|$\#VALUE_{(2)}$|$\#VALUE_{(3)}$|
+            |$\bar A$|$null_{(0)}$|$null_{(1)}$|
+            |$A$|$null_{(2)}$|$null_{(3)}$|
 
         - 3 variables, $ABC$:
             |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
             |:---:|:---:|:---:|:---:|:---:|
-            |$\bar A$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$\#VALUE_{(3)}$|$\#VALUE_{(2)}$|
-            |$A$|$\#VALUE_{(4)}$|$\#VALUE_{(5)}$|$\#VALUE_{(7)}$|$\#VALUE_{(6)}$|
+            |$\bar A$|$null_{(0)}$|$null_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+            |$A$|$null_{(4)}$|$null_{(5)}$|$null_{(7)}$|$null_{(6)}$|
 
         - 4 variables, $ABCD$:
             |$↓AB\ \|\ CD→$|$\bar C \bar D_{(00)}$|$\bar C D_{(01)}$|$C D_{(11)}$|$C \bar D_{(10)}$|
             |:---:|:---:|:---:|:---:|:---:|
-            |$\bar A \bar B_{(00)}$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$\#VALUE_{(3)}$|$\#VALUE_{(2)}$|
-            |$\bar A B_{(01)}$|$\#VALUE_{(4)}$|$\#VALUE_{(5)}$|$\#VALUE_{(7)}$|$\#VALUE_{(6)}$|
-            |$AB_{(11)}$|$\#VALUE_{(12)}$|$\#VALUE_{(13)}$|$\#VALUE_{(15)}$|$\#VALUE_{(14)}$|
-            |$A \bar B_{(10)}$|$\#VALUE_{(8)}$|$\#VALUE_{(9)}$|$\#VALUE_{(11)}$|$\#VALUE_{(10)}$|
+            |$\bar A \bar B_{(00)}$|$null_{(0)}$|$null_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+            |$\bar A B_{(01)}$|$null_{(4)}$|$null_{(5)}$|$null_{(7)}$|$null_{(6)}$|
+            |$AB_{(11)}$|$null_{(12)}$|$null_{(13)}$|$null_{(15)}$|$null_{(14)}$|
+            |$A \bar B_{(10)}$|$null_{(8)}$|$null_{(9)}$|$null_{(11)}$|$null_{(10)}$|
 
 - Example 1: $f(A,B)=\sum (2,3)$
     - Method 1, by directly solving the equation:
@@ -262,9 +262,9 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Example 2: $\sum m(0,2,5,7,9,11)+d(3,8,10,12,14)$
     |$↓PQ\ \|\ RS→$|$\bar R \bar S_{(00)}$|$\bar R S_{(01)}$|$R S_{(11)}$|$R \bar S_{(10)}$|
     |:---:|:---:|:---:|:---:|:---:|
-    |$\bar P \bar Q_{(00)}$|$1_{(0)}$|$\#VALUE_{(1)}$|$d_{(3)}$|$1_{(2)}$|
-    |$\bar P Q_{(01)}$|$\#VALUE_{(4)}$|$1_{(5)}$|$1_{(7)}$|$\#VALUE_{(6)}$|
-    |$PQ_{(11)}$|$d_{(12)}$|$\#VALUE_{(13)}$|$\#VALUE_{(15)}$|$d_{(14)}$|
+    |$\bar P \bar Q_{(00)}$|$1_{(0)}$|$null_{(1)}$|$d_{(3)}$|$1_{(2)}$|
+    |$\bar P Q_{(01)}$|$null_{(4)}$|$1_{(5)}$|$1_{(7)}$|$null_{(6)}$|
+    |$PQ_{(11)}$|$d_{(12)}$|$null_{(13)}$|$null_{(15)}$|$d_{(14)}$|
     |$P \bar Q_{(10)}$|$d_{(8)}$|$1_{(9)}$|$1_{(11)}$|$d_{(10)}$|
     - Pairs: $\{8,9,11,10\},\{0,2,8,10\},\{5,7\}$
     - Min-Terms: **4** ie $P \bar Q, \bar Q \bar S, \bar P Q S, \bar P \bar Q \bar S$
@@ -273,10 +273,10 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Example 3: $\sum m(5,11,13,14,15)$
     |$↓AB\ \|\ CD→$|$\bar C \bar D_{(00)}$|$\bar C D_{(01)}$|$C D_{(11)}$|$C \bar D_{(10)}$|
     |:---:|:---:|:---:|:---:|:---:|
-    |$\bar A \bar B_{(00)}$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$\#VALUE_{(3)}$|$\#VALUE_{(2)}$|
-    |$\bar A B_{(01)}$|$\#VALUE_{(4)}$|$1_{(5)}$|$\#VALUE_{(7)}$|$\#VALUE_{(6)}$|
-    |$AB_{(11)}$|$\#VALUE_{(12)}$|$1_{(13)}$|$1_{(15)}$|$1_{(14)}$|
-    |$A \bar B_{(10)}$|$\#VALUE_{(8)}$|$\#VALUE_{(9)}$|$1_{(11)}$|$\#VALUE_{(10)}$|
+    |$\bar A \bar B_{(00)}$|$null_{(0)}$|$null_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+    |$\bar A B_{(01)}$|$null_{(4)}$|$1_{(5)}$|$null_{(7)}$|$null_{(6)}$|
+    |$AB_{(11)}$|$null_{(12)}$|$1_{(13)}$|$1_{(15)}$|$1_{(14)}$|
+    |$A \bar B_{(10)}$|$null_{(8)}$|$null_{(9)}$|$1_{(11)}$|$null_{(10)}$|
     - Pairs: $\{5,13\},\{13,15\},\{15,14\},\{15,11\}$
     - Prime Implicants: **4** ie $B \bar C D, ABD, ABC, ACD$
     - Essential Prime Implicants: **3** ie $B \bar C D, ABC, ACD$
@@ -325,14 +325,14 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Sum:  $\sum{(m_1,m_2,m_4,m_7)} = x⊕y⊕z$
         |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
         |:---:|:---:|:---:|:---:|:---:|
-        |$\bar A$|$\#VALUE_{(0)}$|$1_{(1)}$|$\#VALUE_{(3)}$|$1_{(2)}$|
-        |$A$|$1_{(4)}$|$\#VALUE_{(5)}$|$1_{(7)}$|$\#VALUE_{(6)}$|
+        |$\bar A$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$1_{(2)}$|
+        |$A$|$1_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$|
         - No pairs possible
     - Carry: $\sum{(m_3,m_5,m_6,m_7)}= xy+yz+xz=(x⊕y)z+xy$
         |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
         |:---:|:---:|:---:|:---:|:---:|
-        |$\bar A$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$1_{(3)}$|$\#VALUE_{(2)}$|
-        |$A$|$\#VALUE_{(4)}$|$1_{(5)}$|$1_{(7)}$|$1_{(6)}$|
+        |$\bar A$|$null_{(0)}$|$null_{(1)}$|$1_{(3)}$|$null_{(2)}$|
+        |$A$|$null_{(4)}$|$1_{(5)}$|$1_{(7)}$|$1_{(6)}$|
         - Pairs: $BC,AC,AB=xy+yz+xz$
 - Circuit Diagram:
     - Sum: $x⊕y⊕z$ | Carry: $(x⊕y)z+xy$
