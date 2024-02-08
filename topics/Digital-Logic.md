@@ -37,7 +37,7 @@
     - XNOR: **1** if both A & B are same, otherwise **0**.
 
 <hr>
-<img src="../assets/images/Digital-Logic/0.jpg" height="200px" alt="logic gates" />
+<img src="../assets/images/Digital-Logic/external/0.jpg" height="200px" alt="logic gates" />
 
 Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec9623f584cf7e16c471.jpg)
 
@@ -104,7 +104,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     5. $A ⊙ A ⊙ A ⊙ A ⊙ A ⊙ A ... n\ times$:
         - If `n` is even (for example $n=4$), $A ⊙ A ⊙ A ⊙ A = 1 ⊙ 1 = 1$
         - If `n` is odd (for example $n=3$), $A ⊙ A ⊙ A = 1 ⊕ A = A$
-- XOR Gate can be used as buffer/inverter: Since $A ⊙ 0  = \bar A$ & $A ⊙ 1 = A$, we can give an input `A` & use the 2nd input as control. If the control is 1, output is same as input, otherwise output is inverted.
+- XNOR Gate can be used as buffer/inverter: Since $A ⊙ 0  = \bar A$ & $A ⊙ 1 = A$, we can give an input `A` & use the 2nd input as control. If the control is 1, output is same as input, otherwise output is inverted.
 
 # Sum of Product & Canonical Sum of Product
 - SoP need not contain all the literals, but in Canonical form, each product term should contain all literals, be it in complemented or un-complemented form.
@@ -192,9 +192,10 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - A K-Map is used to **graphically represent & minimize** boolean expressions.
 - For a boolean expression of `n` variables, number of cells needed in K-Map is $2^{n}$.
 - K-Map is based on Grey code (unit distance code). We can't change more than 1 bit in a single step.
+- **Prime Implicants**: Min-terms which have a `1` in them.
 - **Essential Prime Implicants**: Min-terms which have a `1` in them, which is also not shared with other pairs.
 - There are 3 types of input values, `0`, `1`, `d,x (don't care)`.
-- Steps: <!-- TODO: Correct -->
+- Steps:
     1. We generate the K-Map.
     1. We find the pairs. They contain 1 mandatorily. We may take `d` ie `don't care` if needed, otherwise we ignore them. While pairing elements, we first try to find the biggest pair possible (16 elements in a K-Map of 16 elements). Then, we gradually decrease the pair size.
     1. We find the min-terms. Min-terms consist of variables which are same/common for all elements of the pair.
@@ -268,3 +269,71 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Pairs: $\{8,9,11,10\},\{0,2,8,10\},\{5,7\}$
     - Min-Terms: **4** ie $P \bar Q, \bar Q \bar S, \bar P Q S, \bar P \bar Q \bar S$
     - Essential Prime Implicants: **3** ie $P \bar Q, \bar Q \bar S,\bar P Q S$
+
+- Example 3: $\sum m(5,11,13,14,15)$
+    |$↓AB\ \|\ CD→$|$\bar C \bar D_{(00)}$|$\bar C D_{(01)}$|$C D_{(11)}$|$C \bar D_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar A \bar B_{(00)}$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$\#VALUE_{(3)}$|$\#VALUE_{(2)}$|
+    |$\bar A B_{(01)}$|$\#VALUE_{(4)}$|$1_{(5)}$|$\#VALUE_{(7)}$|$\#VALUE_{(6)}$|
+    |$AB_{(11)}$|$\#VALUE_{(12)}$|$1_{(13)}$|$1_{(15)}$|$1_{(14)}$|
+    |$A \bar B_{(10)}$|$\#VALUE_{(8)}$|$\#VALUE_{(9)}$|$1_{(11)}$|$\#VALUE_{(10)}$|
+    - Pairs: $\{5,13\},\{13,15\},\{15,14\},\{15,11\}$
+    - Prime Implicants: **4** ie $B \bar C D, ABD, ABC, ACD$
+    - Essential Prime Implicants: **3** ie $B \bar C D, ABC, ACD$
+
+# <strong>Digital Logic Circuits</strong>
+
+## Half-Adder
+- Adds 2 bits
+- Inputs: 2 | Outputs: 2
+- Sum (Least Significant Bit [LSB]): $x⊕y$
+- Carry (Most Significant Bit [MSB]): $xy$
+- Truth Table:
+    |X|Y|Carry|Sum|
+    |-|-|-|-|
+    |0|0|0|0|
+    |0|1|0|1|
+    |1|0|0|1|
+    |1|1|1|0|
+- Min-terms:
+    - Sum: $\bar x y, x \bar y=x⊕y$
+    - Carry: $xy$
+- Circuit Diagram:
+    - Sum: $\bar x y, x \bar y$ | Carry: $xy$
+        ![Half-Adder 0](../assets/images/Digital-Logic/self/0.png)
+    - Sum: $x⊕y$ | Carry: $xy$
+        ![Half-Adder 1](../assets/images/Digital-Logic/self/1.png)
+
+## Full-Adder
+- Adds 3 bits
+- Inputs: 3 | Outputs: 2
+- 2 Half-Adders = Full-Adder
+- Sum: $x⊕y⊕z$
+- Carry: $xy+yz+zx=(x⊕y)z+xy$ 
+- Truth Table:
+    | x | y | z ($c_{in}$) | sum | $c_{out}$ |
+    |---|---|-----|:---:|:----:|
+    | 0 | 0 |  0  |  0  |  0   |
+    | 0 | 0 |  1  |  1  |  0   |
+    | 0 | 1 |  0  |  1  |  0   |
+    | 0 | 1 |  1  |  0  |  1   |
+    | 1 | 0 |  0  |  1  |  0   |
+    | 1 | 0 |  1  |  0  |  1   |
+    | 1 | 1 |  0  |  0  |  1   |
+    | 1 | 1 |  1  |  1  |  1   |
+- Min-Terms:
+    - Sum:  $\sum{(m_1,m_2,m_4,m_7)} = x⊕y⊕z$
+        |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar A$|$\#VALUE_{(0)}$|$1_{(1)}$|$\#VALUE_{(3)}$|$1_{(2)}$|
+        |$A$|$1_{(4)}$|$\#VALUE_{(5)}$|$1_{(7)}$|$\#VALUE_{(6)}$|
+        - No pairs possible
+    - Carry: $\sum{(m_3,m_5,m_6,m_7)}= xy+yz+xz=(x⊕y)z+xy$
+        |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar A$|$\#VALUE_{(0)}$|$\#VALUE_{(1)}$|$1_{(3)}$|$\#VALUE_{(2)}$|
+        |$A$|$\#VALUE_{(4)}$|$1_{(5)}$|$1_{(7)}$|$1_{(6)}$|
+        - Pairs: $BC,AC,AB=xy+yz+xz$
+- Circuit Diagram:
+    - Sum: $x⊕y⊕z$ | Carry: $(x⊕y)z+xy$
+        ![Full-Adder 0](../assets/images/Digital-Logic/self/2.png)
