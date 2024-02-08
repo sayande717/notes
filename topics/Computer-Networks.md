@@ -12,7 +12,7 @@
 
 ## OSI Model
 
-<img src="../assets/images/Computer-Networks/0.jpg" height="400px" alt="OSI Model" />
+<img src="../assets/images/Computer-Networks/external/0.jpg" height="400px" alt="OSI Model" />
 
 Image taken from [here](https://www.lifewire.com/thmb/eaQyjAgWa-S1JKEfZxlFYoB-0V8=/1536x1024/filters:fill(auto,1)/OSImodel-8d93f19d50e543348f82110aa11f7a93.jpg)
 
@@ -31,7 +31,7 @@ Image taken from [here](https://www.lifewire.com/thmb/eaQyjAgWa-S1JKEfZxlFYoB-0V
 - [Physical](#physical-layer)
 
 ### Difference vs TCP/IP Model
-<img src="../assets/images/Computer-Networks/1.jpg" height="350px" alt="TCP/IP Model" />
+<img src="../assets/images/Computer-Networks/external/1.jpg" height="350px" alt="TCP/IP Model" />
 
 Image taken from [here](https://ipcisco.com/wp-content/uploads/2018/10/tcpip-model.jpg)
 
@@ -47,7 +47,7 @@ Image taken from [here](https://ipcisco.com/wp-content/uploads/2018/10/tcpip-mod
 
 ### Network Topologies
 
-<img src="../assets/images/Computer-Networks/2.png" width="800px">
+<img src="../assets/images/Computer-Networks/external/2.png" width="800px">
 
 Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-Topology-OFBIT.in_-1024x1024.jpg)
 
@@ -102,7 +102,7 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - It is used to encode 1's and 0's.
 - There are 2 variants: The one by G E Thomas, and the IEEE 802.3 version. By default, IEEE 802.3 is used.
 
-    <img src="../assets/images/Computer-Networks/3.jpg" alt="Manchester Encoding" width="500px" />
+    <img src="../assets/images/Computer-Networks/external/3.jpg" alt="Manchester Encoding" width="500px" />
 
     Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/ETHERNET_1.jpg)
 

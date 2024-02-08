@@ -36,7 +36,7 @@
 
 ## Process States
 
-<img src="../assets/images/Operating-Systems/0.png" height="350px" />
+<img src="../assets/images/Operating-Systems/external/0.png" height="350px" />
 
 Image taken from [here](https://www.sitesbay.com/os/images/process-states-in-operating-system.png)
 

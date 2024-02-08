@@ -52,7 +52,7 @@ Which of theses options is true?
 
 ## 2-Tier Architecture
 
-<img src="../assets/images/Database-Systems/0.png" height="250px" alt="2-tier architecture" />
+<img src="../assets/images/Database-Systems/external/0.png" height="250px" alt="2-tier architecture" />
 
 Image taken from [here](https://i.ibb.co/hMXD29s/2-tier.png)
 
@@ -68,7 +68,7 @@ Image taken from [here](https://i.ibb.co/hMXD29s/2-tier.png)
 ```
 
 ## 3-Tier Architecture:
-<img src="../assets/images/Database-Systems/1.jpg" height="250px" alt="3-tier architecture" />
+<img src="../assets/images/Database-Systems/external/1.jpg" height="250px" alt="3-tier architecture" />
 
 Image taken from [here](https://inui.io/wp-content/uploads/3-tier_architecture_2.jpg)
 
@@ -84,7 +84,7 @@ Image taken from [here](https://inui.io/wp-content/uploads/3-tier_architecture_2
 
 ## Schema & 3-Schema Architecture
 
-<img src="../assets/images/Database-Systems/2.png" height="300px" alt="3-schema architecture" />
+<img src="../assets/images/Database-Systems/external/2.png" height="300px" alt="3-schema architecture" />
 
 Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/2019/08/Three-Schema-Architecture-of-DBMS.png)
 
