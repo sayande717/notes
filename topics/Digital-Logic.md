@@ -300,9 +300,9 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Carry: $xy$
 - Circuit Diagram:
     - Sum: $\bar x y, x \bar y$ | Carry: $xy$
-        ![Half-Adder 0](../assets/images/Digital-Logic/self/0.png)
+        <img src="../assets/images/Digital-Logic/self/0.png" alt="Half-adder 0" />
     - Sum: $x⊕y$ | Carry: $xy$
-        ![Half-Adder 1](../assets/images/Digital-Logic/self/1.png)
+        <img src="../assets/images/Digital-Logic/self/1.png" alt="Half-adder 1" />
 
 ## Full-Adder
 - Adds 3 bits
@@ -336,4 +336,4 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         - Pairs: $BC,AC,AB=xy+yz+xz$
 - Circuit Diagram:
     - Sum: $x⊕y⊕z$ | Carry: $(x⊕y)z+xy$
-        ![Full-Adder 0](../assets/images/Digital-Logic/self/2.png)
+        <img src="../assets/images/Digital-Logic/self/2.png" alt="Full-adder 0" />
