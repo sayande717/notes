@@ -253,7 +253,7 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
 - Example 0: IF $R(A_1,A_2,A_3,...A_n)$:
     - If $A_1$ is a candidate key, then how many super keys are possible?
         - Usually, per key, we have 2 choices. We can either include it in our set, or exclude it.
-            > Total number of possible choices: $2^n$
+            > Total number of possible choices in general: $2^n$
         - But, here $A_1$ is said to be the candidate key, and must be included. For the rest, they may or may not be included.
             > Total number of possible choices: $2^{n-1}$
     - If $A_1$ & $A_2$ are candidate keys:
@@ -263,6 +263,125 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
             > Number of possible sets: $2^{n-1}+2^{n-1}-2^{n-2}$
     - If $A_1 A_2$ & $A_3 A_4$  are candidate keys:
         > Similarly, the number of possible sets: $2^{n-2}+2^{n-2}-2^{n-4}$
+
+# Data Models
+- Before implementing a database, we need to draw a logical design for the end-product. This design is called a data model.
+- 
+## Entity Relationship Model
+- Entity: Object which has some attributes.
+- Relationship: Relationships among the entities.
+
+### Attributes
+Example: Student
+
+1. Single: Attribute which has only 1 value.
+    > Registration number.
+1. Multivalued: has more than 1 values.
+    > Mobile Number
+
+<br>
+
+1. Simple: cannot be broken further
+    > Age
+1. Composite: can be broken further
+    > Name, cab be broken down into first name, middle name, last name <br>
+    > Date of Birth, can be broken down into DD,MM,YY <br>
+    > Address
+1. Complex: Composite + Multivalued
+    > Address, it is composite, and a single student can have multiple addresses too.
+
+<br>
+
+1. Stored: directly stored.
+    > Date of Birth
+1. Derived: derived from stored attribute.
+    > Age, derived from Date of Birth.
+
+<img src="../assets/images/Database-Systems/self/0.png" alt="Representating attributes" />
+
+<br>
+
+1. Key: can be used as the Primary key in a database.
+    > Registration number
+1. Non-key: All keys other than the key attribute.
+    > Name
+
+<br>
+
+1. Required: mandatorily needs to have a value.
+    > Username, usually.
+1. Optional: may not have a value.
+    > Mobile number, usually.
+
+### Relationships
+#### One to One
+- Representation: 1-1 | One-One
+- Example:
+    - 3 tables: `Employee`, `Work`, `Department`
+        <img src="../assets/images/Database-Systems/self/1.png" alt="One-to-One relationship" />
+    - In `Employee`: E_id is the primary key
+    - In `Department` : D_id is the primary key
+    - In the Relationship table, `Work`:
+        - Foreign keys:
+            - E_id: referencing to E_id of `Employee`.
+            - D_id: referencing to D_id of `Department`.
+        - Relationship (1-1): An employee only works in a single Department.
+            - E_id: Value is unique
+            - D_id: Value is unique
+        - Primary Key: Either of the primary keys of the LHS or RHS table.
+            > Any of `E_id` or `D_id`
+    - We **can reduce** (merge) `Employee` & `Work` into a single `Employee` table. In fact, we can merge the Relationship table with either the LHS or the RHS table.
+
+#### One to Many
+- Representation: 1-M | One-Many
+- Example:
+    - 3 tables: `Customer`, `Places`, `Order`
+    - In `Customer`: C_id is the primary key
+    - In `Order` : O_no is the primary key
+    - In the Relationship table, `Places`:
+        - Foreign keys:
+            - C_id: referencing to C_id of `Customer`.
+            - O_no: referencing to O_no of `Order`.
+        - Relationship (1-Many): A customer can place multiple orders.
+            - C_id: Value can repeat
+            - O_no: Value is unique
+        - **Primary Key**: Primary key of the RHS table.
+            > `O_no`, since `C_id` can repeat.
+    - We **can merge** (reduce) `Places` & `Order` into a single `Order` table, ie we're merging the Relationship table with the RHS table.
+
+#### Many to One
+- Representation: M-1 | Many-One
+- Example:
+    - 3 tables: `Order`, `Placed-by`, `Customer`
+    - In `Order` : O_no is the primary key
+    - In `Customer`: C_id is the primary key
+    - In the Relationship table, `Placed-by`:
+        - Foreign keys:
+            - O_no: referencing to O_no of `Order`.
+            - C_id: referencing to C_id of `Customer`.
+        - Relationship (Many-1): Many orders can be placed by a single customer.
+            - O_no: Value is unique
+            - C_id: Value can repeat
+        - **Primary Key**: Primary key of the LHS table.
+            > `O_no`, since `C_id` can repeat.
+    - We **can merge** (reduce) `Placed-by` & `Order` into a single `Order` table, ie we're merging with the LHS table.
+
+#### Many to Many
+- Representation: M-N | Many-Many
+- Example:
+    - 3 tables: `Student`, `Study`, `Course`
+    - In `Study` : RollNo is the primary key.
+    - In `Course`: Cid is the primary key.
+    - In the Relationship table, `Study`:
+        - Foreign keys:
+            - RollNo: referencing to RollNo of `Student`.
+            - C_id: referencing to C_id of `Course`.
+        - Relationship (May-Many): A student can take up multiple courses, and a course can be taken up by multiple students.
+            - `RollNo`: Value can repeat
+            - `C_id`: Value can repeat
+        - **Primary Key**: A composite key, including both the primary keys from the LHS & RHS tables.
+            > `RollNo + C_id`, since both `RollNo` & `C_id` can repeat.
+    - We **cannot merge** (reduce) the tables.
 
 # Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
 # Basics of keys

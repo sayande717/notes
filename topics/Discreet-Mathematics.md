@@ -1,4 +1,14 @@
 # Formulae
+## FRL General
+- Number of choices -
+    - $A=\{1,2,3,4,5\}$
+    - Let's form a sub-set of A with no constraints. Here, for each of the 5 elements, we may or may not include them in the subset. So, we have 2 choices per element. Total number of choices:
+        > $2^5$ for 5 elements <br>
+        > $2^n$ for n elements
+    - If we had 3 choices per element, Total number of choices would be:
+        > $3^5$ for 5 elements <br>
+        > $3^n$ for n elements
+
 ## FRL Reflexive Relations
 - Total number of relations: $n^2$
 - Total number of Diagonal elements: $n$
