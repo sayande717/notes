@@ -126,8 +126,8 @@ Changing permissions:
 - Syntax & example (input file = `1234567890abcdefghij`):
 ```bash
 lseek(int file_descriptor,  offset, int whence)
-lseek(n,10,SEEK_CUR) # It goes 10 bytes from character `1`, ie to `0`.
-lseek(n,5,SEEK_SET)  # pointer is set at the location 5, ie at `5`.
+lseek(n,10,SEEK_CUR) # It goes 10 bytes from character `1`, ie to `a`.
+lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 ```
 - `file_descriptor`: The file descriptor of the pointer that is going to be moved.
 - `offset`: The off-set of the pointer.

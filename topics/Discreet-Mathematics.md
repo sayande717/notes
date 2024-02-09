@@ -15,6 +15,15 @@
 - Smallest possible size: 0 ($\{\}$)
 - Largest possible size: $n^2-n$
 
+## FRL Comparison of relations
+> $A = \{1,2,3\}$, $AxA = \{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$
+
+|Parameter|Reflexive|Irreflexive|Symmetric|Anti-symmetric|Asymmetric|Transitive|
+|---|---|---|---|---|---|---|
+|Cardinality of smallest relation|n|∅|∅|∅|∅|∅|
+|Cardinality of largest relation|$n^2$|$n^2-n$|$n^2$|${(n^2+n)}/2$|$(n^2-n)/2$|$n^2$|
+|Number of relations|$2^{n^2-n}$|$2^{n^2-n}$|$2^n.2^{(n^2-n)/2)}$|$2^n.3^{(n^2-n)/2}$|$3^{(n^2-n)/2}$|N/A|
+
 # Set Theory
 
 ## Set
@@ -53,7 +62,7 @@
 ## Cartesian product
 ### Product of all elements of 1 set, with all elements of the other set.
 - **Example**: If A={a,b} and B={1,2,3}, then:
-    - $AxB = \{(a,1),{a,2},(a,3),(b,1),(b,2),(b,3)\}$ | If an element is (m,n), then m∈A & n∈B.
+    - $AxB = \{(a,1),(a,2),(a,3),(b,1),(b,2),(b,3)\}$ | If an element is (m,n), then m∈A & n∈B.
     - $BxA = \{(1,a),(1,b),(2,a),(2,b),(3,a),(3,b)\}$
 - Total number of products, assuming Cardinality(A)=m & Cardinality(B)=n, is mxn.
 - First multiply element 1 of A with element 1 of B, then element 1 of A with element 2 of B ... and so on.
@@ -149,7 +158,7 @@
     - $\{Φ\}: TRUE, none of the elements are present.
     - $\{(1,2),(2,3)\}$: FALSE, since $(x,z)$ ie $(1,3)$ is not present.
         > x = 1, y = 2, z = 3
-    - $\{(1,1),(1,2),(2,1)\}: TRUE, since in both cases the conditions are matching.
+    - $\{(1,1),(1,2),(2,1)\}$: TRUE, since in both cases the conditions are matching.
         > x = 1, y = 1, z = 2
         > z = 1, y = 2, z = 1
 
@@ -161,7 +170,7 @@
     - $\{(1,1),(2,2),(3,3),(3,2),(1,3)\}$: FALSE, because $(2,3)$ is not present for $(3,2)$, so it's not symmetric.
     - $\{\ \}$: FALSE, since $(1,1),(2,2),(3,3)$ is not present, so it is not a reflexive relation.
 
-### Partial-Ordering Relation
+### Partially Ordered Set
 - A Relation 'R' is said to be a partial-ordering relation if R is `reflexive`, `anti-symmetric` as well as `transitive`.
 - Partially odered set: A set 'A' with Partial-Ordering relation 'R' defined on 'A' is called POSET, defined by [A;R]
 - Example 0: $A = \{1,2,3\}$
@@ -171,3 +180,46 @@
         > $(1 \leq 1)$ is true, so relation is reflexive. <br>
         > $(1 \leq 1)$ is true, and for $(1.5 \leq 2.5)$, $(2.5 \leq 1,5)$ is not true. So, relation is anti-symmetric. <br>
         > $(1 \leq 2.5)$, $(2.5 \leq 3)$, then $(1 \leq 3)$ is also true. So, the relation is transitive.
+
+### Totally Ordered Set
+- A POSET {A,R} is called a totally ordered set if every pair of elements in set `A` are comparable, ie, if:
+    > $aRb\ or\ bRa\ ∀\ (a,b) ∈A$
+- The set has to mandatorily be a [Partially Ordered Set](#partially-ordered-set). In other words, every TOS is a POSET.
+- Example 0: $(A,÷)∈R\ ∀ (A∈I)$, I=Integers: FALSE.
+    > A = {1,2,3,4,5,6,7,8...∞} <br>
+    > Reflexive: $(1,1),(2,2),(3,3)∈R$ <br>
+    > Anti-symmetric: $(4,2)∈R$ but $(2,4)∉R$ <br>
+    > Transitive: If $(8,4)∈R \& (4,2)∈R$, then $(8,2)∈R$. <br>
+    > TOS: $(2,3),(4,8)$, etc. are not comparable when the domain consists only of positive integers.
+- Example 1: $(A,\leq)∈R\ ∀ (A∈R)$, I=Real numbers: TRUE.
+- Example 2: $(A,∈)∈R\ ∀ A∈\{∅\},\{\{a\},\{b\},\{a,b\}\}$: FALSE.
+    > $\{a\}$ is not comparable with $\{b\}$.
+
+### Comparison of all relations
+See [comparison of relations](#frl-comparison-of-relations) in section `formulae`.
+- Explanation:
+    > $A = \{1,2,3\}$ <br>
+    > $AxA = \{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(2,2)\}$
+    - Reflexive:
+        - Smallest: $\{(1,1),(2,2),(3,3)\}$ | Cardinality: $n$
+        - Largest: $\{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ | Cardinality: $n^2$
+        - Number of relations: For $\{(1,1),(2,2),(3,3)\}$ ie `n` elements, we don't have a choice. For the rest $\{(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ ie $(n^2-n)$ elements, we have 2 choices per pair. So, the total number of choices: $2^{n^2}-2^{n} = 2^{n^2-n}$
+    - Irreflexive:
+        - Smallest: $\{\}$ | Cardinality: ∅
+        - Largest: $\{(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ | Cardinality: $n^2-n$
+        - Number of relations: $2^{n^2-n}$
+    - Symmetric:
+        - Smallest: $\{\}$ | Cardinality: ∅
+        - Largest: $\{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ | Cardinality: $n^2$
+        - Number of relations: For $\{(1,1),(2,2),(3,3)\}$ ie `n` elements, we have 2 choices per pair. For the rest $\{(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ ie $(n^2-n)$ elements, if (1,2) is present, (2,1) also needs to be present. So, we have 2 choices per respective double-pair. Total number of choices: $2^{n}.2^{(n^2-n)/2}$
+    - Anti-symmetric:
+        - Smallest: $\{\}$ | Cardinality: ∅
+        - Largest: $\{(1,1),(2,2),(3,3),(1,2),(1,3),(2,3)\}$ OR $\{(1,1),(2,2),(3,3),(2,1),(3,1),(3,2)\}$ | Cardinality: $n+[(n^2-n)/2]=(2n+n^2-n)/2=(n^2+n)/2$
+        - Number of relations: For $\{(1,1),(2,2),(3,3)\}$ ie `n` elements, we have 2 choices per pair. For the rest $\{(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ ie $(n^2-n)$ elements, if (1,2) is present, (2,1) must not be present and vice versa. So, we can either take (1,2) or (2,1) exclusively, or we can exclude both. We have 3 choices per double-pair. Total number of choices: $2^{n}.3^{(n^2-n)/2}$
+    - Asymmetric:
+        - Smallest: $\{\}$ | Cardinality: ∅
+        - Largest: $\{(1,2),(1,3),(2,3)\}$ OR $\{(2,1),(3,1),(3,2)\}$ | Cardinality: $(n^2-n)/2$
+        - Number of relations: For $\{(1,1),(2,2),(3,3)\}$ ie `n` elements, we cannot take them. For the rest $\{(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$ ie $(n^2-n)$ elements, if (1,2) is present, (2,1) must not be present and vice versa. So, we can either take (1,2) or (2,1) exclusively, or we can exclude both. We have 3 choices per double-pair. Total number of choices: $3^{(n^2-n)/2}$
+    - Transitive:
+        - Smallest: $\{\}$ | Cardinality: ∅
+        - Largest: $\{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(2,2)\}$ | Cardinality: $n^2$

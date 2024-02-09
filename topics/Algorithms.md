@@ -207,7 +207,7 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 - Example 1:
     > Recurrence Relation: $T(n)=\{n*T(n-1)\}\ if\ n>1$ <br>
     > Termination condition: $T(n)=1\ if\ n=1$
-    - Step 1: Substitute `n` with `n/2`, because the function is decreasing from $T(n)$ to $T(n-1)$
+    - Step 1: Substitute `n` with `n-1`, because the function is decreasing from $T(n)$ to $T(n-1)$
         - $T(n)=\{n*T(n-1)\}$
         - $T(n-1)=(n-1)*T((n-1)-1)=(n-1)*T(n-2)$
         - $T(n-2)=(n-2)*T((n-2)-1)=(n-2)*T(n-3)$
