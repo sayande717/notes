@@ -17,6 +17,7 @@ git clone https://github.com/sayande717/notes.git
 | Design & Analysis of Algorithms | [link](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.3 | `In Progress` |
 | Digital Logic | [link](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till Full-Adder Combinational Circuit ... | `In Progress` |
 | TIL-Coding | [link](./topics/TIL-Coding.md) | [Kunal Kushwaha](https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ) | null | `Not Started` |
+| Aptitude | [link](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | null | `In Progress` |
 
 <hr>
 
