@@ -1,3 +1,16 @@
+# Formulae
+## FRL-General
+- If number of forks = $n$:
+    > Total Number of processes created = $2^n$ <br>
+    > Number of child processes = $2^n-1$
+    ```c
+    fork();
+    fork();
+    // ... n times
+    printf("Hello!");
+    ```
+    ... will print("Hello!") $2^n$ times.
+
 # Basics
 
 ## Goals of an Operating System
@@ -136,4 +149,61 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - `SEEK_CUR`: Off-set from current location of the pointer.
     - `SEEK_END`: Off-set from the end.
 
+### fork()
+- It is used to create a child process, which is a clone of the parent process and has it's own PID.
+- `fork()` returns different values depending on which process we're in:
+    > 0, if we're in the child process <br>
+    > +1/+ve number, ie the PID of the child process, if we're in the parent process. <br>
+    > -1/-ve number, if the child process couldn't be created.
 
+- If `fork()` is run $n$ times, it will create $2^n$ total processes, including $2^{n}-1$ child processes and $1$ parent process.
+- Child process runs parallely with the parent process.
+- Example 0:
+    ```c
+    main() {
+        fork();
+        printf("Hello");
+    }
+    ```
+    ... will print "Hello" 2 times.
+- Example 1:
+    ```c
+    #include<stdio.h>
+    #include<unistd.h>
+    int main() {
+        if(fork() && fork()) {  // 0, 1
+            fork();             // 2
+        }
+        printf("Hello");
+        return 0;
+    }
+    ```
+
+    <img src="../assets/images/Operating-Systems/self/0.png" height="500px" alt="fork() example 1" />
+
+    - Here, at fork() `#0`, a child process $c_1$ is created.
+        > In the child process, it returns 0. The loop condition becomes false, and it exits. <br>
+        > In the parent process, it returns the PID of the child process. We proceed to fork() `#1`.
+    - In fork() `#1`, child process $c_2$ is created, which also returns 0. The loop exits. In the parent process, we go ahead and execute fork() `#2`. This forks another child process $c_3$.
+    - In total, there are 4 processes, and `Hello` is printed 4 times.
+- Example 2:
+    ```c
+    #include<stdio.h>
+    #include<unistd.h>
+    int main() {
+        if(fork() || fork()) {  // 0, 1
+            fork();             // 2
+        }
+        printf("Hello");
+        return 0;
+    }
+    ```
+    <img src="../assets/images/Operating-Systems/self/0.png" height="500px" alt="fork() example 2" />
+
+    - Here, at fork() `#0`:
+        > In the child process, it returns 0. <br>
+        > In the parent process, it returns the PID of the child process.
+    - For the child process $c_1$, it will continue to check the 2nd sub-condition, which is fork() `#1`. That will fork another child process $c_4$.
+    - For the parent process, since the 1st condition is true, it won't even check the 2nd condition. It'll directly enter the loop, and execute fork() `#2` in it. That will fork another child process, $c_2$.
+    - Now, $c_1$ becomes the parent process. Since the condition is still true, it gets in the loop and executes `fork()` in it. This creates another child process, $c_4$.
+    - In total, there are 5 processes, and `Hello` is printed 5 times.
