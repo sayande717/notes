@@ -2,13 +2,14 @@
 read -p 'Subject ID (1-7): ' subjectID
 
 subjectName=("Mathematics"\
-    "Database Management"\
-    "Operating Systems"\
-    "Digital Logic"\
+    "Database-Management"\
+    "Operating-Systems"\
+    "Digital-Logic"\
     "Algorithms"\
-    "Computer Networks" \
+    "Computer-Networks" \
     "Aptitude")
 
-git add README.md ./topics/${subjectName[$subjectID-1]}.md
-git commit -m "${subjectName[$subjectID-1]}"
+targetSub=${subjectName[$subjectID-1]}
+git add README.md ./topics/$targetSub.md ./assets/images/$targetSub/
+git commit -m "$targetSub"
 git push origin main
