@@ -68,6 +68,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 #### <u>XOR Gate</u>
 - If 2 inputs are A & B, A ⊕ B = $A \bar B + \bar AB$
 - If both inputs are same, output will be `0`, otherwise `1`.
+- In a K-Map, if the diagonals are covered with 1, we can take XOR of the variables.
 - Truth Table:
     | A | B | Y |
     |---|---|---|
@@ -289,17 +290,17 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Sum (Least Significant Bit [LSB]): $x⊕y$
 - Carry (Most Significant Bit [MSB]): $xy$
 - Truth Table:
-    |X|Y|Carry|Sum|
+    |X|Y|Sum|Carry|
     |-|-|-|-|
     |0|0|0|0|
-    |0|1|0|1|
-    |1|0|0|1|
-    |1|1|1|0|
+    |0|1|1|0|
+    |1|0|1|0|
+    |1|1|0|1|
 - Min-terms:
-    - Sum: $\bar x y, x \bar y=x⊕y$
+    - Sum: $\bar x y, x \bar y=x⊕y$ (In K-Map, diagonals are filled with 1)
     - Carry: $xy$
 - Circuit Diagram:
-    - Sum: $\bar x y, x \bar y$ | Carry: $xy$
+    - Sum: $\bar x y + x \bar y$ | Carry: $xy$
         <img src="../assets/images/Digital-Logic/self/0.png" alt="Half-adder 0" />
     - Sum: $x⊕y$ | Carry: $xy$
         <img src="../assets/images/Digital-Logic/self/1.png" alt="Half-adder 1" />
@@ -308,10 +309,10 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Adds 3 bits
 - Inputs: 3 | Outputs: 2
 - 2 Half-Adders = Full-Adder
-- Sum: $x⊕y⊕z$
+- Sum: $x⊕y⊕z$ 
 - Carry: $xy+yz+zx=(x⊕y)z+xy$ 
 - Truth Table:
-    | x | y | z ($c_{in}$) | sum | $c_{out}$ |
+    | x | y | z($c_{in})$ | sum | $c_{out}$ |
     |---|---|-----|:---:|:----:|
     | 0 | 0 |  0  |  0  |  0   |
     | 0 | 0 |  1  |  1  |  0   |
@@ -323,17 +324,71 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     | 1 | 1 |  1  |  1  |  1   |
 - Min-Terms:
     - Sum:  $\sum{(m_1,m_2,m_4,m_7)} = x⊕y⊕z$
-        |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
+        |$↓x\ \|\ yz→$|$\bar y \bar z$|$\bar y z$|$y z$|$y \bar z$|
         |:---:|:---:|:---:|:---:|:---:|
-        |$\bar A$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$1_{(2)}$|
-        |$A$|$1_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$|
-        - No pairs possible
+        |$\bar x$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$1_{(2)}$|
+        |$x$|$1_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$|
+        - Diagonals are filled with 1.
     - Carry: $\sum{(m_3,m_5,m_6,m_7)}= xy+yz+xz=(x⊕y)z+xy$
-        |$↓A\ \|\ BC→$|$\bar B \bar C$|$\bar B C$|$B C$|$B \bar C$|
+        |$↓x\ \|\ yz→$|$\bar y \bar z$|$\bar y z$|$y z$|$y \bar z$|
         |:---:|:---:|:---:|:---:|:---:|
-        |$\bar A$|$null_{(0)}$|$null_{(1)}$|$1_{(3)}$|$null_{(2)}$|
-        |$A$|$null_{(4)}$|$1_{(5)}$|$1_{(7)}$|$1_{(6)}$|
-        - Pairs: $BC,AC,AB=xy+yz+xz$
+        |$\bar x$|$null_{(0)}$|$null_{(1)}$|$1_{(3)}$|$null_{(2)}$|
+        |$x$|$null_{(4)}$|$1_{(5)}$|$1_{(7)}$|$1_{(6)}$|
+        - Pairs: $y z,xz,xy=xy+yz+xz$
 - Circuit Diagram:
     - Sum: $x⊕y⊕z$ | Carry: $(x⊕y)z+xy$
         <img src="../assets/images/Digital-Logic/self/2.png" alt="Full-adder 0" />
+
+## Half-Subtractor
+- Subtracts 2 bits
+- Inputs: 2 | Outputs: 2
+- Subtraction (Least Significant Bit [LSB]): $x⊕y$
+- Borrow (Most Significant Bit [MSB]): $\bar xy$
+- Truth Table:
+    |x|y|sub|$b_{out}$|
+    |-|-|-|-|
+    |0|0|0|0|
+    |0|1|1|1|
+    |1|0|1|0|
+    |1|1|1|0|
+
+- When subtracting $1$ from $0$, first we have to borrow $1$. So, $0$ becomes $10$, and $10-1=1$, with borrow $1$.
+- Min-terms:
+    - Sub: $\bar x y, x \bar y=x⊕y$
+    - Borrow: $\bar xy$
+- Circuit Diagram:
+    - Sub: $x⊕y$ | Borrow: $\bar xy$
+        <img src="../assets/images/Digital-Logic/self/3.png" alt="Haf-subtractor 0" />
+
+## Full-Subtractor
+- Subtracts 3 bits
+- Inputs: 3 | Outputs: 2
+- Sub: $x⊕y⊕z$ 
+- Borrow: $\bar xz+ \bar x y + yz$
+- Truth Table:
+    | x | y | z($c_{in})$ | sub | $c_{out}$ |
+    |---|---|-----|:---:|:----:|
+    | 0 | 0 |  0  |  0  |  0   |
+    | 0 | 0 |  1  |  1  |  0   |
+    | 0 | 1 |  0  |  1  |  0   |
+    | 0 | 1 |  1  |  0  |  1   |
+    | 1 | 0 |  0  |  1  |  0   |
+    | 1 | 0 |  1  |  0  |  1   |
+    | 1 | 1 |  0  |  0  |  1   |
+    | 1 | 1 |  1  |  1  |  1   |
+- Min-Terms:
+    - Sub:  $\sum{(m_1,m_2,m_4,m_7)} = x⊕y⊕z$
+        |$↓x\ \|\ yz→$|$\bar y \bar z$|$\bar y z$|$y z$|$y \bar z$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar x$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$1_{(2)}$|
+        |$x$|$1_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$|
+        - Diagonals are filled with 1.
+    - Borrow: $\sum{(m_1,m_3,m_2,m_7)}=\bar xz+ \bar x y + yz$
+        |$↓x\ \|\ yz→$|$\bar y \bar z$|$\bar y z$|$y z$|$y \bar z$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar x$|$null_{(0)}$|$1_{(1)}$|$1_{(3)}$|$1_{(2)}$|
+        |$x$|$null_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$|
+        - Pairs: $\bar xz, \bar x y, yz$
+- Circuit Diagram:
+    - Sub: $x⊕y⊕z$ | Borrow: $\bar xz+ \bar x y + yz$
+        <img src="../assets/images/Digital-Logic/self/4.png" alt="Full-subtractor 0" />
