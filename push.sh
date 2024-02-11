@@ -7,7 +7,8 @@ subjectName=("Mathematics"\
     "Digital-Logic"\
     "Algorithms"\
     "Computer-Networks" \
-    "Aptitude")
+    "Aptitude" \
+    "TIL-Coding")
 
 targetSub=${subjectName[$subjectID-1]}
 git add README.md ./topics/$targetSub.md ./assets/images/$targetSub/
