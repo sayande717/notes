@@ -182,32 +182,35 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 
 ### Back Substitution Method
 - Example 0:
-    > Recurrence Relation: $T(n)=\{T(n/2)+c\}\ if\ n>1$ <br>
+    > Recurrence Relation: $T(n)=T(n/2)+c$ <br>
     > Termination condition: $T(n)=1\ if\ n=1$
-    - Step 1: Substitute `n` with `n/2`, because the function is decreasing from $T(n)$ to $T(n/2)$
-        - $T(n)={T(n/2)+c}$
-        - $T(n/2)={T((n/2)/2)+c}$ = $T(n/4)+c$ # Substitute `n` by `n/2`
-        - $T((n/2)/2)$ ie $T(n/4)={T((n/4)/2)+c}$ = $T(n/8)+c$
-    - Step 2: Substitute `T(n/2)`, etc. with their RHS
-        - $T(n)=[T(n/2)]+c=[T(n/4)+c]+c=T(n/4)+2c=T(n/2^{2})+2c$ # Substitute `T(n/2)` with `T(n/4)+c`
-        - $T(n)=[T(n/4)]+2c=[T(n/8)+c]+2c=T(n/8)+3c=T(n/2^{3})+3c$
-        - We see a pattern here. $2^k$ & $kc$ are increasing by 1, with each iteration.
-        - So, after `k` iterations, $T(n)=T(n/2^{k})+kc$
-    - Step 3: Try to get $n/2^k=1$, so that the equation can be terminated
-        - Equation: $T(n)=T(n/2^{k})+kc$. If we take $n=2^{k}$,
-        - $T(n/n)+kc=T(1)+kc=1+kc$
-    - Step 4: Write `k` in terms of `n`
-        - We've taken $n=2^{k}$
-        - $\log n = \log 2^{k}$
-        - $\log n = k \log 2$
-        - $\log n = k$ ie $k=\log n$
-    - Substitute the value of `k` in the equation, to find the time complexity.
-        - $1+kc$ = $1+ \log n.c$ = $\log n$. Time Complexity: $O(\log n)$
+    - Step 1: $n$ >> $n/2$.
+        - $T(n)=T(n/2)+c$
+        - $T(n/2)=T(n/4)+c$
+        - $T(n/4)=T(n/8)+c$
+    - Step 2: Substitiute $T(n/2)$ in $T(n)$, and so on.
+        - $T(n)=[T(n/4)+c]+c$
+            - $T(n/4)+2c$
+            > $T(n/2^2)+2c$
+        - $T(n)=[T(n/8)+c]+2c$
+            - $T(n/8)+3c$
+            > $T(n/2^3)+3c$
+        - After k times, $T(n/2^k)+kc$
+    - We need to make $T(n/2^k)=T(1)$. So, let $n/2^k=1$.
+        - $n/2^k=1$
+        - $n=2^k$
+        - $\log n = \log {2^k}$
+        - $\log_2 n = k \log_2 2$
+        - $log n = k$ or $k = \log n$
+    - Substitute the value of `k`:
+       - $1+kc$
+       - $1+\log n*c$
+    - $(\log n)$ is the largest term. So, time complexity: $O(\log n)$
 
 - Example 1:
     > Recurrence Relation: $T(n)=\{n*T(n-1)\}\ if\ n>1$ <br>
     > Termination condition: $T(n)=1\ if\ n=1$
-    - Step 1: Substitute `n` with `n-1`, because the function is decreasing from $T(n)$ to $T(n-1)$
+    - Step 1: $n$ >> $n-1$
         - $T(n)=\{n*T(n-1)\}$
         - $T(n-1)=(n-1)*T((n-1)-1)=(n-1)*T(n-2)$
         - $T(n-2)=(n-2)*T((n-2)-1)=(n-2)*T(n-3)$
@@ -226,5 +229,48 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $n^{n}*(n-1/n)*(n-2/n)*(n-3/n)* ... * (3/n) * (2/n) * (1/n)$
         - So, $n^{n}$ is the most significant term. Time complexity: $O(n!)$, or Factorial.
 
-# Time & Space Complexity (VVI)
-# The Algorithms themselves 
+- Example 2:
+    > Recurrence Relation: $T(n)=2T{(n/2)}+n$ <br>
+    > Termination condition: $T(n)=1\ if\ n=1$
+    - Step 1: $n$ >> $n/2$.
+        - $T(n)=2T{(n/2)}+n$
+        - $T(n/2)=2T{(n/4)}+(n/2)$
+        - $T(n/4)=2T{(n/8)}+(n/4)$
+    - Substitute value of $T(n/2)$ in $T(n)$, and so on.
+        - $T(n)=2[{2T{(n/4)}+(n/2)}]+n$
+            - $4T(n/4)+2n$
+            > $2^2T(n/2^2)+2n$
+        - $T(n)=4[2T{(n/8)}+(n/4)]+2n$
+            - $8T(n/8)+3n$
+            > $2^3T(n/2^3)+3n$
+        - After k times, $T(n)=2^kT(n/2^k)+kn$
+    - We need to make $T(n/2^k)$ 1, using the termination condition, ie $n/2^k=1$ or $n=2^k$.
+        - $n=2^k$
+        - $\log_2 n = log_2 2^k$
+        - $\log_2 n = k \log_2 2$
+        - $\log_2 n = k$ or $k=\log_2 n$
+    - Substitute the value of `k`:
+        - $T(n)=n+n \log n$, $n \log n$ is the largest term.
+        - So, time complexity = $O(n \log n)$.
+
+- Example 3:
+    > Recurrence Relation: $T(n-1)+ \log n$ <br>
+    > Termination condition: $T(n)=1\ if\ n=1$
+    - Step 1: $n$ is decreasing by $(n-1)$.
+        - $T(n)=T(n-1)+ \log n$
+        - $T(n-1)=T(n-2)+ \log (n-1)$
+        - $T(n-2)=T(n-3)+ \log (n-2)$
+    - Substitute value of $T(n-1)$ in $T(n)$, and so on.
+        - $T(n)=[T(n-2)+ \log (n-1)]+ \log n$
+            > $T(n-2)+\log(n-1)+\log n$
+        - $T(n)=T(n-2)+\log(n-1)+\log n$
+            - $[T(n-3)+ \log (n-2)]+\log(n-1)+\log n$
+            > $T(n-3)+ \log (n-2)+\log(n-1)+\log n$
+        - After k times, $T(n)=T(n-k)+\log (n-(k-1))+\log(n-(k-2))+log(n-(k-3)) + ...\ +log(n-0)$
+    - We need to make $T(n-k)=T(1)$. So, let $n-k=1$ or $n=k$
+    - Substitute the value of `k`:
+        - $1+\log 1 + \log 2 + \log 3 + ... + \log n$
+        - $1+log(1*2*3*4*...*n)$
+        - $1+log(n^n)$
+        - $1+n \log n$
+    - $(n \log n)$ is the largest term. So, time complexity: $O(n \log n)$

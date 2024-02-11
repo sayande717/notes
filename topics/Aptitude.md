@@ -1,15 +1,25 @@
 # Logical Reasoning
 ## Number Series
-### Type 1
-- Progress: 1-20
-1. $544, 509, 474, 439$: The numbers are decreasing by 45, **at each step**.
-1. $14,28,20,40,32,64$: Every number is getting multiplied by 2.
-1. $80,10,70,15,60$: From #1, **every alternate number** is decreasing by 10. From #2, every alternate number is inscreasing by 5.
-1. $8,6,9,23,87$:
-    - $8*1-2=6$
-    - $6*2-3=9$
-    - $9*3-4=23$
-    - $23*4-5=87$
-### Type 2
-- Progress: 1-20 | 00:13
-1. 21 25 18 29 33 18: Position 1,4, etc +8. Position 2,5, etc +8. Position 3,6,etc = 18
+### Type 1 | 1-20 | 00:21
+- Syntax:
+    - [Positions] ... [Change]
+    > Example
+1. 544 509 474 439: 
+    - 1,2,3 ... $-45$
+1. 14,28,20,40,32,64:
+    - 1,2,3 ... $*2$
+1. 80,10,70,15,60:
+    - 1,3,5 ... $-10$
+    - 2,4,6 ... $+5$
+1. 8,6,9,23,87:
+    - 1,2,3 ... $m=1 >> n*m-(m+1)=(n+1) >> m=m+1$
+    > $8*1-2=6, 6*2-3=9, 9*3-4=23$
+
+### Type 2 | 1-20 | 00:13
+- Syntax:
+    - [Positions] ... [Change]
+
+1. 21 25 18 29 33 18:
+ - 1,4,7,... $+8$
+ - 2,5,8 ... $+8$
+ - 3,6,9 ... $=18$
