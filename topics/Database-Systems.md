@@ -1,7 +1,8 @@
 # Questions
 
-## qs-UGC_NET-2018, Check [Referential Integrity](#referential-integrity)
-Let $R_1 (a,b,c)$ and $R_2 (x,y,z)$ be 2 relations in which 'a' is a foreign key in $R_1$ that refers to the primary key (unspecified) of $R_2$. Consider 4 options:
+
+## qs-UGC_NET-2018
+> Let $R_1 (a,b,c)$ and $R_2 (x,y,z)$ be 2 relations in which 'a' is a foreign key in $R_1$ that refers to the primary key (unspecified) of $R_2$. Consider 4 options:
 1. Insert into $R_1$
 1. Insert into $R_2$
 1. Delete from $R_1$
@@ -12,6 +13,27 @@ Which of theses options is true?
 - Option 'b' & 'c' will cause violation.
 - Option 'c' & 'd' will cause violation.
 - **Option 'd' & 'a' will cause violation.**
+
+Explanation:  Check 
+
+<details>
+  <summary>Explanation</summary>
+  Check <a href="#referential-integrity">Referential Integrity </a> <br>
+</details>
+
+## qs-GATE-2005
+> What is the minimum number of tables required to represent this E-R Model into Relational Model?
+- 2
+- **3**
+- 4
+- 5
+
+<details>
+  <summary>Explanation</summary>
+  - 4 Tables are created, E1, E2, R1 & R2. <br>
+  - R1: B becomes the primary key. Since E2 also has the same primary key, R1 can get merged with E2. <br>
+  - R2: A+B together forms the primary key. It cannot be merged with any of the other 2 tables. <br>
+</details>
 
 # Basics
 
@@ -382,6 +404,120 @@ Example: Student
         - **Primary Key**: A composite key, including both the primary keys from the LHS & RHS tables.
             > `RollNo + C_id`, since both `RollNo` & `C_id` can repeat.
     - We **cannot merge** (reduce) the tables.
+
+# Normalization
+- It is a method of removing or reducing redundancy ie duplicate values from a table.
+- 2 rows cannot be exactly the same, since we have a primary key in every table. At the very least, the primary key column will be different. However, the other values may be partially or fully duplicated.
+- There are 3 types of anamolies:
+    > Anamoly: Error that only occurs under special circumstances.
+    - Insertion
+    - Deletion
+    - Updation
+- Example:
+    | $S_{ID}$ | Sname   | C_ID | Cname    | F_ID | Fname  | Salary |
+    |------|---------|------|----------|------|--------|--------|
+    | 101  | Alice   | 201  | Math     | 301  | John   | 50000  |
+    | 102  | Bob     | 202  | English  | 302  | Emily  | 55000  |
+    | 103  | Charlie | 203  | Science  | 303  | Sarah  | 60000  |
+    | 104  | Bob     | 202  | English  | 302  | Emily  | 55000  |
+    | 105  | Emma    | 205  | Geography| 305  | Alex   | 58000  |
+
+    - **Insertion Anamoly**: We cannot insert a new course in this table, unless there's also a student to take it up, and $S_{ID}$ is a primary key.
+    - **Deletion Anamoly**: We can delete $S_{ID}=102$ safely without losing data because details for $C_{ID}=202$ & $F_{ID}=302$ is also present in other rows. But, if we delete $S_{ID}=105$, we may lose important information.
+    - **Updation Anamoly**: Say we want to update the salary of faculty $F_{ID}=302$ ie Emily from $55000$ to $60000$. Now, since there is only 1 faculty with $F_{ID}=302$, the updation should only happen once. But, in reality, since there are multiple entries of $F_{ID}=302$, value $55000$ will be updated multiple times within the table (twice, in this example).
+- Normalization aims to prevent these anamolies from happening.
+
+## Closure Method
+- A method to find candidate keys from functional dependencies (FDs).
+- 2 methods:
+    1. One by one: Examples 0,1
+    1. More efficient: Example 2
+
+- Example 0:
+    - R=(ABCD) | FD = {A->B, B->C,C->D}
+    - $A^+=ABCD$
+    - $B^+=BCD$
+    - $C^+=CD$
+    - $D^+=D$
+    - $AB^+=ABCD$, but cannot be considered because candidate keys should be minimal. However, it can be a [super key](#super-key).
+    - Prime Attributes: $\{A\}$
+    > These attributes can be used as a candidate key.
+    - Non-Prime Attributes: $\{B,C,D\}$
+    > These attributes cannot be used as a candidate key.
+    - $A$ is included in $A^+$ because it will always determine it's own value.
+   - Only attributes that determine the values of all attributes in the relation, can be the candidate key.
+
+- Example 1:
+    - R=(ABCD) | FD = {A->B, B->C,C->D,D->A}
+    - $A^+=ABCD$
+    - $B^+=BCDA$
+    - $C^+=CDAB$
+    - $D^+=DABC$
+    - Prime Attributes: $\{A,B,C,D\}$
+    - Non-Prime Attributes: $\{null\}$
+
+- Example 2:
+    - R=(ABCDE) | FD = {A->B, BC->D,E->C,D->A}
+    1. Check the RHS of the functional dependencies: ${AB,D,C,A}$. `E` is missing, so assume that E will be a part of the candidate key.
+    1. Start check from `A`:
+        > $AE^+=\{AECBD\}$. Candidate Key Set: $\{AE\}$
+    1. Check if `A` or `E` is in RHS: \[D->A\]. Check for `D`:
+         > $DE^+=\{DEABC\}$. Candidate Key Set: $\{AE,DE\}$
+    1. Check if `D` is in RHS: \[BC->D\]. Check for `B` & `C`:
+         > $BE^+=\{BECDA\}$. Candidate Key Set: $\{AE,DE,BE\}$ <br>
+         > $CE^+=\{CE\}$. Candidate Key Set: $\{AE,DE,BE\}$
+    - So, in short, when we find a new candidate key, we search if that new attribute is also present in RHS of the FD. If it is, we check for the corresponding LHS attributes.
+
+## First Normal form (1-NF)
+- The table should not contain **multivalued attributes**.
+- Example: Normalize this table to `1-NF` (Solution 3 is the one that works):
+    |RollNo|Name|Course|
+    |---|---|---|
+    |1|Sai|C,C++|
+    |2|Harsh|Java|
+    |3|Onkar|C,DBMS|
+    - Solution 1: Put only 1 course per row.
+        |RollNo|Name|Course|
+        |---|---|---|
+        |1|Sai|C|               
+        |1|Sai|C++|
+        |2|Harsh|Java|
+        |3|Onkar|C|
+        |3|Onkar|DBMS|
+        - Primary Key: `RollNo+Course`
+        ```diff
+        - Data Duplication
+        ```
+    - Solution 2: Divide the `Course` column:
+        |RollNo|Name|Course 1|Course 2|
+        |---|---|---|---|
+        |1|Sai|C|C++|
+        |2|Harsh|Java|null|
+        |3|Onkar|C|DBMS|
+        - Primary Key: `RollNo`
+        - `null`: no value
+        ```diff
+        - If there are 2 columns for course & someone takes up a 3rd course, we have to add another column for `Course 3`.
+        - For people who have only taken 1 course, we have to put the value for course 2,3,... n as `null`, which is not good practice.
+        ```
+    - **Solution 3**: Segregate into 2 tables.
+        - Base Table
+            |RollNo|Name|
+            |---|---|
+            |1|Sai|
+            |2|Harsh|
+            |3|Onkar|
+            - Primary Key: `RollNo`
+        - Referencing Table:
+            |RollNo|Course|
+            |---|---|
+            |1|C|
+            |1|C++|
+            |2|Java|
+            |3|C|
+            |3|DBMS|
+        - Primary Key: `RollNo+Course`
+        - Foreign Key: `RollNo`, referencing to `RollNo`.
 
 # Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
 # Basics of keys
