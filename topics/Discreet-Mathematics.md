@@ -28,6 +28,24 @@
 ## FRL Comparison of relations
 > $A = \{1,2,3\}$, $AxA = \{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$
 
+## FRL Number Types
+- **N** (Natural numbers) = {1,2,3,4,5 ... ∞}
+- **Z** (Integers) = {-∞, ... +∞}
+    - $Z^+$ = {1,2,3 ... ∞}
+    - $Z^-$ = {-∞ ... -3,-2,-1}
+- **Q** (Rational numbers) = Numbers which fit into the following criteria:
+    1. Can be written as a fraction, where the denominator is not zero. <br>
+        Example: $2.5/0$ is not a rational number
+    1. Has a fixed number of digits after decimel, ie terminating decimels. <br>
+        Example: $5/2=2.5$
+    1. Has a repeating pattern of numbers after the decimel. <br>
+        Example: $1/3=0.333...=0.\bar 3$ is a rational number
+    - **Q\*** = {All of Q, excluding 0}
+- **I** (Irrational numbers) = Numbers which cannot be written as a fraction, ie don't have a fixed number of digits after decimel, like π, $\sqrt 2$, etc.
+- **R** (Real numbers) = Natural numbers, Integers, Rational numbers, ie all types of numbers
+- **C** = All complex numbers ie $a+b_i$
+
+
 |Parameter|Reflexive|Irreflexive|Symmetric|Anti-symmetric|Asymmetric|Transitive|
 |---|---|---|---|---|---|---|
 |Cardinality of smallest relation|n|∅|∅|∅|∅|∅|
@@ -233,3 +251,75 @@ See [comparison of relations](#frl-comparison-of-relations) in section `formulae
     - Transitive:
         - Smallest: $\{\}$ | Cardinality: ∅
         - Largest: $\{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(2,2)\}$ | Cardinality: $n^2$
+
+# Group Theory
+## Algebric Structure
+- A non-empty set S is called Algebric Structure with respect to binary operation `*` if $\{(a*b)∈S\}\ ∀\ \{(a,b)∈S\}$
+- `*` is closure operation on `S`
+- Example 0:
+    > N = Natural numbers
+    - (N,+): TRUE
+    - (N,-): FALSE, $3-5=-2$, which is an integer
+    - (N,.): TRUE, we won't have 0 unless we multiply any number by 0, which won't happen in this case
+    - (N,/): FALSE, $1/2=0.5$, which is not a rational number
+- Example 1:
+    > Z = Integers
+    - (Z,+): TRUE
+    - (Z,-): TRUE
+    - (Z,.): TRUE
+    - (Z,/): FALSE, $5/2=2.5$, which is a rational number
+- Example 2:
+    > R = Real numbers
+    - (R,+): TRUE
+    - (R,-): TRUE
+    - (R,.): TRUE
+    - (R,/): TRUE
+- Example 3:
+    > Q: Rational numbers
+    - (Q,+): TRUE
+    - (Q,-): TRUE
+    - (Q,.): TRUE
+    - (Q,/): FALSE, $2/0=∞$, where the denominator is zero
+- Example 4:
+    > Q*: Rational numbers, excluding 0
+    - (Q*,+): TRUE
+    - (Q*,-): TRUE
+    - (Q*,.): TRUE
+    - (Q*,/): TRUE, $5/0$ can't be done because 0 doesn't exist in the range of Q*
+
+## Semi-group
+- An Algebric Structure (S,*) is called Semi-group if it follows associative property, ie $(a*b)*c = a*(b*c) ∀\ \{(a,b)∈S\}$
+- Example 0:
+    > N = Natural numbers
+    - (N,+): TRUE
+    - (N,-): FALSE, it's not an Algebric Structure
+    - (N,.): TRUE
+    - (N,/): FALSE, it's not an Algebric Structure
+- Example 1:
+    > Z = Integers
+    - (Z,+): TRUE
+    - (Z,-): FALSE, $2-(3-5)≠(2-3)-5$
+    - (Z,.): TRUE
+    - (Z,/): FALSE, it's not an Algebric Structure
+- Example 2:
+    > R = Real numbers
+    - (R,+): TRUE
+    - (R,-): FALSE, $2-(3-5)≠(2-3)-5$
+    - (R,.): TRUE
+    - (R,/): FALSE, $8/(4/2)≠(8/4)/2$
+- Example 3:
+    > Q: Rational numbers
+    - (Q,+): TRUE
+    - (Q,-): FALSE, $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
+    - (Q,.): TRUE
+    - (Q,/): FALSE, it's not an Algebric Structure
+- Example 4:
+    > Q*: Rational numbers, excluding 0
+    - (Q*,+): TRUE
+    - (Q*,-): FALSE, $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
+    - (Q*,.): TRUE
+    - (Q*,/): FALSE, $10/(5/2.5)≠(10/5)/2.5$
+- Example 5:
+    - {$2^n$ | n is an integer w.r.t multiplication}
+    - $2^5.2^{10}.2^8=8388608$, which is an integer.
+    - $2^5.(2^{10}.2^8)=(2^5.2^{10}).2^8$, so TRUE
