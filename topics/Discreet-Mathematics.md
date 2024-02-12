@@ -42,8 +42,8 @@
         Example: $1/3=0.333...=0.\bar 3$ is a rational number
     - **Q\*** = {All of Q, excluding 0}
 - **I** (Irrational numbers) = Numbers which cannot be written as a fraction, ie don't have a fixed number of digits after decimel, like π, $\sqrt 2$, etc.
-- **R** (Real numbers) = Natural numbers, Integers, Rational numbers, ie all types of numbers
-- **C** = All complex numbers ie $a+b_i$
+- **R** (Real numbers) = Natural numbers, Integers, Rational numbers, Irrational numbers, etc. ie all types of numbers
+- **C** = All complex numbers ie $(a+b_i)$
 
 
 |Parameter|Reflexive|Irreflexive|Symmetric|Anti-symmetric|Asymmetric|Transitive|
