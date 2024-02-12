@@ -22,17 +22,20 @@ Explanation:  Check
 </details>
 
 ## qs-GATE-2005
+
 > What is the minimum number of tables required to represent this E-R Model into Relational Model?
 - 2
 - **3**
 - 4
 - 5
 
+
 <details>
   <summary>Explanation</summary>
   - 4 Tables are created, E1, E2, R1 & R2. <br>
   - R1: B becomes the primary key. Since E2 also has the same primary key, R1 can get merged with E2. <br>
   - R2: A+B together forms the primary key. It cannot be merged with any of the other 2 tables. <br>
+    <img src="../assets/images/Database-Systems/self/2.png" height="250px" alt="qs-GATE-2005" />
 </details>
 
 # Basics
