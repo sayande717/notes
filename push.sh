@@ -10,7 +10,7 @@ subjectName=("Discreet-Mathematics" \
     "Aptitude" \
     "TIL-Coding")
 
-targetSub=${subjectName[$subjectID-1]}
+targetSub=${subjectName[$((subjectID-1))]}
 
 git add README.md ./topics/$targetSub.md ./assets/images/$targetSub/
 git commit -m "$targetSub"

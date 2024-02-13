@@ -31,3 +31,5 @@ git clone https://github.com/sayande717/notes.git
     |:---|:---:|:---:|:---:|
     |Number Series|Type 1|1-20|00:21|
     |Number Series|Type 2|1-20|00:13|
+    |Number Series|Type 3|1-20|00:17|
+    |Number Series|Type 4|1-10|00:18|
