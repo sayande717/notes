@@ -29,7 +29,9 @@ git clone https://github.com/sayande717/notes.git
 - Logical Reasoning
     |Topic|Sub-Topic|Progress|Time Taken|
     |:---|:---:|:---:|:---:|
-    |Number Series|Type 1|1-20|00:21|
-    |Number Series|Type 2|1-20|00:13|
-    |Number Series|Type 3|1-20|00:17|
-    |Number Series|Type 4|1-10|00:18|
+    |Number Series|Type 1|1-20|21:01|
+    |Number Series|Type 2|1-20|13:27|
+    |Number Series|Type 3|1-20|17:13|
+    |Number Series|Type 4|1-10|08:10|
+    |Number Series|Type 4|1-15|08:54|
+    |Letters & Symbol Series|Type 1|1-12|10:43|
