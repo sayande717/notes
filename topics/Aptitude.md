@@ -1,6 +1,8 @@
+<!-- Time format: MM:SS -->
+
 # Logical Reasoning
 ## Number Series
-### Type 1 | 1-20 | 00:21
+### Type 1 | 1-20 | 21:01
 - Syntax:
     - [Positions] ... [Change]
     > Example
@@ -15,7 +17,7 @@
     - 1,2,3 ... $m=1 >> n*m-(m+1)=(n+1) >> m=m+1$
     > $8*1-2=6, 6*2-3=9, 9*3-4=23$
 
-### Type 2 | 1-20 | 00:13
+### Type 2 | 1-20 | 13:27
 - Syntax:
     - [Positions] ... [Change]
 
@@ -24,7 +26,7 @@
  - 2,5,8 ... $+8$
  - 3,6,9 ... $=18$
 
-### Type 3 | 1-20 | 00:17
+### Type 3 | 1-20 | 17:13
 - Syntax:
     - [Positions] ... [Change]
 1. 42 40 38 35 33 31 28:
@@ -49,7 +51,7 @@
     - 2,3 ... $=$
     - 3,4 ... $-3$
 
-### Type 4 | 1-10 | 00:08
+### Type 4 | 1-10 | 08:10
 - Syntax:
     - [Positions] ... [Change]
 1. 664, 332, 340, 170, \_, 89:
@@ -64,3 +66,33 @@
     - 1,4,7 ... $-20$
     - 2,5,8 ... $-20$
     - 3,6,9 ... $93$
+
+### Type 4 | 1-15 | 08:54
+- Syntax:
+    - [Positions] ... [Change]
+12. 4, 7, 25, 10, \_, 20, 16, 19:
+    - 1,2 ... $+3$
+    - 3,6 ... $-5$
+    - 3,4 ... $+3$
+14. 0.15, 0.3, \_, 1.2, 2.4:
+    - 1,2,3,4 ... $x2$
+
+## Letter & Symbol Series
+### Type 1 | 1-12 | 10:43
+1. SCD, TEF, UGH, \_\_\_, WKL:
+    > S: 1, C: 2, D: 3
+    - 1,4,7 ... $+1$
+    - 2,3,5,6 ... $+1$
+2. $B_2 CD$, $BCD_4$, $B_5CD$, $BC_6D$:
+    - BCD: static
+    - Sub-scripts: change location ... B,C,D
+3. FAG, GAF, HAI, IAH:
+    - A: static
+    - FAG,GAF ... reverse
+    - F,G ... $+1$
+    - F,G,H,I ... $+1$
+2. $ZA_5$, $Y_4B$, $XC_6$, $W_3D$:
+    - ZA, YB, XC ... $-1$, $+1$
+    - Subscript
+        - 1,3,5 ... $+1$
+        - 2,4,6 ... $+1$
