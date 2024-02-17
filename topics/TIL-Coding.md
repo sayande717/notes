@@ -43,3 +43,22 @@
     - From time to time, non-referenced objects in heap are cleaned up.
 - $>1$ reference variables can point to the same object.
 - If one of those reference variables alter the object, it is changed for all of them.
+
+# C++
+
+## Notes
+- \<iostream\> components:
+    - std::cout :- Print data to the Terminal/Console
+    - std::cin :- Read data from the Terminal (without spaces). Space is used as an escape character.
+    - std::getline(std::cin,var) :- Read data with spaces, from the Terminal.
+    - std::string :- String data type
+    - std::cerr :- Print errors to the Terminal/Console
+    - std::clog :- Print log messages to the Terminal/Console
+        > Errors & Logs are printed regardless of the occurence of an error. They are just used to format the message according to it's type.
+
+
+- Define variables:
+    ```cpp
+    int firstNumber {3};
+    int secondNumber = 4;
+    ```
