@@ -28,6 +28,12 @@
 ## FRL Comparison of relations
 > $A = \{1,2,3\}$, $AxA = \{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(3,2)\}$
 
+|Parameter|Reflexive|Irreflexive|Symmetric|Anti-symmetric|Asymmetric|Transitive|
+|---|---|---|---|---|---|---|
+|Cardinality of smallest relation|n|∅|∅|∅|∅|∅|
+|Cardinality of largest relation|$n^2$|$n^2-n$|$n^2$|${(n^2+n)}/2$|$(n^2-n)/2$|$n^2$|
+|Number of relations|$2^{n^2-n}$|$2^{n^2-n}$|$2^n.2^{(n^2-n)/2)}$|$2^n.3^{(n^2-n)/2}$|$3^{(n^2-n)/2}$|N/A|
+
 ## FRL Number Types
 - **N** (Natural numbers) = {1,2,3,4,5 ... ∞}
 - **Z** (Integers) = {-∞, ... +∞}
@@ -45,16 +51,16 @@
 - **R** (Real numbers) = Natural numbers, Integers, Rational numbers, Irrational numbers, etc. ie all types of numbers
 - **C** = All complex numbers ie $(a+b_i)$
 
-
-|Parameter|Reflexive|Irreflexive|Symmetric|Anti-symmetric|Asymmetric|Transitive|
-|---|---|---|---|---|---|---|
-|Cardinality of smallest relation|n|∅|∅|∅|∅|∅|
-|Cardinality of largest relation|$n^2$|$n^2-n$|$n^2$|${(n^2+n)}/2$|$(n^2-n)/2$|$n^2$|
-|Number of relations|$2^{n^2-n}$|$2^{n^2-n}$|$2^n.2^{(n^2-n)/2)}$|$2^n.3^{(n^2-n)/2}$|$3^{(n^2-n)/2}$|N/A|
+## FRL Group Theory
+- **Algebriac Structure**: $a*b=c$, c has to exist in the domain.
+- **Semi-group**: $(a*b)*c=a*(b*c)$
+- **Monoid**: $(e*a)=(a*e)=a$, `e` = identity element
+- **Group**: $(a*b)=(b*a)=e$, `e` = identity element
+- **Albenian Group**: $(a*b)=(b*a)$, does not have to be equal to `e`
 
 # Set Theory
 
-## Set
+## Set:
 ### A **well-defined** **unordered** collection of **distinct** elements.
 - Unordered: Set {1,2,3,4} is same as {2,3,4,1}.
 - Distinct: Set {1,2,3,4} is same as {1,1,2,2,3,4}.
@@ -217,10 +223,10 @@
     > A = {1,2,3,4,5,6,7,8...∞} <br>
     > Reflexive: $(1,1),(2,2),(3,3)∈R$ <br>
     > Anti-symmetric: $(4,2)∈R$ but $(2,4)∉R$ <br>
-    > Transitive: If $(8,4)∈R \& (4,2)∈R$, then $(8,2)∈R$. <br>
+    > Transitive: If $(8,4)∈R\ \&\ (4,2)∈R$, then $(8,2)∈R$. <br>
     > TOS: $(2,3),(4,8)$, etc. are not comparable when the domain consists only of positive integers.
 - Example 1: $(A,\leq)∈R\ ∀ (A∈R)$, I=Real numbers: TRUE.
-- Example 2: $(A,∈)∈R\ ∀ A∈\{∅\},\{\{a\},\{b\},\{a,b\}\}$: FALSE.
+- Example 2: $(A,∈)∈R\ ∀ A∈\{\{∅\},\{a\},\{b\},\{a,b\}\}$: FALSE.
     > $\{a\}$ is not comparable with $\{b\}$.
 
 ### Comparison of all relations
@@ -253,21 +259,28 @@ See [comparison of relations](#frl-comparison-of-relations) in section `formulae
         - Largest: $\{(1,1),(2,2),(3,3),(1,2),(2,1),(1,3),(3,1),(2,3),(2,2)\}$ | Cardinality: $n^2$
 
 # Group Theory
-## Algebric Structure
-- A non-empty set S is called Algebric Structure with respect to binary operation `*` if $\{(a*b)∈S\}\ ∀\ \{(a,b)∈S\}$
+Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
+## Algebriac Structure
+- A non-empty set S is called Algebriac Structure with respect to binary operation `*` if $(a*b)=c\ ∀\ \{(a,b,c)∈S\}$
+- `c` needs to exist in the domain.
 - `*` is closure operation on `S`
+- Prerequisites: none
 - Example 0:
     > N = Natural numbers
     - (N,+): TRUE
-    - (N,-): FALSE, $3-5=-2$, which is an integer
-    - (N,.): TRUE, we won't have 0 unless we multiply any number by 0, which won't happen in this case
-    - (N,/): FALSE, $1/2=0.5$, which is not a rational number
+    - (N,-): FALSE
+        > $3-5=-2$, which is an integer
+    - (N,.): TRUE
+        > We won't have 0 unless we multiply any number by 0, which won't happen in this case
+    - (N,/): FALSE
+        > $1/2=0.5$, which is not a rational number
 - Example 1:
     > Z = Integers
     - (Z,+): TRUE
     - (Z,-): TRUE
     - (Z,.): TRUE
-    - (Z,/): FALSE, $5/2=2.5$, which is a rational number
+    - (Z,/): FALSE
+        > $5/2=2.5$, which is a rational number
 - Example 2:
     > R = Real numbers
     - (R,+): TRUE
@@ -279,47 +292,168 @@ See [comparison of relations](#frl-comparison-of-relations) in section `formulae
     - (Q,+): TRUE
     - (Q,-): TRUE
     - (Q,.): TRUE
-    - (Q,/): FALSE, $2/0=∞$, where the denominator is zero
+    - (Q,/): FALSE
+        > $2/0=∞$, where the denominator is zero
 - Example 4:
     > Q*: Rational numbers, excluding 0
     - (Q*,+): TRUE
     - (Q*,-): TRUE
     - (Q*,.): TRUE
-    - (Q*,/): TRUE, $5/0$ can't be done because 0 doesn't exist in the range of Q*
+    - (Q*,/): TRUE
+        > $5/0$ can't be done because 0 doesn't exist in the range of Q*
 
 ## Semi-group
-- An Algebric Structure (S,*) is called Semi-group if it follows associative property, ie $(a*b)*c = a*(b*c) ∀\ \{(a,b)∈S\}$
+- An Algebriac Structure (S,*) is called Semi-group if it follows associative property, ie $(a*b)*c = a*(b*c) ∀\ \{(a,b,c)∈S\}$
+- Prerequisites: `Algebriac Structure`
 - Example 0:
     > N = Natural numbers
-    - (N,+): TRUE
-    - (N,-): FALSE, it's not an Algebric Structure
-    - (N,.): TRUE
-    - (N,/): FALSE, it's not an Algebric Structure
+    - (N,+): TRUE | TRUE
+    - (N,-): FALSE | null
+    - (N,.): TRUE | TRUE
+    - (N,/): FALSE | null
 - Example 1:
     > Z = Integers
-    - (Z,+): TRUE
-    - (Z,-): FALSE, $2-(3-5)≠(2-3)-5$
-    - (Z,.): TRUE
-    - (Z,/): FALSE, it's not an Algebric Structure
+    - (Z,+): TRUE | TRUE
+    - (Z,-): TRUE | FALSE
+        > $2-(3-5)≠(2-3)-5$
+    - (Z,.): TRUE | TRUE
+    - (Z,/): FALSE | null
 - Example 2:
     > R = Real numbers
-    - (R,+): TRUE
-    - (R,-): FALSE, $2-(3-5)≠(2-3)-5$
-    - (R,.): TRUE
-    - (R,/): FALSE, $8/(4/2)≠(8/4)/2$
+    - (R,+): TRUE | TRUE
+    - (R,-): TRUE | FALSE
+        > $2-(3-5)≠(2-3)-5$
+    - (R,.): TRUE | TRUE
+    - (R,/): TRUE | FALSE
+        > $8/(4/2)≠(8/4)/2$
 - Example 3:
     > Q: Rational numbers
-    - (Q,+): TRUE
-    - (Q,-): FALSE, $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
-    - (Q,.): TRUE
-    - (Q,/): FALSE, it's not an Algebric Structure
+    - (Q,+): TRUE | TRUE
+    - (Q,-): TRUE | FALSE
+        > $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
+    - (Q,.): TRUE | TRUE
+    - (Q,/): FALSE | null
 - Example 4:
     > Q*: Rational numbers, excluding 0
-    - (Q*,+): TRUE
-    - (Q*,-): FALSE, $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
-    - (Q*,.): TRUE
-    - (Q*,/): FALSE, $10/(5/2.5)≠(10/5)/2.5$
+    - (Q*,+): TRUE | TRUE
+    - (Q*,-): TRUE | FALSE
+        > $3.5-(2.5-1.5)≠(3.5-2.5)-1.5$
+    - (Q*,.): TRUE | TRUE
+    - (Q*,/): TRUE | FALSE
+        > $10/(5/2.5)≠(10/5)/2.5$
 - Example 5:
     - {$2^n$ | n is an integer w.r.t multiplication}
     - $2^5.2^{10}.2^8=8388608$, which is an integer.
     - $2^5.(2^{10}.2^8)=(2^5.2^{10}).2^8$, so TRUE
+
+## Monoid
+- A Semi-group (S,*) is called Monoid if there exists one element $(e∈S)$, such that $(e*a) = (a*e) = a\ ∀\ \{a∈S\}$
+- `e` is the identity element, $(a*e = a)$. Our goal is to find the identity element. If it exists, then the resultant group is a Monoid. 
+    > Example: 10+`0`=10, a+`e`=a
+- Prerequisites: `Algebriac Structure`, `Semi-group`
+- Example 0 (`Algebriac Structure` | `Semi-group` | `Monoid`):
+    > N = Natural numbers
+    - (N,+): TRUE | TRUE | FALSE
+    - (N,-): FALSE | null | null
+    - (N,.): TRUE | TRUE | TRUE
+        > 2*`1`=2
+    - (N,/): FALSE | null | null
+- Example 1:
+    > Z = Integers
+    - (Z,+): TRUE | TRUE | TRUE
+    - (Z,-): TRUE | FALSE | null
+    - (Z,.): TRUE | TRUE | TRUE
+    - (Z,/): FALSE | null | null
+- Example 2:
+    > R = Real numbers
+    - (R,+): TRUE | TRUE | FALSE
+    - (R,-): TRUE | FALSE | null
+    - (R,.): TRUE | TRUE | TRUE
+    - (R,/): TRUE | FALSE | null
+- Example 3:
+    > Q: Rational numbers
+    - (Q,+): TRUE | TRUE | FALSE
+        > $4/2+0/0=4/2$, but `0/0` is not allowed.
+    - (Q,-): TRUE | FALSE | null
+    - (Q,.): TRUE | TRUE | FALSE
+        > $0*b=0$, b cannot be found.
+    - (Q,/): FALSE | null | null
+- Example 4:
+    > Q*: Rational numbers, excluding 0
+    - (Q*,+): TRUE | TRUE | FALSE
+    - (Q*,-): TRUE | FALSE | null
+    - (Q*,.): TRUE | TRUE | TRUE
+    - (Q*,/): TRUE | FALSE | null
+- Example 5:
+    - ($2^n$, `n` = Integer wrt multiplication): TRUE | TRUE | TRUE
+        > $2^n.2^0=2^n$
+
+## Group
+- A Monoid (S,*) is called Group if for each element $(a∈S)$, there exists an element $(b∈S)$, such that $(a*b) = (b*a) = e$
+- `e` is the identity element.
+- Prerequisites: `Algebriac Structure`, `Semi-group`, `Monoid`
+- Example 0 (`Algebriac Structure` | `Semi-group` | `Monoid` | `Group`):
+    > N = Natural numbers
+    - (N,+): TRUE | TRUE | FALSE | null
+    - (N,-): FALSE | null | null | null
+    - (N,.): TRUE | TRUE | TRUE | FALSE
+    - (N,/): FALSE | null | null | null
+- Example 1:
+    > Z = Integers
+    - (Z,+): TRUE | TRUE | TRUE | TRUE
+    - (Z,-): TRUE | FALSE | null | null
+    - (Z,.): TRUE | TRUE | TRUE | FALSE
+    - (Z,/): FALSE | null | null | null
+- Example 2:
+    > R = Real numbers
+    - (R,+): TRUE | TRUE | FALSE | null
+    - (R,-): TRUE | FALSE | null | null
+    - (R,.): TRUE | TRUE | TRUE | FALSE
+        > For 0, it is invalid since we can't find `b` in $a.b=e$
+    - (R,/): TRUE | FALSE | null | null
+- Example 3:
+    > Q: Rational numbers
+    - (Q,+): TRUE | TRUE | FALSE | null
+    - (Q,-): TRUE | FALSE | null | null
+    - (Q,.): TRUE | TRUE | FALSE | null
+    - (Q,/): FALSE | null | null | null
+- Example 4:
+    > Q*: Rational numbers, excluding 0
+    - (Q*,+): TRUE | TRUE | FALSE | null
+    - (Q*,-): TRUE | FALSE | null | null
+    - (Q*,.): TRUE | TRUE | TRUE | TRUE
+    - (Q*,/): TRUE | FALSE | null | null
+
+## Abelian Group
+- A Group (G,*) is called an Abelian Group if $(a*b) = (b*a)\ ∀\ \{(a,b)∈G\}$
+- Prerequisites: `Algebriac Structure`, `Semi-group`, `Monoid`, `Group`
+- Example 0 (`Algebiac Structure` | `Semi-group` | `Monoid` | `Group` | `Abelian Group`):
+    > N = Natural numbers
+    - (N,+): TRUE | TRUE | FALSE | null | null
+    - (N,-): FALSE | null | null | null | null
+    - (N,.): TRUE | TRUE | TRUE | FALSE | null
+    - (N,/): FALSE | null | null | null | null
+- Example 1:
+    > Z = Integers
+    - (Z,+): TRUE | TRUE | TRUE | TRUE | TRUE
+    - (Z,-): TRUE | FALSE | null | null | null
+    - (Z,.): TRUE | TRUE | TRUE | FALSE | null
+    - (Z,/): FALSE | null | null | null | null
+- Example 2:
+    > R = Real numbers
+    - (R,+): TRUE | TRUE | FALSE | null | null
+    - (R,-): TRUE | FALSE | null | null | null
+    - (R,.): TRUE | TRUE | TRUE | FALSE | null
+    - (R,/): TRUE | FALSE | null | null | null
+- Example 3:
+    > Q: Rational numbers
+    - (Q,+): TRUE | TRUE | FALSE | null | null
+    - (Q,-): TRUE | FALSE | null | null | null
+    - (Q,.): TRUE | TRUE | FALSE | null | null
+    - (Q,/): FALSE | null | null | null | null
+- Example 4:
+    > Q*: Rational numbers, excluding 0
+    - (Q*,+): TRUE | TRUE | FALSE | null | null
+    - (Q*,-): TRUE | FALSE | null | null | null
+    - (Q*,.): TRUE | TRUE | TRUE | TRUE | TRUE
+    - (Q*,/): TRUE | FALSE | null | null | null
