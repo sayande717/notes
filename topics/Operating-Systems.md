@@ -80,11 +80,12 @@ Image taken from [here](https://www.sitesbay.com/os/images/process-states-in-ope
         - After the I/O operation is complete and the process is in the `Suspend Wait` state, it tries to get back to the `Wait` state. If the `Wait` queue is full for a significant amount of time, it is moved to the `Ready` queue. This is called `Backing Store`.
 - **Terminated**: After the execution of the process is complete, all resources are de-allocated, and the process moves to the `Terminated` state.
 
-## System Calls
+## User Mode & Kernel Mode
 - By default, we use software/apps in **user-mode**.
 - In user-mode, we don't have the rights to directly interact with the hardware. The kernel manages that part, as part of the operating system.
-- When we want to communicate with or send information to hardware, we need to interact with the kernel, using `system calls`.
-- So, a system call is used to invoke the kernel to perform operations on hardware, files, etc.
+- When we want to communicate with or send information to hardware, we need to interact with the kernel, using `system calls`. We do that in **Kernel Mode**.
+- A system call is used to invoke the kernel to perform operations on hardware, files, etc.
+- **Mode bit**: 1 in user mode, 0 in kernel mode.
 
 ### Types of System Calls
 - **File-related**: During execution, if the process needs access to a particular file, it requests the kernel to provide it access, using file-related system calls. Example: `open()`, `read()`, `write()`, `close()`, create file.
@@ -207,3 +208,48 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - For the parent process, since the 1st condition is true, it won't even check the 2nd condition. It'll directly enter the loop, and execute fork() `#2` in it. That will fork another child process, $c_2$.
     - Now, $c_1$ becomes the parent process. Since the condition is still true, it gets in the loop and executes `fork()` in it. This creates another child process, $c_4$.
     - In total, there are 5 processes, and `Hello` is printed 5 times.
+
+## Processes & Threads
+- Legend:
+    - \[+\] Process
+    - \[-\] User-level Thread
+
+```diff
++ System call `fork()` is used to create a child process.
+- No system calls involved.
+
++ OS treats different processes differently.
+- All user-level threads are treated as a single process by the OS.
+
++ Forking multiple child processes creates a lot of overhead, since they all have their own independent copies of data & code.
+- Creating multiple threads does not create much overhead since they all share code, data, memory, registers, etc with each other.
+
++ Context switching is slower. Whenever a process is swapped out of the CPU, it's data has to be saved in the PCB (Process Control Block), and the data of the newly running process has to be retrieved from it's PCB. This is slower in this case, since all processes have their own independent data, code, memory, registers, etc.
+- Context switching is faster, since all threads share their stuff.
+
++ Blocking 1 child process does not affect the parent process or any other child processes.
+- Blocking a thread will block the entire process, since the OS does not know that the process has been divided into threads, and treats it as a single process.
+
++ Processes are independent of each other.
+- Threads are interdependent on each other.
+```
+
+## User-level vs Kernel-level Thread
+- Legend:
+    - \[+\] User-level Thread
+    - \[-\] Kernel-level Thread
+
+```diff
++ Managed by User-level library.
+- Managed by OS System Calls.
+
++ Typically faster.
+- Typically slower.
+
++ Context switching is faster.
+- Context switching is slower.
+
++ If blocked, the process is also blocked.
+- If blocked, the other threads continue to function.
+```
+- Nowadays, we use hybrid systems, where one or more user-level threads is mapped to one or more kernel-level threads. This resolves the blocking problem.
