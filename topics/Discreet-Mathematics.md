@@ -58,6 +58,21 @@
 - **Group**: $(a*b)=(b*a)=e$, `e` = identity element
 - **Albenian Group**: $(a*b)=(b*a)$, does not have to be equal to `e`
 
+## FRL Functions
+> $A=\{1,2,3,4...(x\ elements)\}$, $B=\{a,b,c,d, ... (y\ elements)\}$
+- AxB=$x*y$ elements
+- Number of relations possible: $2^x+2^y=2^{xy}$
+- Number of choices per element of `A`: $y$
+- Number of functions possible: $y^x$
+- Number of relations which are not functions: $2^{xy}-y^{x}$
+
+> $A=\{1,2,3,4...(x\ elements)\}$
+- AxB=$x^x=x^{2}$ elements
+- Number of relations possible: $2^{x^2}$
+- Number of choices per element of `A`: $x$
+- Number of functions possible: $x^x$
+- Number of relations which are not functions: $2^{x^2}-x^{x}$
+
 # Set Theory
 
 ## Set:
@@ -457,3 +472,18 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - (Q*,-): TRUE | FALSE | null | null | null
     - (Q*,.): TRUE | TRUE | TRUE | TRUE | TRUE
     - (Q*,/): TRUE | FALSE | null | null | null
+
+## Functions
+- [Formulae](#frl-functions)
+- A Relation `f` from a set `A` to a set `B` is called a function if, for each element of `A`, we have assigned an unique (only one) element of `B`.
+- Check `Example 0` for `Domain`, `Co-domain`, `Range`.
+- Example 0, $A = \{a,b\}$, $B = \{1,2\}$, $AxB=\{(a,1),(a,2),(b,1),(b,2)\}$:
+    - $(a,1),(b,2)$=TRUE
+    - $(a,2),(b,1)$=TRUE
+    - $(a,1),(b,1)$=TRUE
+    - $(a,1),(a,2),(b,2)$=FALSE, `a` cannot be mapped to both `1` & `2` at the same time.
+    - **Domain**: Set $A = \{a,b\}$
+    - **Co-domain**: Set $B = \{1,2\}$
+    - **Range**: Number of participants in Set `B`.
+
+<img src="../assets/images/Discreet-Mathematics/self/0.png" alt="functions" width="600px" />

@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p 'Subject ID (1-7): ' subjectID
+read -p 'Subject ID (0-8): ' subjectID
 
 subjectName=("Discreet-Mathematics" \
     "Database-Systems" \
@@ -7,10 +7,11 @@ subjectName=("Discreet-Mathematics" \
     "Digital-Logic" \
     "Algorithms" \
     "Computer-Networks" \
-    "Aptitude" \
-    "TIL-Coding")
+    "Data Structures" \
+    "TIL-Coding" \
+    "Aptitude")
 
-targetSub=${subjectName[$((subjectID-1))]}
+targetSub=${subjectName[$((subjectID))]}
 
 git add README.md ./topics/$targetSub.md ./assets/images/$targetSub/
 git commit -m "$targetSub"
