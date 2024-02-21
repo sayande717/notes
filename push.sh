@@ -7,7 +7,7 @@ subjectName=("Discreet-Mathematics" \
     "Digital-Logic" \
     "Algorithms" \
     "Computer-Networks" \
-    "Data Structures" \
+    "Data-Structures" \
     "TIL-Coding" \
     "Aptitude")
 
