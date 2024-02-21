@@ -76,6 +76,7 @@
 
 ## Letter & Symbol Series
 ### Type 1 | 1-12 | 10:43
+### Type 1 | 1-12 | 04:40
 
 > Positions: In SCD, TEF, S: 1, C: 2, D: 3, T: 4, E: 5, F: 6
 1. SCD, TEF, UGH, \_\_\_, WKL:
@@ -99,3 +100,53 @@
     - Subscripts:
         - 2,6,10 ... $+1$
         - 3,7,11 ... $-1$
+
+### Type 2 | 1-15 | 17:23
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-90-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/0.png" alt="question 1"/><br>
+    - Directions:
+        - L: Left
+        - R: Right
+        - U: Up
+        - D: Down
+    - RDR, DDD, RUR, UUU ... *pattern repeats*
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-89-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/1.png" alt="question 2"/><br>
+    - Filled or not:
+        - F: Filled
+        - U: Unfilled
+    - Size: 
+        - s: small
+        - B: big
+    - suBUsf, sfBUsu, suBUsf, sfBUsu ... *pattern repeats*
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-95-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/2.png" alt="question 3"/><br>
+    - Shapes:
+        - T: Triangle
+        - S: Square
+        - P: Parallelogram
+    - TST, SCS, CPC, PSP ...
+    - The shape in the middle (S in TST) moves to the edges (S in SCS) in the next iteration, and so on.
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-98-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/3.png" alt="question 4"/><br>
+    - Sides: 1,2,3,4,5
+    - 123,454,321 ... *pattern repeats*
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-93-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/4.png" alt="question 5"/><br>
+    - Number of dots: 1,2,3
+    - Top Row: 321,123,321,123 ... *pattern repeats*
+    - Bottom Row: 210,123,210,123 ... *pattern repeats*
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-94-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/5.png" alt="question 6"/><br>
+    - Position:
+        - i: inside another shape
+        - o: outside another shape
+    - Shapes:
+        - C: circle
+        - T: triangle
+        - S: Square
+    - CiS TiS, ToS CoS, SiC SiT, SoT SoC ... *pattern repeats*
+1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-94-q-1.png)
+    <br><img src="../assets/images/Aptitude/external/6.png" alt="question 7"/><br>
+    - Number of parts filled: 1,2
+    - 212,212,212 ... *pattern repeats*
