@@ -199,7 +199,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         return 0;
     }
     ```
-    <img src="../assets/images/Operating-Systems/self/0.png" height="500px" alt="fork() example 2" />
+    <img src="../assets/images/Operating-Systems/self/1.png" height="500px" alt="fork() example 2" />
 
     - Here, at fork() `#0`:
         > In the child process, it returns 0. <br>
@@ -253,3 +253,50 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 - If blocked, the other threads continue to function.
 ```
 - Nowadays, we use hybrid systems, where one or more user-level threads is mapped to one or more kernel-level threads. This resolves the blocking problem.
+
+# Process Scheduling
+- Used to move processes from the ready to running state.
+- Important Terms:
+    - Arrival Time: The time at which the process enters the **ready state**.
+    - Burst Time: The total time duration needed to execute the process, from start to finish.
+    - Completion time: The time at which the process completes execution.
+    - Turn-around Time: {Completion Time - Arrival Time}
+    - Waiting Time: {Turn-around Time - Burst Time}
+    - Response Time: {Time at which process was first executed by the CPU - Arrival Time}
+- Pre-emptive vs Non-preemptive:
+    - [+] Pre-emptive
+    - [-] Non-preemptive
+    ```diff
+    + Pre-emptive algorithms can interrupt the execution of a process to give CPU time to another process with higher priority.
+    - Non-preemptive algorithms allow a process to complete its execution before another process can start executing, even if there are processes with higher priority waiting.
+    + Are more responsive to changing priorities and can provide better system utilization.
+    - May lead to longer response times for higher-priority processes if they are waiting for lower-priority processes to finish.
+    + Require additional overhead to manage context switching and ensure fairness among processes.
+    - Are simpler to implement and may be more suitable for real-time systems where predictability and determinism are crucial.
+    ```
+## Non Pre-emptive Scheduling Algorithms
+### FCFS (First Come First Serve)
+- Process which arrives first is executed first.
+- `Response Time` is same as `Waiting Time`.
+- Example 0:
+    |Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|
+    |$P_1$|0|2|2|2|0|0|
+    |$P_2$|1|2|4|3|1|1|
+    |$P_3$|5|3|8|3|0|0|
+    |$P_4$|6|4|12|6|2|2|
+    - Gantt Chart 
+    <br><img src="../assets/images/Operating-Systems/self/2.png" height="200px" alt="FCFS Example 0" />
+
+- SJF (Shortest Job First)
+- LJF (Longest Job First)
+- HRRN (Highest Response Ratio Next)
+- Multi-level Queue
+- Priority (exists as both pre-emptive and non-preemptive)
+
+## Pre-emptive Scheduling Algorithms
+- SRTF (Shortest Remaining Time First)
+- LRTF (Longest Remaining Time First)
+- Round Robin
+- Priority
+
