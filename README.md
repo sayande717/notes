@@ -36,4 +36,6 @@ git clone https://github.com/sayande717/notes.git
     |Number Series|Type 4|1-10|08:10|
     |Number Series|Type 4|1-15|08:54|
     |Letters & Symbol Series|Type 1|1-12|10:43|
+    |Letters & Symbol Series|Type 1|1-12|04:40|
+    |Letters & Symbol Series|Type 2|1-15|17:23|
 
