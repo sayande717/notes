@@ -12,7 +12,8 @@
     - Analyzing after execution, is dependent on hardware.
     - We determine the amount of time an algorithm takes to execute on a particular hardware platform.
 
-## Asymptotic Notation, also check [Algorithm Analysis](algorithm-analysis)
+## Asymptotic Notation
+- Also check: [Algorithm Analysis](algorithm-analysis)
 - It is a mathematical way of representing the time complexity.
 - Example: Let's take the example of a notebook.
     - Best-case: I find the topic right on the first page, just after opening the notebook.
@@ -87,6 +88,56 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 | Exponential     | $O(2^n)$ | Very large number                   |
 | Factorial       | $O(n!)$  | Very large number                   |
 | Double Exponential | $O(2^{2^n})$ | Very large number            |
+
+## Time Complexity Examples
+- Example 0:
+    ```java
+    publc int sum(int x, int y) {
+        int result = x + y; // i
+        return result;      // ii
+    }
+    ```
+    1. $1$ unit
+    1. $1$ unit
+    - Time Complexity: $O(1)$
+- Example 1:
+    ```java
+    publc int get(int[] arr, int i) {
+        return arr[i];      // i
+    }
+    ```
+    1. $1$ unit
+    - Time Complexity: $O(1)$
+- Example 2:
+    ```java
+    public void findSum(int n) {
+        int sum = 0;                    // i
+        for(int i = 1; i <= n; i++) {   
+            sum = sum + i;              // ii
+        }
+        return sum;                     // iii
+    }
+    ```
+    1. $1$ unit
+    1. $n$ units
+    1. $1$ unit
+    - Time Complexity: $O(n)$
+- Example 3:
+    ```java
+    public void print(int n) {
+         for(int i = 1; i <= n; i++) {                  
+            for (int j = 1; j <= n; j++) {              
+                System.out.println("i=" +i+ ", j="+j);  // i
+            }
+            System.out.println("Enter of inner loop");  // ii
+        }       
+        System.out.println("End of outer loop");        // iii
+    }
+    ```
+    1. $n^n$ units
+    1. $n$ units
+    1. $1$ unit
+    - Time Complexity: $O(n^n)$
 
 ## Common Time Complexities
 - Legend:
