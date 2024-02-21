@@ -5,6 +5,32 @@
     - Total number of Boolean functions: $2^{2^n}$
     - Total number of self-dual functions: $2^{2^{n-1}}$ 
 
+## FRL Properties of Gates
+- **AND** Gate:
+    - $A . 0 = 0$
+    - $A . 1 = 1$
+    - $A + \bar A = 0$
+- **OR** Gate:
+    - $A + 0 = A$
+    - $A + 1 = 1$
+    - $A + \bar A = 1$
+- **XOR** Gate:
+    - $A ⊕ A = 0$
+    - $A ⊕ \bar A = 1$
+    - $A ⊕ 0 = A$ // Output is same as input
+    - $A ⊕ 1 = \bar A$ // Output is inverted
+    - $A ⊕ A ⊕ A ⊕ A ⊕ A ⊕ A ... n\ times$:
+        - If `n` is even, result $=0$ 
+        - If `n` is odd, result $=A$
+- XNOR Gate:
+    - $A ⊙  A = 1$
+    - $A ⊙ \bar A = 0$
+    - $A ⊙ 0 = \bar A$ // Output is inverted
+    - $A ⊙ 1 = A$ // Output is same as input
+    - $A ⊙ A ⊙ A ⊙ A ⊙ A ⊙ A ... n\ times$:
+        - If `n` is even, result $=1$
+        - If `n` is odd, result $=A$
+
 # <strong>Gates</strong>
 
 ## <u>Properties of Gates:</u>
@@ -350,7 +376,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |0|0|0|0|
     |0|1|1|1|
     |1|0|1|0|
-    |1|1|1|0|
+    |1|1|0|0|
 
 - When subtracting $1$ from $0$, first we have to borrow $1$. So, $0$ becomes $10$, and $10-1=1$, with borrow $1$.
 - Min-terms:
@@ -392,3 +418,98 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Circuit Diagram:
     - Sub: $x⊕y⊕z$ | Borrow: $\bar xz+ \bar x y + yz$
         <img src="../assets/images/Digital-Logic/self/4.png" alt="Full-subtractor 0" />
+
+# <strong>Combinational Logic Circuits</strong>
+## Multiplexer
+- It is a Combinational circuit that has $2^n$ lines and 1 output line.
+- It is an electronic switch that connects 1 of the `n` inputs to an output.
+- Select lines are used to select the output. If the number of output is $n$ and ($n=2^k$), the number of select lines will be $k$.
+- Multiplexers are **functionally complete**, which means we can design any circuit using them.
+    - We will prove that we can make AND, OR, and NOT gates using Multiplexers. If we can make these basic gates, we can also make NAND & NOR gates after this, which are Universal Gates.
+    - We will use a 2:1 Multiplexer for proving this.
+    - Inputs: $A$,$B$
+    - AND Gate:
+        1. Truth Table of AND Gate:
+            | A | B | O/P |
+            |---|---|---|
+            | 0 | 0 | 0 |
+            | 0 | 1 | 0 |
+            | 1 | 0 | 0 |
+            | 1 | 1 | 1 |
+        1. Min-Terms: $f=AB$
+        1. Let's give B as select-line.
+            |$B$|Value|Input|
+            |---|:-:|:-:|
+            |$\bar B$|$0$|$I_1$|
+            |$B$|$1$|$I_2$|
+        1. $I_1=0$, because $0 . B =0$
+        1. $I_2=A$, because $A . B = AB$
+        1. Result: $0 \bar B + A B = AB$
+    - OR Gate:
+        1. Truth Table of OR Gate: 
+            | A | B | O/P |
+            |---|---|---|
+            | 0 | 0 | 0 |
+            | 0 | 1 | 1 |
+            | 1 | 0 | 1 |
+            | 1 | 1 | 1 |
+        1. Min-Terms: $f=B + A \bar B$
+            - $\bar A B + A \bar B + A B$
+            - $B(\bar A + A) + A \bar B$
+            - $B + A \bar B$ // check [formula](#frl-properties-of-gates)
+        1. Let's give B as select-line.
+            |$B$|Value|Input|
+            |---|:-:|:-:|
+            |$\bar B$|$0$|$I_1$|
+            |$B$|$1$|$I_2$|
+        1. $I_1=A$, because $A . \bar B = A \bar B$
+        1. $I_2=1$, because $1 . B = B$
+        1. Result: $\bar A B + B$
+    - NOT Gate:
+        1. Truth Table of NOT Gate:
+            |A|O/P|
+            |-|-|
+            |0|1|
+            |1|0|
+        1. Let's give A as select-line.
+            |$A$|Value|Input|
+            |---|:-:|:-:|
+            |$\bar A$|$0$|$I_1$|
+            |$A$|$1$|$I_2$|
+        1. We just need to invert the Inputs.
+        1. $I_1=1$, because $A . 1 = 1$
+        1. $I_2=0$, because $A . 0 = 0$
+
+### 4:1 Multiplexer
+- Inputs: $4$ | Outputs: $1$ | Select-Lines: $2$ (because $2^2$)
+- Truth-Table (Select Lines):
+    |$S_1$|$S_0$|O/P|
+    |---|---|---|
+    |0|0|$I_1$|
+    |0|1|$I_2$|
+    |1|0|$I_3$|
+    |1|1|$I_4$|
+- SoP: $\bar S_1 \bar S_0 I_1 + \bar S_1 S_0 I_2 + S_1 \bar S_0 I_3 + S_1 S_0 I_4$
+- Logic Diagram:
+    - Select Lines: $A$, $B$
+    - Inputs: $D_0$, $D_1$, $D_2$, $D_3$
+    - Output: $Y$
+    <br><img src="../assets/images/Digital-Logic/external/1.webp" alt="4:1 Multiplexer Logic Diagram" width="400px" /><br>
+    Image taken from [here](https://www.eeweb.com/wp-content/uploads/articles-articles-4-to-1-multiplexer-circuit-diagram-1387783580.jpg?fit=602%2C499)
+
+### Implementing Functions using Multiplexer:
+- Our objective is to implement the given function in the Multiplexer, to get the same output as that of the function.
+- Example 0:
+    > $f(A,B,C)=\sum {(1,2,5,7)}$
+    - Select Lines: `A` `B`
+    - Inputs: Some variant of `C`
+    - Min-Terms: $\bar A \bar B C + \bar A B \bar C + A \bar B C + A B C$
+    - Match A & B with the select lines, $S_1$ & $S_0$.
+        > Since $\bar A \bar B$ matches with $\bar S_1 \bar S_2$, Input $I_1=C$.
+
+        |$S_1$|$S_0$|Min-Term|Input|
+        |---|---|---|---|
+        |0|0|$\bar A \bar B$|$C$|
+        |0|1|$\bar A B$|$\bar C$|
+        |1|0|$A \bar B$|$C$|
+        |1|1|$A B$|$C$|

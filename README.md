@@ -16,7 +16,7 @@ git clone https://github.com/sayande717/notes.git
 |2| Operating Systems | [PDF](./assets/pdf/3_Operating-Systems.pdf) <br> [Markdown](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | till L-2.3: First Come First Serve ... | `In Progress` |
 |-1| Compiler Design | [PDF](./assets/pdf/Compiler-Design.pdf) <br> [Markdown](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
 |4| Design & Analysis of Algorithms | [PDF](./assets/pdf/5_Algorithms.pdf) <br> [Markdown](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `In Progress` |
-|3| Digital Logic | [PDF](./assets/pdf/4_Digital-Logic.pdf) <br> [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till Full-Adder Combinational Circuit ... | `In Progress` |
+|3| Digital Logic | [PDF](./assets/pdf/4_Digital-Logic.pdf) <br> [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till How Multiplexers are functionally complete ... | `In Progress` |
 |6| Data Structures | [link](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | | `Not Started` |
 |7| C++ | [link](./topics/TIL-Coding.md#c++) | [FreeCodeCamp](https://youtu.be/8jLOx1hD3_o) | till 02:49:56 | `In Progress` |
 |8| Aptitude | [PDF](./assets/pdf/7_Aptitude.pdf) <br> [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
