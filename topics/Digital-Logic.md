@@ -9,7 +9,7 @@
 - **AND** Gate:
     - $A . 0 = 0$
     - $A . 1 = 1$
-    - $A + \bar A = 0$
+    - $A . \bar A = 0$
 - **OR** Gate:
     - $A + 0 = A$
     - $A + 1 = 1$
@@ -421,9 +421,9 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 
 # <strong>Combinational Logic Circuits</strong>
 ## Multiplexer
-- It is a Combinational circuit that has $2^n$ lines and 1 output line.
+- It is a Combinational circuit that has $n$ input lines and $1$ output line.
 - It is an electronic switch that connects 1 of the `n` inputs to an output.
-- Select lines are used to select the output. If the number of output is $n$ and ($n=2^k$), the number of select lines will be $k$.
+- Select lines are used to select the input. If the number of inputs is $n$ and ($n=2^k$), the number of select lines will be $k$.
 - Multiplexers are **functionally complete**, which means we can design any circuit using them.
     - We will prove that we can make AND, OR, and NOT gates using Multiplexers. If we can make these basic gates, we can also make NAND & NOR gates after this, which are Universal Gates.
     - We will use a 2:1 Multiplexer for proving this.
@@ -481,14 +481,14 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         1. $I_2=0$, because $A . 0 = 0$
 
 ### 4:1 Multiplexer
-- Inputs: $4$ | Outputs: $1$ | Select-Lines: $2$ (because $2^2$)
+- Inputs: $4$ | Outputs: $1$ | Select-Lines: $2$ (because $4=2^2$)
 - Truth-Table (Select Lines):
-    |$S_1$|$S_0$|O/P|
-    |---|---|---|
-    |0|0|$I_1$|
-    |0|1|$I_2$|
-    |1|0|$I_3$|
-    |1|1|$I_4$|
+    |$S_1$|$S_0$|$I_0$|$I_1$|$I_2$|$I_3$|
+    |---|---|---|---|---|---|
+    |0|0|I|0|0|0|
+    |0|1|0|I|0|0|
+    |1|0|0|0|I|0|
+    |1|1|0|0|0|I|
 - SoP: $\bar S_1 \bar S_0 I_1 + \bar S_1 S_0 I_2 + S_1 \bar S_0 I_3 + S_1 S_0 I_4$
 - Logic Diagram:
     - Select Lines: $A$, $B$
@@ -513,3 +513,90 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |0|1|$\bar A B$|$\bar C$|
         |1|0|$A \bar B$|$C$|
         |1|1|$A B$|$C$|
+
+### Examples
+- Example 0:
+    <br><img src="../assets/images/Digital-Logic/self/5.png" alt="Multiplexer Question 0" />
+    - Multiplexer I:
+        - Inputs: $X$, $\bar Y$
+        - Select Line: $Z$
+        - Output: $X \bar Z + \bar YZ$
+            > Z: 0, $X \bar Z$ <br>
+            > Z: 1, $\bar Y Z$
+        - This output is Input $I_1$ for Multiplexer II.
+    - Multiplexer II:
+        - Inputs: $X \bar Z + \bar Y Z$, $X$
+        - Select Line: $Y$
+        - Output: $(X \bar Z + \bar Y Z)\bar Y + XY$
+            > Z: 0, $(X \bar Z + \bar Y Z)\bar Y$ <br>
+            > Z: 1, $XY$
+    - Minimizing the output:
+        - $(X \bar Z + YZ)\bar Y + XY$
+        - $X \bar Y \bar Z + \bar Y Z + XY$ // $\bar Y + \bar Y = \bar Y$
+        - $X(Y + \bar Y \bar Z)+ \bar Y Z$
+        - $X[(Y+ \bar Y)(Y + \bar Z)] + \bar Y Z$ // Distributive Property
+        - $X (Y + \bar Z) + \bar Y Z$
+        - $X Y + X \bar Z + \bar Y Z$
+
+## De-Multiplexer
+- It is a Combinational circuit that has $1$ input line and $n$ output line.
+- It is an electronic switch that connects the input to one of the `n` outputs.
+- Select lines are used to select the output where the input will be sent. If the number of outputs is $n$ and ($n=2^k$), the number of select lines will be $k$.
+
+### 1:4 De-multiplexer
+- Inputs: $1$ | Outputs: $4$ | Select-Lines: $2$ (because $4=2^2$)
+- Truth-Table (Select Lines):
+    |$S_1$|$S_0$|$O_0$|$O_1$|$O_2$|$O_3$|
+    |---|---|---|---|---|---|
+    |0|0|I|0|0|0|
+    |0|1|0|I|0|0|
+    |1|0|0|0|I|0|
+    |1|1|0|0|0|I|
+- SoP: $\bar S_1 \bar S_0 O_1,\ \bar S_1 S_0 O_2 ,\ S_1 \bar S_0 O_3,\ S_1 S_0 O_4$
+- Logic Diagram:
+    - Select Lines: $S_1$, $S_0$
+    - Inputs: $D$
+    - Output: $Y_0$, $Y_1$, $Y_2$, $Y_3$
+    <br><img src="../assets/images/Digital-Logic/external/2.jpg" alt="1:4 De-multiplexer Logic Diagram" width="400px" /><br>
+    Image taken from [here](https://www.electronicshub.org/wp-content/uploads/2015/07/1-to-4-Demux-logic-diagram.jpg)
+
+
+## Decoder
+- It is a multi-input multi-output device.
+- Inputs: $n$ | Outputs: upto $2^n$
+- Applications:
+    - Binary to Octal (3:8)
+    - Binary to Hexadecimel (4:16)
+    - Binary to Decimel (4:10)
+- Truth-Table (3:8 Decoder):
+    | X | Y | Z | $D_0$ | $D_1$ | $D_2$ | $D_3$ | $D_4$ | $D_5$ | $D_6$ | $D_7$ |
+    |---|---|---|-------|-------|-------|-------|-------|-------|-------|-------|
+    | 0 | 0 | 0 |    1  |    0  |    0  |    0  |    0  |    0  |    0  |    0  |
+    | 0 | 0 | 1 |    0  |    1  |    0  |    0  |    0  |    0  |    0  |    0  |
+    | 0 | 1 | 0 |    0  |    0  |    1  |    0  |    0  |    0  |    0  |    0  |
+    | 0 | 1 | 1 |    0  |    0  |    0  |    1  |    0  |    0  |    0  |    0  |+
+    | 1 | 0 | 0 |    0  |    0  |    0  |    0  |    1  |    0  |    0  |    0  |
+    | 1 | 0 | 1 |    0  |    0  |    0  |    0  |    0  |    1  |    0  |    0  |
+    | 1 | 1 | 0 |    0  |    0  |    0  |    0  |    0  |    0  |    1  |    0  |
+    | 1 | 1 | 1 |    0  |    0  |    0  |    0  |    0  |    0  |    0  |    1  |
+- SoP: $\bar X \bar Y \bar Z D_0 + \bar X \bar Y Z D_1 + \bar X Y \bar Z D_2 + \bar X Y Z D_3 + X \bar Y \bar Z D_4 + X \bar Y Z D_5 + X Y \bar Z D_6 + X Y Z D_7$
+
+## Encoder
+- It is a multi-input multi-output device.
+- Inputs: $2^n$ | Outputs: upto $n$
+- Applications:
+    - Binary to Octal (8:3)
+    - Binary to Hexadecimel (16:4)
+    - Binary to Decimel (10:4)
+- Truth-Table (8:3 Encoder):
+    | $E_0$ | $E_1$ | $E_2$ | $E_3$ | $E_4$ | $E_5$ | $E_6$ | $E_7$ | X | Y | Z |
+    |-------|-------|-------|-------|-------|-------|-------|-------|---|---|---|
+    |   1   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |  0| 0 | 0 |
+    |   0   |   1   |   0   |   0   |   0   |   0   |   0   |   0   |  0| 0 | 1 |
+    |   0   |   0   |   1   |   0   |   0   |   0   |   0   |   0   |  0| 1 | 0 |
+    |   0   |   0   |   0   |   1   |   0   |   0   |   0   |   0   |  0| 1 | 1 |
+    |   0   |   0   |   0   |   0   |   1   |   0   |   0   |   0   |  1| 0 | 0 |
+    |   0   |   0   |   0   |   0   |   0   |   1   |   0   |   0   |  1| 0 | 1 |
+    |   0   |   0   |   0   |   0   |   0   |   0   |   1   |   0   |  1| 1 | 0 |
+    |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |  1| 1 | 1 |
+- SoP: $\bar X \bar Y \bar Z E_0 + \bar X \bar Y Z E_1 + \bar X Y \bar Z E_2 + \bar X Y Z E_3 + X \bar Y \bar Z E_4 + X \bar Y Z E_5 + X Y \bar Z E_6 + X Y Z E_7$
