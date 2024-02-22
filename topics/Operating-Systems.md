@@ -275,7 +275,9 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Are simpler to implement and may be more suitable for real-time systems where predictability and determinism are crucial.
     ```
 ## Non Pre-emptive Scheduling Algorithms
+
 ### FCFS (First Come First Serve)
+- **Criteria**: Arrival Time | **Mode**: Non-Preemptive
 - Process which arrives first is executed first.
 - `Response Time` is same as `Waiting Time`.
 - Example 0:
@@ -288,15 +290,68 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Gantt Chart 
     <br><img src="../assets/images/Operating-Systems/self/2.png" height="200px" alt="FCFS Example 0" />
 
-- SJF (Shortest Job First)
+### SJF (Shortest Job First)
+- **Criteria**: Burst Time | **Mode**: Non-Preemptive
+- Job with the shortest Burst Time is executed first.
+- If Burst Time of 2 processes are same, the one that arrived earlier is executed first.
+- Example 0:
+    |Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|
+    |$P_1$|1|3|6|5|2|2|
+    |$P_2$|2|4|10|8|4|4|
+    |$P_3$|1|2|3|2|0|0|
+    |$P_4$|4|4|14|10|6|6|
+    - Gantt Chart 
+    <br><img src="../assets/images/Operating-Systems/self/3.png" height="200px" alt="SJF Example 0" />
+
+## Pre-emptive Scheduling Algorithms
+
+### SRTF (Shortest Remaining Time First)
+- **Criteria**: Burst Time | **Mode**: Pre-emptive
+- Job with the shortest Remaining Burst Time is executed first, pre-emptively.
+- At every step (ie unit of time), it checks if there's a process without a shorter burst time, in the ready queue.
+- If Remaining Burst Time of 2 processes are same, the one that arrived earlier is executed first.
+- Example 0:
+    |Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|
+    |$P_1$|0|5|9|9|4|0|
+    |$P_2$|1|3|4|3|0|0|
+    |$P_3$|2|4|13|11|7|7|
+    |$P_4$|4|1|5|1|0|0|
+    - Gantt Chart 
+    <br><img src="../assets/images/Operating-Systems/self/4.png" height="200px" alt="SRTF Example 0" />
+- Example 1:
+    |Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|
+    |$P_1$|0|7|11|11|4|0|
+    |$P_2$|1|4|5|4|0|1|
+    |$P_3$|2|8|19|17|9|9|
+    - Gantt Chart 
+    <br><img src="../assets/images/Operating-Systems/self/5.png" height="200px" alt="SRTF Example 1" />
+
+### Round Robin
+- **Criteria**: Time Quantum | **Mode**: Pre-emptive
+- Jobs are executed according to the defined time quantum.
+- Processes, which have never been executed, are added to the ready queue based on their arrival time.
+- Whenever a process is pre-empted, but has remaining burst time, it is added back **to the end of the ready queue**.
+- We should move the first process in the ready queue from the left to the running queue.
+- Example 0 (Time Quantum: 2):
+    |Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|
+    |$P_1$|0|5|12|12|7|0|
+    |$P_2$|1|4|11|10|6|1|
+    |$P_3$|2|2|6|4|2|2|
+    |$P_4$|4|1|9|5|4|4|
+    - Gantt Chart 
+    <br><img src="../assets/images/Operating-Systems/self/6.png" height="300px" alt="Round Robin Example 0" />
+    - Number of context switches: 6
+        > Calculate from Gantt Chart, excluding the first & last line in the running queue)
+
 - LJF (Longest Job First)
 - HRRN (Highest Response Ratio Next)
 - Multi-level Queue
 - Priority (exists as both pre-emptive and non-preemptive)
-
-## Pre-emptive Scheduling Algorithms
-- SRTF (Shortest Remaining Time First)
 - LRTF (Longest Remaining Time First)
-- Round Robin
+
 - Priority
 
