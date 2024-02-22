@@ -73,6 +73,32 @@
 - Number of functions possible: $x^x$
 - Number of relations which are not functions: $2^{x^2}-x^{x}$
 
+## FRL One-To-One Functions
+> $A=\{1,2,3,4...(x\ elements)\}$, $B=\{a,b,c,d, ... (y\ elements)\}$
+- Number of elements: $x \leq y$
+- In set `A`, number of choices for:
+    - 1st element: $y$
+    - 2nd element: $(y-1)$
+    - 3rd element: $(y-2)$
+    <br> ...
+    - $x^{th}$ element: $y-(x-1)$
+- Number of functions possible: $y*(y-1)*(y-2)*...*(y-(x-1))=P^{y}_x$
+    > P: Permutation
+
+## FRL Onto Functions
+> $A=\{1,2,3,4...(x\ elements)\}$, $B=\{a,b,c,d, ... (y\ elements)\}$
+- Number of elements: $x \geq y$
+- If a function is one-to-one, it may not be onto.
+- If a function is onto, it may not be one-to-one.
+- Number of functions possible: $y*(y-1)*(y-2)*...*(y-(x-1))=P^{y}_x$
+    > P: Permutation
+
+## FRL Bijective Functions
+> $A=\{1,2,3,4...(x\ elements)\}$, $B=\{a,b,c,d, ... (y\ elements)\}$
+- Number of elements: $x = y = n$
+- Number of functions possible: $n+(n-1)*(n-2)*...*1=n!$
+    > !: Factorial
+
 # Set Theory
 
 ## Set:
@@ -118,7 +144,8 @@
 - The order needs to be maintained, as is apparent in the example.
 - AxB is not same as BxA, unless A=B.
 
-## Relations, also check [Cartesian Product](#cartesian-product)
+## Relations
+> also check [Cartesian Product](#cartesian-product)
 ### If A and B are two sets and AxB is their cartesian product, then **any subset of AxB can form a relation from A to B**.
 - **Example**:
     - $\{(a,1),(a,2)\}$         | Valid
@@ -474,6 +501,7 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - (Q*,/): TRUE | FALSE | null | null | null
 
 ## Functions
+> also check [Relations](#relations)
 - [Formulae](#frl-functions)
 - A Relation `f` from a set `A` to a set `B` is called a function if, for each element of `A`, we have assigned an unique (only one) element of `B`.
 - Check `Example 0` for `Domain`, `Co-domain`, `Range`.
@@ -486,4 +514,20 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - **Co-domain**: Set $B = \{1,2\}$
     - **Range**: Number of participants in Set `B`.
 
-<img src="../assets/images/Discreet-Mathematics/self/0.png" alt="functions" width="600px" />
+<img src="../assets/images/Mathematics/self/0.png" alt="functions" width="500px" />
+
+### One-To-One Function (Injective)
+- [Formulae](#frl-one-to-one-functions)
+- A function `f` from set `A` to set `B` is one-to-one if each element in `A` is mapped to only 1 element in `B`. All elements in `A` should be mapped.
+    <br><img src="../assets/images/Mathematics/self/1.png" alt="one-to-one function" width="500px" />
+
+### Onto Function (Surjective)
+- [Formulae](#frl-onto-functions)
+-  A function `f` from set `A` to set `B` is onto if each element in `B` is mapped to atleast 1 element of `A`.
+- Every element in `A` must also participate in the function, since it is a function in the first place.
+    <br><img src="../assets/images/Mathematics/self/2.png" alt="onto function" width="500px" />
+
+### Bijective Function
+- [Formulae](#frl-bijective-functions)
+- A function `f` from set `A` to set `B` is bijective  if `f` is both one-to-one and onto.
+- Number of elements in A should be equal to number of elements in B.

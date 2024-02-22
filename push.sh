@@ -1,7 +1,7 @@
 #!/bin/bash
 read -p 'Subject ID (0-8): ' subjectID
 
-subjectName=("Discreet-Mathematics" \
+subjectName=("Mathematics" \
     "Database-Systems" \
     "Operating-Systems" \
     "Digital-Logic" \
