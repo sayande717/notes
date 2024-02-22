@@ -7,3 +7,12 @@
         > Tree, Graph
 - Algorithms: check [here](./Algorithms.md)
 
+## Linear Data Structures
+### Arrays
+- It's a collection of elements of a particular data type
+- Elements are adjacent to each other.
+- Each partition has 2 neighbours, except 1st and last one.
+- Size of the box is fixed, and cannot be modified.
+- The positions are indexed, and we can find an element by it's index.
+
+- Implementation: [code](https://github.com/sayande717/code/blob/main/self/Java/initArray.java)
