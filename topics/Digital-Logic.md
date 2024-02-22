@@ -516,7 +516,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 
 ### Examples
 - Example 0:
-    <br><img src="../assets/images/Digital-Logic/self/5.png" alt="Multiplexer Question 0" />
+    <br><img src="../assets/images/Digital-Logic/self/5.png" alt="Multiplexer Question 0" width="600px" />
     - Multiplexer I:
         - Inputs: $X$, $\bar Y$
         - Select Line: $Z$
