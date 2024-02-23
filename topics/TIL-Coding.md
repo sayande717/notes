@@ -56,9 +56,54 @@
     - std::clog :- Print log messages to the Terminal/Console
         > Errors & Logs are printed regardless of the occurence of an error. They are just used to format the message according to it's type.
 
-
 - Define variables:
     ```cpp
     int firstNumber {3};
     int secondNumber = 4;
     ```
+
+## How a program runs
+- Sample code:
+```cpp
+#include <iostream>
+
+int addNumbers(int number1, int number2) {
+    return (number1+number2);
+}
+
+int main() {
+    int first_number {3};  // Variable 1
+    int second_number {7}; // Variable 2
+    int c;
+    
+    std::cout << "First number: " << first_number << std::endl;
+    std::cout << "Second number: " << second_number << std::endl;
+    c = addNumbers(a,b);
+    std::cout << "Sum: " << sumFunc(first_number,second_number) << std::endl;
+
+    return 0;
+}
+```
+<br><img src="../assets/images/TIL-Coding/external/0.png">
+Image taken from [here](https://youtu.be/8jLOx1hD3_o)
+- Steps:
+    1. The program is converted to binary, after compilation.
+    1. When the binary is executed, it is copied to RAM line-by-line.
+    1. For the function `addNumbers(a,b)` and input variables, it assigns a separate memory location on RAM.
+    1. For Variable 1, it assigns a memory location with value `3` and points `first_number` to it.
+    1. Same goes for `second_number`.
+    1. Since `c` doesn't have a value, the CPU fills the location with garbage data.
+    1. It prints the 2 strings.
+    1. Next, it has to run the function `addNumbers(a,b)`. Before going to the function, it stores the current memory address of the code binary, so it can return to it once it's done executing the function.
+    1. It goes ahead and runs the function.
+    1. It takes the output of the function and returns back to same location it left.
+    1. It prints the rest of the strings.
+    1. Program execution is over.
+
+## Terms:
+- **Core Features**: The features that govern the functionality C++ provices, and the rules that we need to follow when using them.
+    > data types, function definition, etc.
+- **Standard Library**: A set of specialized reusable components that are ready to use, and provide added functionality to the program.
+    > iostream, string (imported using `#include`)
+- **STL**: A part of Standard Library. It is a collection of container types.
+    > iterators
