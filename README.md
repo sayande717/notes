@@ -17,7 +17,7 @@ git clone https://github.com/sayande717/notes.git
 |-1| Compiler Design | [Markdown](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
 |4| Design & Analysis of Algorithms | [Markdown](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `In Progress` |
 |3| Digital Logic | [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till SR Latch using NAND Gate ... | `In Progress` |
-|6| Data Structures | [Markdown](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | till 01:44:33 | `In Progress` |
+|6| Data Structures | [Markdown](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | till 02:18:19 | `In Progress` |
 |7| C++ | [Markdown](./topics/TIL-Coding.md#c++) | [FreeCodeCamp](https://youtu.be/8jLOx1hD3_o) | till 03:00:47 | `In Progress` |
 |8| Aptitude | [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
 
