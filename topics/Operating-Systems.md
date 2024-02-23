@@ -347,11 +347,58 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Number of context switches: 6
         > Calculate from Gantt Chart, excluding the first & last line in the running queue)
 
+### Priority
+- **Criteria**: Priority | **Mode**: Pre-emptive
+- Higher priority processes are executed first.
+- Whenever a higher priority process arrives in the Ready queue, the currently running process is pre-empted in favour of that process.
+- Example 0 (higher number = higher priority):
+    |Priority|Process No.|Arrival Time|Burst Time|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+    |10|$P_1$|0|5|12|12|7|0|
+    |20|$P_2$|1|4|8|7|3|0|
+    |30|$P_3$|2|2|4|2|0|0|
+    |40|$P_4$|4|1|5|1|0|0|
+    - Gantt Chart: 
+    <br><img src="../assets/images/Operating-Systems/self/7.png" height="300px" alt="Priority Example 0" />
+
+- Example 1 (lower number = higher priority):
+    |Priority|Process No.|Arrival Time|CPU|I/O|CPU|Completion Time|Turn-around Time|Waiting Time|Response Time|
+    |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+    |2|$P_1$|0|1|5|3|10|10|0|0|
+    |3|$P_2$|2|3|3|1|15|13|0|0|
+    |1|$P_3$|3|2|3|1|9|6|0|0|
+    |4|$P_4$|3|2|4|1|18|15|8|8|
+    - Total CPU Idle Time: $4$
+    - Ratio of CPU Idle Time: $4:18 = 2:9$
+    - Ratio of CPU Active Time: $14:18 = 7:9$
+    - Gantt Chart:
+    <br><img src="../assets/images/Operating-Systems/self/8.png" height="320px" alt="Priority Example 1" />
+
+## Multi-level Queue
+- If there are different types of processes, there must also be different ready/running queues in the system, for accomodating them.
+- These different queues have their own scheduling algorithms.
+- The queues themselves are prioritized according to the kind of processes they house.
+- Queue Priority:
+    - **System Process**: Highest Priority, Round Robin algorithm
+        > System calls, interrupts, etc.
+    - **Interactive Process**: Medium Priority, Shortest Job First (SJF) algorithm
+        > Processes related to software we're currently interacting with.
+    - **Batch Process**: Lowest Priority, First Come First Serve (FCFS) algorithm
+        > Background processes.
+- The algorithms used for the jobs can differ based on the use-cases.
+
 - LJF (Longest Job First)
 - HRRN (Highest Response Ratio Next)
 - Multi-level Queue
 - Priority (exists as both pre-emptive and non-preemptive)
 - LRTF (Longest Remaining Time First)
 
-- Priority
-
+## Multi-level Feedback Queue
+- In a [Multi-level Queue](#multi-level-queue) system, If there are a lot of processes in a higher priority queue, the processes in the lower priority queues will have to wait for a very long time to get executed. The `Multi-level Feedback Queue` aims to solve this problem.
+- Steps:
+    - A process first arrives in it's designated queue (Example, $Q_1$).
+    - After it is executed once (as per the queue's algorithm), it is moved to the next higher priority queue ($Q_2$).
+    - After it is executed here, it is again upgraded to a higher priority queue ($Q_3$). This process repeats till it has finished executing.
+    - **Each higher priority queue has a time quantum higher than the previous one.**
+    - $T$: Time Quantum | $Q_n$: Queue ID
+    <br><img src="../assets/images/Operating-Systems/self/9.png" height="500px" alt="Multi-level Feedback Queue 0" />
