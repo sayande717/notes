@@ -136,7 +136,8 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - It is a 2 port device.
 - While an amplifier amplifies the signal (from x to 2x,3x, etc), a repeater regenerates the signal (x) and retains it's original strength.
 - Signal filtering/attenuation: Not possible, since it's purely hardware.
-- Collision: A maximum of `n` collisions can occur, if there are `n` connected devices.
+- **Collision Domain**: A maximum of `n` collisions can occur, if there are `n` connected devices.
+- **Broadcast Domain**: Any broadcast packet will reach all devices connected, on all sides of the repeater.
 
 ### Hub
 - Layer: `Physical`
@@ -144,10 +145,11 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - It has $>2$ ports.
 - There is some basic functionality built-in, using which we can check if all devices are properly connected or not.
 - Signal filtering/attenuation: Not possible. If `A` wants to send some data to `B`, then the others also get the message. The message is broadcasted messages to all connected devices.
-- Collision: A maximum of `n` collisions can occur, if there are `n` connected devices.
+- **Collision Domain**: A maximum of `n` collisions can occur, if there are `n` connected devices.
+- **Broadcast Domain**: Any broadcast packet will reach all devices connected, on all sides of the hub.
 
 ### Bridge
-- Layer: `Physical` & `Data Link`
+- Layer: `Data Link`
 - Bridges are used to connect 2 different LANs.
 - A packet transmitted by a device contains the source & destination MAC address.
 - Signal filtering/attenuation: Possible. If the bridge notices that some packet does not need to be forwarded to the other LAN to reach it's destination, it can filter the packet & directly send it to the destination, on the same LAN it originated in.
@@ -168,10 +170,44 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
         - The device which has accepted it, sends back the ACK (Acknowledgement) packet. 
         - Using that packet, the bridge 'learns' about the location of the destination device and adds it to the mapping table.
 - It uses Spanning Trees in the form of `Bridge Data Unit Protocol`, which ensures that data packets don't get stuck in a loop.
-- Collision Domain: The packet uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. So, **there are no collisions**.
+- **Collision Domain**: The bridge uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. There may be collisions within the networks themselves, but not across them.
+- **Broadcast Domain**: Any broadcast packet will reach all devices connected, on all sides of the bridge.
 
 ### Switch
+- Layer: `Data Link`
+- It is a multi-port bridge.
+- We connect multiple devices with a switch, which in turn is connected to the router, which in turn is connected to the Internet (optional).
+- Switch provides full-duplex links to the devices.
+    > Duplex: Data can be sent/Received parallely. <br>
+    > Simplex: Only 1 signal can be transmitted at a time.
+- **Collision Domain**: The switch uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. There may be collisions within the networks themselves, but not across them.
+- **Broadcast Domain**: Any broadcast packet will reach all devices connected, on all sides of the switch.
+
 ### Router
+- Layer: `Physical` `Data Link` `Network`
+- It is a multi-port device. Multiple networks can be connected to it at the same time.
+- Router can check for both MAC & IP addresses.
+- The router receives an IP Address (usually `XXX.XXX.XXX.1`) from each network it is connected to, so that it can identify and differentiate between them.
+- Forwarding/Flooding: Once the router receives a data packet containing the source & destination IP & MAC Address, it checks it's **Routing Table**.
+    - If it finds the entry, it forwards it to the destination.
+    - If it does not find the entry ie cannot decide where to send the packet, it floods the network ie broadcasts it to all networks.
+- Filtering: If the router receives something like an ARP request, it can send it back to the same network.
+    > An ARP (Address Resolution Protocol) request is a message sent by a device on a network to discover the MAC (Media Access Control) address associated with a specific IP (Internet Protocol) address.
+- **Collision Domain**: The switch uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. There may be collisions within the networks themselves, but not across them.
+- **Broadcast Domain**: Any broadcast packet will reach all devices connected but only within the network. It will not propagate to the other networks connected to the router.
+
+## Collision Domain & Broadcast Domain
+- **Collision Domain**: A collision domain represents the network segment where collisions can occur. If multiple devices send data packets at the same time in a shared medium, the data packets will collide with each other. In the worst case, the collision domain can be $n$ if there are $n$ devices connected.
+- **Broadcast Domain**: Whether all devices receive the data packet a particular device on the network sends, regardless of if it was intended for them or not.
+
+| Device   | Collision Domain     | Broadcast Domain    |
+|----------|----------------------|---------------------|
+| Repeater | Unchanged            | Unchanged           |
+| Hub      | Unchanged            | Unchanged           |
+| Bridge   | Reduced              | Unchanged           |
+| Switch   | Reduced              | Unchanged           |
+| Router   | Reduced              | Reduced             |
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
