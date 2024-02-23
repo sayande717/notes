@@ -77,17 +77,71 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 | 1 | 0 |  0  |  1 | 1 |  0  |  1  |   0  |
 | 1 | 1 |  1  |  1 | 0 |  0  |  0  |   1  |
 
+### <u>Basic Gates: AND, OR and NOT</u>
+
+### <u>AND Gate</u>
+- Inputs: $A$, $B$ | Outputs: $Y$
+- If any 1 of the inputs is 0, output is 0.
+- Truth-Table:
+    | A | B | Y |
+    |---|---|---|
+    | 0 | 0 | 0 |
+    | 0 | 1 | 0 |
+    | 1 | 0 | 0 |
+    | 1 | 1 | 1 |
+
+### <u>OR Gate</u>
+- Inputs: $A$, $B$ | Outputs: $Y$
+- If any 1 of the inputs is 1, output is 1.
+- Truth-Table:
+    | A | B | Y |
+    |---|---|---|
+    | 0 | 0 | 0 |
+    | 0 | 1 | 1 |
+    | 1 | 0 | 1 |
+    | 1 | 1 | 1 |
+
+### <u>NOT Gate</u>
+- Inputs: $A$ | Outputs: $Y$
+- If any 1 of the inputs is 1, output is 1.
+- Truth-Table:
+    | A | Y |
+    |---|---|
+    | 0 | 1 |
+    | 1 | 0 |
+
 ### <u>Universal Gates: NAND and NOR</u>
 <!-- TODO: Add Circuit Diagram -->
-- Logic: To implement OR gate, we need 3 NAND gates or 2 NOR gates.
+#### <u>NAND Gate</u>
+- Inputs: $A$, $B$ | Outputs: $Y$
+- If any 1 of the inputs is 0, output is 1.
+- Truth-Table:
+    | A | B | Y |
+    |---|---|---|
+    | 0 | 0 | 1 |
+    | 0 | 1 | 1 |
+    | 1 | 0 | 1 |
+    | 1 | 1 | 0 |
 
-| Gates | NAND | NOR |
-| :---  |:---: |:---:|
-|  NOT  |  1   |  1  |
-|  AND  |  2   |  3  |
-|  OR   |  3   |  2  |
-|  XOR  |  4   |  5  |
-|  XNOR |  5   |  4  |
+#### <u>NOR Gate</u>
+- Inputs: $A$, $B$ | Outputs: $Y$
+- If any 1 of the inputs is 1, output is 0.
+- Truth-Table:
+    | A | B | Y |
+    |---|---|---|
+    | 0 | 0 | 1 |
+    | 0 | 1 | 0 |
+    | 1 | 0 | 0 |
+    | 1 | 1 | 0 |
+
+- To implement OR gate, we need 3 NAND gates or 2 NOR gates.
+    | Gates | NAND | NOR |
+    | :---  |:---: |:---:|
+    |  NOT  |  1   |  1  |
+    |  AND  |  2   |  3  |
+    |  OR   |  3   |  2  |
+    |  XOR  |  4   |  5  |
+    |  XNOR |  5   |  4  |
 
 ### <u>Arithmetic Gates (XOR, XNOR)</u>
 
@@ -308,7 +362,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Prime Implicants: **4** ie $B \bar C D, ABD, ABC, ACD$
     - Essential Prime Implicants: **3** ie $B \bar C D, ABC, ACD$
 
-# <strong>Digital Logic Circuits</strong>
+# <strong>Logic Circuits</strong>
 
 ## Half-Adder
 - Adds 2 bits
@@ -585,9 +639,9 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - It is a multi-input multi-output device.
 - Inputs: $2^n$ | Outputs: upto $n$
 - Applications:
-    - Binary to Octal (8:3)
-    - Binary to Hexadecimel (16:4)
-    - Binary to Decimel (10:4)
+    - Octal to Binary (8:3)
+    - Hexadecimel to Binary (16:4)
+    - Decimel to Binary (10:4)
 - Truth-Table (8:3 Encoder):
     | $E_0$ | $E_1$ | $E_2$ | $E_3$ | $E_4$ | $E_5$ | $E_6$ | $E_7$ | X | Y | Z |
     |-------|-------|-------|-------|-------|-------|-------|-------|---|---|---|
@@ -600,3 +654,56 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |   0   |   0   |   0   |   0   |   0   |   0   |   1   |   0   |  1| 1 | 0 |
     |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |  1| 1 | 1 |
 - SoP: $\bar X \bar Y \bar Z E_0 + \bar X \bar Y Z E_1 + \bar X Y \bar Z E_2 + \bar X Y Z E_3 + X \bar Y \bar Z E_4 + X \bar Y Z E_5 + X Y \bar Z E_6 + X Y Z E_7$
+
+# <strong>Sequential Circuits</strong>
+- Consists of a memory element that stores the present output.
+- Output not only depends on the input, but also on the previous output.
+- Inputs: $I$ (Input) | $Q_n$ (Present output)
+- Output: $Q_{n+1}$ (Next Output)
+
+## SR Latch
+### Using NAND Gate
+- Inputs: $S$, $R$ | Outputs: $Q_{n+1}$
+- Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
+- Truth-Table:
+    |$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|
+    |0|0|Invalid|
+    |0|1|1|
+    |1|0|0|
+    |1|1|Hold / Q|
+- Inputs: $S=0$, $R=0$ | Outputs: $Q=1$, $\bar Q=1$
+    - NAND Gate (I) will output 1, since one of the inputs is 0.
+    - NAND Gate (II) will output 1, since one of the inputs is 0.
+    - This is invalid since the outputs should've been complimentary to each other.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/6.png" alt="SR Latch 0,1" width="600px" />
+- Inputs: $S=0$, $R=1$ | Outputs: $Q=1$, $\bar Q=0$
+    - NAND Gate (I) will output 1, since one of the inputs is 0.
+    - NAND Gate (II) will output 0, since both the inputs are 1.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/7.png" alt="SR Latch 0,1" width="600px" />
+- Inputs: $S=1$, $R=0$ | Outputs: $Q=0$, $\bar Q=1$
+    - NAND Gate (II) will output 1, since one of the inputs is 0.
+    - NAND Gate (I) will output 0, since both the inputs are 1.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/8.png" alt="SR Latch 0,1" width="600px" />
+- Inputs: $S=1$, $R=1$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/9.png" alt="SR Latch 1,1" width="600px" />
+    1. NAND Gate (II) will always output $\bar Q$, which will be taken as an input to NAND Gate (I).
+    1. Also, NAND Gate (I) will always output $Q$, which will be taken as an input to NAND Gate (II).
+    1. So, for NAND Gate (I), output:
+       - $\bar {(1.\bar Q)}$
+       - $\bar 1 . \bar {\bar Q}$
+       - $0+Q$
+       - $Q$
+    1. Also, for NAND Gate (II), output:
+       - $\bar {1.Q}$
+       - $\bar 1 . \bar Q$
+       - $0 + \bar Q$
+       - $\bar Q$
+
+## SR Flip-Flop 
+### Using NAND Gate
+
