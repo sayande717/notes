@@ -28,14 +28,19 @@ git clone https://github.com/sayande717/notes.git
 ## Aptitude
 
 - Logical Reasoning
-    |Topic|Sub-Topic|Progress|Time Taken|
-    |:---|:---:|:---:|:---:|
-    |Number Series|Type 1|1-20|21:01|
-    |Number Series|Type 2|1-20|13:27|
-    |Number Series|Type 3|1-20|17:13|
-    |Number Series|Type 4|1-10|08:10|
-    |Number Series|Type 4|1-15|08:54|
-    |Letters & Symbol Series|Type 1|1-12|10:43|
-    |Letters & Symbol Series|Type 1|1-12|04:40|
-    |Letters & Symbol Series|Type 2|1-15|17:23|
+    |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
+    |:---|:---:|:---:|:---:|:---:|
+    |Number Series|Type 1|1-20|Not Recorded|21:01|
+    |Number Series|Type 2|1-20|Not Recorded|13:27|
+    |Number Series|Type 3|1-20|Not Recorded|17:13|
+    |Number Series|Type 4|1-10|Not Recorded|08:10|
+    |Number Series|Type 4|1-15|Not Recorded|08:54|
+    |Letters & Symbol Series|Type 1|1-12|Not Recorded|10:43|
+    |Letters & Symbol Series|Type 1|1-12|Not Recorded|04:40|
+    |Letters & Symbol Series|Type 2|1-15|Not Recorded|17:23|
+    |Verbal Classification|Type 1|1-17|2|05:00|
+    |Artificial Language|Type 1|1-12|2|06:15|
+    |Artificial Language|Type 2|1-12|3|08:17|
+    |Artificial Language|Type 1|1-12|2|10:34|
+    |Artificial Language|Type 2|1-12|2|05:26|
 

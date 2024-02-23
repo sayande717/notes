@@ -4,7 +4,7 @@
 - Syntax:
     - [Positions] ... [Change]
 ## Number Series
-### Type 1 | 1-20 | 21:01
+### Type 1
 - Syntax:
     - [Positions] ... [Change]
     > Example
@@ -19,14 +19,14 @@
     - 1,2,3 ... $m=1 >> n*m-(m+1)=(n+1) >> m=m+1$
     > $8*1-2=6, 6*2-3=9, 9*3-4=23$
 
-### Type 2 | 1-20 | 13:27
+### Type 2
 
 1. 21 25 18 29 33 18:
  - 1,4,7,... $+8$
  - 2,5,8 ... $+8$
  - 3,6,9 ... $=18$
 
-### Type 3 | 1-20 | 17:13
+### Type 3
 
 1. 42 40 38 35 33 31 28:
     - 1,2,4,5 ... $-2$
@@ -50,7 +50,7 @@
     - 2,3 ... $=$
     - 3,4 ... $-3$
 
-### Type 4 | 1-10 | 08:10
+### Type 4
 
 1. 664, 332, 340, 170, \_, 89:
     - 1,2 ... $/2$
@@ -65,7 +65,7 @@
     - 2,5,8 ... $-20$
     - 3,6,9 ... $93$
 
-### Type 4 | 1-15 | 08:54
+### Type 4
 
 1. 4, 7, 25, 10, \_, 20, 16, 19:
     - 1,2 ... $+3$
@@ -75,8 +75,7 @@
     - 1,2,3,4 ... $*2$
 
 ## Letter & Symbol Series
-### Type 1 | 1-12 | 10:43
-### Type 1 | 1-12 | 04:40
+### Type 1
 
 > Positions: In SCD, TEF, S: 1, C: 2, D: 3, T: 4, E: 5, F: 6
 1. SCD, TEF, UGH, \_\_\_, WKL:
@@ -101,7 +100,7 @@
         - 2,6,10 ... $+1$
         - 3,7,11 ... $-1$
 
-### Type 2 | 1-15 | 17:23
+### Type 2
 1. Image obtained from [here](https://www.indiabix.com/_files/images/logical-reasoning/5-90-q-1.png)
     <br><img src="../assets/images/Aptitude/external/0.png" alt="question 1"/><br>
     - Directions:
@@ -150,3 +149,25 @@
     <br><img src="../assets/images/Aptitude/external/6.png" alt="question 7"/><br>
     - Number of parts filled: 1,2
     - 212,212,212 ... *pattern repeats*
+
+## Artificial Language
+### Type 1
+1. Here are some words translated from an artificial language.
+`gorblflur` means `fan belt`
+`pixngorbl` means `ceiling fan`
+`arthtusl` means `tile roof`
+Which word could mean "ceiling tile"?
+- gorbl: fan
+- pixn: ceiling
+- arth: tile
+- So, the word is `pixnarth`.
+
+### Type 2
+Here are some words translated from an artificial language.
+`slar` means `jump`
+`slary` means `jumping`
+`slarend` means `jumped`
+Which word could mean "playing"?
+- y: ing
+- end: ed
+- So the word is `clargy`.
