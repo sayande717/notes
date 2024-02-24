@@ -402,3 +402,74 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - **Each higher priority queue has a time quantum higher than the previous one.**
     - $T$: Time Quantum | $Q_n$: Queue ID
     <br><img src="../assets/images/Operating-Systems/self/9.png" height="500px" alt="Multi-level Feedback Queue 0" />
+
+## Process Synchronization
+- **Co-operative process**: Processes whose execution affects other processes. Usually, this is because they share memory, code, variables, resources like scanner, printer, etc. with each other.
+- **Independent processes**: Processes which run independently of each other.
+- If co-operative processes are not synchronized properly, they can create conflicts or deadlock in the system.
+- This problem is called `Race condition`.
+- Example 0 (initially, $shared=5$):
+    |Row|Process 1|Process 2|
+    |---:|:---|:---|
+    |1|int x=shared;|int y=shared;|
+    |2|x++;|y--;|
+    |3|sleep(1);|sleep(1);|
+    |4|shared=x;|shared=y;|
+    1. Instructions `1` & `2` of process `1` will be executed. $x=6$
+    1. The CPU, upon receiving Instruction `3`, will pre-empt the process, and switch to process `2`.
+    1. Instructions `1` & `2` of process `2` will be executed. $y=4$
+    1. The CPU, upon receiving Instruction `3`, will pre-empt the process, and switch back to process `1`.
+    1. Instruction `4` of process `1` will be executed. $shared=6$.
+    1. Process `1` ends, so the CPU will switch to process `2`.
+    1. Instruction `4` of process `2` will be executed. $shared=4$.
+    1. So, the values of shared becomes `5`, then `6`, then finally `4`. But, it shoud've been `5`.
+- Example 1:
+    - $count=0$, shared variable, represents the number of items in the buffer.
+    - $n=8$, stores the number of slots available in the buffer.
+    - $in=1$, stores the address of the next memory location, where the item produced by the producer, is stored.
+    - `Producer` code:
+    ```cpp
+    void producer() {
+        int itemp; // Item count of producer
+        while (true) {
+            produceItem(itemp); // Produce the item
+            while(count==n);    // If buffer is full, do nothing
+            buffer[in]=itemp;   // Store the item. Also check `DESC_buffer` below
+            in=(in+1)%n;        
+            count=count+1;      // Check `DESC_count0` below
+        }
+    }
+    ```
+    - `DESC_buffer`: `in` 
+    - `DESC_count0`: This is how CPU processes this line:
+        - READ $R_p$, $m[count]$; // $R_p$ = Register
+        - INCREMENT $R_p$;
+        - STORE $m[count]$, $R_p$
+    - $out=1$, stores the address of the next memory location, where the item to be retrieved by the consumer, is stored.
+    - `Consumer` code:
+    ```cpp
+    void consumer() {
+        int itemc;
+        while(true) {
+            while(count==0);    // If buffer is empty, do nothing
+            itemc=buffer[out];  // Retrieve the item. Also check `DESC_buffer` above
+            out=(out+1)%n;      
+            count = count - 1; // Check `DESC_count1` below
+        }
+    }
+    ```
+    - `DESC_count1`: This is how CPU processes this line:
+        - READ $R_c$, $m[count]$; // $R_c$ = Register
+        - DECREMENT $R_c$;
+        - STORE $m[count]$, $R_c$
+    - **Case 1**: `Producer` & `Consumer` code run one after the other.
+        1. At the end of `Producer` code, $count=1$ & $in=1$.
+        1. At the end of `Consumer` code, $count=0$ & $out=1$.
+        > This won't cause problems because count is 0, so the consumer won't try to consume more products.
+    - **Case 2**: `Producer` code is pre-empted before it can increment the value of `count`. **Assume that producer has already produced `4` items.**
+        1. `Producer` code starts running.
+        1. Before being pre-empted, `Producer` code: $in=4$ & $count=3$. `count` could not be incremented.
+        1. `Consumer` code runs from the start. Again, it is pre-empted before it could update the value of `count`. $out=1$ & $count=3$.
+        1. Now, CPU goes back and executes `Consumer` code. $count=4$.
+         1. CPU goes back and executes `Producer` code. $count=2$.
+         > At this point, 3 items should be present in the buffer, but the `count` value says otherwise. This is a problem.
