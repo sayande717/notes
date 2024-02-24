@@ -8,7 +8,7 @@
 ## FRL Properties of Gates
 - **AND** Gate:
     - $A . 0 = 0$
-    - $A . 1 = 1$
+    - $A . 1 = A$
     - $A . \bar A = 0$
 - **OR** Gate:
     - $A + 0 = A$
@@ -22,6 +22,9 @@
     - $A ⊕ A ⊕ A ⊕ A ⊕ A ⊕ A ... n\ times$:
         - If `n` is even, result $=0$ 
         - If `n` is odd, result $=A$
+- **NAND** Gate:  If any 1 of the inputs is 0, output is 1.
+- **NOR** Gate: If any 1 of the inputs is 1, output is 0.
+
 - XNOR Gate:
     - $A ⊙  A = 1$
     - $A ⊙ \bar A = 0$
@@ -662,8 +665,9 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Output: $Q_{n+1}$ (Next Output)
 
 ## SR Latch
+- For Latches, the output depends on the Gate used to design it.
 ### Using NAND Gate
-- Inputs: $S$, $R$ | Outputs: $Q_{n+1}$
+- Inputs: $S$ (Set), $R$ (Reset) | Outputs: $Q_{n+1} / Q$, $\bar Q$
 - Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
 - Truth-Table:
     |$S$|$R$|$Q_{n+1}$ ($Q$)|
@@ -704,6 +708,96 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
        - $0 + \bar Q$
        - $\bar Q$
 
-## SR Flip-Flop 
-### Using NAND Gate
+### Using NOR Gate
+- Inputs: $S$ (Set), $R$ (Reset) | Outputs: $Q_{n+1} / Q$, $\bar Q$
+- Property of NOR Gate: If any 1 of the inputs is 1, output is 0.
+- Truth-Table:
+    |$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|
+    |0|0|Hold / Q|
+    |0|1|0|
+    |1|0|1|
+    |1|1|Invalid|
+- Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/10.png" alt="SR Latch 0,0" width="600px" />
+    1. NOR Gate (II) will always output $Q$, which will be taken as an input to NOR Gate (I).
+    1. Also, NOR Gate (I) will always output $\bar Q$, which will be taken as an input to NOR Gate (II).
+    1. So, for NOR Gate (II), output:
+       - $\bar {0+\bar Q}$
+       - $\bar 0.\bar {\bar Q}$
+       - $1.Q$
+       - $Q$
+    1. Also, for NAND Gate (I), output:
+       - $\bar {0+Q}$
+       - $\bar 0. \bar Q$
+       - $1.\bar Q$
+       - $\bar Q$
+- Inputs: $S=0$, $R=1$ | Outputs: $Q=0$, $\bar Q=1$
+    - NOR Gate (II) will output 0, since one of the inputs is 1.
+    - NOR Gate (I) will output 1, since both the inputs are 0.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/11.png" alt="SR Latch 0,1" width="600px" />
+- Inputs: $S=1$, $R=0$ | Outputs: $Q=1$, $\bar Q=0$
+    - NOR Gate (I) will output 0, since one of the inputs is 1.
+    - NOR Gate (II) will output 1, since both the inputs are 0.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/12.png" alt="SR Latch 1,0" width="600px" />
+- Inputs: $S=1$, $R=1$ | Outputs: $Q=0$, $\bar Q=0$
+    - NAND Gate (I) will output 0, since one of the inputs is 1.
+    - NAND Gate (II) will output 0, since one of the inputs is 1.
+    - This is invalid since the outputs should've been complimentary to each other.
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/13.png" alt="SR Latch 1,1" width="600px" />
 
+## SR Flip-Flop 
+- A Flip-Flop only works when the Clock is triggered.
+- For Flip-Flops, the output is same regardless of the Gate used to design it.
+### Using NAND Gate
+- Inputs: $S$ (Set), $R$ (Reset) | Outputs: $Q_{n+1} / Q$, $\bar Q$
+- Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
+- When the Clock is triggered, value `1` is passed to both NAND Gates.
+- Truth-Table:
+    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|---|
+    |0|Any|Any|Hold / Q|
+    |1|0|0|Hold / Q|
+    |1|0|1|0|
+    |1|1|0|1|
+    |1|1|1|Invalid|
+- Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/14.png" alt="SR Flip-Flop 0,0" width="600px" />
+- Inputs: $S=0$, $R=1$ | Outputs: $Q=0$, $\bar Q=1$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/15.png" alt="SR Flip-Flop 0,1" width="600px" />
+- Inputs: $S=1$, $R=0$ | Outputs: $Q=1$, $\bar Q=0$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/16.png" alt="SR Flip-Flop 1,0" width="600px" />
+- Inputs: $S=1$, $R=1$ | Outputs: $Q=1$, $\bar Q=1$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/17.png" alt="SR Flip-Flop 1,1" width="600px" />
+
+### Using NOR Gate
+- We use AND Gate instead of NOR Gate, as inputs to the Latch. This is because, if we use NOR Gates, they'll always output `0` when the clock is triggered (Property of NOR Gate: If any 1 of the inputs is 1, output is 0). So the Flip-Flop will not work properly.
+- When the Clock is triggered, value `1` is passed to both NOR Gates.
+- Truth-Table:
+    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|---|
+    |0|Any|Any|Hold / Q|
+    |1|0|0|Hold / Q|
+    |1|0|1|0|
+    |1|1|0|1|
+    |1|1|1|Invalid|
+- Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/18.png" alt="SR Flip-Flop 0,0" width="600px" />
+- Inputs: $S=0$, $R=1$ | Outputs: $Q=0$, $\bar Q=1$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/19.png" alt="SR Flip-Flop 0,1" width="600px" />
+- Inputs: $S=1$, $R=0$ | Outputs: $Q=1$, $\bar Q=0$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/20.png" alt="SR Flip-Flop 1,0" width="600px" />
+- Inputs: $S=1$, $R=1$ | Outputs: $Q=0$, $\bar Q=0$
+    - Circuit-Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/21.png" alt="SR Flip-Flop 1,1" width="600px" />
