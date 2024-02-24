@@ -107,3 +107,33 @@ Image taken from [here](https://youtu.be/8jLOx1hD3_o)
     > iostream, string (imported using `#include`)
 - **STL**: A part of Standard Library. It is a collection of container types.
     > iterators
+
+## Number Systems
+### Binary
+- Base 2
+- If we have `n` digits, we can represent a total of $2^{n-1}$ decimel numbers.
+- Examples:
+    - $100101=1*2^5+1*0^4+0*2^3+1*2^2+0*2^1+1*2^0=37$
+    - $10010=1*2^4+0*2^3+0*2^2+1*2^1+0*2^0=18$
+- We add `Ob` in front to specify that it is a octal number. Example: $0b00110101$
+
+### Decimel
+- Base 10
+- Examples:
+    - $2371=2*10^3+3*10^2+7*10^1+1*10^0$
+    - $924=9*10^2+2*10^1+4*10^0$
+### Hexadecimel
+- Base 16
+- A Binary number is grouped to groups of 4 from the right, and then converted to hexadecimel.
+- Example: $0x6E30F13F$
+- 1-9 is represented as usual, and 10-15 is represented by A-F.
+- Padding: When grouping numbers, if there are some missing digits in the left-most group, we add `0` to the missing places.
+- We add `Ox` in front to specify that it is a hexadecimel number.
+
+### Octal
+- Base 8
+- A Binary number is grouped to groups of 3 from the right, and then converted to octal.
+- Example: $015614170477$
+- We add `O` in front to specify that it is a octal number.
+
+
