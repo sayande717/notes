@@ -163,7 +163,7 @@ Which word could mean "ceiling tile"?
 - So, the word is `pixnarth`.
 
 ### Type 2
-Here are some words translated from an artificial language.
+1. Here are some words translated from an artificial language.
 `slar` means `jump`
 `slary` means `jumping`
 `slarend` means `jumped`
@@ -171,3 +171,10 @@ Which word could mean "playing"?
 - y: ing
 - end: ed
 - So the word is `clargy`.
+
+## Analogies
+### Type 1
+1. yard, inch | quart, ounce
+    - Relation: larger measure than
+1. elated, dependent | enlightened, ignorant
+    - Relation: opposite of

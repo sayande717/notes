@@ -5,6 +5,16 @@ Number of devices = `n`
 - Cable: $n$
 - Repeater: $n$
 
+## FRL Circuit Switching
+- Setup Time, Tear Down time
+- Transmission Time: Number of Messages / Bandwidth
+- Propagation Delay: Distance / Velocity
+- Total Time: Setup Time + Transmission Time + Propagation Delay + Tear Down Time
+
+# FRL Packet Switching
+- `n`: Number of intermediate devices re-transmitting the data packet
+- Total time: n(Transmission Time) + Propagation Delay
+
 # Basics
 
 ## Network Types
@@ -207,6 +217,51 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 | Bridge   | Reduced              | Unchanged           |
 | Switch   | Reduced              | Unchanged           |
 | Router   | Reduced              | Reduced             |
+
+## Switching Techniques
+## Circuit Switching
+- Layer: `Physical`
+- Formulae: [here](#frl-circuit-switching)
+<br><img src="../assets/images/Computer-Networks/self/0.png" alt="Circuit Switching">
+- In a Telephone Exchange, the physical cables are already laid out between all devices. The Exchange themselves are connected to each other using cables.
+- When we pick up the phone and dial a number, a connection is established between the sender and the receiver. The time it takes is acalled `Setup Time`.
+- By establishing a connection, we're effectively reserving a portion of bandwidth and ports, for the duration of the session.
+- Once the connection is established, data flows in-order and is continuous. No headers are needed since a one-to-one connection is established.
+    > Header: Section within a data packet which contains source and destination address.
+- Efficiency of the overall network is less, since once a connection is established, resources are reserved for it. Even if it's not being used, the resources can't be freed until the connection is terminated.
+- Packet delay is minimal since the pathway is already clearly defined at the very beginning.
+- Circuit Switching is good for Telephone networks, but not suitable for computer networks because of it's inefficiency.
+
+## Packet Switching
+- Layer:
+    - Datagram: `Network`
+    - Virtual Circuit: `Data Link`
+- Formulae: [here](#frl-packet-switching)
+<br><img src="../assets/images/Computer-Networks/self/1.png" alt="Packet Switching">
+- All connected switches store the received data packet, figure out which path to send it through (using Routing Tables), then send it. This is called **Store & Forward strategy**.
+- If there are multiple data packets to be sent, they are sent one after the other. The sender does not wait for the current packet to be received on the other end, before sending the next packet.
+- Efficiency: high, since no reserved pathways exist.
+- Delay: The more the number of intermediate devices like switches, the more the delay.
+
+### Datagram Switching
+- Layer: `Network`
+- Connectionless: No connection is established before tranmitting data. Resources are provided on-demand.
+- No reservation takes place.
+- Data is usually received out-of-order, since they're taking different paths to get to the destination.
+- There is high overhead, all data packets have headers in them.
+- Packet loss can take place.
+- Packet Delay depends on the load on the network.
+- Used in Internet
+
+### Virtual Circuit
+Layer: `Data Link`
+- Connection-oriented: A global packet is sent first, which establishes a dedicated connection and resources in it's pathway.
+- The pathway is reserved.
+- Data packets are received in-order.
+- Only the global (first) packet has a header.
+- Since the connection is dedicated, there is minimal delay.
+- Minimal probability of packet loss.
+- Used in ATM (Asynchronous Transfer Mode)  etc.
 
 ### Gateway
 ### IDS (Intrusion Detection System)
