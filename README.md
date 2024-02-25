@@ -45,4 +45,7 @@ git clone https://github.com/sayande717/notes.git
     |Artificial Language|Type 2|1-12|2|05:26|
     |Analogies|Type 1|1-20|3|05:22|
     |Analogies|Type 2|1-20|4|05:20|
+    |Analogies|Type 3|1-20|3|05:58|
+    |Analogies|Type 4|1-14|4|04:59|
+    |Analogies|Type 5|1-20|4|06:46|
 
