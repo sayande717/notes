@@ -7,8 +7,8 @@ git clone https://github.com/sayande717/notes.git
 
 # Topics (Summary)
 
-|ID| **Name** | **Notes** | **References** | **Progress (Self)** | **Status** |
-|:--- | :---: | :---: | :---: | :---: | ---: |
+|ID| **Name** | **Notes** | **References** | **Progress** | **Status** |
+|:--- | :---: | :---: | :---: | :---: | :---: |
 |5| Computer Networks | [Markdown](./topics/Computer-Networks.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_) \| [Kunal Kushwaha](https://www.youtube.com/watch?v=IPvYjXCsTg8&pp=ygUNa3VuYWwgbmV0d29yaw%3D%3D) | till Lec-18 | `In Progress` |
 |0| Discreet Mathematics | [Markdown](./topics/Mathematics.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiH2wwES9vPWsEL6ipTaUSl3) | null | `Completed` |
 |-1| Numerical Methods | [Markdown](./topics/Mathematics.md) | [Gajendra Purohit](https://www.youtube.com/playlist?list=PLU6SqdYcYsfLrTna7UuaVfGZYkNo0cpVC) \| [Gajendra Purohit](https://www.youtube.com/playlist?list=PLU6SqdYcYsfIk1VhXxIYNPFU67ym6gae8) | null \| null | `Not Started` |
@@ -17,9 +17,8 @@ git clone https://github.com/sayande717/notes.git
 |-1| Compiler Design | [Markdown](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
 |4| Design & Analysis of Algorithms | [Markdown](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `In Progress` |
 |3| Digital Logic | [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till SR flip-flop using NOR gate ... | `In Progress` |
+|7| Aptitude | [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
 |6| Data Structures | [Markdown](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | till 03:01:46 | `In Progress` |
-|7| C++ | [Markdown](./topics/TIL-Coding.md#c++) | [FreeCodeCamp](https://youtu.be/8jLOx1hD3_o) | till 03:21:52 | `In Progress` |
-|8| Aptitude | [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
 
 <hr>
 
