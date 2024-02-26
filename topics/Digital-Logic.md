@@ -557,7 +557,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 ### Cascading Multiplexer
 - Multiplexers are connected in a way such that the output of 1 Multiplexer becomes one of the inputs of the next Multiplexer.
 - Example 0:
-    <br><img src="../assets/images/Digital-Logic/self/22.png" alt="Cascading Multiplexer 0" width="400px" />
+    <br><img src="../assets/images/Digital-Logic/self/22.png" alt="Cascading Multiplexer 0" width="600px" />
     - Output of Multiplexer 1: $x \bar z + \bar y z$
     - Output of Multiplexer 2: $f=(x \bar z + \bar y z)\bar y + xy$
         - $x \bar y \bar z + \bar y z + x y$
