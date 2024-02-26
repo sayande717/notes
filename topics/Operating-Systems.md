@@ -423,7 +423,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     1. Process `1` ends, so the CPU will switch to process `2`.
     1. Instruction `4` of process `2` will be executed. $shared=4$.
     1. So, the values of shared becomes `5`, then `6`, then finally `4`. But, it shoud've been `5`.
-- Example 1:
+- Example 1 (Producer-Consumer problem):
     - $count=0$, shared variable, represents the number of items in the buffer.
     - $n=8$, stores the number of slots available in the buffer.
     - $in=1$, stores the address of the next memory location, where the item produced by the producer, is stored.
@@ -473,3 +473,56 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. Now, CPU goes back and executes `Consumer` code. $count=4$.
          1. CPU goes back and executes `Producer` code. $count=2$.
          > At this point, 3 items should be present in the buffer, but the `count` value says otherwise. This is a problem.
+- Example 2 (Printer-Spooler problem):
+    - The printer is a lot slower than the CPU, that's why there's a spooler directory in-between to store the print files and Instructions.
+    - Whenever a process wants to print something, it puts it in the spooler directory. The printer takes the documents from the spooler directory, and prints them.
+    - Code:
+    ```
+    LOAD $R_i$, $m[in]$
+    STORE $SD[R_i]$, File-Name
+    INCR $R_i$
+    STORE $m[i]$, $R_i$
+    ```
+    - $m[in]$: Stores the next empty slot in the spooler directory.
+    - **Case 1**: There is only 1 process $P_1$, trying to print file `f1.doc`
+        1. Initially, $in = 0$. It is loaded onto the register.
+        1. The file name is stored in position `in` ie `0`, in the spooler directory.
+        1. Register $R_i$ is incremented from `0` to `1`
+        1. $in$ is updated to `1`.
+    - **Case 2**: **2 co-operative processes, $P_1$ & $P_2$**, want to print documents. The spooler directory already contains 3 documents to print.
+        1. $P_1$ executes first. Initially, in = 3. It is loaded onto the register.
+        1. The file name is stored in position `in` ie `3`, in the spooler directory.
+        1. Register $R_i$ is incremented from `3` to `4`
+        1. Before $in$ can be updated to `4`, the process $P_1$ is pre-empted from the CPU.
+        1. $P_2$ executes next. Initially, $in = 3$. It is loaded onto the register.
+        1. The file name is stored in position `in` ie `3`, in the spooler directory. **It replaces the file $P_1$ had stored, resulting in Data Loss.**
+        1. Register $R_i$ is incremented from `3` to `4`
+        1. Before $in$ can be updated to `4`, the process $P_2$ is pre-empted from the CPU.
+        1. CPU goes back and executes the remainder of $P_1$. $in = 4$. Process Terminates.
+        1. CPU goes back and executes the remainder of $P_2$. $in = 4$. Process Terminates.
+        - In this case, only $P_2$'s document will be printed. Data loss occurs for $P_1$.
+
+### Critical Section
+- The portion of the program where shared resources are accessed by various co-operative processes.
+- If 1 program is executing it's Critical Section, no other program cannot execute their Critical Sections.
+- Code syntax:
+    ```
+    // Non-critical Section
+    
+    // Entry Section
+    // Critical Section
+    // Exit Section
+
+    // Non-critical Section
+    ```
+    - We have an `Entry Section` before the Critical Section. A program has to clear this section to execute the Critical Section. If 1 program is executing it's Critical Section, we have to make sure that the others cannot clear their `Entry Sections`.
+    - We also have an `Exit Section`, after the Critical Section. Once a code executed it's `Exit Section`, it means that it's finished executing it's Critical Section.
+- These sections are used to achieve `Process Synchronization`.
+
+### Conditions for achieving Process Synchronization
+- To achieve Process Synchronization, the code must fulfill these conditions:
+1. **Mutual Exclusion**: 
+1. **Progress**: 
+1. **Bounded Wait**: 
+1. **No assumption related to hardware, speed, etc.**: 
+
