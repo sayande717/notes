@@ -178,3 +178,13 @@ Which word could mean "playing"?
     - Relation: larger measure than
 1. elated, dependent | enlightened, ignorant
     - Relation: opposite of
+### Type 5
+1. Dalmation is a type of dog.
+1. Flinch is a type of bird.
+1. Spy acts in a cladestine way.
+1. Accountant acts in a meticulous way.
+1. Dirge is a song used in a funurel.
+1. Jingle is a song used in a commercial.
+1. Asinine means extremely silly.
+1. Ephemeral and immortal are antonyms.
+1. Feral and tame are antonyms.
