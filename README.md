@@ -9,7 +9,7 @@ git clone https://github.com/sayande717/notes.git
 
 |ID| **Name** | **Notes** | **References** | **Progress** | **Status** |
 |:--- | :---: | :---: | :---: | :---: | :---: |
-|5| Computer Networks | [Markdown](./topics/Computer-Networks.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_) \| [Kunal Kushwaha](https://www.youtube.com/watch?v=IPvYjXCsTg8&pp=ygUNa3VuYWwgbmV0d29yaw%3D%3D) | till Lec-18 | `In Progress` |
+|5| Computer Networks | [Markdown](./topics/Computer-Networks.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_) \| [Kunal Kushwaha](https://www.youtube.com/watch?v=IPvYjXCsTg8&pp=ygUNa3VuYWwgbmV0d29yaw%3D%3D) | till Lec-21 | `In Progress` |
 |0| Discreet Mathematics | [Markdown](./topics/Mathematics.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiH2wwES9vPWsEL6ipTaUSl3) | null | `Completed` |
 |-1| Numerical Methods | [Markdown](./topics/Mathematics.md) | [Gajendra Purohit](https://www.youtube.com/playlist?list=PLU6SqdYcYsfLrTna7UuaVfGZYkNo0cpVC) \| [Gajendra Purohit](https://www.youtube.com/playlist?list=PLU6SqdYcYsfIk1VhXxIYNPFU67ym6gae8) | null \| null | `Not Started` |
 |1| Database Systems | [Markdown](./topics/Database-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y) | till Lec-18 | `In Progress` |

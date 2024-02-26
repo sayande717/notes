@@ -44,7 +44,7 @@ Image taken from [here](https://www.lifewire.com/thmb/eaQyjAgWa-S1JKEfZxlFYoB-0V
 - Session
 - Transport
 - Network
-- Data Link
+- [Data Link](#data-link-layer)
 - [Physical](#physical-layer)
 
 ### Difference vs TCP/IP Model
@@ -67,7 +67,6 @@ Image taken from [here](https://ipcisco.com/wp-content/uploads/2018/10/tcpip-mod
 <img src="../assets/images/Computer-Networks/external/2.png" width="800px">
 
 Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-Topology-OFBIT.in_-1024x1024.jpg)
-
 
 #### Point-to-Point Topology
 - Direct communication between two devices.
@@ -232,6 +231,12 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - Packet delay is minimal since the pathway is already clearly defined at the very beginning.
 - Circuit Switching is good for Telephone networks, but not suitable for computer networks because of it's inefficiency.
 
+## Message Switching
+- Predessor of [Packet Switching](#packet-switching)
+- Uses the Store & Forward strategy.
+- Hop by hop delivery: A message first goes to the first node. It processes it, then transfers it to the next node, and so on. The message keeps hopping between various nodes, till it reaches it's destination.
+- In contrast to Packet Switching, here the message is not broken down before being transmitted. It is transmitted as a whole.
+
 ## Packet Switching
 - Layer:
     - Datagram: `Network`
@@ -262,6 +267,27 @@ Layer: `Data Link`
 - Since the connection is dedicated, there is minimal delay.
 - Minimal probability of packet loss.
 - Used in ATM (Asynchronous Transfer Mode)  etc.
+
+## Cast
+- The meaning of cast is to share information with a number of devices.
+- **Unicast**: `one-to-one`. We're sending information from one device to another.
+- **Broadcast**: The information is sent to a broad range of devices (for example, all devices within a local area network).
+    - Example: Let's assume: Network `A: 90.0.0.1`, `B: 92.0.0.1`.
+    - **Limited Broadcast**: A broadcast originating from network `A`, to all devices on `A`. The signal is not received by devices on network `B`. Broadcast address: `255.255.255.255`
+    - **Direct Broadcast**: A broadcast originating from network `A`, to all devices on `B`. The signal is not received by devices on network `A`. Broadcast address, in this case: `92.255.255.255`.
+- **Multicast**: Broadcasting to a specific group of devices.
+
+## Data Link Layer
+- Within a particular network, this layer is enough to send data between devices.
+- Terminology: `Data Frame`. Data packets, received from the Network Layer, are split into equal sized Date Frames, and transmitted to Physical Layer.
+- **Node-to-Node delivery**: The primary responsibility is to determine which node the data packet will hop to, next. At every step, it performs the task of moving the data packet to the next node, till it reaches the destination.
+- **Flow Control**: Flow control refers to the techniques used to regulate the flow of data between two communicating devices to ensure that the sender does not overwhelm the receiver. It involves mechanisms for pacing data transmission, buffering, and acknowledgment to prevent data loss due to congestion or buffer overflow.
+    > Methods: Stop & Wait, Go Back N, Selective Repeat
+- **Error Control**: Error control involves techniques used to detect and correct errors that may occur during data transmission over a communication channel.
+    > Cyclic Redundancy Check, Checksum (in Transport Layer), Parity (in Transport Layer)
+- **Access Control**: Access control mechanisms govern the access to the communication channel by multiple devices in a network. It manages how devices contend for access to the channel, resolve contention issues, and allocate the channel efficiently to ensure fair and orderly data transmission.
+    > Methods:  CSMA/CD (dontention-based), ALOHA, Slotted ALOHA, Token Ring (contention-free)
+- **Physical Addressing**: It uses MAC Addresses for identifying devices.
 
 ### Gateway
 ### IDS (Intrusion Detection System)
