@@ -341,7 +341,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |---|---|---|
         |$\bar A$|$0_{(0)}$|$0_{(1)}$|
         |$A$|$1_{(2)}$|$1_{(3)}$|
-        - Pair: (2) & (3). Output: $A$
+        - Pairs: (2) & (3). Output: $A$
 
 - Example 2: $\sum m(0,2,5,7,9,11)+d(3,8,10,12,14)$
     |$↓PQ\ \|\ RS→$|$\bar R \bar S_{(00)}$|$\bar R S_{(01)}$|$R S_{(11)}$|$R \bar S_{(10)}$|
@@ -447,7 +447,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Subtracts 3 bits
 - Inputs: 3 | Outputs: 2
 - Sub: $x⊕y⊕z$ 
-- Borrow: $\bar xz+ \bar x y + yz$
+- Borrow: $\bar x y + yz + \bar xz$
 - Truth Table:
     | x | y | z($c_{in})$ | sub | $c_{out}$ |
     |---|---|-----|:---:|:----:|
@@ -553,6 +553,18 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Output: $Y$
     <br><img src="../assets/images/Digital-Logic/external/1.webp" alt="4:1 Multiplexer Logic Diagram" width="400px" /><br>
     Image taken from [here](https://www.eeweb.com/wp-content/uploads/articles-articles-4-to-1-multiplexer-circuit-diagram-1387783580.jpg?fit=602%2C499)
+
+### Cascading Multiplexer
+- Multiplexers are connected in a way such that the output of 1 Multiplexer becomes one of the inputs of the next Multiplexer.
+- Example 0:
+    <br><img src="../assets/images/Digital-Logic/self/22.png" alt="Cascading Multiplexer 0" width="400px" />
+    - Output of Multiplexer 1: $x \bar z + \bar y z$
+    - Output of Multiplexer 2: $f=(x \bar z + \bar y z)\bar y + xy$
+        - $x \bar y \bar z + \bar y z + x y$
+        - $x(\bar y \bar z + y) + \bar y z$
+        - $x((y + \bar y)(y + \bar z)) + \bar y z$ // Distributive Property
+        - $x(y + \bar z) + \bar y z$ // $(y + \bar y) = 1$
+        > $f=x y + x \bar z + \bar y z$
 
 ### Implementing Functions using Multiplexer:
 - Our objective is to implement the given function in the Multiplexer, to get the same output as that of the function.
@@ -760,10 +772,10 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Truth-Table:
     |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
     |---|---|---|---|
-    |0|Any|Any|Hold / Q|
-    |1|0|0|Hold / Q|
-    |1|0|1|0|
-    |1|1|0|1|
+    |0|Any|Any|Q / Hold|
+    |1|0|0|Q / Hold|
+    |1|0|1|0 / Reset|
+    |1|1|0|1 / Set|
     |1|1|1|Invalid|
 - Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
     - Circuit-Diagram:
@@ -784,10 +796,10 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Truth-Table:
     |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
     |---|---|---|---|
-    |0|Any|Any|Hold / Q|
-    |1|0|0|Hold / Q|
-    |1|0|1|0|
-    |1|1|0|1|
+    |0|Any|Any|Q / Hold|
+    |1|0|0|Q / Hold|
+    |1|0|1|0 / Reset|
+    |1|1|0|1 / Set|
     |1|1|1|Invalid|
 - Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
     - Circuit-Diagram:
@@ -801,3 +813,49 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Inputs: $S=1$, $R=1$ | Outputs: $Q=0$, $\bar Q=0$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/21.png" alt="SR Flip-Flop 1,1" width="600px" />
+
+### Characteristic & Excitation Table
+- SR Flip-Flop Truth-Table:
+    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|---|
+    |0|Any|Any|Q / Hold|
+    |1|0|0|Q / Hold|
+    |1|0|1|0 / Reset|
+    |1|1|0|1 / Set|
+    |1|1|1|Invalid|
+- **Characteristic Table**:
+    - Inputs: 3 {$S$,$R$,$Q_n$} | Outputs: 1, {$Q_{n+1}$}
+    - `Corresponds to`:
+        - If $Q_n$ is in `Hold` state, $Q_{n+1}$ will be same as $Q_n$
+        - If $Q_n$ is in `Reset` state, $Q_{n+1}$ will $0$ regardless of the value of $Q_n$
+        - If $Q_n$ is in `Set` state, $Q_{n+1}$ will $1$ regardless of the value of $Q_n$
+        - If $Q_n$ is in `invalid` state, $Q_{n+1}$ will also be invalid.
+    - Truth-Table (x: don't care):
+        |$S$|$R$|$Q_n$|$Q_{n+1}$|Corresponds to|
+        |-----|-----|---------|-----------|---:|
+        |  0  |  0  |    0    |     0     |Hold|
+        |  0  |  0  |    1    |     1     |Hold|
+        |  0  |  1  |    0    |     0     |Reset|
+        |  0  |  1  |    1    |     0     |Reset|
+        |  1  |  0  |    0    |     1     |Set|
+        |  1  |  0  |    1    |     1     |Set|
+        |  1  |  1  |    0    |     x     |Invalid|
+        |  1  |  1  |    1    |     x     |Invalid|
+    - SoP: $\bar S \bar R Q_{n} + S \bar R \bar Q_{n} + S \bar R Q_{n}$ (excluding don't care)
+    - K-Map:
+        |$↓S\ \|\ R {Q_n}→$|$\bar R \bar {Q_n}_{(00)}$|$\bar R {Q_n}_{(01)}$|$R {Q_n}_{(11)}$|$R \bar {Q_n}_{(10)}$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar S_{(0)}$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+        |$S_{(1)}$|$1_{(4)}$|$1_{(5)}$|$d_{(7)}$|$d_{(6)}$
+        - Pairs: $\{1,5\},\{4,5,7,6\}$
+        - Min-Terms: **2** ie $S + \bar R Q_{n}$
+- **Excitation Table**:
+    - Represents corresponding inputs to outputs $Q_n$ & $Q_{n+1}$
+    - Prerequisite: `Characteristic Table`
+    - Truth-Table (x: don't care / cannot be determined):
+        |$Q_n$|$Q_{n+1}$|$S$|$R$|
+        |---------|-----------|-----|-----|
+        |    0    |     0     |  0  |  x  |
+        |    1    |     1     |  1  |  0  |
+        |    0    |     1     |  0  |  1  |
+        |    1    |     0     |  x  |  0  |
