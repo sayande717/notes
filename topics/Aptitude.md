@@ -174,17 +174,18 @@ Which word could mean "playing"?
 
 ## Analogies
 ### Type 1
-1. yard, inch | quart, ounce
-    - Relation: larger measure than
-1. elated, dependent | enlightened, ignorant
-    - Relation: opposite of
+1. yard is a larger measure than inch.
+1. quart is a larger measure than ounce.
+1. elated is the opposite of dependent.
+1. enlightened is the opposite of ignorant.
+
 ### Type 5
-1. Dalmation is a type of dog.
-1. Flinch is a type of bird.
-1. Spy acts in a cladestine way.
-1. Accountant acts in a meticulous way.
-1. Dirge is a song used in a funurel.
-1. Jingle is a song used in a commercial.
-1. Asinine means extremely silly.
-1. Ephemeral and immortal are antonyms.
-1. Feral and tame are antonyms.
+1. dalmation is a type of dog.
+1. flinch is a type of bird.
+1. spy acts in a cladestine way.
+1. accountant acts in a meticulous way.
+1. dirge is a song used in a funeral.
+1. jingle is a song used in a commercial.
+1. asinine means extremely silly.
+1. ephemeral and immortal are antonyms.
+1. feral and tame are antonyms.
