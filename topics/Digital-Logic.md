@@ -764,29 +764,30 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 
 ## SR Flip-Flop 
 - A Flip-Flop only works when the Clock is triggered.
+- The SR Flip-Flop is the most basic version of Flip-Flops, all other Flip-Flops are designed from it.
 - For Flip-Flops, the output is same regardless of the Gate used to design it.
 ### Using NAND Gate
-- Inputs: $S$ (Set), $R$ (Reset) | Outputs: $Q_{n+1} / Q$, $\bar Q$
+- Inputs: $S$, $R$ | Outputs: $Q_{n}$, $\bar Q_n$
 - Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
 - When the Clock is triggered, value `1` is passed to both NAND Gates.
 - Truth-Table:
-    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |$CLK$|$S$|$R$|$Q_{n}$|
     |---|---|---|---|
     |0|Any|Any|Q / Hold|
     |1|0|0|Q / Hold|
     |1|0|1|0 / Reset|
     |1|1|0|1 / Set|
     |1|1|1|Invalid|
-- Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+- Inputs: $S=0$, $R=0$ | Outputs: $Q_n=Q$, $\bar Q_n=\bar Q$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/14.png" alt="SR Flip-Flop 0,0" width="600px" />
-- Inputs: $S=0$, $R=1$ | Outputs: $Q=0$, $\bar Q=1$
+- Inputs: $S=0$, $R=1$ | Outputs: $Q_n=0$, $\bar Q_n=1$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/15.png" alt="SR Flip-Flop 0,1" width="600px" />
-- Inputs: $S=1$, $R=0$ | Outputs: $Q=1$, $\bar Q=0$
+- Inputs: $S=1$, $R=0$ | Outputs: $Q_n=1$, $\bar Q_n=0$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/16.png" alt="SR Flip-Flop 1,0" width="600px" />
-- Inputs: $S=1$, $R=1$ | Outputs: $Q=1$, $\bar Q=1$
+- Inputs: $S=1$, $R=1$ | Outputs: $Q_n=1$, $\bar Q_n=1$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/17.png" alt="SR Flip-Flop 1,1" width="600px" />
 
@@ -794,29 +795,29 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - We use AND Gate instead of NOR Gate, as inputs to the Latch. This is because, if we use NOR Gates, they'll always output `0` when the clock is triggered (Property of NOR Gate: If any 1 of the inputs is 1, output is 0). So the Flip-Flop will not work properly.
 - When the Clock is triggered, value `1` is passed to both NOR Gates.
 - Truth-Table:
-    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |$CLK$|$S$|$R$|$Q_n$|
     |---|---|---|---|
     |0|Any|Any|Q / Hold|
     |1|0|0|Q / Hold|
     |1|0|1|0 / Reset|
     |1|1|0|1 / Set|
     |1|1|1|Invalid|
-- Inputs: $S=0$, $R=0$ | Outputs: $Q=Q$, $\bar Q=\bar Q$
+- Inputs: $S=0$, $R=0$ | Outputs: $Q_n=Q$, $\bar Q_n=\bar Q$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/18.png" alt="SR Flip-Flop 0,0" width="600px" />
-- Inputs: $S=0$, $R=1$ | Outputs: $Q=0$, $\bar Q=1$
+- Inputs: $S=0$, $R=1$ | Outputs: $Q_n=0$, $\bar Q_n=1$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/19.png" alt="SR Flip-Flop 0,1" width="600px" />
-- Inputs: $S=1$, $R=0$ | Outputs: $Q=1$, $\bar Q=0$
+- Inputs: $S=1$, $R=0$ | Outputs: $Q_n=1$, $\bar Q_n=0$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/20.png" alt="SR Flip-Flop 1,0" width="600px" />
-- Inputs: $S=1$, $R=1$ | Outputs: $Q=0$, $\bar Q=0$
+- Inputs: $S=1$, $R=1$ | Outputs: $Q_n=0$, $\bar Q_n=0$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/21.png" alt="SR Flip-Flop 1,1" width="600px" />
 
 ### Characteristic & Excitation Table
 - SR Flip-Flop Truth-Table:
-    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |$CLK$|$S$|$R$|$Q_n$|
     |---|---|---|---|
     |0|Any|Any|Q / Hold|
     |1|0|0|Q / Hold|
@@ -841,7 +842,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |  1  |  0  |    1    |     1     |Set|
         |  1  |  1  |    0    |     x     |Invalid|
         |  1  |  1  |    1    |     x     |Invalid|
-    - SoP: $\bar S \bar R Q_{n} + S \bar R \bar Q_{n} + S \bar R Q_{n}$ (excluding don't care)
+    - SoP (based on $Q_{n+1}$): $\bar S \bar R Q_{n} + S \bar R \bar Q_{n} + S \bar R Q_{n} + S R \bar Q_{n} + S R Q_{n}$
     - K-Map:
         |$↓S\ \|\ R {Q_n}→$|$\bar R \bar {Q_n}_{(00)}$|$\bar R {Q_n}_{(01)}$|$R {Q_n}_{(11)}$|$R \bar {Q_n}_{(10)}$|
         |:---:|:---:|:---:|:---:|:---:|
@@ -856,6 +857,97 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |$Q_n$|$Q_{n+1}$|$S$|$R$|
         |---------|-----------|-----|-----|
         |    0    |     0     |  0  |  x  |
-        |    1    |     1     |  1  |  0  |
-        |    0    |     1     |  0  |  1  |
-        |    1    |     0     |  x  |  0  |
+        |    0    |     1     |  1  |  0  |
+        |    1    |     0     |  0  |  1  |
+        |    1    |     1     |  x  |  0  |
+
+## JK Flip-Flop
+### Using NAND Gate
+<br><img src="../assets/images/Digital-Logic/self/23.png" alt="JK Flip-Flop" width="600px" />
+- Inputs: $J$,  $K$ | Outputs: $Q_{n}$, $\bar Q_n$
+- Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
+- When the Clock is triggered, value `1` is passed to both NAND Gates.
+- Truth-Table:
+    |$CLK$|$S$|$R$|$Q_{n+1}$ ($Q$)|
+    |---|---|---|---|
+    |0|Any|Any|Q / Hold|
+    |1|0|0|Q / Hold|
+    |1|0|1|0 / Reset|
+    |1|1|0|1 / Set|
+    |1|1|0/1|Toggle|
+- Inputs: $J=0$, $K=0$ | Outputs: $Q_n=Q$, $\bar Q_n=\bar Q$
+- Inputs: $J=0$, $K=1$ | Outputs: $Q_n=0$, $\bar Q_n=1$
+- Inputs: $K=1$, $K=0$ | Outputs: $Q_n=1$, $\bar Q_n=0$
+- Inputs: $J=1$, $K=1$ | Outputs if $Q_n=1$, $\bar Q_n=0$ are $Q_{n+1}=0$, $\bar Q_{n+1}=1$
+    - Let $Q_n=1$, then $\bar Q_{n}=0$.
+    - $Q_{n}=1$ goes as input to NAND Gate $J$. It outputs $1$
+    - $\bar Q_n=0$ goes as input to NAND Gate $K$. It outputs $0$.
+    - The SR Latch gets input $1,0$ and outputs $Q_{n+1}=0$, $\bar Q_{n+1}=1$.
+    <br><img src="../assets/images/Digital-Logic/self/24.png" alt="JK Flip-Flop 1,1 1" width="600px" />
+- Inputs: $J=1$, $K=1$ | Outputs if $Q_n=0$, $\bar Q_n=1$ are $Q_{n+1}=1$, $\bar Q_{n+1}=0$
+    - Let $Q_n=0$, then $\bar Q_{n}=1$.
+    - $Q_{n}=0$ goes as input to NAND Gate $J$. It outputs $0$
+    - $\bar Q_n=1$ goes as input to NAND Gate $K$. It outputs $1$.
+    - The SR Latch gets input $0,1$ and outputs $Q_{n+1}=1$, $\bar Q_{n+1}=0$.
+    <br><img src="../assets/images/Digital-Logic/self/25.png" alt="JK Flip-Flop 1,1 0" width="600px" />
+
+### Characteristic & Excitation Table
+- SR Flip-Flop Truth-Table:
+    |$CLK$|$S$|$R$|$Q_n$|
+    |---|---|---|---|
+    |0|Any|Any|Q / Hold|
+    |1|0|0|Q / Hold|
+    |1|0|1|0 / Reset|
+    |1|1|0|1 / Set|
+    |1|1|1|Invalid|
+- **Characteristic Table**:
+    - Inputs: 3 {$J$,$K$,$Q_n$} | Outputs: 1, {$Q_{n+1}$}
+    - `Corresponds to`:
+        - If $Q_n$ is in `Hold` state, $Q_{n+1}$ will be same as $Q_n$
+        - If $Q_n$ is in `Reset` state, $Q_{n+1}$ will $0$ regardless of the value of $Q_n$
+        - If $Q_n$ is in `Set` state, $Q_{n+1}$ will $1$ regardless of the value of $Q_n$
+        - If $Q_n$ is in `Toggle` state, $Q_{n+1}$ will be the opposite of $Q_n$.
+    - Truth-Table:
+        |$J$|$K$|$Q_n$|$Q_{n+1}$|Corresponds to|
+        |-----|-----|---------|-----------|---:|
+        |  0  |  0  |    0    |     0     |Hold|
+        |  0  |  0  |    1    |     1     |Hold|
+        |  0  |  1  |    0    |     0     |Reset|
+        |  0  |  1  |    1    |     0     |Reset|
+        |  1  |  0  |    0    |     1     |Set|
+        |  1  |  0  |    1    |     1     |Set|
+        |  1  |  1  |    0    |     1     |Toggle|
+        |  1  |  1  |    1    |     0     |Toggle|
+    - SoP: $\bar J \bar K Q_{n} + J \bar K \bar Q_n + J \bar K Q_n + J K \bar Q_n$
+    - K-Map:
+        |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+        |:---:|:---:|:---:|:---:|:---:|
+        |$\bar J_{(0)}$|$null_{(0)}$|$1_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+        |$J_{(1)}$|$1_{(4)}$|$1_{(5)}$|$null_{(7)}$|$1_{(6)}$
+        - Pairs: $\{1,5\},\{4,6\}$
+        - Min-Terms: **2** ie $\bar K Q_n + J \bar Q_{n}$
+- **Excitation Table**:
+    - Represents corresponding inputs to outputs $Q_n$ & $Q_{n+1}$
+    - Prerequisite: `Characteristic Table`
+    - Truth-Table (x: cannot be determined):
+        |$Q_n$|$Q_{n+1}$|$J$|$K$|
+        |---------|-----------|-----|-----|
+        |    0    |     0     |  0  |  x  |
+        |    0    |     1     |  1  |  x  |
+        |    1    |     0     |  x  |  1  |
+        |    1    |     1     |  x  |  0  |
+
+### Level Trigger & Edge Trigger
+- T: Time duration of 1 clock pulse, consisting of 1 low & 1 high.
+- Level Trigger
+    - Low Level Trigger: when $clock=0$
+    - High Level Trigger: when $clock=1$
+    - $T_w=T/2$
+    
+- Edge Trigger
+    - Positive Edge Trigger: When clock switches from $0$ to $1$
+    - Negative Edge Trigger: When clock switches from $1$ to $0$
+<br><img src="../assets/images/Digital-Logic/self/26.png" alt="Level, Edge Trigger" width="600px" />
+- Representation:
+    - Remember the edge cases in the right-most representation(s).
+    <br><img src="../assets/images/Digital-Logic/self/27.png" alt="Level, Edge Trigger Representation" width="600px" />
