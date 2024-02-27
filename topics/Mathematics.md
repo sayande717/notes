@@ -531,3 +531,5 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - [Formulae](#frl-bijective-functions)
 - A function `f` from set `A` to set `B` is bijective  if `f` is both one-to-one and onto.
 - Number of elements in A should be equal to number of elements in B.
+
+# Probability & Statistics
