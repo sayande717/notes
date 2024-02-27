@@ -16,3 +16,5 @@
 - The positions are indexed, and we can find an element by it's index.
 
 - Implementation: [code](https://github.com/sayande717/code/blob/main/self/Java/initArray.java)
+
+- Resize an array: There is no way to directly resize an array in Java. To do it, create another bigger array, and then copy all elements from the current array to the new array.
