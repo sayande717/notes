@@ -502,7 +502,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. CPU goes back and executes the remainder of $P_2$. $in = 4$. Process Terminates.
         - In this case, only $P_2$'s document will be printed. Data loss occurs for $P_1$.
 
-### Critical Section
+## Critical Section
 - The portion of the program where shared resources are accessed by various co-operative processes.
 - If 1 program is executing it's Critical Section, no other program cannot execute their Critical Sections.
 - Code syntax:
@@ -526,3 +526,77 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 1. **Bounded Wait**: There exists a limit on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted. This rule prevents a process from being indefinitely postponed in favor of other processes.
 1. **No dependency on hardware, specifications, etc.**: The solution to the synchronization problem should be applicable to a wide range of hardware and system configurations. It should not rely on specific assumptions about the speed of execution, number of processes, or other hardware-related characteristics. This ensures portability and generality of the synchronization mechanism.
 
+### Solutions for achieving Process Synchronization
+#### LOCK variable
+- Scope: `Multiple processes`
+- `Mutual Exclusion`: Not guaranteed. See Case 2.
+- It executes in User Mode.
+- Code:
+    ```cpp
+    while(LOCK==1);
+    LOCK=1;
+    // Critical Section
+    LOCK=0;
+    ```
+- **Case 1**: There are 2 processes in the system, each wanting to execute it's Critical Section.
+    1. Initially, $LOCK=0$. $P_1$ starts.
+    1. `while` condition is false.
+    1. $LOCK$ is set as $1$. $P_1$ enters it's Critical Section.
+    1. Now, $P_2$ starts.
+    1. `while` condition is true, and $P_2$ gets stuck in an infinite loop.
+     1. Until $P_1$ exits it's Critical Section and sets $LOCK=0$ again, $P_1$ cannot enter it's Critical Section.
+- **Case 2**: There are 2 processes in the system, each wanting to execute it's Critical Section. $P_1$ has higher priority than $P_2$ and it is a pre-emptive system.
+    1. Initially, $LOCK=0$. $P_1$ starts.
+    1. `while` condition is false.
+    1. Right before $P_1$ could set $LOCK=1$, it is pre-empted from the CPU.
+    1. Now, $P_2$ starts.
+    1. `while` condition is false, since $LOCK=0$. It goes ahead, sets $LOCK=1$, and enters it's Critical Section.
+    1. Meanwhile, $P_1$ returns. Since it's a higher priority process, $P_2$ is pre-empted and $P_1$ resumes.
+    1. $P_1$ sets $LOCK=1$ and enters it's Critical Section.
+    1. So, now both $P_1$ and $P_2$ are in their Critical Section. So, **Mutual Exclusion is not obeyed**.
+
+#### TEST and SET
+- Scope: Multiple processes
+- `Mutual Exclusion`: Guaranteed. 
+- `Bounded Wait`: Guaranteed.
+- `Progress`: Not Guaranteed.
+- The problem with the [previous method](#lock-variable) is if a process gets pre-empted between the check and assignment statements, Mutual Exclusion does not happen. This method combines both the statements into 1.
+- Code:
+    ```cpp
+    boolean test_and_set(boolean *target) {
+        boolean r=*target;
+        *target=TRUE;
+        return r;
+    }
+
+    while(test_and_set(&LOCK));
+    // Critical Section
+    LOCK=FALSE;
+    ```
+- Initially, $LOCK=false$.
+- When process $P_1$ executes the `while()` condition, the address of `LOCK` is taken as the input in `test_and_set()`.
+- In `test_and_set()`, $r=false$. $*target=LOCK=true$. Finally, $r$ is returned.
+- Process $P_1$ gets $false$ as the output, so it can enter it's Critical Section.
+- Now, if another process executes it's code: in `test_and_set()`, $r=true$. $*target=LOCK=true$. Finally, $r$ is returned.
+- Process $P_2$ gets $true$ as the output, so it has to wait.
+- Here, the execution is same as the [previous method](#lock-variable), but there is no problem even if the process is pre-empted.
+
+#### TURN variable
+- Scope: 2 processes
+- `Mutual Exclusion`: Guaranteed.
+- `Progress`: Not Guaranteed. See point (1) below.
+- `Bounded Wait`: Guaranteed. $P_1$ cannot execute multiple times in succession.
+- Code:
+    ```cpp
+    // Process 1
+    while(turn!=0);
+    // Critical Section
+    turn=1;
+
+    // Process 2
+    while(turn!=1);
+    // Critical Section
+    turn=0;
+    ```
+1. If $turn=0$ initially, $P_1$ can enter it's Critical Section. Then, it sets $turn=1$. Then, $P_2$ can enter it's Critical Section. However, in case $P_2$ wants to enter the Critical Section before $P_1$, it cannot, even if there are no processes in their Critical Sections. **$P_1$ has to execute before $P_2$.**
+1. If $turn=1$ initially, $P_2$ can enter it's Critical Section. Then, it sets $turn=0$. Then, $P_1$ can enter it's Critical Section. However, in case $P_1$ wants to enter the Critical Section before $P_2$, it cannot.
