@@ -25,7 +25,7 @@
 - **NAND** Gate:  If any 1 of the inputs is 0, output is 1.
 - **NOR** Gate: If any 1 of the inputs is 1, output is 0.
 
-- XNOR Gate:
+- **XNOR** Gate:
     - $A ⊙  A = 1$
     - $A ⊙ \bar A = 0$
     - $A ⊙ 0 = \bar A$ // Output is inverted
@@ -899,7 +899,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |1|0|0|Q / Hold|
     |1|0|1|0 / Reset|
     |1|1|0|1 / Set|
-    |1|1|1|Invalid|
+    |1|1|1|Toggle|
 - **Characteristic Table**:
     - Inputs: 3 {$J$,$K$,$Q_n$} | Outputs: 1, {$Q_{n+1}$}
     - `Corresponds to`:
@@ -951,3 +951,91 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Representation:
     - Remember the edge cases in the right-most representation(s).
     <br><img src="../assets/images/Digital-Logic/self/27.png" alt="Level, Edge Trigger Representation" width="600px" />
+
+### Race Around Condition
+> Requirements (all are mandatory):
+1. **Level Trigger**ed JK Flip-Flop.
+1. Inputs: $J=1$, $K=1$ (Toggle Mode)
+1. $T_w \gt \gt T_d$
+    > $T_w$: Time duration that clock stays at a particular state <br> 
+    $T_d$: Time taken by the Flip-Flop to process the inputs)
+> What happens:
+1. We know that JK Flip-Flop gives next state $Q_n=1$ for current state $Q_n=0$.
+1. If the clock stays at the same state $CLK=1$ for a sufficiently long time ($T_w \gt \gt T_d$), the outputs will get fed back to the Flip-Flop, and toggle the inputs again.
+1. This will keep happening again and again, and we will not be able to figure out the output of the Flip-Flop. This is known as **Race Condition**.
+<br><img src="../assets/images/Digital-Logic/self/28.png" alt="JK Flip-Flop Race Condition" width="600px" />
+
+### Master-Slave JK Flip-Flop 
+- This is a solution for [Race Around Condition](#race-around-condition) in a JK Flip-Flop.
+<br><img src="../assets/images/Digital-Logic/self/29.png" alt="JK Flip-Flop Race Condition Solution" width="600px" />
+- The feedback from the Slave Flip-Flop goes to the Master Flip-Flop.
+- The clock triggers only the Master Flip-Flop, and not the Slave Flip-Flop.
+- The Master Flip-Flop is giving the desired output, and the Slave Flip-Flop is forwarding it as-is.
+
+## D Flip-Flop
+- Inputs: 2: $\{D,CLK\}$ | Outputs: 2: $\{Q_n,\bar Q_n\}$
+- Also known as `transparent latch` or `storage device`.
+- Truth Table:
+    |$D$|$Q_{n}$|
+    |---|---|
+    |0|0|
+    |1|1|
+> Construction using SR Flip-Flop:
+- Input: $D=0$ | Outputs: $Q_n=0$, $\bar Q_n=1$
+    - Circuit-diagram:
+        <br><img src="../assets/images/Digital-Logic/self/30.png" alt="D flip-flop 0" width="600px" />
+- Input: $D=1$ | Outputs: $Q_n=1$, $\bar Q_n=0$
+    - Circuit-diagram:
+        <br><img src="../assets/images/Digital-Logic/self/31.png" alt="D flip-flop 1" width="600px" />
+
+### Characteristic & Excitation Table
+- **Characteristic Table**:
+    - Inputs: 2 $\{D,Q_n\}$ | Outputs: 1, $\{Q_{n+1}\}$
+        |$D$|$Q_n$|$Q_{n+1}$|
+        |---|---|---|
+        |0|0|0|
+        |0|1|0|
+        |1|0|1|
+        |1|1|1|
+    - Output is same as the input.
+- **Excitation Table**:
+    - Inputs: 2 $\{Q_n,Q_{n+1}\}$ | Outputs: 1, ${D}$
+        |$Q_n$|$Q_{n+1}$|D|
+        |---|---|---|
+        |0|0|0|
+        |0|1|1|
+        |1|0|0|
+        |1|1|1|
+
+## T Flip-Flop
+- Inputs: 2: $\{T,CLK\}$ | Outputs: 2: $\{Q_n,\bar Q_n\}$
+- If $T=0$, outputs the same value as current input.
+- If $T=1$, outputs the complement of current input.
+- Truth Table:
+    |$D$|$Q_{n}$|
+    |---|---|
+    |0|$Q_n$|
+    |1|$\bar Q_n$|
+- Input: $T$ | Outputs: $Q_n$, $\bar Q_n$
+    - Logic-diagram:
+        <br><img src="../assets/images/Digital-Logic/self/32.png" alt="T flip-flop" width="600px" />
+
+### Characteristic & Excitation Table
+- **Characteristic Table**:
+    - Inputs: 2 $\{Y,Q_n\}$ | Outputs: 1, $\{Q_{n+1}\}$
+        |$T$|$Q_n$|$Q_{n+1}$|
+        |---|---|---|
+        |0|0|0|
+        |0|1|1|
+        |1|0|1|
+        |1|1|0|
+    - Output: $Q_{n+1}=T⊕Q_n$
+
+- **Excitation Table**:
+    - Inputs: 2 $\{Q_n,Q_{n+1}\}$ | Outputs: 1, ${T}$
+        |$Q_n$|$Q_{n+1}$|T|
+        |---|---|---|
+        |0|0|0|
+        |0|1|1|
+        |1|0|1|
+        |1|1|0|
