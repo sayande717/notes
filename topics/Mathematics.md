@@ -533,3 +533,42 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - Number of elements in A should be equal to number of elements in B.
 
 # Probability & Statistics
+- **Random experiment**: The experiment for which the outcome is uncertain.
+- **Sample space**: The set of all possible outcomes of a Random Experiment is called Sample space. Denoted by `S`.
+    - Example 0: Flipping a coin, $S=\{head, tail\}$.
+    - Example 1: Rolling a dice: $S=\{1,2,3,4,5,6\}$
+- **Event**: Any subset of Sample space is called an Event. Usually denoted by `E`.
+    - Example 0: `head` appearing when a coin is flipped.
+- **Probability of an Event**: Probability of Event `A` is given by:
+    - $P(A)={Number\ of\ elements\ in\ `S`\ that\ favour\ occurence\ of\ `A`} \div {Total\ number\ of\ elements\ in\ `S`}$
+    - Example 0:
+        - Rolling a dice; $S=\{1,2,3,4,5,6\}$; $n(S)=6$
+        - A: Getting even number, $A=\{2,4,6\}$; $n(A)=3$
+        - $P(Getting\ an\ even\ number)=3/6=1/2$
+- Axioms of Probability:
+    > Axiom: Statements that are correct by default, but have no proof as such. <br>
+    > Theorem: Statements that are correct, and can also be proved.
+    1. Probability of an event always lies between `0` & `1`. $0 \le P(A)\le 1$
+    1. If $S$ is the Sample space of a Random Experiment, then all  outcomes of the Experiment will definitely be from $S$. $P(S)=1$
+    1. If there are `n` elements in a Sample space, out of which `m` elements favour the occurence of `A`, then: 
+        - Odds in favour of `A` = $m / {(n-m)}$ = Number of ways `A` can occur / Number of ways `A` cannot occur.
+        - Odds against `A` = $(n-m) / m$ = Number of ways `A` cannot occur / Number of ways `A` can occur.
+    1. If `A` is any event within Sample space `S`, and $n(A)$ is the number of Events that favour occurence of `A`, then the Probability of `A` to not happen: $P(A^c) = (n(S)-n(A))/n(S) = (1-n(A))/n(S) = 1-P(A)$.
+- Types of Events:
+    - **Mutually Exhaustive**: If Events `A` & `B` together form the Sample space `S`, $A∪B=S$
+        - Example 0: Experiment: Rolling a dice.
+            - `A`: Getting an even number; $A = \{2,4,6\}$
+            - `B`: Getting an odd number; $B = \{1,3,5\}$
+            - $A∪B=\{1,2,3,4,5,6\}=S$, so Mutually Exhaustive
+            - $A∩B={}=ϕ$, so Mutually Exclusive
+    - **Mutually Exclusive**: If Events `A` & `B` don't intersect each other, $A∩B=ϕ$
+        - Example 0: Experiment: Rolling a dice.
+            - `A`: Getting a prime number; $A = \{2,3,5\}$
+            - `B`: Getting a composite number; $B = \{4,6\}$
+            - $A∩B={}=ϕ$, so Mutually Exclusive
+            - $A∪B=\{2,3,4,5,6\} \neq S$, so not Mutually Exhaustive
+    - **Impossible**: If there is no feasable outcome of the event `A` in Sample space `S`. Denoted by `ϕ`.
+        - Example: Probability of Getting a number >6 when Rolling a dice.
+            - $S=\{1,2,3,4,5,6\}$
+            - $A=\{ϕ\}$
+            - $P(A)=n(A)/n(S)=0/6=0$
