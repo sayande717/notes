@@ -53,3 +53,6 @@ git clone https://github.com/sayande717/notes.git
     |Analogies|Type 6|1-10|3|05:00|
     |Logical Problems|Type 1|1-11|2|06:59|
     |Logical Problems|Type 2|1-11|1|07:34|
+    |Logical Problems|Type 1|1-11|0|03:41|
+    |Logical Problems|Type 2|1-11|1|05:55|
+    |Logical Problems|Type 3|1-11|0|03:38|
