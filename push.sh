@@ -1,18 +1,28 @@
 #!/bin/bash
 read -p 'Subject ID (0-8): ' subjectID
 
-subjectName=("Mathematics" \
+subjectList=("Mathematics" \
     "Database-Systems" \
     "Operating-Systems" \
     "Digital-Logic" \
     "Algorithms" \
     "Computer-Networks" \
     "Data-Structures" \
-    "TIL-Coding" \
     "Aptitude")
 
-targetSub=${subjectName[$((subjectID))]}
+subjectName=${subjectList[$((subjectID))]}
 
-git add README.md ./topics/$targetSub.md ./assets/images/$targetSub/
-git commit -m "$targetSub"
+# Subject file name formatting
+extension="md"
+targetFile="$subjectName.$extension"
+targetAssetsDir="$subjectName"
+
+# Commit message formatting
+commitMessage="update: $subjectName"
+
+# push to repository
+git add README.md ./topics/$targetFile ./assets/images/$targetAssetsDir
+git commit -m "$commitMessage"
 git push origin main
+
+
