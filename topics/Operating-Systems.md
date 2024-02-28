@@ -600,3 +600,110 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     ```
 1. If $turn=0$ initially, $P_1$ can enter it's Critical Section. Then, it sets $turn=1$. Then, $P_2$ can enter it's Critical Section. However, in case $P_2$ wants to enter the Critical Section before $P_1$, it cannot, even if there are no processes in their Critical Sections. **$P_1$ has to execute before $P_2$.**
 1. If $turn=1$ initially, $P_2$ can enter it's Critical Section. Then, it sets $turn=0$. Then, $P_1$ can enter it's Critical Section. However, in case $P_1$ wants to enter the Critical Section before $P_2$, it cannot.
+
+#### Semaphore
+- `Semaphore` is an integer variable used in a Mutually Exclusive manner by various concurrent co-operative processes in order to achieve process synchronization.
+- Synonyms for function in `Entry Section`: P(), Down(), Wait()
+- Synonyms for function in `Exit Section`: V(), Up(), Signal(), Post(), Release()
+- **Counting Semaphore**
+    - Integer value can be anything from $-∞$ to $+∞$
+    - Multiple processes run in their Critical Sections consurrently.
+    - Code:
+        ```cpp
+        // Entry Section
+        Down(Semaphore S) {
+            S.value = S.value-1;
+            if(S.value<0) {
+                // put process in suspended list
+                sleep;
+            } else {
+                return;
+            }
+        }
+    
+        // Exit Section
+        Up(Semaphore S) {
+            S.value = S.value+1;
+            if($S.value <= 0$) {
+                // select process from suspended list
+                wake-up;
+            } else {
+                return;
+            }
+        }
+        ```
+    - $S=10$: 10 processes can run their Critical Sections, before they begin to be blocked.
+    - $S=0$: No process can enter their Critical Section, all subsequent processes will be blocked.
+    - $S=-4$: 4 processes are currently blocked.
+    - Example 0: Initially, $S=10$.
+        - 6 P() & 4 V() operations are run
+        - Final $S=10-6=4+4=8$
+
+- **Binary Semaphore**: 
+    - Integer value can be $0$ or $1$
+    - $0$ means the resource is not available.
+    - $1$ means the resource is available.
+    - Code:
+        ```cpp
+        // Entry Section
+        Down(Semaphore S) {
+            if(S.value==1) {
+                S.value=0;
+                // Process enters Critical Section
+            } else {
+                // Block the process, place in suspend list
+                sleep();
+            }
+        }
+        // Exit Section
+        Up(Semaphore S) {
+            if(suspend list is empty) {
+                S.value=1;
+            } else {
+                // select process from suspended list
+                wake-up;
+            }
+        }
+        ```
+    - In the `Entry Section`, we're checking if $S=0$.
+        - If it is, then process is allowed to enter it's Critical Section, and $S=1$.
+        - Otherwise, process is blocked.
+    - In the `Exit Section`, we're checking if there are any existing processes in the suspend list.
+        - If there are, we will first wake up all those processes, and move them to the ready queue.
+        - Otherwise, set $S=1$, regardless of the previous value of $S$.
+    - Example 0: There are 10 co-operative processes. What is the maximum number of processes that can enter the `Critical Section` at any given time?
+        ```cpp
+        // For P1 through P9
+        p(mutex)
+        // Critical Section
+        v(mutex)
+
+        // For P10
+        v(mutex)
+        // Critical Section
+        v(mutex)
+        ```
+        1. Initially, $S=1$. First, $P_1$ can enter. It sets $S=0$, then enters Critical Section. $P_2$ through $P_9$ cannot enter anymore.
+        1. But $P_{10}$ can enter it's Critical Section. It sets $S=1$, then enters Critical Section. Now, another process amongst $P_2$ through $P_9$ can enter their Critical Section.
+        1. $P_{10}$ exits it's Critical Section. $S=1$.
+        1. $P_2$ sets $S=0$, then enters Critical Section. Now, $P_3$ through $P_9$ cannot enter anymore. However, $P_{10}$ can.
+        1. $P_{10}$ sets $S=1$, then enters Critical Section. Now, another process amongst $P_3$ through $P_9$ can enter their Critical Section.
+        1. So, at the end, assuming the cycle goes like this, all 10 processes can be in their Critical Sections. So, $result=10$.
+    - Example 1: There are 10 co-operative processes. What is the maximum number of processes that can enter the `Critical Section` at any given time?
+        ```cpp
+        // For P1 through P9
+        p(mutex)
+        // Critical Section
+        v(mutex)
+
+        // For P10
+        v(mutex)
+        // Critical Section
+        p(mutex)
+        ```
+        1. Initially, $S=1$. First, $P_1$ can enter. It sets $S=0$, then enters Critical Section. $P_2$ through $P_9$ cannot enter anymore.
+        1. But $P_{10}$ can enter it's Critical Section. It sets $S=1$, then enters Critical Section. Now, another process amongst $P_2$ through $P_9$ can enter their Critical Section.
+        1. $P_2$ sets $S=0$, then enters Critical Section. Now, $P_3$ through $P_9$ cannot enter anymore. However, $P_{10}$ can.
+        1. $P_{10}$ exits it's critical section. $S=0$.
+        1. $P_{10}$ cannot re-enter it's Critical Section repeatedly. The other 9 processes cannot enter either.
+        1. So, a maximum of 3 processes can be in their Critical Sections at any point of time.
