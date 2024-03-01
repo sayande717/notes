@@ -1,5 +1,18 @@
 # Formulae
+## FRL Permutation Combination
+- (Combination) If we can choose `r` elements from `n` elements: $c^n_r=n! \div (n-r)!r!$
+    - $c^n_n=1$
+    - If $c^n_r=c^n_S$, then $r=s$, or $n=r+s$
+- (Permutation) If we can choose & arrange `r` elements from `n` elements: $n! \div (n-r)!r! * r! = n! \div (n-r)! = p^n_r$
+    - Permutation: Arrangement
+    - $p^n_r \gt c^n_r$
+    - The number of ways `n` things can be arranged, if `p` things are of 1st kind, `q` things are of 2nd kind, `r` things are of 3rd kind, is $n! \div (p!q!r!)$
+
 ## FRL General
+- Factorials:
+    - $3!=6$
+    - $4!=24$
+    > To get $6$ (previous result), we divide $24$ (current result) by $4$ (current input), ie $24 \div 4 = 6$
 - Number of choices -
     - $A=\{1,2,3,4,5\}$
     - Let's form a sub-set of A with no constraints. Here, for each of the 5 elements, we may or may not include them in the subset. So, we have 2 choices per element. Total number of choices:
@@ -8,6 +21,7 @@
     - If we had 3 choices per element, Total number of choices would be:
         > $3^5$ for 5 elements <br>
         > $3^n$ for n elements
+
 
 ## FRL Reflexive Relations
 - Total number of relations: $n^2$
@@ -533,6 +547,7 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - Number of elements in A should be equal to number of elements in B.
 
 # Probability & Statistics
+- Prerequisite: [Permutation & Combination](#permutation-combination)
 - **Random experiment**: The experiment for which the outcome is uncertain.
 - **Sample space**: The set of all possible outcomes of a Random Experiment is called Sample space. Denoted by `S`.
     - Example 0: Flipping a coin, $S=\{head, tail\}$.
@@ -572,3 +587,22 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
             - $S=\{1,2,3,4,5,6\}$
             - $A=\{ϕ\}$
             - $P(A)=n(A)/n(S)=0/6=0$
+    - **Independent**: If they are from different sample spaces (random experiments). 
+        - $P(A∩B)=P(A).P(B)$
+- Example 0: Calculate the Probability that a leap year selected at random will contain 53 Sundays.
+    - $52$ weeks = $52*7=364$ days will mandatorily have a Sunday per week.
+    - For the rest of the 2 days, Sunday can be 1 of the 2 days.
+    - So, $S=\{(S,M),(M,T),(T,W),(W,T),(T,F),(F,S),(S,S),\}$
+    - if `A` is the event, then we have 2 probable outcomes for `A`.
+    - $P(A) = n(A)/n(S)=2/7$
+# Permutation & Combination
+- Prerequisite: [Formulae](#frl-permutation-combination)
+- **Permutation**
+    - Example 0: Find the number of Permutations of all the letters of the word 'KAMALUDDIN'.
+        - `A` occurs twice
+        - `D` occurs twice
+        - The rest 8 occur once.
+        - $p^n_r=10! \div (2!*2!*1!*1!*1!*1!*1!*1!*1!*1!)$
+- **Combination**
+    - Example 0: If $c^n_4=c^n_5$, then $n=$?
+        - If $c^n_4=c^n_5$, then either $r=s$ (impossible) or $n=r+s=4+5=9$ (possible)
