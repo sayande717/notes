@@ -707,3 +707,105 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. $P_{10}$ exits it's critical section. $S=0$.
         1. $P_{10}$ cannot re-enter it's Critical Section repeatedly. The other 9 processes cannot enter either.
         1. So, a maximum of 3 processes can be in their Critical Sections at any point of time.
+- Example 0 (Producer-Consumer):
+    - $n=8$ (number of slots):
+    - Producer code ($P_1$):
+        ```cpp
+        produceItem(item p) {
+            // Entry section
+            Down(EMPTY);
+            Down(S);
+            // Critical Section
+            buffer[in] = item p;
+            in=(in+1)%n;
+            // Exit Section
+            Up(S);
+            Up(FULL);
+        }
+        ```
+    - Consumer code ($P_2$):
+        ```cpp
+        consumeItem(item p) {
+            // Entry section
+            Down(FULL);
+            Down(S);
+            // Critical Section
+            item p = buffer[out];
+            out=(out+1)%n;
+            // Exit Section
+            Up(S);
+            Up(EMPTY);
+        }
+        ```
+    - Case 1:
+        1. Initially, $S=1$, $EMPTY=5$, $FULL=3$. $P_1$ runs.
+        1. $EMPTY=4$. $P_1$ gets pre-empted.
+        1. Now, $S=1$, $EMPTY=4$, $FULL=3$. $P_2$ arrives.
+        1. $FULL=2$, $S=0$. $P_2$ enters critical section.
+        1. If, during execution of critical section, $P_2$ gets pre-empted, then $P_1$ will be switched back.
+        1. $P_1$ cannot execute `Down(S);`, because $S=0$. It'll get blocked and pre-empted again. $P_2$ will be executed again.
+        1. $S=1$, $EMPTY=5$, $FULL=2$. $P_2$ completes execution.
+        1. $P_1$ comes back to get executed. $S=0$. $P_1$ enters it's critical section.
+        1. $S=1$, $FULL=3$. $P_1$ finishes executing.
+        1. $S=1$, $EMPTY=5$, $FULL=3$. $n=8$ is maintained.
+        1. Once $S=0$ is executed by a process, the other process can no longer execute it's critical section, thus maintaining consistency.
+- Example 1 (Reader-Writer):
+    - Problems only occur if both operations are being done on the same data.
+    - Can it cause problems?
+        - Read-Write: yes
+        - Write-Read: yes
+        - Write-Write: yes
+        - Read-Read: no
+        - $P_1=R$, $P_2=W$
+    - Code:
+        ```cpp
+        Semaphore mutex=1;
+        Semaphore db=1;
+        int rc=0;
+
+        void Reader(void) {
+            while(true) {
+                down(mutex);
+                rc=rc+1;        // Read count 
+                if(rc==1) {
+                    down(db);
+                }
+                up(mutex);
+                // Critical Section
+                UseDB();
+                down(mutex);
+                rc=rc-1;
+                if(rc==0) {
+                    up(db);
+                }
+            }
+        }
+
+        void Writer(void) {
+            down(db);
+            // Critical Section
+            up(db);
+            }   
+        }
+        ```
+    - Case 1 (R-W):
+        - $P_1=R$, $P_2=W$
+        1. $rc=0$, $mutex=1$, $db=1$. $P_1$ executes.
+        1. $rc=1$, $mutex=0$ then $mutex=1$, $db=0$. $P_1$ enters critical section.
+        1. Now, if $P_2$ wants to enter, it cannot. The line $down(db)$ will return an error, since $d=0$. So, Mutual Exclusion is maintained.
+     - Case 2 (W-R):
+        - $P_1=R$, $P_2=W$
+        1. $rc=0$, $mutex=1$, $db=1$. $P_2$ executes.
+        1. $rc=0$, $mutex=1$, $db=0$. $P_2$ enters critical section.
+        1. Now, if $P_1$ wants to enter, it cannot. The line $down(db)$ will return an error, since $rc=1$, but $d=0$. So, Mutual Exclusion is maintained.
+     - Case 3 (W-W):
+        - $P_1=R$, $P_2=W$, $P_3=W$
+        1. $rc=0$, $mutex=1$, $db=1$. $P_2$ executes.
+        1. $rc=0$, $mutex=1$, $db=0$. $P_2$ enters critical section.
+        1. Now, if $P_3$ wants to enter, it cannot. The line $down(db)$ will return an error, since $d=0$. So, Mutual Exclusion is maintained.
+    - Case 4 (R-R):
+        - $P_1=R$, $P_2=W$, $P_3=R$
+        1. $rc=0$, $mutex=1$, $db=1$. $P_1$ executes.
+        1. $rc=1$, $mutex=0$ then $mutex=1$, $db=0$. $P_1$ enters critical section.
+        1. Now, $P_3$ wants to enter. $rc=2$, $mutex=0$ then $mutex=1$, $db=0$. Since, $rc \neq 1$, $down(db)$ is not executed. $P_3$ can enter the critical section, too.
+        1. So, in this case, all processes that want to read data can do so. It will not cause any problems. Mutual Exclusion doesn't need to be maintained.
