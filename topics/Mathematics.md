@@ -595,6 +595,29 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - So, $S=\{(S,M),(M,T),(T,W),(W,T),(T,F),(F,S),(S,S),\}$
     - if `A` is the event, then we have 2 probable outcomes for `A`.
     - $P(A) = n(A)/n(S)=2/7$
+- Example 1: A bag contains $40$ tickets numbered $1-40$, out of which $4$ tickets are drawn at random and arranged in ascending order. What is the probability that the 3rd ticket is $25$?
+    - Out of 40 tickets, 4 can be drawn in $c^{40}_4$ ways.
+    - Combination: _ _ 25 _ .
+    - For the 1st 2 positions, we have $c^{24}_2$ choices.
+    - For 25, we have $c^1_1$ choices.
+    - For the last position, we have $c^{15}_1$ choices.
+    - Total number of choices: $c^{24}_2*c^1_1*c^{15}_1$
+    - Probability: $(c^{24}_2*c^1_1*c^{15}_1)/c^{40}_4=0.0453$
+- Example 2: A 5 digit number is formed by the digits 0,1,2,3,4 without repitition. The probability that the number formed is divisible by $4$ is _.
+    - Total number of 5 digits: _ _ _ _ _ = $4*4*3*2*1=96$ (we cannot have 0 in the 1st position).
+    - Numbers divisible by 4 (last 2 digits have to be divisible by 4):
+        - _ _ _ 0 4: $3*2*1=6$ choices
+        - _ _ _ 1 2: $2*2*1=4$ choices
+        - _ _ _ 2 0: $3*2*1=6$ choices
+        - _ _ _ 2 4: $2*2*1=4$ choices
+        - _ _ _ 3 2: $2*2*1=4$ choices
+        - _ _ _ 4 0: $3*2*1=6$ choices
+        - Total number of choices: $6+4+6+4+4+6=30$
+    - Probability: $30/96=0.3125$
+- Example 3: A bag contains 8 blue and 6 white balls. The probability of drawing 2 balls of same colour is _.
+    - Total number of choices: $c^{14}_2$
+    - Number of favourable choices: $c^{8}_2+c^{6}_2$ (+ because they're alternative choices)
+    - Probability: $(c^{8}_2+c^{6}_2) \div c^{14}_2=86/182=0.4725$
 # Permutation & Combination
 - Prerequisite: [Formulae](#frl-permutation-combination)
 - **Permutation**
@@ -606,3 +629,4 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - **Combination**
     - Example 0: If $c^n_4=c^n_5$, then $n=$?
         - If $c^n_4=c^n_5$, then either $r=s$ (impossible) or $n=r+s=4+5=9$ (possible)
+
