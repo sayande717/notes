@@ -809,3 +809,61 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. $rc=1$, $mutex=0$ then $mutex=1$, $db=0$. $P_1$ enters critical section.
         1. Now, $P_3$ wants to enter. $rc=2$, $mutex=0$ then $mutex=1$, $db=0$. Since, $rc \neq 1$, $down(db)$ is not executed. $P_3$ can enter the critical section, too.
         1. So, in this case, all processes that want to read data can do so. It will not cause any problems. Mutual Exclusion doesn't need to be maintained.
+
+## Deadlock
+- This situation occurs when 2 processes are waiting for some event, which will never happen.
+- Example: $P_1$ already has resource $R_1$, and needs $R_2$ to execute. $P_2$ already has resource $R_2$, and needs $R_1$ to execute. Both processes are in a deadlock situation.
+
+- All these Conditions must be true for deadlock to occur:
+    1. Mutual Exclusion: The resource being used must only be used in a mutually exclusive manner, ie one by one.
+    1. No preemption: Processes cannot be forced to release the resource, and get pre-empted.
+    1. Hold & Wait: $P_1$ is holding on-to $R_1$, and waiting for $R_2$. $P_2$ is holding on-to $R_2$, and waiting for $R_1$.
+    1. Circular Wait: The Hold-Request graph forms a closed loop.
+        <br><img src="../assets/images/Operating-Systems/self/10.png" width="500px" alt="Deadlock Example 0">
+        <br><img src="../assets/images/Operating-Systems/self/11.png" width="500px" alt="Deadlock Example 1">
+
+## Resource Allocation Graph
+- Used to represent the state of processes in the system.
+- Vertices: Process (1) & Resource: Single-Instance (2) & Multi-Instance (3).
+- Edges: Assign Edge (5) & Request Edge (4).
+- In a Single-Instance Resource system, if Circular Wait is true, deadlock will mandatorily occur, but not in Multi-Instance system.
+<br><img src="../assets/images/Operating-Systems/self/12.png" width="500px" alt="Resources & Vertices">
+- Example 0:
+    <br><img src="../assets/images/Operating-Systems/self/13.png" width="500px" alt="RAG Example 0">
+    |Process|Allocate ($R_1$,$R_2$)|Request ($R_1$,$R_2$)|
+    |---|---|---|
+    |$P_1$|1,0|0,0|
+    |$P_2$|0,1|0,0|
+    |$P_3$|0,0|1,1|
+    - Availability (0): (0,0). In this case, $P_1$ will get executed. After getting terminated, and the resources will be released.
+    - Availability (1): (1,0). $P_2$ will get executed, and terminate.
+    - Availability (2): (1,1). $P_3$ will get executed, and terminate.
+    - Availability (3): (1,1).
+    - So, all processes can get executed and deadlock will not occur.
+- Example 1:
+    <br><img src="../assets/images/Operating-Systems/self/14.png" width="500px" alt="RAG Example 1">
+    |Process|Allocate ($R_1$,$R_2$)|Request ($R_1$,$R_2$)|
+    |---|---|---|
+    |$P_1$|1,0|0,1|
+    |$P_2$|0,1|1,0|
+    |$P_3$|0,1|0,0|
+   - Availability (0): (0,0). $P_3$ will get executed, and terminate.
+    - Availability (1): (0,1). $P_1$ will get executed, and terminate.
+    - Availability (2): (1,1). $P_2$ will get executed, and terminate.
+    - Availability (3): (1,1).
+    - So, all processes can get executed and deadlock will not occur.
+- Example 2:
+    <br><img src="../assets/images/Operating-Systems/self/15.png" height="300px" alt="RAG Example 2">
+    |Process|Allocate ($R_1$,$R_2$,$R_3$)|Request ($R_1$,$R_2$,$R_3$)|
+    |---|---|---|
+    |$P_0$|1,0,1|0,1,1|
+    |$P_1$|1,1,0|1,0,0|
+    |$P_2$|0,1,0|0,0,1|
+    |$P_3$|0,1,0|1,2,0|
+   - Availability (0): (0,0,1). $P_2$ will get executed, and terminate.
+   - Availability (1): (0,1,1). $P_0$ will get executed, and terminate.
+   - Availability (2): (1,1,2). $P_1$ will get executed, and terminate. 
+   - Availability (3): (2,2,2). $P_3$ will get executed, and terminate.
+   - Availability (4): (2,3,2).
+   - So, all processes can get executed and deadlock will not occur.
+   
