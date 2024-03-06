@@ -880,8 +880,8 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Inputs: $K=1$, $K=0$ | Outputs: $Q_n=1$, $\bar Q_n=0$
 - Inputs: $J=1$, $K=1$ | Outputs if $Q_n=1$, $\bar Q_n=0$ are $Q_{n+1}=0$, $\bar Q_{n+1}=1$
     - Let $Q_n=1$, then $\bar Q_{n}=0$.
-    - $Q_{n}=1$ goes as input to NAND Gate $J$. It outputs $1$
-    - $\bar Q_n=0$ goes as input to NAND Gate $K$. It outputs $0$.
+    - $Q_{n}=1$ goes as input to NAND Gate $K$. It outputs $1$
+    - $\bar Q_n=0$ goes as input to NAND Gate $J$. It outputs $0$.
     - The SR Latch gets input $1,0$ and outputs $Q_{n+1}=0$, $\bar Q_{n+1}=1$.
     <br><img src="../assets/images/Digital-Logic/self/24.png" alt="JK Flip-Flop 1,1 1" width="600px" />
 - Inputs: $J=1$, $K=1$ | Outputs if $Q_n=0$, $\bar Q_n=1$ are $Q_{n+1}=1$, $\bar Q_{n+1}=0$
@@ -958,7 +958,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 1. Inputs: $J=1$, $K=1$ (Toggle Mode)
 1. $T_w \gt \gt T_d$
     > $T_w$: Time duration that clock stays at a particular state <br> 
-    $T_d$: Time taken by the Flip-Flop to process the inputs)
+    $T_d$: Time taken by the Flip-Flop to process the inputs
 > What happens:
 1. We know that JK Flip-Flop gives next state $Q_n=1$ for current state $Q_n=0$.
 1. If the clock stays at the same state $CLK=1$ for a sufficiently long time ($T_w \gt \gt T_d$), the outputs will get fed back to the Flip-Flop, and toggle the inputs again.
@@ -1039,3 +1039,56 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |0|1|1|
         |1|0|1|
         |1|1|0|
+        
+## Conversion: D Flip-Flop to SR Flip-Flop
+- We need to excite D Flip-Flop, so it gets the Characteristics of SR Flip-Flop.
+- First, we define the Characteristics of SR Flip-Flop.
+- Next, we need the Excitation Table of D Flip-Flop.
+- Excitation Table of new Flip-Flop:
+    |D|$Q_n$|$Q_{n+1}$|$S$|$R$|
+    |-|-|-|-|-|
+    |0|0|0|0|x|
+    |0|1|0|0|1|
+    |1|0|1|1|0|
+    |1|1|1|x|0|
+- Generate K-Map for $S$:
+    |$↓D\ \|\ {Q_n}→$|$\bar {Q_n}_{(00)}$|${Q_n}_{(01)}$|
+    |:---:|:---:|:---:|
+    |$\bar D_{(0)}$|$null_{(0)}$|$null_{(1)}$|
+    |$D_{(1)}$|$1_{(2)}$|$x_{(3)}$|
+    - Pairs: $\{2,3\}$
+    - Min-Terms: **1** ie $D$
+- Generate K-Map for $R$:
+    |$↓D\ \|\ {Q_n}→$|$\bar {Q_n}_{(00)}$|${Q_n}_{(01)}$|
+    |:---:|:---:|:---:|
+    |$\bar D_{(0)}$|$x_{(0)}$|$1_{(1)}$|
+    |$D_{(1)}$|$null_{(2)}$|$null_{(3)}$|
+    - Pairs: $\{0,1\}$
+    - Min-Terms: **1** ie $\bar D$
+    - Logic-diagram:
+        <br><img src="../assets/images/Digital-Logic/self/33.png" alt="SR Flip-Flop to D Flip-Flop" width="500px" />
+
+## Conversion: T Flip-Flop to JK Flip-Flop
+- We need to excite T Flip-Flop, so it gets the Characteristics of JK Flip-Flop.
+- First, we define the Characteristics of JK Flip-Flop.
+- Next, we need the Excitation Table of T Flip-Flop.
+- Excitation Table of new Flip-Flop:
+    |J|K|$Q_n$|$Q_{n+1}$|T|
+    |-|-|-|-|-|
+    |0|0|0|0|0|
+    |0|0|1|1|0|
+    |0|1|0|0|0|
+    |0|1|1|0|1|
+    |1|0|0|1|1|
+    |1|0|1|1|0|
+    |1|1|0|1|1|
+    |1|1|1|0|1|
+- K-Map for $T$:
+    |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar J_{(0)}$|$null_{(0)}$|$null_{(1)}$|$1_{(3)}$|$null_{(2)}$|
+    |$J_{(1)}$|$1_{(4)}$|$null_{(5)}$|$1_{(7)}$|$1_{(6)}$
+    - Pairs: $\{3,7\},\{4,6\}$
+    - Min-Terms: **2** ie $K Q_n + J \bar Q_{n}$
+    - Logic-diagram:
+        <br><img src="../assets/images/Digital-Logic/self/34.png" alt="T Flip-Flop to JK Flip-Flop" width="500px" />

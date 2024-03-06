@@ -18,7 +18,7 @@ git clone https://github.com/sayande717/notes.git
 |2| Operating Systems | [Markdown](./topics/Operating-Systems.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | till L-4.3 ... | `In Progress` |
 |-1| Compiler Design | [Markdown](./topics/Compiler-Design.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `In Progress` |
 |4| Design & Analysis of Algorithms | [Markdown](./topics/Algorithms.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `In Progress` |
-|3| Digital Logic | [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till Introduction to T Flip-Flop ... | `In Progress` |
+|3| Digital Logic | [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | till T Flip-Flop to JK Flip-Flop conversion ... | `In Progress` |
 |7| Aptitude | [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
 |6| Data Structures | [Markdown](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | null | `In Progress` |
 
