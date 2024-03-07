@@ -1,3 +1,4 @@
+<!-- ID: 3 -->
 # Formulae
 ## FRL Self Duality
 - How many self-dual functions can be made with n variables?
@@ -762,10 +763,17 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/13.png" alt="SR Latch 1,1" width="600px" />
 
-## SR Flip-Flop 
+## Flip-Flop
+## SR Flip-Flop
 - A Flip-Flop only works when the Clock is triggered.
 - The SR Flip-Flop is the most basic version of Flip-Flops, all other Flip-Flops are designed from it.
 - For Flip-Flops, the output is same regardless of the Gate used to design it.
+- Flip-Flops also have 2 more pins, clear and preset.
+    - **Clear**: Force `0` as output.
+    - **Preset**: Force `1` as output.
+    - Low / High enabled flip-flop: The pins get enabled when the input for Clear/Preset is low/high.
+    - Notation:
+        <br><img src="../assets/images/Digital-Logic/self/35.png" alt="Flip-Flop Set, Preset Notation" width="300px" />
 ### Using NAND Gate
 - Inputs: $S$, $R$ | Outputs: $Q_{n}$, $\bar Q_n$
 - Property of NAND Gate: If any 1 of the inputs is 0, output is 1.
@@ -1039,12 +1047,12 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         |0|1|1|
         |1|0|1|
         |1|1|0|
-        
-## Conversion: D Flip-Flop to SR Flip-Flop
-- We need to excite D Flip-Flop, so it gets the Characteristics of SR Flip-Flop.
-- First, we define the Characteristics of SR Flip-Flop.
-- Next, we need the Excitation Table of D Flip-Flop.
-- Excitation Table of new Flip-Flop:
+   
+## Conversion: SR Flip-Flop to D Flip-Flop
+- We need to excite SR Flip-Flop, so it gets the Characteristics of D Flip-Flop.
+- First, we define the Characteristics of D Flip-Flop.
+- Next, we need the Excitation Table of SR Flip-Flop.
+- Merge the Excitation Table of SR Flip-Flop, with the Characteristic Table of D Flip-Flop.
     |D|$Q_n$|$Q_{n+1}$|$S$|$R$|
     |-|-|-|-|-|
     |0|0|0|0|x|
@@ -1072,7 +1080,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - We need to excite T Flip-Flop, so it gets the Characteristics of JK Flip-Flop.
 - First, we define the Characteristics of JK Flip-Flop.
 - Next, we need the Excitation Table of T Flip-Flop.
-- Excitation Table of new Flip-Flop:
+- Merge the Excitation Table of T Flip-Flop, with the Characteristic Table of JK Flip-Flop.
     |J|K|$Q_n$|$Q_{n+1}$|T|
     |-|-|-|-|-|
     |0|0|0|0|0|
@@ -1091,4 +1099,17 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Pairs: $\{3,7\},\{4,6\}$
     - Min-Terms: **2** ie $K Q_n + J \bar Q_{n}$
     - Logic-diagram:
-        <br><img src="../assets/images/Digital-Logic/self/34.png" alt="T Flip-Flop to JK Flip-Flop" width="500px" />
+        <br><img src="../assets/images/Digital-Logic/self/34.png" alt="T Flip-Flop to JK Flip-Flop" width="400px" />
+
+## Counters
+- A counter is a device that stores and sometimes displays the number of times a particular event or process has occured.
+- Counters count clock pulses.
+- They are usually constructed of a number of flip-flops connected in cascade.
+- We only use edge-triggered flip-flops, not level triggered flip-flops because of race condition of level triggered flip-flops.
+- For a 0-1-2-3-4-0 ... etc, counter, it counts from 0 to 1,2,3,4, then comes back to 0. There are a total of 5 states {0,1,2,3,4}, and it is a Mod-5 counter.
+    - The counter moves to the next state everytime a clock pulse is applied to it.
+    - Consequently, **after every 5 clock pulses, it will come back to `0`**, if `0` is the `starting state`.
+    - After 21 clock pulses, it'll will be 1 state ahead of the `starting state`, ie at `1`.
+    <br><img src="../assets/images/Digital-Logic/self/36.png" height="200px" alt="Counter">
+- To design a `Mod-5` counter, we need $n$ Flip-Flops, such that $2^n \geq M$. For $M=5$, $2^3 \geq 5$, so we need $3$ Flip-Flops.
+- If the counter sequence is 0-1-4-8-5, then it is a `Mod-5` counter. We should need $3$ Flip-Flops. However, we also need to look at the maximum number in the sequence, which is $8$. To represent $8=1000$, we would need $4$ Flip-Flops. **So, when a counter sequence is given, check both the number of states and the largest value in the sequence.**
