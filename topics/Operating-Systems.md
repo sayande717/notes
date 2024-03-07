@@ -822,7 +822,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         <br><img src="../assets/images/Operating-Systems/self/10.png" width="500px" alt="Deadlock Example 0">
         <br><img src="../assets/images/Operating-Systems/self/11.png" width="500px" alt="Deadlock Example 1">
 
-## Resource Allocation Graph
+### Resource Allocation Graph
 - Used to represent the state of processes in the system.
 - Vertices: Process (1) & Resource: Single-Instance (2) & Multi-Instance (3).
 - Edges: Assign Edge (5) & Request Edge (4).
@@ -866,4 +866,58 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
    - Availability (3): (2,2,2). $P_3$ will get executed, and terminate.
    - Availability (4): (2,3,2).
    - So, all processes can get executed and deadlock will not occur.
-   
+
+### Deadlock Handling
+- **Deadlock ignorance** (Ostrich method): Just ignore it. 
+    - Because deadlock occurs very rarely, it isn't worth writing code for it, which solves the issue. If a deadlock occurs, the solution is to reboot the kernel.
+    - Also, if we include the solution for deadlock, the system will get more functionality but performance will degrade.
+    - This solution is widely used.
+    - Ostrict method: Whenever a sandstorm occurs, an Ostrich just puts it's head in it's feathers, and *tries to ignore* the sandstorm.
+- **Deadlock Prevention**: Preventing the deadlock before it can occur, ie preventing any or all 4 [deadlock](#deadlock) conditions from occuring.
+    - Mutual Exclusion: Make all resources shareable.
+        ```diff
+        - Not all resources can be made shareable. Examples are printer, etc.
+        ```
+    - No pre-emption: Make preemption mandatory.
+        ```diff
+        + When a process is pre-empted, it will release it's resources, which can then be used by another process asking for it.
+        ```
+    - Hold & Wait: Before a process starts executing, allocate all resources it needs, so it doesn't have to request for anything later on.
+        ```diff
+        - Not practical.
+        - Can lead to starvation of other processes, because of insufficient resources.
+        ```
+    - Circular Wait: Order/Prioritize resources. A process can only request for a resource of a priority lower than the one it has allocated to it. If it has $3$ assigned, it can only request for $>3$, not $<3$.
+        <br><img src="../assets/images/Operating-Systems/self/16.png" height="200px" alt="Deadlock Prevention: Circular Wait">
+- **Deadlock Avoidance**: We try to avoid the deadlock. This is done using Banker's Algorithm.
+    - Safe Sequence: There is no possibility of deadlock if processes are executed in this order.
+    - Unsafe Sequence: There is a possibility of deadlock if processes are executed in any other order.
+    - Banker's Algorithm:
+        |Process|Allocation|Max Need|Available|Remaining Need|
+        |:---|:---:|:---:|:---:|:---:|
+        |$P_1$| 0 \| 1 \| 0 | 7 \| 5 \| 3 | 3 \| 3 \| 2 | 7 \| 4 \| 3 |
+        |$P_2$| 2 \| 0 \| 0 | 3 \| 2 \| 2 | 5 \| 3 \| 2 | 1 \| 2 \| 2 |
+        |$P_3$| 3 \| 0 \| 2 | 9 \| 0 \| 2 | 7 \| 4 \| 3 | 6 \| 0 \| 0 |
+        |$P_4$| 2 \| 1 \| 1 | 4 \| 2 \| 2 | 7 \| 4 \| 5 | 2 \| 1 \| 1 |
+        |$P_5$| 0 \| 0 \| 2 | 5 \| 3 \| 3 | 7 \| 5 \| 5 | 5 \| 3 \| 1 |
+        |null | null | null | 10 \| 5 \| 7 | null | 
+        1. Calculate the `Available` amount of resources: `Total Allocation`: 7,2,5. `Available`: 10,5,7 - 7,2,5= 3,3,2.
+        1. Calculate the `Remaining Need`, which is `Max Need`-`Allocation`.
+        1. With the amount of resources we have available (based on difference between `Available` and `Remaining Need`), we can fulfill the request of $P_2$ & $P_4$. We will let $P_2$ execute.
+        1. After $P_2$ terminates, `Available`, which is `Current Available` + `Allocation`, is 3,3,2 + 2,0,0 = 5,3,2
+        1. Next, we can fulfill the request of $P_4$.
+        1. After $P_4$ terminates, `Available`: 5,3,2 + 2,1,1 = 7,4,3
+        1. Next, we fulfill the request of $P_5$.
+        1. After $P_5$ terminates, `Available`: 7,4,3 + 0,0,2 = 7,4,5
+        1. Next, we fulfill the request of $P_1$.
+        1. After $P_1$ terminates, `Available`: 7,4,5 + 0,1,0 = 7,5,5
+        1. Lastly, we fulfill the request of $P_3$.
+        1. After $P_3$ terminates, `Available`: 7,5,5 + 3,0,2 = 10,5,7.
+        1. Check for correctness: `Final Available` = `Initial Available` = 10,5,7
+        1. Safe Sequence: $P_2 > P_4 > P_5 > P_1 > P_3$.
+            > There is no possibility of deadlock if processes are executed in this order.
+        - In real life, processes don't have static needs, rather their needs keep changing as they're running. Banker's Algorithm provides a base for solutions that can be implemented in practical scenarios.
+
+- **Deadlock Detection & Recovery**: Try to detect a deadlock, and then try to recover from it. Recovery method:
+    - Kill the deadlocked processes: Kill 1 of the processes, check for deadlock, then kill another (if needed). Continue this till deadlock is no longer present.
+    - Pre-empt the resources: Pre-empt all the resources a process is holding.
