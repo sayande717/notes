@@ -618,6 +618,29 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - Total number of choices: $c^{14}_2$
     - Number of favourable choices: $c^{8}_2+c^{6}_2$ (+ because they're alternative choices)
     - Probability: $(c^{8}_2+c^{6}_2) \div c^{14}_2=86/182=0.4725$
+- Example 4: A fair dice is rolled twice. Find the probability that an odd number will follow an even number.
+    - They are Independent events.
+    - Probability of getting an odd number, $P(A)=3/6$
+    - Probability of getting an even number, $P(B)=3/6$
+    - Total probability: $3/6+3/6=1/2+1/2=1/4=0.25$
+    - **Another method**: $S=\{(E,E),(E,O),(O,E),(O,O)\}$
+    - $n(S)=4$, $N(A)=1$
+    - $P(A)=1/4$
+- Additional Theorem of Probability:
+    - If $E_1$ & $E_2$ are two events within a sample space $S$, then: $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
+    - If $E_1$, $E_2$ & $E_3$ are three events within a sample space $S$, then: $P(E_1 ∪ E_2 ∪ E_3) = P(E_1)+P(E_2)+P(E_3)-P(E_1 ∩ E_2)-P(E_2 ∩ E_3)-P(E_3 ∩ E_1)-P(E_1 ∩ E_2 ∩ E_3)$
+    - If Events $E_1$ & $E_2$ are Mutually Exclusive, then $P(E_1 ∪ E_2) = P(E_1)+P(E_2)$
+    - If Events $E_1$ & $E_2$ are Independent of each other, then $P(E_1 ∩ E_2)=P(E_1).P(E_2)$, and $P(E_1 ∪ E_2) = P(E_1)+P(E_2)- P(E_1).P(E_2)$
+        - $P(E_1)+P(E_2)\{1 - P(E_1)\}$
+        - $P(E_1)+P(E_2).(P(\bar E_1))$
+    - If $E_1$ & $E_2$ are events within a Sample space $S$, then $P(\bar E_1 ∩ \bar E_2)=1-P(A∪B)$
+- Example 5: In view of Covid-19 pandemic, the probability that the state government cancels SSC exams is $0.6$. The probability that it cancels Class 12 exams is $0.4$. The probability that it cancels either SSC or Class 12 exams is $0.7$. The probability that it cancels both of them is ? Assume that both events are dependent on each other.
+    - $E_1$ = SSC Exams are cancelled.
+    - $E_2$ = Class 12 Exams are cancelled.
+    - $P(E_1 ∪ E_2) = 0.7$, $P(E_1)=0.6$, $P(E_2)=0.4$
+    - $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
+    - $0.7 = 0.6+0.4-P(E_1 ∩ E_2)$
+    - $P(E_1 ∩ E_2)=0.3$
 # Permutation & Combination
 - Prerequisite: [Formulae](#frl-permutation-combination)
 - **Permutation**
