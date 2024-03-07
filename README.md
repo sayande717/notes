@@ -61,3 +61,7 @@ git clone https://github.com/sayande717/notes.git
     |Logical Problems|Type 3|1-10|0|04:17|
     |Logical Problems|Type 4|1-12|0|07:34|   
     |Logical Problems|Type 5|1-12|1|18:28|
+    |Logical Problems|Type 1|1-11|0|03:30|
+    |Logical Problems|Type 2|1-11|2|05:11|
+    |Logical Problems|Type 3|1-10|0|04:11|
+    |Logical Problems|Type 4|1-12|1|05:30|
