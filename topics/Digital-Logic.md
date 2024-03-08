@@ -1113,3 +1113,56 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     <br><img src="../assets/images/Digital-Logic/self/36.png" height="200px" alt="Counter">
 - To design a `Mod-5` counter, we need $n$ Flip-Flops, such that $2^n \geq M$. For $M=5$, $2^3 \geq 5$, so we need $3$ Flip-Flops.
 - If the counter sequence is 0-1-4-8-5, then it is a `Mod-5` counter. We should need $3$ Flip-Flops. However, we also need to look at the maximum number in the sequence, which is $8$. To represent $8=1000$, we would need $4$ Flip-Flops. **So, when a counter sequence is given, check both the number of states and the largest value in the sequence.**
+- Types of Counters: `Synchronous (+)` & `Asynchronous (-)`
+    ```diff
+    + All clocks are externally triggered.
+    - The 1st clock is externally triggered. The 2nd clock is triggered by the output of the first flip-flop, the 3rd one gets triggered by the output of 2nd flip-flop ... and so on.
+    + We can design both sequential and non-sequential circuits (like 0-3-2-6-4).
+    - We can only design Sequential circuits like 0-1-2-3 (UP Sequential) or 3-2-1-0 (DOWN Sequential).
+    + It is faster.
+    - It is comparatively slower.
+    + If we want to disable some flip-flops, we have to use extra Gates, which increases the complexity.
+    - It is relatively simpler.
+    + Example: Ring, Twisted Ring Counter
+    - Example: Ripple Counter
+    ```
+    <br><img src="../assets/images/Digital-Logic/self/37.png" height="200px" alt="Types of Counter">
+
+### Synchronous Counter
+- Design a Synchronous Counter using D Flip-Flop: 0-1-3-2
+    - Number of states: $4$, Largest number: $3$. $2^2=4$, and $3=11$, so we need 2 Flip-Flops.
+    - Current inputs: $Q_1$, $Q_0$
+    - Next inputs: $Q^+_1$, $Q^+_0$
+    - Representational inputs to the D Flip-Flops: $D_1$, $D_0$
+    - Steps:
+        |$Q_1$|$Q_0$|$Q^+_1$|$Q^+_0$|$D_1$|$D_0$|
+        |---|---|---|---|---|---|
+        |0|0|0|1|0|1|
+        |0|1|1|1|1|1|
+        |1|0|0|0|0|0|
+        |1|1|1|0|1|0|
+        1. Write the current inputs.
+        1. For each input, write the next state by looking at the sequence (0-1-3-2).
+        1. From the Excitation Table of the D Flip-Flop, write the D states:
+            - $D_1$: Corresponds to $Q_1$ & $Q^+_1$
+            - $D_0$: Corresponds to $Q_0$ & $Q^+_0$
+        1. Generate the Flip-Flop for $D_1$, using the `Current Inputs` $Q_1$, $Q_0$.
+            |$↓Q_1\ \|\ Q_0 →$|$\bar Q_0$|$Q_0$|
+            |:---:|:---:|:---:|
+            |$\bar Q_1$|$null_{(0)}$|$1_{(1)}$|
+            |$Q_1$|$null_{(2)}$|$1_{(3)}$|
+            - Pairs: $\{1,3\}$, Min-term: $Q_0$
+        1. Generate the Flip-Flop for $D_0$, using the `Current Inputs` $Q_1$, $Q_0$.
+            |$↓Q_1\ \|\ Q_0 →$|$\bar Q_0$|$Q_0$|
+            |:---:|:---:|:---:|
+            |$\bar Q_1$|$1_{(0)}$|$1_{(1)}$|
+            |$Q_1$|$null_{(2)}$|$null_{(3)}$|
+            - Pairs: $\{0,1\}$, Min-term: $\bar Q_1$
+    - Logic Diagram:
+        <br><img src="../assets/images/Digital-Logic/self/38.png" height="200px" alt="Synchronous Counter, D Flip-Flop">
+
+### Asynchronous Counter
+- In Asynchronous counter, we can identify if it is an UP or DOWN counter, from it's representation. $Q$ & $\bar Q$ are the outputs used to trigger the clocks, and the arrows represent the clocks themselves.
+    <br><img src="../assets/images/Digital-Logic/self/39.png" height="200px" alt="Asynchronous Counter ID">
+
+
