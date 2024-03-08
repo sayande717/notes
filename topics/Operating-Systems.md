@@ -1,3 +1,5 @@
+<!-- ID: 2 -->
+
 # Formulae
 ## FRL-General
 - If number of forks = $n$:
@@ -10,6 +12,13 @@
     printf("Hello!");
     ```
     ... will print("Hello!") $2^n$ times.
+## FRL-Deadlock
+- If a system has 3 processes each requiring 2 units of resources `R`.  The solution to finding the minimum number of units of `R` such that no deadlock will occur is:
+    - Allocate 1 less than the amount of resources needed to each process (1+1+1 here). Then add 1 to it (4). This is **the minimum number of resources** we need to prevent Deadlock.
+    - Consequently, when we allocate 1 less than the amount of resources needed to each process, it becomes **the maximum number of resources** needed for Deadlock to occur.
+- If a system has 3 processes that share 4 instances of the same resource type, and each process can request `k` instances of that resource, then to find the maximum value of `k` (to avoid deadlock), the following equation must be true: $Processes + Resources > Total\ Demand$
+    - $R+n \leq \sum (i=1\ to\ n)\ D_i$, for deadlock to occur
+    - $R+n > \sum (i=1\ to\ n)\ D_i$, to prevent deadlock
 
 # Basics
 
@@ -889,10 +898,10 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         ```
     - Circular Wait: Order/Prioritize resources. A process can only request for a resource of a priority lower than the one it has allocated to it. If it has $3$ assigned, it can only request for $>3$, not $<3$.
         <br><img src="../assets/images/Operating-Systems/self/16.png" height="200px" alt="Deadlock Prevention: Circular Wait">
-- **Deadlock Avoidance**: We try to avoid the deadlock. This is done using Banker's Algorithm.
+- **Deadlock Avoidance**: We try to avoid the deadlock. This is done using **Banker's Algorithm**.
     - Safe Sequence: There is no possibility of deadlock if processes are executed in this order.
     - Unsafe Sequence: There is a possibility of deadlock if processes are executed in any other order.
-    - Banker's Algorithm:
+    - Example 0: Banker's Algorithm
         |Process|Allocation|Max Need|Available|Remaining Need|
         |:---|:---:|:---:|:---:|:---:|
         |$P_1$| 0 \| 1 \| 0 | 7 \| 5 \| 3 | 3 \| 3 \| 2 | 7 \| 4 \| 3 |
@@ -917,7 +926,45 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. Safe Sequence: $P_2 > P_4 > P_5 > P_1 > P_3$.
             > There is no possibility of deadlock if processes are executed in this order.
         - In real life, processes don't have static needs, rather their needs keep changing as they're running. Banker's Algorithm provides a base for solutions that can be implemented in practical scenarios.
-
+    - Example 1: Banker's Algorithm
+        |Process|Allocation|Max Need|Available|Remaining Need|
+        |:---|:---:|:---:|:---:|:---:|
+        |$P_0$| 1 \| 0 \| 1 | 4 \| 3 \| 1 | 3 \| 3 \| 0 | 3 \| 3 \| 0 |
+        |$P_1$| 1 \| 1 \| 2 | 2 \| 1 \| 4 | 4 \| 3 \| 1 | 1 \| 0 \| 2 |
+        |$P_2$| 1 \| 0 \| 3 | 1 \| 3 \| 3 | 5 \| 3 \| 4 | 0 \| 3 \| 0 |
+        |$P_3$| 2 \| 0 \| 0 | 5 \| 4 \| 1 | 6 \| 4 \| 6 | 3 \| 4 \| 1 |
+        |null | null | null | 8 \| 4 \| 6 | null | 
+        1. Calculate the `Remaining Need`, which is `Max Need`-`Allocation`.
+        1. With the amount of resources we have available (based on difference between `Available` and `Remaining Need`), we can fulfill the request of $P_0$ & $P_0$. We will let $P_0$ execute.
+        1. After $P_2$ terminates, `Available`, which is `Current Available` + `Allocation`, is 3,3,0 + 1,0,0=4,3,1 
+        1. Next, we can fulfill the request of $P_2$.
+        1. After $P_2$ terminates, `Available`: 1,3,1 + 1,0,3 = 5,3,4
+        1. Next, we can fulfill the request of $P_1$.
+        1. After $P_2$ terminates, `Available`: 5,3,4 + 1,1,2 = 6,4,6
+        1. Next, we can fulfill the request of $P_3$.
+        1. After $P_3$ terminates, `Available`: 6,4,6 + 2,0,0 = 8,4,6
+        1. Safe Sequence: $P_0 > P_2 > P_1 > P_3$
+    - Example 2: Deadlock. A system is having 3 processes each requiring 2 units of resources `R`. The minimum number of units of `R` such that no deadlock will occur:
+        - 3
+        - 5
+        - 6
+        - 4
+        1. Focus on the word '**minimum**'.
+        1. If we have `6` resources, we can allow `2` each to all processes, and they'll be fine. But we need '**minimum**' here.
+        1. If we have `3` resources, we can allocate `2` to $P_1$, then `2` to $P_2$, and so on. But we need to check for all cases.
+        1. If we allocate `1` resource each to each process, then deadlock will occur.
+        1. If we have `4` resources, then we can allocate `1` resource each to each process, and still have 1 left. So we can allocate the remaining resource to any of the processes, and let them execute. There will be no deadlock in any case.
+        1. $Answer: 4$
+        - Check [Formulae](#frl-deadlock).
+    - Example 3: Deadlock. A system is having 3 processes. $P_1$ requires 3 instances of Resource $R$, $P_2$ requires 4 instances, $P_3$ requires 5 instances. What is the minimum number of units of `R` such that no deadlock will occur?
+        - Processes need $\{3,4,5\}$ resources. Allocate $\{2,3,4\}$ resources. We need $1$ more instance to break the deadlock. $Answer: 10$.
+        - Maximum number of resources needed for Deadlock to occur: $9$
+    - Example 4: Deadlock. Consider a system with 3 processes that share 4 instances of the same resource type. Each process can request `k` instances of that resource. What can the maximum value of `k` be, to avoid deadlock?
+        1. Assume that each process needs `1` instance of the resource ($k=1$). If we give `1` each to each process, we are left with `1` instance, and the processes execute successfully.
+        1. Now, assume that each process needs `2` instances of the resource ($k=2$). If we give `1` instance to each process, we're left with `1` instance, which we can give to any of the processes, and deadlock will not occur.
+        1. Now, $k=3$. Now, if we give `1` instance to each process, we're left with `1` instance, but we cannot execute any process with it.
+        1. $Answer: k=2$
+        - Check [Formulae](#frl-deadlock).
 - **Deadlock Detection & Recovery**: Try to detect a deadlock, and then try to recover from it. Recovery method:
     - Kill the deadlocked processes: Kill 1 of the processes, check for deadlock, then kill another (if needed). Continue this till deadlock is no longer present.
     - Pre-empt the resources: Pre-empt all the resources a process is holding.
