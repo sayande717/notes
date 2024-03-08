@@ -1,3 +1,4 @@
+<!-- ID: 0 -->
 # Formulae
 ## FRL Permutation Combination
 - (Combination) If we can choose `r` elements from `n` elements: $c^n_r=n! \div (n-r)!r!$
@@ -560,35 +561,35 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
         - Rolling a dice; $S=\{1,2,3,4,5,6\}$; $n(S)=6$
         - A: Getting even number, $A=\{2,4,6\}$; $n(A)=3$
         - $P(Getting\ an\ even\ number)=3/6=1/2$
-- Axioms of Probability:
-    > Axiom: Statements that are correct by default, but have no proof as such. <br>
-    > Theorem: Statements that are correct, and can also be proved.
-    1. Probability of an event always lies between `0` & `1`. $0 \le P(A)\le 1$
-    1. If $S$ is the Sample space of a Random Experiment, then all  outcomes of the Experiment will definitely be from $S$. $P(S)=1$
-    1. If there are `n` elements in a Sample space, out of which `m` elements favour the occurence of `A`, then: 
-        - Odds in favour of `A` = $m / {(n-m)}$ = Number of ways `A` can occur / Number of ways `A` cannot occur.
-        - Odds against `A` = $(n-m) / m$ = Number of ways `A` cannot occur / Number of ways `A` can occur.
-    1. If `A` is any event within Sample space `S`, and $n(A)$ is the number of Events that favour occurence of `A`, then the Probability of `A` to not happen: $P(A^c) = (n(S)-n(A))/n(S) = (1-n(A))/n(S) = 1-P(A)$.
-- Types of Events:
-    - **Mutually Exhaustive**: If Events `A` & `B` together form the Sample space `S`, $A∪B=S$
-        - Example 0: Experiment: Rolling a dice.
-            - `A`: Getting an even number; $A = \{2,4,6\}$
-            - `B`: Getting an odd number; $B = \{1,3,5\}$
-            - $A∪B=\{1,2,3,4,5,6\}=S$, so Mutually Exhaustive
-            - $A∩B={}=ϕ$, so Mutually Exclusive
-    - **Mutually Exclusive**: If Events `A` & `B` don't intersect each other, $A∩B=ϕ$
-        - Example 0: Experiment: Rolling a dice.
-            - `A`: Getting a prime number; $A = \{2,3,5\}$
-            - `B`: Getting a composite number; $B = \{4,6\}$
-            - $A∩B={}=ϕ$, so Mutually Exclusive
-            - $A∪B=\{2,3,4,5,6\} \neq S$, so not Mutually Exhaustive
-    - **Impossible**: If there is no feasable outcome of the event `A` in Sample space `S`. Denoted by `ϕ`.
-        - Example: Probability of Getting a number >6 when Rolling a dice.
-            - $S=\{1,2,3,4,5,6\}$
-            - $A=\{ϕ\}$
-            - $P(A)=n(A)/n(S)=0/6=0$
-    - **Independent**: If they are from different sample spaces (random experiments). 
-        - $P(A∩B)=P(A).P(B)$
+## Axioms of Probability:
+> Axiom: Statements that are correct by default, but have no proof as such. <br>
+> Theorem: Statements that are correct, and can also be proved.
+1. Probability of an event always lies between `0` & `1`. $0 \le P(A)\le 1$
+1. If $S$ is the Sample space of a Random Experiment, then all  outcomes of the Experiment will definitely be from $S$. $P(S)=1$
+1. If there are `n` elements in a Sample space, out of which `m` elements favour the occurence of `A`, then: 
+    - Odds in favour of `A` = $m / {(n-m)}$ = Number of ways `A` can occur / Number of ways `A` cannot occur.
+    - Odds against `A` = $(n-m) / m$ = Number of ways `A` cannot occur / Number of ways `A` can occur.
+1. If `A` is any event within Sample space `S`, and $n(A)$ is the number of Events that favour occurence of `A`, then the Probability of `A` to not happen: $P(A^c) = (n(S)-n(A))/n(S) = (1-n(A))/n(S) = 1-P(A)$.
+## Types of Events
+- **Mutually Exhaustive**: If Events `A` & `B` together form the Sample space `S`, $A∪B=S$
+    - Example 0: Experiment: Rolling a dice.
+        - `A`: Getting an even number; $A = \{2,4,6\}$
+        - `B`: Getting an odd number; $B = \{1,3,5\}$
+        - $A∪B=\{1,2,3,4,5,6\}=S$, so Mutually Exhaustive
+        - $A∩B={}=ϕ$, so Mutually Exclusive
+- **Mutually Exclusive**: If Events `A` & `B` don't intersect each other, $A∩B=ϕ$
+    - Example 0: Experiment: Rolling a dice.
+        - `A`: Getting a prime number; $A = \{2,3,5\}$
+        - `B`: Getting a composite number; $B = \{4,6\}$
+        - $A∩B={}=ϕ$, so Mutually Exclusive
+        - $A∪B=\{2,3,4,5,6\} \neq S$, so not Mutually Exhaustive
+- **Impossible**: If there is no feasable outcome of the event `A` in Sample space `S`. Denoted by `ϕ`.
+    - Example: Probability of Getting a number >6 when Rolling a dice.
+        - $S=\{1,2,3,4,5,6\}$
+        - $A=\{ϕ\}$
+        - $P(A)=n(A)/n(S)=0/6=0$
+- **Independent**: If they are from different sample spaces (random experiments). 
+    - $P(A∩B)=P(A).P(B)$
 - Example 0: Calculate the Probability that a leap year selected at random will contain 53 Sundays.
     - $52$ weeks = $52*7=364$ days will mandatorily have a Sunday per week.
     - For the rest of the 2 days, Sunday can be 1 of the 2 days.
@@ -626,14 +627,14 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - **Another method**: $S=\{(E,E),(E,O),(O,E),(O,O)\}$
     - $n(S)=4$, $N(A)=1$
     - $P(A)=1/4$
-- Additional Theorem of Probability:
-    - If $E_1$ & $E_2$ are two events within a sample space $S$, then: $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
-    - If $E_1$, $E_2$ & $E_3$ are three events within a sample space $S$, then: $P(E_1 ∪ E_2 ∪ E_3) = P(E_1)+P(E_2)+P(E_3)-P(E_1 ∩ E_2)-P(E_2 ∩ E_3)-P(E_3 ∩ E_1)-P(E_1 ∩ E_2 ∩ E_3)$
-    - If Events $E_1$ & $E_2$ are Mutually Exclusive, then $P(E_1 ∪ E_2) = P(E_1)+P(E_2)$
-    - If Events $E_1$ & $E_2$ are Independent of each other, then $P(E_1 ∩ E_2)=P(E_1).P(E_2)$, and $P(E_1 ∪ E_2) = P(E_1)+P(E_2)- P(E_1).P(E_2)$
-        - $P(E_1)+P(E_2)\{1 - P(E_1)\}$
-        - $P(E_1)+P(E_2).(P(\bar E_1))$
-    - If $E_1$ & $E_2$ are events within a Sample space $S$, then $P(\bar E_1 ∩ \bar E_2)=1-P(A∪B)$
+## Additional Theorem of Probability
+- If $E_1$ & $E_2$ are two events within a sample space $S$, then: $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
+- If $E_1$, $E_2$ & $E_3$ are three events within a sample space $S$, then: $P(E_1 ∪ E_2 ∪ E_3) = P(E_1)+P(E_2)+P(E_3)-P(E_1 ∩ E_2)-P(E_2 ∩ E_3)-P(E_3 ∩ E_1)-P(E_1 ∩ E_2 ∩ E_3)$
+- If Events $E_1$ & $E_2$ are Mutually Exclusive, then $P(E_1 ∪ E_2) = P(E_1)+P(E_2)$
+- If Events $E_1$ & $E_2$ are Independent of each other, then $P(E_1 ∩ E_2)=P(E_1).P(E_2)$, and $P(E_1 ∪ E_2) = P(E_1)+P(E_2)- P(E_1).P(E_2)$
+    - $P(E_1)+P(E_2)\{1 - P(E_1)\}$
+    - $P(E_1)+P(E_2).(P(\bar E_1))$
+- If $E_1$ & $E_2$ are events within a Sample space $S$, then $P(\bar E_1 ∩ \bar E_2)=1-P(A∪B)$
 - Example 5: In view of Covid-19 pandemic, the probability that the state government cancels SSC exams is $0.6$. The probability that it cancels Class 12 exams is $0.4$. The probability that it cancels either SSC or Class 12 exams is $0.7$. The probability that it cancels both of them is ? Assume that both events are dependent on each other.
     - $E_1$ = SSC Exams are cancelled.
     - $E_2$ = Class 12 Exams are cancelled.
@@ -641,6 +642,29 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
     - $0.7 = 0.6+0.4-P(E_1 ∩ E_2)$
     - $P(E_1 ∩ E_2)=0.3$
+## Conditional Probability
+- The Probability of happening of `B` given that event `A` has already occured, is said to be the Conditional probability of `B`, denoted by $P(B|A)$.
+- $P(B|A)=n(A∩B) \div n(A)=(n(A∩B) \div n(S)) / n(A) \div n(S)=P(B∩A) / P(A)$
+- $P(B∩A) = P(B|A).P(A)$ and $P(A∩B)=P(A).P(A|B)$
+- So, **Multiplication Theorem of Probability**: $P(A).P(A|B)=P(B|A).P(A)$ 
+- If `A` & `B` are Independent Events, $P(B|A)=P(A).P(B) \div P(A) = P(B)$
+
+### Pack or Deck of Cards
+- Total pack: (52), divided into Red (26) and Black (26) cards.
+- Red Pack contains Diamonds (13), Hearts (13).
+- Black Pack contains Spades (13), Clubs (13).
+- Each suit contains:
+    - Ace
+    - 2,3,4,5,6,7,8,9,10
+    - Jack, King, Queen (Face Cards)
+    <br><img src="../assets/images/Mathematics/self/3.png" alt="Card game" height="300px" />
+### Rolling a pair of dice
+- The probability that the sum of outcomes to be `k` when a pair of dice is rolled is:
+    - $P(k) = (k-1)/36; 2 \leq k \leq 7$
+    - $P(k) = (13-k)/36; 8 \leq k \leq 12$
+- Example 5: From a pack of regular playing cards, two cards are drawn one after the other without replacement. What is the probability that both cards will be kings?
+    - $P(E)=(c^4_1 * c^{52}_1) \div (c^3_1 * c^{51}_1) = 1/221 = 0.00452$
+
 # Permutation & Combination
 - Prerequisite: [Formulae](#frl-permutation-combination)
 - **Permutation**
