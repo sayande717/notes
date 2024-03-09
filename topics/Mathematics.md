@@ -664,6 +664,29 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - $P(k) = (13-k)/36; 8 \leq k \leq 12$
 - Example 5: From a pack of regular playing cards, two cards are drawn one after the other without replacement. What is the probability that both cards will be kings?
     - $P(E)=(c^4_1 * c^{52}_1) \div (c^3_1 * c^{51}_1) = 1/221 = 0.00452$
+- Example 6: In a YouTube live class, the probability that a student likes the class is $0.2$, and the probability that the student dislikes the class is $0.002$. Assuming that a student can either like or dislike the class, or choose not to share his feedback, the probability that a student doesn't share feedback is ____.
+    - $P(A ∪ B)^c = 1 - P(A ∪ B)$
+    - $P(A ∪ B)^c = 1 - P(A) - P(B)$ // $P(A ∪ B) = P(A)+P(B)$
+    - $1 - P(A) - P(B) = 1 - 0.2 - 0.02 = 0.798$
+- Example 7: The probability of getting sum equal to `8` when a dice is rolled twice is $5/36=0.138$.
+- Example 8: Ten cards numbered 1 to 10 are placed in a box, mixed up thoroughly and then one card is drawn at random. If it is known that the number of the card is more than 3, the probability that it is an even number is ____.
+    - A: Number is even, B: Number is more than 3
+    - $P(A|B)=P(A∩B)/P(B)=4/10 \div 7/10 = 4/7 = 0.571$
+- Example 9: A dice is thrown twice and the sum of numbers appearing is observed to be `6`. The Conditional probability that `4` has appeared atleast once is ____.
+    - A: 4 has appeared atleast once, B: Sum is 6
+    - $S=\{(1,5),(2,4),(3,3),(4,2),(5,1)\}$
+    - $P(A|B)=P(A∩B)/P(B)=2/5=0.4$
+- Example 10: A number is drawn at random from 100 numbers ${00-99}$. Let `x` denote the sum of digits, and `y` denote the product of digits of the numbers. The value of P(x=9|y=0) is?
+    - $P(y=0): 19, ${(00,01,02,03 ... 09,10,20,30 ... 90)}$
+    - $P(x=9|y=0)=2/19=0.1052$
+- Example 11: A & B are 2 players rolling a pair of dice on the condition that one who gets the sum 9 first, wins the game. The probability that `A` wins the game, if `B` starts the game is?
+    - $P(sum = 9)=p=4/36=1/9$, $S=\{(6,3),(5,4),(4,5),(3,6)\}$
+    - $P(sum \neq 9)=q=8/9$
+    - For `A` to win, $P(A)=(q.p)+(q.q.q.p)+(q.q.q.q.q.p)+ ...$.
+        > If `A` wins in 1st attempt, it means `B` started, but didn't get $sum=6$. Then `A` rolled the dice and got $sum=6$. <br>
+        > If `A` wins in 2nd attempt, it means `B` started, didn't get $sum=6$, then `A` rolled the dice and didn't get $sum=6$ either, then `B` rolled the dice, didn't get it either, but then `A` rolled the dice and got $sum=6$.
+    - $P(A)=(q.p)+(q.q.q.p)+(q.q.q.q.q.p)+ ...=pq(1+q^2+q^4+q^6)=pq(1 \div 1-q^2)$ // Geometric Progression
+    - $P(A)=pq(1 / (1-q^2))=1/9*8/9 \div 1-(8/9)^2=0.4705$
 
 # Permutation & Combination
 - Prerequisite: [Formulae](#frl-permutation-combination)
