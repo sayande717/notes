@@ -12,6 +12,7 @@
     printf("Hello!");
     ```
     ... will print("Hello!") $2^n$ times.
+
 ## FRL-Deadlock
 - If a system has 3 processes each requiring 2 units of resources `R`.  The solution to finding the minimum number of units of `R` such that no deadlock will occur is:
     - Allocate 1 less than the amount of resources needed to each process (1+1+1 here). Then add 1 to it (4). This is **the minimum number of resources** we need to prevent Deadlock.
@@ -19,6 +20,9 @@
 - If a system has 3 processes that share 4 instances of the same resource type, and each process can request `k` instances of that resource, then to find the maximum value of `k` (to avoid deadlock), the following equation must be true: $Processes + Resources > Total\ Demand$
     - $R+n \leq \sum (i=1\ to\ n)\ D_i$, for deadlock to occur
     - $R+n > \sum (i=1\ to\ n)\ D_i$, to prevent deadlock
+
+# FRL Memory Management
+- If each process consumes 4MB, and there is 8MB of primary memory available, we can accomodate 2 processes in the memory. If it does I/O operations for $K=0.7$ ie $70\%$ of it's time, CPU  Utilization: $1-K^2=1-0.49=0.51$ ie $51\%$.
 
 # Basics
 
@@ -968,3 +972,33 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 - **Deadlock Detection & Recovery**: Try to detect a deadlock, and then try to recover from it. Recovery method:
     - Kill the deadlocked processes: Kill 1 of the processes, check for deadlock, then kill another (if needed). Continue this till deadlock is no longer present.
     - Pre-empt the resources: Pre-empt all the resources a process is holding.
+
+## Memory Management
+- Check [Formulae](#frl-memory-management)
+- Register, cache and primary memory (RAM) is directly connected to the CPU.
+- Programs are stored in the secondary memory. Whenever a process needs to be executed, it is transferred to the primary memory.
+- Degree of Multi-programming: Keep more and more processes in the System RAM.
+- CPU Utilization increases with an increase in the size of the system memory.
+- Example 0:
+    - If each process consumes 4MB, and there is 4MB of primary memory available, we can only accomodate 1 process in the memory. If it does I/O operations for $K=70\%$ of it's time, CPU  Utilization: $1-K^1=1-0.7=0.3$ ie $30\%$.
+    - If each process consumes 4MB, and there is 8MB of primary memory available, we can accomodate 2 processes in the memory. If it does I/O operations for $K=70\%$ of it's time, CPU  Utilization: $1-K^2=1-0.49=0.51$ ie $51\%$.
+    - Similarly, if there is 16MB of primary memory available, we can accomodate 4 processes. I/O Operation time duration: $70\%$ ie $0.7$, so CPU Utilization: $1-k^4=1-0.7^4=1-0.2401=0.7599$ ie $76\%$.
+- Techniques:
+    - Contiguous: We allocate processes in continuous partitions in the memory. Example: Fixed & Dynamic Partition
+    - Non-Contiguous: We allocate processes in random places in the memory.
+
+### Fixed Partitioning
+- Type: Contiguous
+- Number of partitions: Fixed.
+- Size of partitions: May not be Fixed.
+- We have to fit the entire process within the same partition. Spanning between partitions is not allowed.
+- Facts:
+    ```diff
+    - Internal Fragmentation: If partition size is 4MB and we want to accomodate a 2MB process in it, the remaining 2MB space cannot be used for anything else (in diagram) within the partition. This is called Internal Fragmentation.
+    - External Fragmentation: Happens when free memory is split into small blocks and scattered throughout the memory. If total External Fragmentation size is 5MB, we cannot bring in a 5MB process, because memory is Contiguously allocated.
+    - If maximum partition size is 8MB, we cannot bring in processes larger than 8MB in the memory.
+    - If number of partitions is 4, we cannot bring in more than 4 processes to memory.
+    + Easy to implement.
+    ```
+- Diagram:
+    <br><img src="../assets/images/Operating-Systems/self/17.png" height="600px" alt="Fixed Partitioning">
