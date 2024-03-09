@@ -864,7 +864,6 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Truth-Table (x: don't care / cannot be determined):
         |$Q_n$|$Q_{n+1}$|$S$|$R$|
         |---------|-----------|-----|-----|
-        |    0    |     0     |  0  |  x  |
         |    0    |     1     |  1  |  0  |
         |    1    |     0     |  0  |  1  |
         |    1    |     1     |  x  |  0  |
@@ -1020,7 +1019,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - If $T=0$, outputs the same value as current input.
 - If $T=1$, outputs the complement of current input.
 - Truth Table:
-    |$D$|$Q_{n}$|
+    |$T$|$Q_{n}$|
     |---|---|
     |0|$Q_n$|
     |1|$\bar Q_n$|
@@ -1165,4 +1164,76 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - In Asynchronous counter, we can identify if it is an UP or DOWN counter, from it's representation. $Q$ & $\bar Q$ are the outputs used to trigger the clocks, and the arrows represent the clocks themselves.
     <br><img src="../assets/images/Digital-Logic/self/39.png" height="200px" alt="Asynchronous Counter ID">
 
+### Ring Counter
+- Type: Synchronous
+- In an `n-bit` ring counter, out of $2^n$ states, there are `n` usable states, while the rest are not usable.
+- After `n` clock cycles, it returns to it's starting position.
+- States for `4-bit` Counter:
+    |$Q_3$|$Q_2$|$Q_1$|$Q_0$|
+    |---|---|---|---|
+    |1|0|0|0|
+    |0|1|0|0|
+    |0|0|1|0|
+    |0|0|0|1|
+    |1|0|0|0|
+- After `4` clock cycles, the counter returns back to it's starting position.
+- In a `4-bit` ring counter,
+    - There are $2^4=16$ states.
+    - There are 4 usable states: $1010, 0100, 0010, 0001$.
+    - It will be called a `Mod-4 Ring Counter`.
+<br><img src="../assets/images/Digital-Logic/self/40.png" height="200px" alt="Ring Counter">
 
+### Twisted Ring Counter
+- aka Johnson Counter
+- Type: Synchronous
+- In an `n-bit` ring counter, out of $2^n$ states, there are `2n` usable states, while the rest are not usable.
+- After `2n` clock cycles, it returns to it's starting position.
+- States for `4-bit` Counter:
+    |$Q_3$|$Q_2$|$Q_1$|$Q_0$|
+    |---|---|---|---|
+    |0|0|0|0|
+    |0|1|0|0|
+    |1|1|0|0|
+    |1|1|1|0|
+    |1|1|1|1|
+    |0|1|1|1|
+    |0|0|1|1|
+    |0|0|0|1|
+    |0|0|0|0|
+- After `8` clock cycles, the counter returns back to it's starting position.
+- In a `4-bit` Twisted Ring counter,
+    - There are $2^4=16$ states.
+    - There are 8 usable states: $0000,0100,1100,1110,1111,0111,0011,0001,0000$
+    - It will be called a `Mod-4 Twisted Ring Counter`.
+<br><img src="../assets/images/Digital-Logic/self/41.png" height="400px" alt="Twisted Ring Counter">
+
+## Shift Registers
+- Type: Synchronous
+- They are used to implement arithmetic operations: multiplication & division.
+- D Flip-Flops are used for making Shift Registers.
+- Left-Shift (for multiplication):
+    1. 0 0 0 1 = 1
+    1. 0 0 1 0 = 2 = 1*2
+    1. 0 1 0 0 = 4 = 2*2
+    1. 1 0 0 0 = 8 = 4*2
+- Right-Shift (for division):
+    1. 1 0 0 0 = 8
+    1. 0 1 0 0 = 4 = 8/2
+    1. 0 0 1 0 = 2 = 4/2
+    1. 0 0 0 1 = 1 = 2/2
+- 4 types of shift registers:
+    1. SISO (Serial-In Serial-Out)
+        <br><img src="../assets/images/Digital-Logic/self/42.png" height="200px" alt="SISO">
+    1. SIPO (Serial-In Parallel-Out)
+        <br><img src="../assets/images/Digital-Logic/self/43.png" height="200px" alt="SIPO">
+    1. PISO (Parallel-In Serial-Out)
+        <br><img src="../assets/images/Digital-Logic/self/44.png" height="200px" alt="PISO">
+    1. PIPO (Parallel-In Parallel-Out)
+        <br><img src="../assets/images/Digital-Logic/self/45.png" height="200px" alt="PIPO">
+- Number of clock cycles needed for n-shift register:
+    | Mode  | Loading | Reading | Total |
+    |-------|---------|---------|-------|
+    | SISO  |    n    |    n-1  | 2n-1  |
+    | SIPO  |    n    |    0    |    n  |
+    | PISO  |    1    |    n-1    | n |
+    | PIPO  |    1    |    0    |  1   |
