@@ -688,6 +688,23 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - $P(A)=(q.p)+(q.q.q.p)+(q.q.q.q.q.p)+ ...=pq(1+q^2+q^4+q^6)=pq(1 \div 1-q^2)$ // Geometric Progression
     - $P(A)=pq(1 / (1-q^2))=1/9*8/9 \div 1-(8/9)^2=0.4705$
 
+## Theorem of Total Probability
+- If $E_1$, $E_2$, $E_3$ ... $E_n$, are Mutually Exclusive $(E_i∩E_j=∅ ∀ i \neq j)$ and collectively exclusive in a Sample Space S $(E_1∪E_2∪E_3...∪E_n = S)$ and if `A` is any event withing Sample Space `S`, then $P(A)$ is:
+    - $A=(A∩S)$
+    - $A=A∩(E_1∪E_2∪E_3...∪E_n)$
+    - $A=A∩(E_1)∪A∩(E_2)∪A∩(E_3)∪A∩(E_4) ... ∪A∩(E_n)$
+        > A∩(E_1), A∩(E_2), etc are also Mutually exclusive
+    - $P(A)=P(A∩(E_1)∪A∩(E_2)∪A∩(E_3)∪A∩(E_4) ... ∪A∩(E_n))$
+    - $P(A)=P(A∩(E_1))+P(A∩(E_2))+P(A∩(E_3))+ ... +P(A∩(E_n)$
+    - $P(A)=P(A|E_1).P(E_1) + P(A|E_2).P(E_2) + P(A|E_3).P(E_3) + ... + P(A|E_n).P(E_n)$
+    - $P(A)= \sum (i=1-n) P(E_i).P(A|E_i)$ (i)
+    - $P(A∩E_i)=P(E_i).P(A|E_i)=P(A).P(E_i|A)$
+    - $P(A∩E_i)=P(E_i).P(A|E_i)/P(A)=P(E_i|A)$
+    - $P(E_i|A)=P(E_i).P(A|E_i) / \sum (i=1-n) P(E_i).P(A|E_i)$ Substituting (i), **Bayes' Theorem**
+- In an exam, for a muptiple choice question, if it's assumed that the answer is correct, then:
+    - P(A)=P(I know the answer).P(Answer is correct|I know the answer) + P(I guessed the answer).P(Answer is correct|I guessed the answer)
+
+
 # Permutation & Combination
 - Prerequisite: [Formulae](#frl-permutation-combination)
 - **Permutation**
@@ -699,4 +716,3 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - **Combination**
     - Example 0: If $c^n_4=c^n_5$, then $n=$?
         - If $c^n_4=c^n_5$, then either $r=s$ (impossible) or $n=r+s=4+5=9$ (possible)
-

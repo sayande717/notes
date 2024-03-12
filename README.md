@@ -68,6 +68,9 @@ git clone https://github.com/sayande717/notes.git
     |Logical Problems|Type 5|1-12|0|05:48|
     |Letters & Symbol Series|Type 1|1-12|0|03:51|
     |Letters & Symbol Series|Type 2|1-14|1|05:03|
-    |Number Series|Type 1|1-20|1-19|0|04:52|    
-    |Number Series|Type 2|1-20|1-20|0|07:59|
-    |Number Series|Type 3|1-20|1-20|1|07:09|
+    |Number Series|Type 1|1-19|0|04:52|    
+    |Number Series|Type 2|1-20|0|07:59|
+    |Number Series|Type 3|1-20|1|07:09|
+    |Verbal Reasoning|Type 1|1-9|2|04:31|
+    |Making Judgements|Type 1|1-10|1|07:29|
+
