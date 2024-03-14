@@ -1002,3 +1002,40 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     ```
 - Diagram:
     <br><img src="../assets/images/Operating-Systems/self/17.png" height="600px" alt="Fixed Partitioning">
+
+### Dynamic Partitioning
+- Type: Contiguous
+- Number of partitions: Not Fixed.
+- Size of partitions: Not Fixed.
+```diff
++ Partitions are allocated at runtime.
++ No limitation on process size.
++ No Internal Fragmentation: Since memory is allocated as processes arrive.
+- External Fragmentation: After processes leave the memory, holes are created in it. There maybe a total of `K units` of space available, but we may still not be able to accomodate a process of size `K units`.
+```
+- **Compacting**: We may use this method to resolve External Fragmentation. We move all processes to one end of the memory, and all the free space to the other end. Then we can accomodate new processes in memory.
+    - We have to stop processes before re-allocating memory.
+    - It consumes a lot of time.
+- Diagram:
+    <br><img src="../assets/images/Operating-Systems/self/18.png" height="400px" alt="Variable Partitioning">
+- How memory is allocated:
+    - **First Fit**: Processes are allocated the first slot of memory that is sufficient for it.
+        <br><img src="../assets/images/Operating-Systems/self/19.png" height="600px" alt="First Fit">
+    - **Best Fit**: We allocate the memory in such a way that the remaining available space in the slot should be minimum.
+        <br><img src="../assets/images/Operating-Systems/self/20.png" height="600px" alt="Best Fit">
+        - **Example 0**: Calculate the time at which $J_7$ will be completed.
+            | Request No. | Request Size | Usage Time |
+            |-------------|--------------|------------|
+            | $J_1$       | 2K           | 4          |
+            | $J_2$       | 14K          | 10         |
+            | $J_3$       | 3K           | 2          |
+            | $J_4$       | 6K           | 8          |
+            | $J_5$       | 6K           | 4          |
+            | $J_6$       | 10K          | 1          |
+            | $J_7$       | 7K           | 8          |
+            | $J_8$       | 20K          | 6          |
+
+            <br><img src="../assets/images/Operating-Systems/self/21.png" height="600px" alt="Best Fit Example 0">
+            - $Result=19$, and $J_7$ will enter at $11$
+    - **Worst Fit**: We allocate the memory in such a way that the remaining available space in the slot should be maximum.
+        <br><img src="../assets/images/Operating-Systems/self/22.png" height="600px" alt="Worst Fit">
