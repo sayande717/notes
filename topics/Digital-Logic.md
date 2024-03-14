@@ -809,7 +809,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |1|0|0|Q / Hold|
     |1|0|1|0 / Reset|
     |1|1|0|1 / Set|
-    |1|1|1|Invalid|
+    |1|1|1|0 / Invalid|
 - Inputs: $S=0$, $R=0$ | Outputs: $Q_n=Q$, $\bar Q_n=\bar Q$
     - Circuit-Diagram:
         <br><img src="../assets/images/Digital-Logic/self/18.png" alt="SR Flip-Flop 0,0" width="600px" />
@@ -827,11 +827,11 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - SR Flip-Flop Truth-Table:
     |$CLK$|$S$|$R$|$Q_n$|
     |---|---|---|---|
-    |0|Any|Any|Q / Hold|
+    |0|Any|Any|Hold|
     |1|0|0|Q / Hold|
     |1|0|1|0 / Reset|
     |1|1|0|1 / Set|
-    |1|1|1|Invalid|
+    |1|1|1|0 / Invalid|
 - **Characteristic Table**:
     - Inputs: 3 {$S$,$R$,$Q_n$} | Outputs: 1, {$Q_{n+1}$}
     - `Corresponds to`:
@@ -864,6 +864,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Truth-Table (x: don't care / cannot be determined):
         |$Q_n$|$Q_{n+1}$|$S$|$R$|
         |---------|-----------|-----|-----|
+        |    0    |     0     |  0  |  x  |
         |    0    |     1     |  1  |  0  |
         |    1    |     0     |  0  |  1  |
         |    1    |     1     |  x  |  0  |
@@ -1100,6 +1101,68 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Logic-diagram:
         <br><img src="../assets/images/Digital-Logic/self/34.png" alt="T Flip-Flop to JK Flip-Flop" width="400px" />
 
+## Conversion: SR Flip-Flop to JK Flip-Flop
+- We need to excite SR Flip-Flop so it gets the Characteristics of JK Flip-Flop.
+- First, we define the Characteristics of JK Flip-Flop.
+- Next, we need the Excitation Table of SR Flip-Flop.
+- Merge the Excitation Table of SR Flip-Flop, with the Characteristic Table of JK Flip-Flop.
+    | $J$ | $K$ | $Q_n$ | $Q_{n+1}$ | $S$ | $R$ |
+    |-----|-----|-------|-----------|-----|-----|
+    | 0   | 0   | 0     | 0         | 0   | x   |
+    | 0   | 0   | 1     | 1         | x   | 0   |
+    | 0   | 1   | 0     | 0         | 1   | 0   |
+    | 0   | 1   | 1     | 0         | 1   | 0   |
+    | 1   | 0   | 0     | 1         | 0   | 1   |
+    | 1   | 0   | 1     | 1         | 0   | 1   |
+    | 1   | 1   | 0     | 1         | 1   | 1   |
+    | 1   | 1   | 1     | 0         | 1   | 1   |
+- K-Map for $S$:
+    |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar J_{(0)}$|$null_{(0)}$|$x_{(1)}$|$null_{(3)}$|$null_{(2)}$|
+    |$J_{(1)}$|$1_{(4)}$|$x_{(5)}$|$null_{(7)}$|$1_{(6)}$
+    - Pairs: $\{4,6\}$
+    - Min-Terms: **1** ie $J \bar Q_{n}$
+- K-Map for $R$:
+    |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar J_{(0)}$|$x_{(0)}$|$null_{(1)}$|$1_{(3)}$|$x_{(2)}$|
+    |$J_{(1)}$|$null_{(4)}$|$null_{(5)}$|$1_{(7)}$|$null_{(6)}$
+    - Pairs: $\{3,7\}$
+    - Min-Terms: **1** ie $K Q_{n}$
+        <br><img src="../assets/images/Digital-Logic/self/47.png" alt="SR Flip-Flop to JK Flip-Flop" width="400px" />
+
+## Conversion: JK Flip-Flop to SR Flip-Flop
+- We need to excite JK Flip-Flop so it gets the Characteristics of SR Flip-Flop.
+- First, we define the Characteristics of SR Flip-Flop.
+- Next, we need the Excitation Table of JK Flip-Flop.
+- Merge the Excitation Table JK Flip-Flop, with the Characteristic Table of SR Flip-Flop.
+    | $S$ | $R$ | $Q_n$ | $Q_{n+1}$ | $J$ | $K$ |
+    |-----|-----|-------|-----------|-----|-----|
+    | 0   | 0   | 0     | 0         | 0   | x   |
+    | 0   | 0   | 1     | 1         | x   | 0   |
+    | 0   | 1   | 0     | 0         | 0   | x   |
+    | 0   | 1   | 1     | 0         | x   | 1   |
+    | 1   | 0   | 0     | 1         | 1   | x   |
+    | 1   | 0   | 1     | 1         | x   | 0   |
+    | 1   | 1   | 0     | x         | x   | x   |
+    | 1   | 1   | 1     | x         | x   | x   |
+- K-Map for $J$:
+    |$↓S\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar S_{(0)}$|$null_{(0)}$|$x_{(1)}$|$x_{(3)}$|$null_{(2)}$|
+    |$S_{(1)}$|$1_{(4)}$|$x_{(5)}$|$x_{(7)}$|$x_{(6)}$
+    - Pairs: $\{4,5,7,6\}$
+    - Min-Terms: **1** ie $S$
+- K-Map for $K$:
+    |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
+    |:---:|:---:|:---:|:---:|:---:|
+    |$\bar S_{(0)}$|$null_{(0)}$|$null_{(1)}$|$1_{(3)}$|$x_{(2)}$|
+    |$S_{(1)}$|$x_{(4)}$|$null_{(5)}$|$x_{(7)}$|$x_{(6)}$
+    - Pairs: $\{3,2,7,6\}$
+    - Min-Terms: **1** ie $R$
+        <br><img src="../assets/images/Digital-Logic/self/48.png" alt="JK Flip-Flop to SR Flip-Flop" width="400px" />
+
 ## Counters
 - A counter is a device that stores and sometimes displays the number of times a particular event or process has occured.
 - Counters count clock pulses.
@@ -1205,7 +1268,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - There are $2^4=16$ states.
     - There are 8 usable states: $0000,0100,1100,1110,1111,0111,0011,0001,0000$
     - It will be called a `Mod-4 Twisted Ring Counter`.
-<br><img src="../assets/images/Digital-Logic/self/41.png" height="400px" alt="Twisted Ring Counter">
+<br><img src="../assets/images/Digital-Logic/self/41.png" height="280px" alt="Twisted Ring Counter">
 
 ## Shift Registers
 - Type: Synchronous
@@ -1237,3 +1300,18 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     | SIPO  |    n    |    0    |    n  |
     | PISO  |    1    |    n-1    | n |
     | PIPO  |    1    |    0    |  1   |
+- Example 0:
+    <br><img src="../assets/images/Digital-Logic/self/46.png" height="200px" alt="Shift Register Example 0">
+    - After 6 clock cycles, the value will be $1,1,1,1$, when initial value is $0,1,1,0$.
+    - Outputs:
+        |Clocks| $Q_3$ | $Q_2$ | $Q_1$ | $Q_0$ |
+        |------|-------|-------|-------|-------|
+        | $C_0$|   0   |   1   |   1   |   0   |
+        | $C_1$|   1   |   0   |   1   |   1   |
+        | $C_2$|   0   |   1   |   0   |   1   |
+        | $C_3$|   1   |   0   |   1   |   0   |
+        | $C_4$|   1   |   1   |   0   |   1   |
+        | $C_5$|   1   |   1   |   1   |   0   |
+        | $C_6$|   1   |   1   |   1   |   1   |
+
+<!-- Last image: self/48.png | external/2.jpg -->
