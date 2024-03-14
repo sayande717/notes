@@ -638,10 +638,10 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
 - Example 5: In view of Covid-19 pandemic, the probability that the state government cancels SSC exams is $0.6$. The probability that it cancels Class 12 exams is $0.4$. The probability that it cancels either SSC or Class 12 exams is $0.7$. The probability that it cancels both of them is ? Assume that both events are dependent on each other.
     - $E_1$ = SSC Exams are cancelled.
     - $E_2$ = Class 12 Exams are cancelled.
-    - $P(E_1 ∪ E_2) = 0.7$, $P(E_1)=0.6$, $P(E_2)=0.4$
+    - $P(E_1 ∪ E_2) = 0.7$, $P(E_1)=0.6$, $P(E_2)=0.4$ // ∪: Both events
     - $P(E_1 ∪ E_2) = P(E_1)+P(E_2)-P(E_1 ∩ E_2)$
     - $0.7 = 0.6+0.4-P(E_1 ∩ E_2)$
-    - $P(E_1 ∩ E_2)=0.3$
+    - $P(E_1 ∩ E_2)=0.3$ // ∩: Either of the events
 ## Conditional Probability
 - The Probability of happening of `B` given that event `A` has already occured, is said to be the Conditional probability of `B`, denoted by $P(B|A)$.
 - $P(B|A)=n(A∩B) \div n(A)=(n(A∩B) \div n(S)) / n(A) \div n(S)=P(B∩A) / P(A)$
@@ -663,7 +663,7 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - $P(k) = (k-1)/36; 2 \leq k \leq 7$
     - $P(k) = (13-k)/36; 8 \leq k \leq 12$
 - Example 5: From a pack of regular playing cards, two cards are drawn one after the other without replacement. What is the probability that both cards will be kings?
-    - $P(E)=(c^4_1 * c^{52}_1) \div (c^3_1 * c^{51}_1) = 1/221 = 0.00452$
+    - $P(E)=(c^4_1 \div c^{52}_1) * (c^3_1 \div c^{51}_1) = 1/221 = 0.00452$
 - Example 6: In a YouTube live class, the probability that a student likes the class is $0.2$, and the probability that the student dislikes the class is $0.002$. Assuming that a student can either like or dislike the class, or choose not to share his feedback, the probability that a student doesn't share feedback is ____.
     - $P(A ∪ B)^c = 1 - P(A ∪ B)$
     - $P(A ∪ B)^c = 1 - P(A) - P(B)$ // $P(A ∪ B) = P(A)+P(B)$
