@@ -34,6 +34,11 @@
     - $A ⊙ A ⊙ A ⊙ A ⊙ A ⊙ A ... n\ times$:
         - If `n` is even, result $=1$
         - If `n` is odd, result $=A$
+## FRL Signed Magnitude & Complement
+- For Signed Magniture (SM) & 1's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1}-1)$ to $(2^{n-1}-1)$
+    > If Range is $0$ to $2^n/2 - 1$, then $2^n/2-1=2^{n}.2^{-1}-1=2^{n-1}-1$
+- For 2's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1})$ to $(2^{n-1}-1)$
+    > The negative range starts at one less than the previous, while the positive range remains the same.
 
 # <strong>Gates</strong>
 
@@ -629,7 +634,6 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Output: $Y_0$, $Y_1$, $Y_2$, $Y_3$
     <br><img src="../assets/images/Digital-Logic/external/2.jpg" alt="1:4 De-multiplexer Logic Diagram" width="400px" /><br>
     Image taken from [here](https://www.electronicshub.org/wp-content/uploads/2015/07/1-to-4-Demux-logic-diagram.jpg)
-
 
 ## Decoder
 - It is a multi-input multi-output device.
@@ -1302,7 +1306,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     | PIPO  |    1    |    0    |  1   |
 - Example 0:
     <br><img src="../assets/images/Digital-Logic/self/46.png" height="200px" alt="Shift Register Example 0">
-    - After 6 clock cycles, the value will be $1,1,1,1$, when initial value is $0,1,1,0$.
+    - After 6 clock cycles, the value will be $1,1,1,1$ when initial value is $0,1,1,0$.
     - Outputs:
         |Clocks| $Q_3$ | $Q_2$ | $Q_1$ | $Q_0$ |
         |------|-------|-------|-------|-------|
@@ -1313,5 +1317,48 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
         | $C_4$|   1   |   1   |   0   |   1   |
         | $C_5$|   1   |   1   |   1   |   0   |
         | $C_6$|   1   |   1   |   1   |   1   |
+
+# Ranges of sign magnitude
+- [Formulae](#frl-signed-magnitude-complement)
+- Table:
+    | USM  |        | SM  | 1's | 2's |
+    |------|--------|-----|-----|-----|
+    | 0    | 000    | +0  | +0  | +0  |
+    | 1    | 001    | +1  | +1  | +1  |
+    | 2    | 010    | +2  | +2  | +2  |
+    | 3    | 011    | +3  | +3  | +3  |
+    | 4    | 100    | -0  | -3  | -4  |
+    | 5    | 101    | -1  | -2  | -3  |
+    | 6    | 110    | -2  | -1  | -2  |
+    | 7    | 111    | -3  | -0  | -1  |
+- Explanation:
+    - Unsigned Magnitude (USM): Self-explanatory.
+    - Signed Magnitude (SM): In $010$, 0/1: +ve/-ve number, while $10=2$ in integer form. In $110$, it will be $-2$.
+    - 1's Complement: Positive numbers (starting with 0) remain the same. For $110$, 1: -ve number, 1 becomes 0, and 0 becomes 1. So the result is $101$, which is $-1$.
+    - 2's Complement: Positive numbers (starting with 0) remain the same. For $110$, $1*2^{-2}+1*2^{1}+0*2^{0}=-4+2=-2$. Note the $-2$ as the power of 2 because the number is negative.
+- For Signed Magniture (SM) & 1's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1}-1)$ to $(2^{n-1}-1)$
+    > If Range is $0$ to $2^n/2 - 1$, then $2^n/2-1=2^{n}.2^{-1}-1=2^{n-1}-1$
+- For 2's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1})$ to $(2^{n-1}-1)$
+    > The negative range starts at one less than the previous, while the positive range remains the same.
+
+# Binary Operations
+## Addition
+- Example 0: $1110+1100=11010$, ie $14+12=26$
+    - $1+1=10$, carry $1$. $1+1+1=11$, carry $1$.
+- Example 1: $1110.110+1100.011=11011.001$, ie $14.750+12.375=27.125$
+
+## Subtraction
+- Example 0: $1110-0101=1001$, ie $14-5=9$
+    - $0-1=10-1=1$, borrow $1$.
+- Example 1: $1100-0101=0111$, ie $12-5=7$
+    1. In $1100$, right-most 0 needs 1. It can't get it from the position 3 element. So, it gets it from the position 2 element.
+    1. Position 2 element (1) will only give 10 to position 3 element (0).
+    1. Again, position 3 element gives 1 to position 4 element.
+    1. **However,position 4 element gets 10 too, not 1.**
+    1. So, $10-1=1$, $1-0=1$, $0-1=10-1=1$, borrow $1$. $0-0=0$.
+    - Whenever we borrow $1$ from a digit $1$, all the 0's on the right get $1$, but the right-most $0$ gets $10$.
+- Example 2: $11000-00001=10111$, ie $24-1=23$
+    - See previous
+- Example 3: $11000-01111=01001$, ie $24-15=9$
 
 <!-- Last image: self/48.png | external/2.jpg -->
