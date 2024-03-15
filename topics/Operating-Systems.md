@@ -13,6 +13,9 @@
     ```
     ... will print("Hello!") $2^n$ times.
 
+- Number of frames = Main memory size / frame size
+- Number of pages = Process size / Page size
+
 ## FRL-Deadlock
 - If a system has 3 processes each requiring 2 units of resources `R`.  The solution to finding the minimum number of units of `R` such that no deadlock will occur is:
     - Allocate 1 less than the amount of resources needed to each process (1+1+1 here). Then add 1 to it (4). This is **the minimum number of resources** we need to prevent Deadlock.
@@ -1033,9 +1036,36 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
             | $J_5$       | 6K           | 4          |
             | $J_6$       | 10K          | 1          |
             | $J_7$       | 7K           | 8          |
-            | $J_8$       | 20K          | 6          |
+            | $J_8$       | 20K          | 1          |
 
             <br><img src="../assets/images/Operating-Systems/self/21.png" height="600px" alt="Best Fit Example 0">
             - $Result=19$, and $J_7$ will enter at $11$
     - **Worst Fit**: We allocate the memory in such a way that the remaining available space in the slot should be maximum.
         <br><img src="../assets/images/Operating-Systems/self/22.png" height="600px" alt="Worst Fit">
+
+### Paging
+- Also known as: non-Continguous memory allocation
+- Processes are divided into pages, and then allocated space in the main memory so that they can take advantage of the scattered free spaces in the main memory.
+- You don't have to allocate memory space individually.
+- It's a time consuming process, because determining all free spaces that are available, checking for suitability, etc. takes time.
+- Process is divided into pages, Memory is divided into frames.
+- Page size = Frame size.
+- If frame size = $8KB$, memory size = $1KB$, number of frames = $8$
+- Number of frames = Main memory size / frame size
+- Number of pages = Process size / Page size
+<br><img src="../assets/images/Operating-Systems/self/23.png" height="400px" alt="Non-contiguous memory allocation" >
+- CPU is not aware of any occurence of paging.
+- **Logical Address**: The address CPU generates.
+    - Format: Page Number | Page offset
+        > Page Number: The number of the page we need to go to. <br>
+        > Page offset: The bit we need to go to, within that page number.
+- **Absolute Address**: The actual address of the data in memory.
+    - Format: Frame Number | Frame offset
+        > Frame Number: The number of the frame we need to go to. <br>
+        > Frame offset: The bit we need to go to, within that frame number.
+- **Memory Management Unit (MMU)** converts the logical address to it's absolute address.
+    - MMU uses a paging table for this. Every process has it's own page table.
+    - Page Table contains the frame number per page.
+<br><img src="../assets/images/Operating-Systems/self/24.png" height="400px" alt="">
+
+<!-- Last image: self/24.png | external/0.png -->
