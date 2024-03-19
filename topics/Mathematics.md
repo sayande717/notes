@@ -1,4 +1,5 @@
 <!-- ID: 0 -->
+
 # Formulae
 ## FRL Permutation Combination
 - (Combination) If we can choose `r` elements from `n` elements: $c^n_r=n! \div (n-r)!r!$
@@ -701,7 +702,7 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
     - $P(A∩E_i)=P(E_i).P(A|E_i)=P(A).P(E_i|A)$
     - $P(A∩E_i)=P(E_i).P(A|E_i)/P(A)=P(E_i|A)$
     - $P(E_i|A)=P(E_i).P(A|E_i) / \sum (i=1-n) P(E_i).P(A|E_i)$ Substituting (i), **Bayes' Theorem**
-- In an exam, for a muptiple choice question, if it's assumed that the answer is correct, then:
+- In an exam, for a multiple choice question, if it's assumed that the answer is correct, then:
     - P(A)=P(I know the answer).P(Answer is correct|I know the answer) + P(I guessed the answer).P(Answer is correct|I guessed the answer)
 
 
@@ -712,7 +713,7 @@ Algebriac Structure >> Semi-group >> Monoid >> Group >> Abelian Group
         - `A` occurs twice
         - `D` occurs twice
         - The rest 8 occur once.
-        - $p^n_r=10! \div (2!*2!*1!*1!*1!*1!*1!*1!*1!*1!)$
+        - $p^n_r=10! \div (2!*2!*1!*1!*1!*1!*1!*1!*1!*1!)=907200$
 - **Combination**
     - Example 0: If $c^n_4=c^n_5$, then $n=$?
         - If $c^n_4=c^n_5$, then either $r=s$ (impossible) or $n=r+s=4+5=9$ (possible)
