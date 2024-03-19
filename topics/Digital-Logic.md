@@ -1,4 +1,5 @@
 <!-- ID: 3 -->
+
 # Formulae
 ## FRL Self Duality
 - How many self-dual functions can be made with n variables?
@@ -1114,12 +1115,12 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |-----|-----|-------|-----------|-----|-----|
     | 0   | 0   | 0     | 0         | 0   | x   |
     | 0   | 0   | 1     | 1         | x   | 0   |
-    | 0   | 1   | 0     | 0         | 1   | 0   |
-    | 0   | 1   | 1     | 0         | 1   | 0   |
-    | 1   | 0   | 0     | 1         | 0   | 1   |
-    | 1   | 0   | 1     | 1         | 0   | 1   |
-    | 1   | 1   | 0     | 1         | 1   | 1   |
-    | 1   | 1   | 1     | 0         | 1   | 1   |
+    | 0   | 1   | 0     | 0         | 0   | x   |
+    | 0   | 1   | 1     | 0         | 0   | 1   |
+    | 1   | 0   | 0     | 1         | 1   | 0   |
+    | 1   | 0   | 1     | 1         | x   | 0   |
+    | 1   | 1   | 0     | 1         | 1   | 0   |
+    | 1   | 1   | 1     | 0         | 0   | 1   |
 - K-Map for $S$:
     |$↓J\ \|\ K {Q_n}→$|$\bar K \bar {Q_n}_{(00)}$|$\bar K {Q_n}_{(01)}$|$K {Q_n}_{(11)}$|$K \bar {Q_n}_{(10)}$|
     |:---:|:---:|:---:|:---:|:---:|
@@ -1335,7 +1336,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     - Unsigned Magnitude (USM): Self-explanatory.
     - Signed Magnitude (SM): In $010$, 0/1: +ve/-ve number, while $10=2$ in integer form. In $110$, it will be $-2$.
     - 1's Complement: Positive numbers (starting with 0) remain the same. For $110$, 1: -ve number, 1 becomes 0, and 0 becomes 1. So the result is $101$, which is $-1$.
-    - 2's Complement: Positive numbers (starting with 0) remain the same. For $110$, $1*2^{-2}+1*2^{1}+0*2^{0}=-4+2=-2$. Note the $-2$ as the power of 2 because the number is negative.
+    - 2's Complement: Positive numbers (starting with 0) remain the same. For $110$, $-1*2^{2}+1*2^{1}+0*2^{0}=-4+2=-2$. Note the $-$ sign for the 1st element, because the number is negative.
 - For Signed Magniture (SM) & 1's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1}-1)$ to $(2^{n-1}-1)$
     > If Range is $0$ to $2^n/2 - 1$, then $2^n/2-1=2^{n}.2^{-1}-1=2^{n-1}-1$
 - For 2's Complement: For n-bits, there are $2^n$ possible numbers, and the ranges are $-(2^{n-1})$ to $(2^{n-1}-1)$
