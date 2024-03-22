@@ -676,6 +676,21 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
     |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |  1| 1 | 1 |
 - SoP: $\bar X \bar Y \bar Z E_0 + \bar X \bar Y Z E_1 + \bar X Y \bar Z E_2 + \bar X Y Z E_3 + X \bar Y \bar Z E_4 + X \bar Y Z E_5 + X Y \bar Z E_6 + X Y Z E_7$
 
+## Priority Encoder
+- Example, Inputs: $4=2^2$ and Output: $2$
+- V: Valid
+- Truth Table:
+    | $I_3$ | $I_2$ | $I_1$ | $I_0$ | $O_1$ | $O_0$ | $V$   |
+    |-------|-------|-------|-------|-------|-------|-------|
+    |   0   |   0   |   0   |   0   |   x   |   x   |   0   |
+    |   0   |   0   |   0   |   1   |   0   |   0   |   1   |
+    |   0   |   0   |   1   |   0   |   0   |   1   |   1   |
+    |   0   |   1   |   0   |   0   |   1   |   0   |   1   |
+    |   1   |   0   |   0   |   0   |   1   |   1   |   1   |
+- In this type of encoder, there's no output ($V=0$), if all the inputs are $0$.
+- For a normal encoder, the output is the same for inputs $0,0,0,0$ & $1,0,0,0$ ie $I_3=1$, while the rest are 0. So, in a Priority encoder, we have an extra output $V$, and the outputs are valid only when $V=1$.
+- If 2 inputs become 1, no problems arise because the inputs are considered based on priority. Assuming that $I_3>I_2>I_1>I_0$, if $I_2=1$ & $I_1=1$, only $I_2$ will be considered.
+
 # <strong>Sequential Circuits</strong>
 - Consists of a memory element that stores the present output.
 - Output not only depends on the input, but also on the previous output.
@@ -1361,5 +1376,7 @@ Image taken from [here](https://i.pinimg.com/originals/0c/19/25/0c1925a59240ec96
 - Example 2: $11000-00001=10111$, ie $24-1=23$
     - See previous
 - Example 3: $11000-01111=01001$, ie $24-15=9$
+
+
 
 <!-- Last image: self/48.png | external/2.jpg -->
