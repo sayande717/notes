@@ -190,3 +190,28 @@ Which word could mean "playing"?
 1. asinine means extremely silly.
 1. ephemeral and immortal are antonyms.
 1. feral and tame are antonyms.
+
+# Verbal Reasoning
+## Syllogism
+### Type 1
+1. Some actors are singers. All the singers aredancers. Conclusion:
+    ```diff
+    + Some actors are dancers.
+    - No singer is actor.
+    ```
+    <img src="../assets/images/Aptitude/self/0.png" alt="Syllogism 1" width="200px" />
+1. All cars are cats. All fans are cats. Conclusion:
+    ```diff
+    - All cars are fans.
+    - Some fans are cars. 
+    ```
+    <img src="../assets/images/Aptitude/self/1.png" alt="Syllogism 2" width="200px" />
+1. All the research scholars are psychologists. Some psychologists are scientists. Conclusion:
+    ```diff
+    - All the research scholars are scientists.
+    - Some research scholars are scientists.
+    + Some scientists are psychologists. 
+    + Some psychologists are research scholars.
+    ```
+    <img src="../assets/images/Aptitude/self/2.png" alt="Syllogism 3" width="200px" />
+
