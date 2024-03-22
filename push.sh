@@ -8,7 +8,8 @@ subjectList=("Mathematics" \
     "Algorithms" \
     "Computer-Networks" \
     "Data-Structures" \
-    "Aptitude")
+    "Aptitude" \
+    "Artificial-Intelligence")
 
 subjectName=${subjectList[$((subjectID))]}
 

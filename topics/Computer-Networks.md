@@ -1,3 +1,4 @@
+<!-- ID: 5 -->
 # Formulae
 ## FRL Collision Domain
 The maximum amount of collisions that can occur.
@@ -11,9 +12,15 @@ Number of devices = `n`
 - Propagation Delay: Distance / Velocity
 - Total Time: Setup Time + Transmission Time + Propagation Delay + Tear Down Time
 
-# FRL Packet Switching
+## FRL Packet Switching
 - `n`: Number of intermediate devices re-transmitting the data packet
 - Total time: n(Transmission Time) + Propagation Delay
+
+## FRL Data Link Error Control
+> Window Size: Sender | Receiver
+- Stop & Wait: $1$ | $1$
+- Go-Back-N: $N=2^m-1$ | $1$
+    > If we want to transmit 4 bits, $N=4=2^m=2^2$, and window size for the sender will be $2^2-1=3$ bits.
 
 # Basics
 
@@ -153,7 +160,7 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - A hub is a multi-port repeater.
 - It has $>2$ ports.
 - There is some basic functionality built-in, using which we can check if all devices are properly connected or not.
-- Signal filtering/attenuation: Not possible. If `A` wants to send some data to `B`, then the others also get the message. The message is broadcasted messages to all connected devices.
+- Signal filtering/attenuation: Not possible. If `A` wants to send some data to `B`, then the others also get the message. The message is broadcasted to all connected devices.
 - **Collision Domain**: A maximum of `n` collisions can occur, if there are `n` connected devices.
 - **Broadcast Domain**: Any broadcast packet will reach all devices connected, on all sides of the hub.
 
@@ -289,6 +296,38 @@ Layer: `Data Link`
     > Methods:  CSMA/CD (dontention-based), ALOHA, Slotted ALOHA, Token Ring (contention-free)
 - **Physical Addressing**: It uses MAC Addresses for identifying devices.
 
+## Error Control
+- Formulae: [here](#frl-data-link-error-control)
+### Stop and Wait ARQ
+- ARQ: Automatic Repeat Request
+- It is an error control technique. It is done by keeping a copy of the sent frame, and re-transmitting it when the timer expires.
+- **Window size:** Sender: $1$ | Receiver: $1$
+- Sequence numbers used: 0,1.
+- Steps:
+    1. `Frame 0` is sent by `A` to `B`.
+    1. `B` receives the frame, and sends back the acknowledgement `ACK 1`. The acknowledgement states that `B` is now expecting `Frame 1`.
+    1. `A` receives the acknowledgement, sends `Frame 1`.
+    - If `Frame 0` is lost or the acknowledgement is lost, then `A` sends `Frame 0` again to `B`.
+        - If the frame was lost, `B` accepts it.
+        - If the frame was received but acknowledgement was lost, `B` discards it as a duplicate frame.
+    - `A` waits for a specific amount of time (called timeout) before re-sending the frame.
+    <br><img src="../assets/images/Computer-Networks/external/4.png" height="400px" alt="Stop and Wait ARQ" />
+    <br>Image taken from [here](https://contribute.geeksforgeeks.org/wp-content/uploads/Stop-and-Wait-ARQ-7.png)
+
+### Go-Back-N ARQ
+- ARQ: Automatic Repeat Request
+- **Window size:** Sender: $2^{m}-1$ | Receiver: $1$
+- If we want to send $2^m$ bits, then size must be 1 less than it, otherwise it will accept the previously received packet again.
+    <br><img src="../assets/images/Computer-Networks/self/2.png" height="400px" alt="Go Back N 0" />
+- If window size of the sender is `N`, it means `N` packets can be sent to the receiver. If any acknowledgement in the middle is lost, and still the receiver expects the correct packet, it is assumed that all frames have been received properly.
+    <br><img src="../assets/images/Computer-Networks/external/5.png" height="400px" alt="Go Back N 1" />
+    <br>Image taken from [here](https://4.bp.blogspot.com/-Mp8qNeHkFRw/Vu5KRrdlu9I/AAAAAAAAAh4/w2zhkQ7S-hM4t4k60G_D8AY1hoaGCh5fg/s1600/go-back-n%2B2.png)
+
+- If sender window size is $N=2$, and frames 0,1,2,3 are sent, and if `Frame 2` is lost in the middle, then Frame 3 onwards will not be accepted by the receiver (NAK 2). Afterwards, Frames 2 & 3 will have to be re-sent by the sender. So, **Frames cannot be received out of order.**
+    <br><img src="../assets/images/Computer-Networks/external/6.jpg" height="400px" alt="Go Back N 2" />
+    <br>Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/Sliding-Window-Protocol.jpg)
+
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
@@ -299,3 +338,4 @@ Layer: `Data Link`
 ### Transmission modes
 ### Multiplexing
 ### Encoding
+<!-- Last image: self/2.png | external/5.png -->
