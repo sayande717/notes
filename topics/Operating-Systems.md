@@ -1049,23 +1049,46 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 - You don't have to allocate memory space individually.
 - It's a time consuming process, because determining all free spaces that are available, checking for suitability, etc. takes time.
 - Process is divided into pages, Memory is divided into frames.
+- Each entry in the Page Table has frame number in it.
 - Page size = Frame size.
-- If frame size = $8KB$, memory size = $1KB$, number of frames = $8$
+- If frame size = $1KB$, memory size = $8KB$, number of frames = $8$
 - Number of frames = Main memory size / frame size
 - Number of pages = Process size / Page size
-<br><img src="../assets/images/Operating-Systems/self/23.png" height="400px" alt="Non-contiguous memory allocation" >
+<br><img src="../assets/images/Operating-Systems/self/23.png" height="600px" alt="Non-contiguous memory allocation" >
 - CPU is not aware of any occurence of paging.
 - **Logical Address**: The address CPU generates.
     - Format: Page Number | Page offset
+    - Size: If a process has 2 pages of 2 bytes each, then: Page Number: $2^1=2$ ie $1$ byte. Page Off-set: $2^1=2$ ie $1$ byte.
         > Page Number: The number of the page we need to go to. <br>
         > Page offset: The bit we need to go to, within that page number.
 - **Absolute Address**: The actual address of the data in memory.
     - Format: Frame Number | Frame offset
+    - Size: If a memory has 8 frames of 2 bytes each, then: Frame Number: $2^3=8$ ie $3$ bytes. Frame Off-set: $2^1=2$ ie $1$ byte.
         > Frame Number: The number of the frame we need to go to. <br>
         > Frame offset: The bit we need to go to, within that frame number.
+
 - **Memory Management Unit (MMU)** converts the logical address to it's absolute address.
     - MMU uses a paging table for this. Every process has it's own page table.
     - Page Table contains the frame number per page.
-<br><img src="../assets/images/Operating-Systems/self/24.png" height="400px" alt="">
+<br><img src="../assets/images/Operating-Systems/self/24.png" height="400px" alt="MMU">
 
-<!-- Last image: self/24.png | external/0.png -->
+- Example 0: Logical Address Space: 4GB, Physical Address Space: 64MB, Page Size: 4KB. What is the: Number of pages, Number of frames, Number of entries in the Page Table, Size of Page Table?
+    > $4GB = 2^2*2^{30}$ bytes, $2KB=2^1*2^{10}$ bytes
+    1. Logical Address Space: $4GB=2^2*2^{30}=2^{32}$ bytes.
+        > Total size of logical address: $32$ bytes.
+    1. Page Size: $4KB=2^2*2^{10}=2^{12}$ bytes.
+        > Size of page offset: $12$ bytes. So, $32-12=20$ bytes is the size of page number.
+    1. Number of pages: $2^{20}=1048576$
+    1. Physical Address Space: $64MB=2^6*2^{20}=2^{26}$ bytes.
+        > Total size of logical address: $26$ bytes.
+    1. Frame Size (= Page Size): $4KB=2^2*2^{10}=2^{12}$ bytes.
+        > Size of frame offset: $12$ bytes. So, $26-12=14$ bytes is the size of frame number.
+    1. Number of frames: $2^{14}=16384$
+    1. Number of entries in the Page Table: Number of pages: $2^{20}=1048576$
+    1. Size of Page Table: $2^{20}*14=14680064$ bytes.
+        > Each entry in the Page Table has frame number in it. Each frame number is $14$ bytes, and there are a total of $2^{20}$ pages in the table.
+
+        <br><img src="../assets/images/Operating-Systems/self/25.png" height="400px" alt="Paging Example 0">
+
+
+<!-- Last image: self/25.png | external/0.png -->
