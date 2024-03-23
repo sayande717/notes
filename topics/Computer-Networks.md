@@ -209,7 +209,7 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
     - If it does not find the entry ie cannot decide where to send the packet, it floods the network ie broadcasts it to all networks.
 - Filtering: If the router receives something like an ARP request, it can send it back to the same network.
     > An ARP (Address Resolution Protocol) request is a message sent by a device on a network to discover the MAC (Media Access Control) address associated with a specific IP (Internet Protocol) address.
-- **Collision Domain**: The switch uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. There may be collisions within the networks themselves, but not across them.
+- **Collision Domain**: The router uses the `Store & Forward` strategy. It stores the incoming packet, processes it, and then sends it to the destination. There may be collisions within the networks themselves, but not across them.
 - **Broadcast Domain**: Any broadcast packet will reach all devices connected but only within the network. It will not propagate to the other networks connected to the router.
 
 ## Collision Domain & Broadcast Domain
@@ -338,4 +338,4 @@ Layer: `Data Link`
 ### Transmission modes
 ### Multiplexing
 ### Encoding
-<!-- Last image: self/2.png | external/5.png -->
+<!-- Last image: self/2.png | external/6.png -->
