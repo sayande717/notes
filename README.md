@@ -77,5 +77,7 @@ git clone https://github.com/sayande717/notes.git
     |Logical Reasoning|Test: Random|1-20|9|09:56|
     |Logical Reasoning|Test: 1|1-20|3|08:30|
 - Verbal Reasoning
-    |Syllogism|Type 1|1-15|2|09:12|
+    |Syllogism|Type 1|1-14|2|09:12|
     |Syllogism|Type 2|1-20|1|06:45|
+    |Syllogism|Type 3|1-9|1|08:37|
+    |Syllogism|Type 1|1-14|0|05:25|
