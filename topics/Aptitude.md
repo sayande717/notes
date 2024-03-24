@@ -214,4 +214,6 @@ Which word could mean "playing"?
     + Some psychologists are research scholars.
     ```
     <img src="../assets/images/Aptitude/self/2.png" alt="Syllogism 3" width="200px" />
-
+## Logical Sequence of Words
+1. Newly married Couple, Family, Caste, Clan, Species
+    - Relation: Belongs to
