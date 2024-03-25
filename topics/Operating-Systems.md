@@ -1087,8 +1087,27 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     1. Number of entries in the Page Table: Number of pages: $2^{20}=1048576$
     1. Size of Page Table: $2^{20}*14=14680064$ bytes.
         > Each entry in the Page Table has frame number in it. Each frame number is $14$ bytes, and there are a total of $2^{20}$ pages in the table.
-
         <br><img src="../assets/images/Operating-Systems/self/25.png" height="400px" alt="Paging Example 0">
-
+- **Page Table**: Format: | Frame Number | Valid/Invalid (0/1) | Protection (RWX) | Reference (0/1) | Caching | Dirty (0/1)?
+    - Frame Number: **Mandatory**.
+    - Valid/Invalid (1/0): Is the page present? Sometimes the page is swapped out to secondary memory, in which case it can be absent from main memory.
+    - Protection (RWX): Permissions
+    - Reference (0/1): If we had brought the page to main memory before.
+    - Caching: Caching means putting the data to cache memory. If this is enabled, the data can be cached by the CPU.
+    - Dirty?: If some value is modified, we will set this as 1.
+- **Multi-level Paging**:
+    - Example 0:Physical Address Space: $256MB$, Logical Address Space: $4GB$, Page Size = Frame Size = $4KB$
+        1. Frame: $256MB=2^8*2^{20}=2^{28}$ | Frame Number size: $16$
+        1. Frame Size: $4KB=2^2*2^{10}=2^{12}$ | Frame Offset size: $12$
+        1. Physical Address Format: $16+12=28$
+        1. Number of frames: $2^{28}-2^{12}=2^{16}=65536$
+        1. Page: $4GB=2^2*2^{30}=2^{32}$ | Page Number size: $32$
+        1. Frame Size: $4KB=2^2*2^{10}=2^{12}$ | Frame Offset size: $12$
+        1. Logical Address Format: $20+12=32$
+        1. Number of pages: $2^{32}-2^{12}=2^{20}=1048576$
+        - Page Table stores frames. Each partition mandatorily has the frame number.
+        1. A frame has a size of 16 bits. There are $2^{20}$ pages in it. So, total size: $2^{20}*(16/8)=2MB$
+        1. Obviously, we cannot store 2MB in the main memory partition of size 4KB. This is why we need **Multi-level Paging**.
+        
 
 <!-- Last image: self/25.png | external/0.png -->
