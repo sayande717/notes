@@ -217,3 +217,19 @@ Which word could mean "playing"?
 ## Logical Sequence of Words
 1. Newly married Couple, Family, Caste, Clan, Species
     - Relation: Belongs to
+1. Si Units of measurement: 
+    - Exa ($10^{18}$)
+    - Peta ($10^{15}$)
+    - Tera ($10^{12}$)
+    - Giga ($10^{9}$)
+    - Mega ($10^{6}$)
+    - Kilo ($10^{3}$)
+    - Hecto ($10^{2}$)
+    - Deca ($10^{1}$)
+    - Unit ($10^{0}$)
+    - Deci ($10^{-1}$)
+    - Centi ($10^{-2}$)
+    - Milli ($10^{-3}$)
+    - Micro ($10^{-6}$)
+    - Nano ($10^{-9}$)
+    - Pico ($10^{-12}$)
