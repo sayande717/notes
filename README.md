@@ -21,7 +21,7 @@ git clone https://github.com/sayande717/notes.git
 |3| Digital Logic | [Markdown](./topics/Digital-Logic.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | null | `Completed` |
 |7| Aptitude | [Markdown](./topics/Aptitude.md) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `In Progress` |
 |6| Data Structures | [Markdown](./topics/Data-Structures.md) | [FreeCodeCamp](https://youtu.be/2ZLl8GAk1X4) | null | `In Progress` |
-|8| Artificial Intelligence | [Markdown](./topics/Artificial-Intelligence.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI) | till 8-Puzzle Problem ... | `In Progress` |
+|8| Artificial Intelligence | [Markdown](./topics/Artificial-Intelligence.md) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI) | till Generate and Test Search ... | `In Progress` |
 
 <hr>
 
