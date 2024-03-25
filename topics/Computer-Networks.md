@@ -19,8 +19,16 @@ Number of devices = `n`
 ## FRL Data Link Error Control
 > Window Size: Sender | Receiver
 - Stop & Wait: $1$ | $1$
-- Go-Back-N: $N=2^m-1$ | $1$
+- Go-Back-N: $N=2^k-1$ | $1$
+- Selective Repeat: $N=2^{k-1}$ | $N=2^{k-1}$
     > If we want to transmit 4 bits, $N=4=2^m=2^2$, and window size for the sender will be $2^2-1=3$ bits.
+- Efficiency:
+    - $T_p$: Propagation Delay, $T_t$: Transmission Time
+    - Efficiency: Transmission Time / Round Trip Time (= 2* Propagation Delay)
+    - $x=T_p / T_t$
+    - Stop-and-Wait ARQ: $1*1/(1+2x)$
+    - Go-Back-N: $(2^k-1)*1/(1+2x)$
+    - Selective Repeat: $(2^k-1)*1/(1+2x)$
 
 # Basics
 
@@ -126,7 +134,6 @@ Image taken from [here](https://ofbit.in/wp-content/uploads/2022/05/Full-Mesh-To
 - There are 2 variants: The one by G E Thomas, and the IEEE 802.3 version. By default, IEEE 802.3 is used.
 
     <img src="../assets/images/Computer-Networks/external/3.jpg" alt="Manchester Encoding" width="500px" />
-
     Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/ETHERNET_1.jpg)
 
 ## Networking Devices
@@ -299,7 +306,10 @@ Layer: `Data Link`
 ## Error Control
 - Formulae: [here](#frl-data-link-error-control)
 ### Stop and Wait ARQ
+- Formulae: [here](#frl-data-link-error-control)
 - ARQ: Automatic Repeat Request
+- Acknowledgement (ACK): Independent, per frame
+- Maximum frames Re-tramsmitted: 1
 - It is an error control technique. It is done by keeping a copy of the sent frame, and re-transmitting it when the timer expires.
 - **Window size:** Sender: $1$ | Receiver: $1$
 - Sequence numbers used: 0,1.
@@ -315,10 +325,14 @@ Layer: `Data Link`
     <br>Image taken from [here](https://contribute.geeksforgeeks.org/wp-content/uploads/Stop-and-Wait-ARQ-7.png)
 
 ### Go-Back-N ARQ
+- Formulae: [here](#frl-data-link-error-control)
 - ARQ: Automatic Repeat Request
-- **Window size:** Sender: $2^{m}-1$ | Receiver: $1$
-- If we want to send $2^m$ bits, then size must be 1 less than it, otherwise it will accept the previously received packet again.
-    <br><img src="../assets/images/Computer-Networks/self/2.png" height="400px" alt="Go Back N 0" />
+- Acknowledgement (ACK): Cumulative
+- Number of bits used to represent window: $k$
+- Maximum frames Re-tramsmitted: $2^{k}-1$
+- **Window size:** Sender: $N=2^{k}-1$ | Receiver: $1$
+- If we want to send $N$ bits, then size must be 1 less than it, otherwise it will accept the previously received packet again.
+    <br><img src="../assets/images/Computer-Networks/self/2.png" height="500px" alt="Go Back N 0" />
 - If window size of the sender is `N`, it means `N` packets can be sent to the receiver. If any acknowledgement in the middle is lost, and still the receiver expects the correct packet, it is assumed that all frames have been received properly.
     <br><img src="../assets/images/Computer-Networks/external/5.png" height="400px" alt="Go Back N 1" />
     <br>Image taken from [here](https://4.bp.blogspot.com/-Mp8qNeHkFRw/Vu5KRrdlu9I/AAAAAAAAAh4/w2zhkQ7S-hM4t4k60G_D8AY1hoaGCh5fg/s1600/go-back-n%2B2.png)
@@ -326,6 +340,21 @@ Layer: `Data Link`
 - If sender window size is $N=2$, and frames 0,1,2,3 are sent, and if `Frame 2` is lost in the middle, then Frame 3 onwards will not be accepted by the receiver (NAK 2). Afterwards, Frames 2 & 3 will have to be re-sent by the sender. So, **Frames cannot be received out of order.**
     <br><img src="../assets/images/Computer-Networks/external/6.jpg" height="400px" alt="Go Back N 2" />
     <br>Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/Sliding-Window-Protocol.jpg)
+
+### Selective Repeat ARQ
+- Formulae: [here](#frl-data-link-error-control)
+- ARQ: Automatic Repeat Request
+- Acknowledgement (ACK): Cumulative & Independent
+- Number of bits used to represent window: $k$
+- Maximum frames Re-tramsmitted: $2^{k-1}$
+- **Window Size:** Sender: $N=2^{k-1}$ | Receiver: $N=2^{k-1}$
+- Since the receiver can receive any one of the $2^{m-1}$ packets that the sender packet sends, ie frames 0,1,2,3 if window size for both is $4=2^{2-1}$, **frames can be received out of order**.
+- Window size of receiver should not be greater than $2^{m-1}$, otherwise it will accept the previously received packet again.
+    <br><img src="../assets/images/Computer-Networks/self/3.png" height="500px" alt="Selective Repeat ARQ 0" />
+- Sliding Window will not move till all frames have been received. For example, out of frame 0,1,2,3, if 1 was lost in the way, then the receiver will accept 0,2,3 but will not send an ACK for 1. Then, sender will re-send frame 1.
+- NAK: If a frame is corrupt, it can send an NAK (negative acknowledgement) for it, so that the sender re-sends it.
+<br><img src="../assets/images/Computer-Networks/external/7.png" height="500px" alt="Selective Repeat ARQ 1" />
+<br>Image taken from [here](https://4.bp.blogspot.com/-_GoNnqzwU-k/Vu5NWQywVcI/AAAAAAAAAiI/Cg-LF4EBhI0JZoSLYDKSYZ0ToeQksK2rA/s1600/selective%2Brepeat%2B1.png)
 
 
 ### Gateway
@@ -338,4 +367,4 @@ Layer: `Data Link`
 ### Transmission modes
 ### Multiplexing
 ### Encoding
-<!-- Last image: self/2.png | external/6.png -->
+<!-- Last image: self/3.png | external/7.png -->

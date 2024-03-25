@@ -82,3 +82,5 @@ git clone https://github.com/sayande717/notes.git
     |Syllogism|Type 3|1-9|1|08:37|
     |Syllogism|Type 1|1-14|0|05:25|
     |Logical Sequence of Words|Type 1|1-23|3|10:42|
+    |Logical Sequence of Words|Type 1|1-23|1|07:52|
+    |Logical Sequence of Words|Type 2|1-20|3|08:31|
