@@ -233,3 +233,8 @@ Which word could mean "playing"?
     - Micro ($10^{-6}$)
     - Nano ($10^{-9}$)
     - Pico ($10^{-12}$)
+
+## Analogy
+1. Carbon:Diamond::Corundum:Ruby, is used in making
+1. Eye:Myopia::Teeth:Pyorrhoea, can have disease
+1. Cassock:Priest::Gown:Graduate, is worn by
