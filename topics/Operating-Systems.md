@@ -942,7 +942,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         |$P_3$| 2 \| 0 \| 0 | 5 \| 4 \| 1 | 6 \| 4 \| 6 | 3 \| 4 \| 1 |
         |null | null | null | 8 \| 4 \| 6 | null | 
         1. Calculate the `Remaining Need`, which is `Max Need`-`Allocation`.
-        1. With the amount of resources we have available (based on difference between `Available` and `Remaining Need`), we can fulfill the request of $P_0$ & $P_0$. We will let $P_0$ execute.
+        1. With the amount of resources we have available (based on difference between `Available` and `Remaining Need`), we can fulfill the request of $P_0$ & $P_2$. We will let $P_0$ execute.
         1. After $P_2$ terminates, `Available`, which is `Current Available` + `Allocation`, is 3,3,0 + 1,0,0=4,3,1 
         1. Next, we can fulfill the request of $P_2$.
         1. After $P_2$ terminates, `Available`: 1,3,1 + 1,0,3 = 5,3,4
@@ -1109,5 +1109,4 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. A frame has a size of 16 bits. There are $2^{20}$ pages in it. So, total size: $2^{20}*(16/8)=2MB$
         1. Obviously, we cannot store 2MB in the main memory partition of size 4KB. This is why we need **Multi-level Paging**.
         
-
 <!-- Last image: self/25.png | external/0.png -->
