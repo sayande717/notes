@@ -1,4 +1,5 @@
 <!-- ID: 5 -->
+
 # Formulae
 ## FRL Collision Domain
 The maximum amount of collisions that can occur.
@@ -28,7 +29,7 @@ Number of devices = `n`
     - $x=T_p / T_t$
     - Stop-and-Wait ARQ: $1*1/(1+2x)$
     - Go-Back-N: $(2^k-1)*1/(1+2x)$
-    - Selective Repeat: $(2^k-1)*1/(1+2x)$
+    - Selective Repeat: $(2^{k-1})*1/(1+2x)$
 
 # Basics
 
@@ -293,7 +294,7 @@ Layer: `Data Link`
 
 ## Data Link Layer
 - Within a particular network, this layer is enough to send data between devices.
-- Terminology: `Data Frame`. Data packets, received from the Network Layer, are split into equal sized Date Frames, and transmitted to Physical Layer.
+- Terminology: `Data Frame`. Data packets, received from the Network Layer, are split into equal sized Data Frames, and transmitted to Physical Layer.
 - **Node-to-Node delivery**: The primary responsibility is to determine which node the data packet will hop to, next. At every step, it performs the task of moving the data packet to the next node, till it reaches the destination.
 - **Flow Control**: Flow control refers to the techniques used to regulate the flow of data between two communicating devices to ensure that the sender does not overwhelm the receiver. It involves mechanisms for pacing data transmission, buffering, and acknowledgment to prevent data loss due to congestion or buffer overflow.
     > Methods: Stop & Wait, Go Back N, Selective Repeat
@@ -302,6 +303,27 @@ Layer: `Data Link`
 - **Access Control**: Access control mechanisms govern the access to the communication channel by multiple devices in a network. It manages how devices contend for access to the channel, resolve contention issues, and allocate the channel efficiently to ensure fair and orderly data transmission.
     > Methods:  CSMA/CD (dontention-based), ALOHA, Slotted ALOHA, Token Ring (contention-free)
 - **Physical Addressing**: It uses MAC Addresses for identifying devices.
+
+### Stuffing
+- Stuffing is done on the Data Link Layer to distinguish between 2 data frames.
+- General: FLAG **ABCDE** FLAG **BCDEF** FLAG ...
+    - `FLAG` is used as a delimiter, to separate 2 frames.
+- **Byte Stuffing**: In byte stuffing, a special byte sequence is inserted into the data stream to mark the beginning and end of a frame or packet. When the sender encounters the special byte sequence within the data, it inserts an additional byte to distinguish it from the data. Byte stuffing helps to prevent ambiguity and misinterpretation of data frames, particularly when the data contains sequences that might be mistaken for control characters.
+    - If `FLAG` itself is present in the data: FLAG **ABCDE** ESC **FLAG BCDEF** FLAG ...
+        - If `ESC` precedes the `FLAG`, it is meant to be ignored, as it is a part of the data.
+    - If `ESC` itself is present in the data: FLAG **ABCDE** ESC **ESC BCDEF** FLAG ...
+        - If `ESC` precedes the `ESC`, it is meant to be ignored, as it is a part of the data.
+- **Bit Stuffing**: Bit stuffing is similar to byte stuffing but operates at the bit level. In bit stuffing, a special bit pattern is inserted into the data stream to mark the beginning and end of a frame. When the sender encounters the special bit pattern within the data, it inserts an additional bit to ensure that the pattern does not appear in the data itself. Bit stuffing is commonly used in synchronous communication protocols, such as HDLC (High-Level Data Link Control) and Ethernet, to maintain synchronization and prevent errors in data transmission.
+    - `1` after `011111` (1 followed by 0 followed by 5 1's) is a starting delimiter, used in the header. If it is a part of the data, we stuff a 0 after `011111`.
+        - Example: 011111**0**11010110101110011111**0**101010010
+- Data is unstuffed before being sent to the next layer.
+
+### Error Detection and Correction
+- In the `Data Link Layer`, the data is checked bit-by-bit for errors.
+- Types of errors:
+    - **Single Bit**: Error only occurs in 1 bit. Example: 101**0** ➡ 101**1**
+    - **Burst**: Error in more than 1 bit. Example: 1**0**101**0** ➡ 1**1**101**1**
+- **Length of error**: The number of bits, between the 1st and last error bit. In the previous example, it is 5 bits.
 
 ## Error Control
 - Formulae: [here](#frl-data-link-error-control)
@@ -348,14 +370,13 @@ Layer: `Data Link`
 - Number of bits used to represent window: $k$
 - Maximum frames Re-tramsmitted: $2^{k-1}$
 - **Window Size:** Sender: $N=2^{k-1}$ | Receiver: $N=2^{k-1}$
-- Since the receiver can receive any one of the $2^{m-1}$ packets that the sender packet sends, ie frames 0,1,2,3 if window size for both is $4=2^{2-1}$, **frames can be received out of order**.
+- Since the receiver can receive any one of the $2^{3-1}=4$ frames that the sender sends, ie frames 0,1,2 or 3 out of 0,1,2,3,4,5,6,7 if window size for both is $2^{3-1}=4$, **frames can be received out of order**.
 - Window size of receiver should not be greater than $2^{m-1}$, otherwise it will accept the previously received packet again.
     <br><img src="../assets/images/Computer-Networks/self/3.png" height="500px" alt="Selective Repeat ARQ 0" />
 - Sliding Window will not move till all frames have been received. For example, out of frame 0,1,2,3, if 1 was lost in the way, then the receiver will accept 0,2,3 but will not send an ACK for 1. Then, sender will re-send frame 1.
 - NAK: If a frame is corrupt, it can send an NAK (negative acknowledgement) for it, so that the sender re-sends it.
 <br><img src="../assets/images/Computer-Networks/external/7.png" height="500px" alt="Selective Repeat ARQ 1" />
 <br>Image taken from [here](https://4.bp.blogspot.com/-_GoNnqzwU-k/Vu5NWQywVcI/AAAAAAAAAiI/Cg-LF4EBhI0JZoSLYDKSYZ0ToeQksK2rA/s1600/selective%2Brepeat%2B1.png)
-
 
 ### Gateway
 ### IDS (Intrusion Detection System)
