@@ -76,6 +76,12 @@ git clone https://github.com/sayande717/notes.git
     |Making Judgements|Type 1|1-10|1|07:29|
     |Logical Reasoning|Test: Random|1-20|9|09:56|
     |Logical Reasoning|Test: 1|1-20|3|08:30|
+    |Analyzing Arguments|Type 1|1-10|0|07:17|
+    |Analyzing Arguments|Type 2|1-10|1|05:34|
+    |Analyzing Arguments|Type 3|1-8|2|03:04|
+
+
+
 - Verbal Reasoning
     |Syllogism|Type 1|1-14|2|09:12|
     |Syllogism|Type 2|1-20|1|06:45|
@@ -85,4 +91,5 @@ git clone https://github.com/sayande717/notes.git
     |Logical Sequence of Words|Type 1|1-23|1|07:52|
     |Logical Sequence of Words|Type 2|1-20|3|08:31|
     |Analogy|Type 1|1-25|2|05:48|
+
 
