@@ -1108,5 +1108,51 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         - Page Table stores frames. Each partition mandatorily has the frame number.
         1. A frame has a size of 16 bits. There are $2^{20}$ pages in it. So, total size: $2^{20}*(16/8)=2MB$
         1. Obviously, we cannot store 2MB in the main memory partition of size 4KB. This is why we need **Multi-level Paging**.
-        
+        1. So, we divide the page table by the frame size: $2MB/4KB=2^{20}*2 \div 2^{10}*2^2=2^9=512$
+        1. For the outer page table, there will be $512$ partitions, and each partition will have a size of $2B$ (because frame has a size of 16 bits). So, total size: $2*512=2*2^9=2^{10}=1KB$.
+        1. We can easily store 1KB within a frame partition.
+        1. **Addressing Scheme**: Whenever we're using a Multi-level Paging system, we also need to accomodate all the data we need in the logical address.
+        1. Previous Logical Address Format: $20+12=32$. Now, the offset will remain the same, but the Page number will change.
+        1. Outer page table accomodates $2^9$ elements.
+        1. Each partition in the Inner page table is of size 4KB. The frame size is 2B. So, there are $4KB/2B=(2^2*2^{10})/(2^1)=2^{12}/2^1=2^{11}$ elements.
+        1. So, Logical Address now: $(9+11)+12=32$
+    - Logical address: $P_1,P_2,d$.
+        - $P_1$ points to outer page table.
+        - $P_2$ points to inner page table.
+        - $d$ points to the main memory.
+- **Inverted Paging**:
+    - If there are $10$ processes whose pages are present in main memory, then their corresponding page tables must also be stored in main memory. So, we're using up the already limited main memory space to store multiple page tables.
+    - Inverted Paging aims to solve this problem, by using a **global page table** for all processes, maintained by the operating system.
+    - Difference:
+        - Normal Page Table: Page Number || Frame |
+        - Inverted Page Table: Frame Number || Page | Process ID |
+    - Since we're storing data of multiple pages, we also need to store process ID in addition.
+    - Example:
+        | Frame No. |   Page   | Process ID |
+        |-----------|----------|------------|
+        | $f_0$     | $p_0$    | $P_1$      |
+        | $f_1$     | $p_1$    | $P_2$      |
+        | $f_2$     | $p_2$    | $P_1$      |
+        | $f_3$     | $p_1$    | $P_3$      |
+        | $f_4$     | $p_3$    | $P_2$      |
+        | $f_5$     | $p_2$    | $P_3$      |
+        - As we can see, Page Number 1 can easily be present for multiple processes.
+        - Example: for last entry, we can see that Page $p_2$ of process $P_3$ is located at frame $f_5$. We go to frame 5, to get the data from main memory.
+    - Much more Searching Time is required, since we have to check each and every entry individually.
+- **Example 0**: Consider a virtual addresss space of 32 bits and page size of 4KB. The system has a RAM of 128KB. What will the ratio of Page Table and Inverted Page Table be, if frame size = page size = 4B?
+    - For Virtual Address:
+        - Total address size = Virtual Address Space = $32$ bits
+        - $4KB=2^2*2^{10}=2^{12}$, Page offset: $12$ bits
+        - So, Page Number size: $32-12=20$, Address size: $20+12=32$
+    - For Physical Address:
+        - Total address size = Physical Address Space = $128KB=2^7*2^{10}=2^{17}$
+        - $4KB=2^2*2^{10}=2^{12}$, Frame offset: $12$ bits
+        - So, Frame Number size: $17-12=5$, Address size: $5+12=17$
+        - We have a total of $2^{20}$ elements in a page table, each of size $2B$. So, Page Table Size: $2^{20}*2^2$.
+        - We have a total of $2^{5}$ elements in the Inverted Page Table, each of size $2B$. So, Inverted Page Table Size: $2^{5}*2^1=2^{2}$.
+        - **Ratio**: $(2^{20}*2^2) \div (2^{5}*2^{2})=2^{15}/1$ ie $2^{15}:1$
+
+
+
+
 <!-- Last image: self/25.png | external/0.png -->
