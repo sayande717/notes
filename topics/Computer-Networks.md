@@ -378,6 +378,67 @@ Layer: `Data Link`
 <br><img src="../assets/images/Computer-Networks/external/7.png" height="500px" alt="Selective Repeat ARQ 1" />
 <br>Image taken from [here](https://4.bp.blogspot.com/-_GoNnqzwU-k/Vu5NWQywVcI/AAAAAAAAAiI/Cg-LF4EBhI0JZoSLYDKSYZ0ToeQksK2rA/s1600/selective%2Brepeat%2B1.png)
 
+## Error Detection
+### Single Bit Parity
+- Least Expensive
+- Number of bits added: 1
+- **It can only detect errors when the number of error bits is odd.**.
+- 2 types:
+    - Even Parity: Number of 1's in the data word should be even.
+        > Example: 1010 -> 1010**0**, 1110 -> 1110**1**
+    - Odd Parity: Number of 1's in the data word should be odd.
+        > Example: 1010 -> 1010**1**, 1110 -> 1110**0**
+- If there is some error in the data, for example, in case of even parity, if 1**0**100 becomes 1**1**100, then the number of 1's is no longer even like it was supposed to be. Also, if **11**1**0**1 becomes **00**1**1**1, then also it can be detected.
+- **Hamming Distance**: Perform a XOR operation, then count the number of 1's. Example: $1010⊕1100=0110:2$, $0000⊕1111=1111:4$.
+    - If the Minimum Hamming Distance is `d`, then a maximum of `d-1` errors can be detected.
+    - Example 0:
+        | 0 | 1 | 2 | 3 | Even Parity |
+        |---|---|---|---|-------------|
+        | 0 | 0 | 0 | 0 | 0           |
+        | 0 | 0 | 0 | 1 | 1           |
+        | 0 | 0 | 1 | 0 | 1           |
+        | 0 | 0 | 1 | 1 | 0           |
+        | 0 | 1 | 0 | 0 | 1           |
+        | 0 | 1 | 0 | 1 | 0           |
+        | 0 | 1 | 1 | 0 | 0           |
+        | 0 | 1 | 1 | 1 | 1           |
+        | 1 | 0 | 0 | 0 | 1           |
+        | 1 | 0 | 0 | 1 | 0           |
+        | 1 | 0 | 1 | 0 | 0           |
+        | 1 | 0 | 1 | 1 | 1           |
+        | 1 | 1 | 0 | 0 | 0           |
+        | 1 | 1 | 0 | 1 | 1           |
+        | 1 | 1 | 1 | 0 | 1           |
+        | 1 | 1 | 1 | 1 | 0           |
+        - Here, the Minimum Hamming Distance (example between $00000$ & $00011$) is 2, so only 1-bit errors can be detected.
+
+### Cyclic Redundancy Check (CRC)
+- Based on Binary division
+- Number of Redundant bits: r
+- It can detect single bit, odd number of errors, and burst error of length equal to the maximum polynomial degree.
+- How it works is explained using an example.
+- Example 0:
+    1. Data Word: $1010101010$
+    1. Divisor, **tells us how many 0 bits to add at the end**:
+        - If given in polynomial: $x^4+x^3+1=1.x^4+1.x^3+0.x^2+0.x^1+1.x^0$ ie $11001$, 1 if x has a degree, 0 in all the other places. Number of digits to append = degree of highest polynomial = $4$.
+        - If given in binary, $11001$, then Number of digits to append = 1 less than the length of the Divisor = $4$
+    1. Divide: 1010101010**0000** $\div 11011$
+        - $10101⊕11001=01100$
+        - $01100\ 0⊕11001=00001$ Start with the leading 1, add the same number of bits as needed to make it equal to $11001$
+        - $00001\ 1010⊕11001=00011$
+        - $00011\ 000⊕11001=000010$, Remainder$=000010$.
+    1. Append 4 bits from the Remainder, starting from the last. So, add $0010$ to $1010101010$ to make it $10101010100010$.
+    1. When we send these 14 bits to the receiver, the receiver divides this same number with the same Divisor.
+    1. Receiver receives: $1010101010\ 0010$
+    1. Divide: 10101010100010 $\div 11011$
+        - $10101⊕11001=01100$
+        - $01100\ 0⊕11001=00001$
+        - $00001\ 1010⊕11001=00011$
+        - $00011\ 001⊕11001=000000$
+    1. **The Remainder will always be 0 for the receiver. But, if there's an error, it will be a non-zero value.**
+    1. Efficiency: $10/14*100=71.42\%$
+
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
