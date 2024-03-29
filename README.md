@@ -79,6 +79,8 @@ git clone https://github.com/sayande717/notes.git
     |Analyzing Arguments|Type 1|1-10|0|07:17|
     |Analyzing Arguments|Type 2|1-10|1|05:34|
     |Analyzing Arguments|Type 3|1-8|2|03:04|
+    |Course of Action|Type 1|1-20|4|07:07|
+    |Logical Reasoning|Test: 1|1-20|2|06:10|
 
 
 
