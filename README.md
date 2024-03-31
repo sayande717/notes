@@ -81,8 +81,7 @@ git clone https://github.com/sayande717/notes.git
     |Analyzing Arguments|Type 3|1-8|2|03:04|
     |Course of Action|Type 1|1-20|4|07:07|
     |Logical Reasoning|Test: 1|1-20|2|06:10|
-
-
+    |Theme Detection|1|1-18|6|15:24|
 
 - Verbal Reasoning
     |Syllogism|Type 1|1-14|2|09:12|
