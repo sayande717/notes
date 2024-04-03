@@ -438,6 +438,57 @@ Layer: `Data Link`
     1. **The Remainder will always be 0 for the receiver. But, if there's an error, it will be a non-zero value.**
     1. Efficiency: $10/14*100=71.42\%$
 
+### Hamming Code
+1. Data-word:
+    - Parity bits are spaced out according to $2^n$, ie they're located at positions $2^0=1,2^1=2,2^2=4,2^3=8$, ie $1,2,4,8$ etc.
+    - 7 bits:
+        |7|6|5|4|3|2|1|
+        |-|-|-|-|-|-|-|
+        |$D_3$|$D_2$|$D_1$|$P_2$|$D_0$|$P_1$|$P_0$|
+    - 11 bits:
+        |11|10|9|8|7|6|5|4|3|2|1|
+        |-|-|-|-|-|-|-|-|-|-|-|
+        |$D_6$|$D_5$|$D_4$|$P_3$|$D_3$|$D_2$|$D_1$|$P_2$|$D_0$|$P_1$|$P_0$|
+    - **Example**: Let data word (7 bits) be 1010:
+        |7|6|5|4|3|2|1|
+        |-|-|-|-|-|-|-|
+        |$1$|$0$|$1$|$P_2$|$0$|$P_1$|$P_0$|
+1. Calculating parity bits:
+    - For $P_0$:
+        - $2_0=1$. Start from 1. Take 1 bit, leave the next 1 bit, take the next 1 bit, etc.
+        - Take positions $1,3,5,7$, etc.
+        - $P_0=0⊕1⊕1=0$
+    - For $P_1$:
+        - $2_1=2$. Start from 2. Take 2 bits, leave the next 2 bits, take the next 2 bits, etc.
+        - Take positions $2,3,6,7,10,11$, etc.
+        - $P_1=0⊕0⊕1=1$
+    - For $P_2$:
+        - $2_2=4$. Start from 4. Take 4 bits, leave the next 4 bits, take the next 4 bits, etc.
+        - Take positions $4,5,6,7,12,13,14,15$, etc.
+        - $P_2=1⊕0⊕1=0$
+1. When the receiver receives it, it calculates the parity bits too. If they match with that of the sender, there is no error.
+1. **Example of error**:
+    - Sent data: $10011100101$
+    - Received data: $10111100101$
+    1. For sender, $P_0=1⊕0⊕1⊕0⊕1=1$
+    1. For receiver, $P_0=1⊕1⊕1⊕0⊕1=0$
+    - Clearly, the parity bit is different, so the error is detected.
+
+## Error Control
+### MAC: Multiple Access Control
+- It is only used in networks where a single link is shared by multiple devices, to transmit data, example in Bus Topology.
+- **Random Access Protocol**:
+    - There is no priority system between devices.
+    - They can send data at any time, whenever the link is ready.
+    - **Examples**: Pure ALOHA, Slotted ALOHA, CSMA/CD, CSMA/CA
+- **Controlled Access**:
+    - There is a controller that controls who can send data at any point in time.
+    - **Examples**: Polling, Token Passing
+- **Channelization Protocol**:
+    - We divide the frequency bands into multiple channels, and allocate devices to specific channels.
+    - **Examples**: FDMA, TDMA
+
+
 
 ### Gateway
 ### IDS (Intrusion Detection System)
@@ -449,4 +500,5 @@ Layer: `Data Link`
 ### Transmission modes
 ### Multiplexing
 ### Encoding
+
 <!-- Last image: self/3.png | external/7.png -->
