@@ -93,5 +93,8 @@ git clone https://github.com/sayande717/notes.git
     |Logical Sequence of Words|Type 1|1-23|1|07:52|
     |Logical Sequence of Words|Type 2|1-20|3|08:31|
     |Analogy|Type 1|1-25|2|05:48|
+    |Cube & Cuboid|Type 1|1-5|0|08:27|
+    |Cube & Cuboid|Type 2|1-4|1|07:42|
+
 
 
