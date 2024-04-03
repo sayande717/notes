@@ -9,7 +9,8 @@ subjectList=("Mathematics" \
     "Computer-Networks" \
     "Data-Structures" \
     "Aptitude" \
-    "Artificial-Intelligence")
+    "Artificial-Intelligence" \
+    "Cloud-Computing")
 
 subjectName=${subjectList[$((subjectID))]}
 imgDIR="./assets/images/$subjectName/self"
