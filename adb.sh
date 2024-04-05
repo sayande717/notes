@@ -14,7 +14,8 @@ subjectList=("Mathematics" \
 
 subjectName=${subjectList[$((subjectID))]}
 imgDIR="./assets/images/$subjectName/self"
+device="HA1WF4HH"
 
-adb pull /sdcard/Download/self $imgDIR/tmp
+adb -s $device pull /sdcard/Download/self $imgDIR/tmp
 mv $imgDIR/tmp/* $imgDIR/
 rm -r $imgDIR/tmp

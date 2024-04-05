@@ -20,6 +20,19 @@
 - If a system has 3 processes each requiring 2 units of resources `R`.  The solution to finding the minimum number of units of `R` such that no deadlock will occur is:
     - Allocate 1 less than the amount of resources needed to each process (1+1+1 here). Then add 1 to it (4). This is **the minimum number of resources** we need to prevent Deadlock.
     - Consequently, when we allocate 1 less than the amount of resources needed to each process, it becomes **the maximum number of resources** needed for Deadlock to occur.
+    n
+    Number of child processes = 2n−12n−1
+
+fork();
+fork();
+// ... n times
+printf("Hello!");
+
+… will print(“Hello!”) 2n2n times.
+
+Number of frames = Main memory size / frame size
+
+Number of pages = Process size / Page size
 - If a system has 3 processes that share 4 instances of the same resource type, and each process can request `k` instances of that resource, then to find the maximum value of `k` (to avoid deadlock), the following equation must be true: $Processes + Resources > Total\ Demand$
     - $R+n \leq \sum (i=1\ to\ n)\ D_i$, for deadlock to occur
     - $R+n > \sum (i=1\ to\ n)\ D_i$, to prevent deadlock
