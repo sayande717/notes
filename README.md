@@ -83,6 +83,8 @@ git clone https://github.com/sayande717/notes.git
     |Course of Action|Type 1|1-20|4|07:07|
     |Logical Reasoning|Test: 1|1-20|2|06:10|
     |Theme Detection|1|1-18|6|15:24|
+    |Logical Reasoning|Test: 2|1-20|5|09:01|
+
 
 - Verbal Reasoning
     |Syllogism|Type 1|1-14|2|09:12|
