@@ -1097,11 +1097,11 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Dirty?: If some value is modified, we will set this as 1.
 - **Multi-level Paging**:
     - Example 0:Physical Address Space: $256MB$, Logical Address Space: $4GB$, Page Size = Frame Size = $4KB$
-        1. Frame: $256MB=2^8*2^{20}=2^{28}$ | Frame Number size: $16$
+        1. Frame: $256MB=2^8*2^{20}=2^{28}$ | Physical address size: $28$
         1. Frame Size: $4KB=2^2*2^{10}=2^{12}$ | Frame Offset size: $12$
         1. Physical Address Format: $16+12=28$
         1. Number of frames: $2^{28}-2^{12}=2^{16}=65536$
-        1. Page: $4GB=2^2*2^{30}=2^{32}$ | Page Number size: $32$
+        1. Page: $4GB=2^2*2^{30}=2^{32}$ | Logical address size: $32$
         1. Frame Size: $4KB=2^2*2^{10}=2^{12}$ | Frame Offset size: $12$
         1. Logical Address Format: $20+12=32$
         1. Number of pages: $2^{32}-2^{12}=2^{20}=1048576$
@@ -1139,7 +1139,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         - As we can see, Page Number 1 can easily be present for multiple processes.
         - Example: for last entry, we can see that Page $p_2$ of process $P_3$ is located at frame $f_5$. We go to frame 5, to get the data from main memory.
     - Much more Searching Time is required, since we have to check each and every entry individually.
-- **Example 0**: Consider a virtual addresss space of 32 bits and page size of 4KB. The system has a RAM of 128KB. What will the ratio of Page Table and Inverted Page Table be, if frame size = page size = 4B?
+- **Example 0**: Consider a virtual address space of 32 bits and page size of 4KB. The system has a RAM of 128KB. What will the ratio of Page Table and Inverted Page Table be, if frame size = page size = 4B?
     - For Virtual Address:
         - Total address size = Virtual Address Space = $32$ bits
         - $4KB=2^2*2^{10}=2^{12}$, Page offset: $12$ bits
@@ -1148,8 +1148,8 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         - Total address size = Physical Address Space = $128KB=2^7*2^{10}=2^{17}$
         - $4KB=2^2*2^{10}=2^{12}$, Frame offset: $12$ bits
         - So, Frame Number size: $17-12=5$, Address size: $5+12=17$
-        - We have a total of $2^{20}$ elements in a page table, each of size $2B$. So, Page Table Size: $2^{20}*2^2$.
-        - We have a total of $2^{5}$ elements in the Inverted Page Table, each of size $2B$. So, Inverted Page Table Size: $2^{5}*2^1=2^{2}$.
+        - We have a total of $2^{20}$ elements in a page table, each of size $4B$. So, Page Table Size: $2^{20}*2^2$.
+        - We have a total of $2^{5}$ elements in the Inverted Page Table, each of size $2B$. So, Inverted Page Table Size: $2^{5}*2^2$.
         - **Ratio**: $(2^{20}*2^2) \div (2^{5}*2^{2})=2^{15}/1$ ie $2^{15}:1$
 
 
