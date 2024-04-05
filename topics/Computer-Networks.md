@@ -372,7 +372,7 @@ Layer: `Data Link`
 - **Window Size:** Sender: $N=2^{k-1}$ | Receiver: $N=2^{k-1}$
 - Since the receiver can receive any one of the $2^{3-1}=4$ frames that the sender sends, ie frames 0,1,2 or 3 out of 0,1,2,3,4,5,6,7 if window size for both is $2^{3-1}=4$, **frames can be received out of order**.
 - Window size of receiver should not be greater than $2^{m-1}$, otherwise it will accept the previously received packet again.
-    <br><img src="../assets/images/Computer-Networks/self/3.png" height="500px" alt="Selective Repeat ARQ 0" />
+    <br><img src="../assets/images/Computer-Networks/self/:.png" height="500px" alt="Selective Repeat ARQ 0" />
 - Sliding Window will not move till all frames have been received. For example, out of frame 0,1,2,3, if 1 was lost in the way, then the receiver will accept 0,2,3 but will not send an ACK for 1. Then, sender will re-send frame 1.
 - NAK: If a frame is corrupt, it can send an NAK (negative acknowledgement) for it, so that the sender re-sends it.
 <br><img src="../assets/images/Computer-Networks/external/7.png" height="500px" alt="Selective Repeat ARQ 1" />
@@ -455,15 +455,15 @@ Layer: `Data Link`
         |$1$|$0$|$1$|$P_2$|$0$|$P_1$|$P_0$|
 1. Calculating parity bits:
     - For $P_0$:
-        - $2_0=1$. Start from 1. Take 1 bit, leave the next 1 bit, take the next 1 bit, etc.
+        - $2^0=1$. Start from 1. Take 1 bit, leave the next 1 bit, take the next 1 bit, etc.
         - Take positions $1,3,5,7$, etc.
         - $P_0=0⊕1⊕1=0$
     - For $P_1$:
-        - $2_1=2$. Start from 2. Take 2 bits, leave the next 2 bits, take the next 2 bits, etc.
+        - $2^1=2$. Start from 2. Take 2 bits, leave the next 2 bits, take the next 2 bits, etc.
         - Take positions $2,3,6,7,10,11$, etc.
         - $P_1=0⊕0⊕1=1$
     - For $P_2$:
-        - $2_2=4$. Start from 4. Take 4 bits, leave the next 4 bits, take the next 4 bits, etc.
+        - $2^2=4$. Start from 4. Take 4 bits, leave the next 4 bits, take the next 4 bits, etc.
         - Take positions $4,5,6,7,12,13,14,15$, etc.
         - $P_2=1⊕0⊕1=0$
 1. When the receiver receives it, it calculates the parity bits too. If they match with that of the sender, there is no error.
@@ -481,14 +481,47 @@ Layer: `Data Link`
     - There is no priority system between devices.
     - They can send data at any time, whenever the link is ready.
     - **Examples**: Pure ALOHA, Slotted ALOHA, CSMA/CD, CSMA/CA
-- **Controlled Access**:
+- **Controlled Access Protocol**:
     - There is a controller that controls who can send data at any point in time.
     - **Examples**: Polling, Token Passing
 - **Channelization Protocol**:
     - We divide the frequency bands into multiple channels, and allocate devices to specific channels.
     - **Examples**: FDMA, TDMA
 
+#### Pure ALOHA
+- Type: Random Access Protocol
+- After the receiver receives the data packet, it sends back an acknowledgment (ACK).
+- It is a LAN based protocol.
+- Collision can occur if 2 or more stations transmit data at the same time, or if a station starts transmitting data before another one has finished.
+- **Transmission Time** = Message Size / Bandwidth.
+- **Vulnerable Time**: 2*Transmission Time
+    <br><img src="../assets/images/Computer-Networks/self/4.png" height="300px" alt="Vulnerable Time" />
+- **Efficiency**: $G*e^{-2G}$. Maximum Efficiency: $G=1/2$, $1/2*e^{-2*(1/2)}=1/2*e^{-1}=18.4\%$
+    - G: Number of stations currently transmitting data.
 
+#### Slotted ALOHA
+- The time is divided into slots, each slot size being the Transmission Time.
+- A station can only start transmitting data at the beginning of the slot.
+- Collision can only occur if 2 or more stations start transmitting data at the beginning of the same slot.
+- **Vulnerable Time**: Transmission Time
+- **Efficiency**: $G*e^{-G}$. Maximum Efficiency: $G=$, $1*e^{-1}=36.8\%$
+   - G: Number of stations currently transmitting data.
+
+#### CSMA (Carrier Sense Multiple Access)
+- A particular station senses if there is any data being actively transmitted. It cannot sense the entire medium, it can only sense if there's any data transmission occuring in front of it.
+- 3 Types:
+    - **1-Persistent**: 
+        - Station will constantly utilize resources and sense if the medium is being used.
+        - Collision: If multiple stations are scanning the medium at the same time, then the moment it becomes free (idle), all of them will start transmitting data, which will lead to collisions.
+        - Use-case: Wired LAN / Ethernet.
+    - **0-Persistent**:
+        - If the station checks the medium and it is busy, it will wait for a random amount of time before checking again.
+        - Medium can get freed up before the wait time of the station expires, which would mean the station waits longer than needed.
+        - Collision: Less than 1-Persistent, since all stations are waiting for distinct and random amount of time.
+    - **P-Persistent**:
+        - Station will constantly utilize resources and sense if the channel is being used.
+        - Once medium is free, it will start transmitting data according to the value of Probability (P), which ranges between 0 and 1.
+        - Use-case: WiFi (Wireless Fidelity).
 
 ### Gateway
 ### IDS (Intrusion Detection System)
@@ -501,4 +534,4 @@ Layer: `Data Link`
 ### Multiplexing
 ### Encoding
 
-<!-- Last image: self/3.png | external/7.png -->
+<!-- Last image: self/4.png | external/7.png -->
