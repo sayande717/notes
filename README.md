@@ -84,6 +84,10 @@ git clone https://github.com/sayande717/notes.git
     |Logical Reasoning|Test: 1|1-20|2|06:10|
     |Theme Detection|1|1-18|6|15:24|
     |Logical Reasoning|Test: 2|1-20|5|09:01|
+    |Logical Reasoning|Test: 2|1-20|3|04:21|
+    |Logical Problems|Type 1|1-11|0|02:31|
+
+
 
 
 - Verbal Reasoning
