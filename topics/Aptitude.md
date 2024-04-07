@@ -238,3 +238,11 @@ Which word could mean "playing"?
 1. Carbon:Diamond::Corundum:Ruby, is used in making
 1. Eye:Myopia::Teeth:Pyorrhoea, can have disease
 1. Cassock:Priest::Gown:Graduate, is worn by
+
+## Arithmetic Reasoning
+1. A girl counted in the following way on the fingers of her left hand : She started by calling the thumb 1, the index finger 2, middle finger 3, ring finger 4, little finger 5 and then reversed direction calling the ring finger 6, middle finger 7 and so on. She counted upto 1994. She ended counting on which finger?
+    - If we take the thumb, then the numbers are counted like: $1,9,17,25$, etc.
+    - The equation is $8n+1$, n starts from 0.
+    - So, $8n+1=1994$, $n=249(+1)$. So, she counts till 1 finger after the thumb, ie the index finger.
+1. What is the product of all the numbers in the dial of a telephone?
+    - The digit `0` is included among the dial, so the product is `0`.
