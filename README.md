@@ -102,6 +102,11 @@ git clone https://github.com/sayande717/notes.git
     |Cube & Cuboid|Type 1|1-5|0|08:27|
     |Cube & Cuboid|Type 2|1-4|1|07:42|
     |Arithmetic Reasoning|Section 1|1-10|2|27:42|
+    |Sitting Arrangement|Type 1|1-3|1|04:26|
+    |Sitting Arrangement|Type 2|1-3|1|03:51|
+    |Sitting Arrangement|Type 3|1-3|1|00:31|
+    |Sitting Arrangement|Type 4|1-3|1|04:18|
+
 
 
 
