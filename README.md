@@ -86,6 +86,8 @@ git clone https://github.com/sayande717/notes.git
     |Logical Reasoning|Test: 2|1-20|5|09:01|
     |Logical Reasoning|Test: 2|1-20|3|04:21|
     |Logical Problems|Type 1|1-11|0|02:31|
+    |Statement & Assumption|Section 1|1-30|5|09:26|
+    |Logical Reasoning|Test: 3|1-20|4|07:00|
 
 
 
