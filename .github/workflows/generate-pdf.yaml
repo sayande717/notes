@@ -7,7 +7,7 @@ on:
 
 jobs:
   run_commands:
-    runs-on: s0-notes 
+    runs-on: server0-notes
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2  # This step checks out your repository code
