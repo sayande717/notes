@@ -17,9 +17,9 @@ jobs:
           export fileName="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//')"
           export fileNameMD="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //')"
           export fileNamePDF="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//').pdf"
-          pandoc "./topics/${{fileNameMD}}" -o "./assets/pdf/$}}fileNamePDF}}"
+          pandoc "./topics/${fileNameMD}" -o "./assets/pdf/${fileNamePDF}"
       - name: Commit PDF
         run: |
-          git add "./assets/pdf/${{fileNamePDF}}"
-          git commit -m "pdf: ${{fileName}}"
+          git add "./assets/pdf/${fileNamePDF}"
+          git commit -m "pdf: ${fileName}"
           git push origin main
