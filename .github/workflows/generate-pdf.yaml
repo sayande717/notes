@@ -1,0 +1,27 @@
+
+name: Generate PDF from Markdown
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_commands:
+    runs-on: s0-notes 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # This step checks out your repository code
+
+      - name: Convert & Store
+        run: |
+          ls -la
+          fileName="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//')
+          fileNameMD="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //')
+          fileNamePDF=$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//').pdf
+          pandoc ./topics/$fileNameMD -o ./assets/pdf/$fileNamePDF
+      - name: Commit PDF
+        run: |
+          git add ./assets/pdf/$fileNamePDF
+          git commit -m "pdf: ${{fileName}}"
+          git push origin main
