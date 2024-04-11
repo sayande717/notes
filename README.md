@@ -89,9 +89,6 @@ git clone https://github.com/sayande717/notes.git
     |Statement & Assumption|Section 1|1-30|5|09:26|
     |Logical Reasoning|Test: 3|1-20|4|07:00|
 
-
-
-
 - Verbal Reasoning
     |Syllogism|Type 1|1-14|2|09:12|
     |Syllogism|Type 2|1-20|1|06:45|

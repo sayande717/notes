@@ -16,15 +16,15 @@ subjectName=${subjectList[$((subjectID))]}
 
 # Subject file name formatting
 extension="md"
-targetFile="$subjectName.$extension"
-targetAssetsDir="$subjectName"
+targetFile="${subjectName}.${extension}"
+targetAssetsDir="${subjectName}"
 
 # Commit message formatting
-commitMessage="update: $subjectName"
+commitMessage="update: ${subjectName}"
 
 # push to repository
-git add README.md ./topics/$targetFile ./assets/images/$targetAssetsDir
-git commit -m "$commitMessage"
+git add README.md "./topics/${targetFile}" "./assets/images/${targetAssetsDir}"
+git commit -m "${commitMessage}"
 git push origin main
 
 
