@@ -1,4 +1,3 @@
-
 name: Generate PDF from Markdown
 
 on:
@@ -15,10 +14,9 @@ jobs:
 
       - name: Convert & Store
         run: |
-          ls -la
-          fileName="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//')"
-          fileNameMD="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //')"
-          fileNamePDF="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//').pdf"
+          export fileName="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//')"
+          export fileNameMD="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //')"
+          export fileNamePDF="$(echo "${{ github.event.head_commit.message }}" | sed 's/update: //; s/\.md$//').pdf"
           pandoc "./topics/${{fileNameMD}}" -o "./assets/pdf/$}}fileNamePDF}}"
       - name: Commit PDF
         run: |
