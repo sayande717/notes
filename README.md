@@ -90,6 +90,8 @@ git clone https://github.com/sayande717/notes.git
     |Logical Reasoning|Test: 3|1-20|4|07:00|
 
 - Verbal Reasoning
+    |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
+    |:---|:---:|:---:|:---:|:---:|
     |Syllogism|Type 1|1-14|2|09:12|
     |Syllogism|Type 2|1-20|1|06:45|
     |Syllogism|Type 3|1-9|1|08:37|

@@ -17,7 +17,7 @@ Number of devices = `n`
 - `n`: Number of intermediate devices re-transmitting the data packet
 - Total time: n(Transmission Time) + Propagation Delay
 
-## FRL Data Link Error Control
+## FRL Data Link Error Detection
 > Window Size: Sender | Receiver
 - Stop & Wait: $1$ | $1$
 - Go-Back-N: $N=2^k-1$ | $1$
@@ -30,6 +30,22 @@ Number of devices = `n`
     - Stop-and-Wait ARQ: $1*1/(1+2x)$
     - Go-Back-N: $(2^k-1)*1/(1+2x)$
     - Selective Repeat: $(2^{k-1})*1/(1+2x)$
+
+## FRL Error Control 
+- **Pure ALOHA**:
+    - **Transmission Time** = Message Size / Bandwidth.
+    - **Vulnerable Time**: 2*Transmission Time
+    - **Efficiency**: $G*e^{-2G}$. Maximum Efficiency: $G=1/2$, $1/2*e^{-2*(1/2)}=1/2*e^{-1}=18.4\%$
+        - G: Number of stations currently transmitting data.
+- **Slotted ALOHA**:
+    - **Vulnerable Time**: Transmission Time
+    - **Efficiency**: $G*e^{-G}$. Maximum Efficiency: $G=$, $1*e^{-1}=36.8\%$
+       - G: Number of stations currently transmitting data.
+- **Carrier Sense Multiple Access / Collision Detection (CSMA/CD)**:
+    - **Transmission Time** = Message Size / Bandwidth.
+    - Transmission Time $\geq$ 2*Propagation Delay
+    - Message Size $\geq$ 2 * Propagation Delay * Bandwidth
+
 
 # Basics
 
@@ -372,7 +388,7 @@ Layer: `Data Link`
 - **Window Size:** Sender: $N=2^{k-1}$ | Receiver: $N=2^{k-1}$
 - Since the receiver can receive any one of the $2^{3-1}=4$ frames that the sender sends, ie frames 0,1,2 or 3 out of 0,1,2,3,4,5,6,7 if window size for both is $2^{3-1}=4$, **frames can be received out of order**.
 - Window size of receiver should not be greater than $2^{m-1}$, otherwise it will accept the previously received packet again.
-    <br><img src="../assets/images/Computer-Networks/self/:.png" height="500px" alt="Selective Repeat ARQ 0" />
+    <br><img src="../assets/images/Computer-Networks/self/3.png" height="500px" alt="Selective Repeat ARQ 0" />
 - Sliding Window will not move till all frames have been received. For example, out of frame 0,1,2,3, if 1 was lost in the way, then the receiver will accept 0,2,3 but will not send an ACK for 1. Then, sender will re-send frame 1.
 - NAK: If a frame is corrupt, it can send an NAK (negative acknowledgement) for it, so that the sender re-sends it.
 <br><img src="../assets/images/Computer-Networks/external/7.png" height="500px" alt="Selective Repeat ARQ 1" />
@@ -489,6 +505,7 @@ Layer: `Data Link`
     - **Examples**: FDMA, TDMA
 
 #### Pure ALOHA
+- Formulae: [here](#frl-error-control)
 - Type: Random Access Protocol
 - After the receiver receives the data packet, it sends back an acknowledgment (ACK).
 - It is a LAN based protocol.
@@ -500,6 +517,7 @@ Layer: `Data Link`
     - G: Number of stations currently transmitting data.
 
 #### Slotted ALOHA
+- Formulae: [here](#frl-error-control)
 - The time is divided into slots, each slot size being the Transmission Time.
 - A station can only start transmitting data at the beginning of the slot.
 - Collision can only occur if 2 or more stations start transmitting data at the beginning of the same slot.
@@ -508,6 +526,7 @@ Layer: `Data Link`
    - G: Number of stations currently transmitting data.
 
 #### CSMA (Carrier Sense Multiple Access)
+- Formulae: [here](#frl-error-control)
 - A particular station senses if there is any data being actively transmitted. It cannot sense the entire medium, it can only sense if there's any data transmission occuring in front of it.
 - 3 Types:
     - **1-Persistent**: 
@@ -521,7 +540,25 @@ Layer: `Data Link`
     - **P-Persistent**:
         - Station will constantly utilize resources and sense if the channel is being used.
         - Once medium is free, it will start transmitting data according to the value of Probability (P), which ranges between 0 and 1.
+        - Hybrid approach, combines 1-Persistent & 0-Persistent.
         - Use-case: WiFi (Wireless Fidelity).
+- **CSMA/CD**:
+    - Formulae: [here](#frl-error-control)
+    - CSMA, with Collision Detection.
+    - **No Acknowledgement is used**, because transmitting both data and acknowledgments will lead to more collisions.
+    - When A is transmitting data and it receives a collision signal. Then, A knows that the data it sent, collided.
+    - When A is not transmitting data (it has stopped transmission), and it receives a collision signal, A will not be able to figure out which station's data collided.
+    - Transmission Time should be atleast twice the amount of Propagation Delay.
+        1. `A` starts transmitting data at **12pm**. **Propagation Delay is `1 hour`**. So, it will complete transmitting data by **1pm**.
+        1. At **12:59:59**, `B` senses the channel. It notices that it's free, and start transmitting data. This will cause a collision.
+        1. But, the collision signal from it will take another hour to reach `A`, ie at **2pm**.
+        1. If `A` stops transmitting data at **1pm**, then at **2pm** it will not be able to detect whether it was it's own data that collided, at **2pm**.
+        1. This is why collision detection is only possible if Transmission Time is atleast twice the amount of Propagation Delay.
+        <br><img src="../assets/images/Computer-Networks/self/5.png" height="300px" alt="CSMA/CD 0" />
+    - Propagation Delay: The amount of time it takes for the receiver to receive the data, after the sender has sent it. 
+    - **Transmission Time** = Message Size / Bandwidth.
+    - Transmission Time $\geq$ 2*Propagation Delay
+    - Message Size $\geq$ 2 * Propagation Delay * Bandwidth
 
 ### Gateway
 ### IDS (Intrusion Detection System)
@@ -534,4 +571,4 @@ Layer: `Data Link`
 ### Multiplexing
 ### Encoding
 
-<!-- Last image: self/4.png | external/7.png -->
+<!-- Last image: self/5.png | external/7.png -->
