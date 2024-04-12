@@ -107,6 +107,12 @@ git clone https://github.com/sayande717/notes.git
     |Sitting Arrangement|Type 2|1-3|1|03:51|
     |Sitting Arrangement|Type 3|1-3|1|00:31|
     |Sitting Arrangement|Type 4|1-3|1|04:18|
+    |Sitting Arrangement|Type 5|1-5|1|03:48|
+    |Sitting Arrangement|Type 6|1-4|0|01:58|
+    |Sitting Arrangement|Type 7|1-5|0|09:21|
+    |Sitting Arrangement|Type 8|1-5|0|02:34|
+
+
 
 
 
