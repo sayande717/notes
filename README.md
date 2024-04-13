@@ -111,9 +111,5 @@ git clone https://github.com/sayande717/notes.git
     |Sitting Arrangement|Type 6|1-4|0|01:58|
     |Sitting Arrangement|Type 7|1-5|0|09:21|
     |Sitting Arrangement|Type 8|1-5|0|02:34|
-
-
-
-
-
-
+    |Verification of Truth|Section 1|1-39|3|06:49|
+    |Data Sufficiency|Section 1|1-10|4|07:19|
