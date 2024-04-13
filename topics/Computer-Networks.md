@@ -45,6 +45,8 @@ Number of devices = `n`
     - **Transmission Time** = Message Size / Bandwidth.
     - Transmission Time $\geq$ 2*Propagation Delay
     - Message Size $\geq$ 2 * Propagation Delay * Bandwidth
+    - **Propagation Delay**: Distance / Velocity
+    - **Efficiency** = $1 \div (1+6.44a)$, a = Propagation Delay / Transmission Time
 
 
 # Basics
@@ -544,6 +546,7 @@ Layer: `Data Link`
         - Use-case: WiFi (Wireless Fidelity).
 - **CSMA/CD**:
     - Formulae: [here](#frl-error-control)
+    - Usage: Wired Networks
     - CSMA, with Collision Detection.
     - **No Acknowledgement is used**, because transmitting both data and acknowledgments will lead to more collisions.
     - When A is transmitting data and it receives a collision signal. Then, A knows that the data it sent, collided.
@@ -559,7 +562,35 @@ Layer: `Data Link`
     - **Transmission Time** = Message Size / Bandwidth.
     - Transmission Time $\geq$ 2*Propagation Delay
     - Message Size $\geq$ 2 * Propagation Delay * Bandwidth
+    - Example 0: Consider a CSMA/CD network that transmits data at a rate of 100Mbps ($10^8$ bits per second) over a 1km cable with no repeaters. If the minimum frame size required for this network is 1250bytes, what is the signal speed (km/second) in the cable?
+        - Transmission Time $\geq$ 2*Propagation Delay
+        - Transmission Time = Message Size / Bandwidth
+        - Message Size $\geq$ 2 * Propagation Delay * Bandwidth
+        - Propagation Delay: Distance / Velocity
+        - **We have to find Velocity**.
+        1. Transmission Time = 2 * Propagation Delay
+        1. Message Size = 2 * Propagation Delay * Bandwidth
+        1. Message Size = 2 * (Distance/Velocity) * Bandwidth
+        1. **Velocity = (2 * Propagation Delay * Bandwidth) / (Message Size)**
+        1. $Velocity = (2 * 1km * 10^8) / (1250*8)=20000\ km/second$
 
+- **CSMA/CA**:
+    - CSMA, with Collision Avoidance.
+    - Steps:
+        1. START, set $k=0$ (k=number of attempts).
+        1. Sense the carrier.
+            - If medium is being used, wait.
+            - If medium is idle, wait for an amount of time equivalent to IFS (Interframe Space)/DCF (Distributed Coordination Function) / DIFS (Distributed Interframe Space).
+        1. In the Contention Window, **it will choose it's slot number** equal to a random number between $0\ to\ 2^k-1$. For 1st attempt, the slot number will be $0\ to\ 2^0-1$.
+        1. It will sent an RTS (Ready-To-Send). This signal will be transmitted to the hub the device is connected to. Then, it'll wait for a CTS (Clear-to-send) timer.
+        1. If it receives the CTS before the timeout, it waits for another IFS amount of time, **then finally sends the frame**.
+            - If it receives an ACK, well and good.
+            - If it does not receive an ACK, then $k=k+1$. It is checked if $k<limit$, then the station waits for $T_b$ seconds.
+            - $T_b=R*T_s$ ($T_b$=Back-off time, R=Random Value, $T_s$=Slot Time).
+
+        <br><img src="../assets/images/Computer-Networks/external/8.png" height="600px" alt="CSMA/CA" />
+        <br>Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/44-3.png)
+    
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
@@ -571,4 +602,4 @@ Layer: `Data Link`
 ### Multiplexing
 ### Encoding
 
-<!-- Last image: self/5.png | external/7.png -->
+<!-- Last image: self/5.png | external/8.png -->
