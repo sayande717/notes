@@ -430,6 +430,44 @@ Example: Student
     - **Updation Anamoly**: Say we want to update the salary of faculty $F_{ID}=302$ ie Emily from $55000$ to $60000$. Now, since there is only 1 faculty with $F_{ID}=302$, the updation should only happen once. But, in reality, since there are multiple entries of $F_{ID}=302$, value $55000$ will be updated multiple times within the table (twice, in this example).
 - Normalization aims to prevent these anamolies from happening.
 
+## Functional Dependency
+- X -> Y: means that X determines Y, or Y is determined by X.
+    - X: Determinant
+    - Y: Dependent Attribute
+- Example:
+    - X: Sid, Y: Sname, X -> Y
+    1. VALID, data has been duplicated.
+        |Sid|Sname|
+        |---|---|
+        |1|Ranjit|
+        |1|Ranjit|
+    1. VALID, they are different people.
+        |Sid|Sname|
+        |---|---|
+        |1|Ranjit|
+        |2|Ranjit|
+    1. VALID, they are different people.
+        |Sid|Sname|
+        |---|---|
+        |1|Ranjit|
+        |2|Varun|
+    1. INVALID, Sid cannot be same for different people.
+        |Sid|Sname|
+        |---|---|
+        |1|Ranjit|
+        |1|Varun|
+- Types:
+    - **Trivial**: Functional Dependencies where if (X -> Y), then Y is a subset of X. Also, they are always valid, because effectively, X is determining itself. Example: (Sname,Sid -> Sid).
+    - **Non-Trivial**: Functional Dependencies where if (X -> Y), then Y is not a subset of X. Example: (Eid -> Ename).
+- Properties: 
+    - **Reflexivity**: If X & Y are Trivial Functional Dependencies (Y is a subset of X), then (X -> Y)
+    - **Augmentation**: If (X -> Y), then (XZ -> YZ)
+    - **Transitive**: If (X -> Y) & (Y -> Z), then (X -> Z)
+    - **Union**:  If (X -> Y) & (X -> Z), then (X -> YZ)
+    - **Decomposition**: If (X -> YZ), then (X -> Y) & (X -> Z). You cannot Decompose the left hand side.
+    - **Composition**: If (X -> Y) & (Z -> W), then (XZ -> YW)
+    - **Pseudotransitivity**: If (X -> Y) & (WY -> Z), then (WX -> Z)
+
 ## Closure Method
 - A method to find candidate keys from functional dependencies (FDs).
 - 2 methods:
@@ -521,6 +559,45 @@ Example: Student
             |3|DBMS|
         - Primary Key: `RollNo+Course`
         - Foreign Key: `RollNo`, referencing to `RollNo`.
+
+## Second Normal form (2-NF)
+- Table must be in First Normal Form (1-NF).
+- All the non-prime attributes must be fully functionally dependent on the Candidate Key. They must not be only partially dependent on a part of (ie a proper subset of) the Candidate Key.
+- If (AB -> C), AB is a candidate key (prime attribute) while C is a non-prime attribute. If (A -> C) or (B -> C) is true, then the table is not in 2-NF.
+- Example:
+    |Customer ID|Store ID|Location|
+    |---|---|---|
+    |1|1|Delhi|
+    |1|3|Mumbai|
+    |2|1|Delhi|
+    |3|2|Bangalore|
+    |4|3|Mumbai|
+    - Primary Key: `Customer ID + Store ID`
+    - Here, Location (non-prime attribute), is only dependent on one of the prime attributes (Store ID). So, it's not in `2-NF`.
+    - So, we divide it into 2 tables.
+    - Table 1 (no dependency problems):
+        |Customer ID|Store ID|
+        |---|---|
+        |1|1|
+        |1|3|
+        |2|1|
+        |3|2|
+        |4|3|
+    - Table 2 (Location is dependent on the only prime attribute, `Store ID`):
+        |Store ID|Location|
+        |---|---|
+        |1|Delhi|
+        |2|Bangalore|
+        |3|Mumbai|
+- Example 1:
+    - $R=\{A,B,C,D,E,F\}$, FD: {C->F, E->A, EC->D, A->B}
+    1. Here, C & E are not present in the RHS of the functional dependencies. So, let's check for $CE^+$.
+    1. $CE^+={CEAFDB}$
+    1. Candidate Key: CE
+    1. None of C,E are present in the RHS of the functional dependencies, so {CE} is the only candidate key.
+    1. Prime attributes: $\{C,E\}$
+    1. Non-Prime attributes: $\{A,B,D,F\}$
+    1. Here,because C->F, E->A, we can clearly see the C & E by tehmselves are determining a non-prime attribute. So, table is not in `2-NF`.
 
 # Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
 # Basics of keys
