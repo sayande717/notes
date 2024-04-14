@@ -1165,7 +1165,32 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         - We have a total of $2^{5}$ elements in the Inverted Page Table, each of size $2B$. So, Inverted Page Table Size: $2^{5}*2^2$.
         - **Ratio**: $(2^{20}*2^2) \div (2^{5}*2^{2})=2^{15}/1$ ie $2^{15}:1$
 
+### Thrashing
+- It is the process of partially bringing in processes (as pages) in the main memory, instead of the full process, to increase the degree of Multi-programming.
+- If we've brought page `p1` of Process $P_0$ to $P_n$, but the CPU asks for page `p2` of some processes, we have to spend extra time to bring in those processes. A **Page Fault** will occur, and the OS needs extra **Page Fault Service Time** to service them.
+- Steps to resolve the problem:
+    1. Increase main memory size (not always feasible or easy)
+    1. Reduce the speed of Long-Term Scheduler, so that less processes arrive at the ready state (and less memory is allocated).
 
-
+### Segmentation
+- In **Paging**, a process is equally divided and stored in the main memory. If, there is a piece of code that needs > 1 page to fit, chances are that it will the code will be divided into 2 pages and put in 2 random locations in main memory. This will cause problems.
+- In **Segmentation**, a process is divided into variable size segments, and stored in main memory. So, the same code from above can now fit in a single segment.
+- Memory Management Unit (MMU) converts logical address to physical address.
+- Segment Table has 2 columns: Base Address & Size.
+    |Segment No.|Base Address|Size (d)|
+    |-----------|------------|----|
+    |0|3300|200|
+    |1|1800|400|
+    |2|2700|600|
+    |3|2300|400|
+    |4|2200|100|
+    |5|1500|300|
+- CPU generates a logical address: |Segment Number | Off-set|
+- Example:
+    - Logical address: |0001|100| = |1|400|
+    1. Segment number is 1, and Base Address is $1800$.
+    1. Check if the Size (d) $\leq$ Off-set. $400 \leq 400 = TRUE$
+    1. Calculate the range: $1800+400=2200$. So, CPU needs the whole segment in this case.
+    1. If d>off-set, generate a trap/error.
 
 <!-- Last image: self/25.png | external/0.png -->
