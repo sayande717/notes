@@ -88,6 +88,8 @@ git clone https://github.com/sayande717/notes.git
     |Logical Problems|Type 1|1-11|0|02:31|
     |Statement & Assumption|Section 1|1-30|5|09:26|
     |Logical Reasoning|Test: 3|1-20|4|07:00|
+    |Logical Reasoning|Test: 4|1-20|10|06:47|
+    |Logical Reasoning|Test: 5|1-20|4|08:40|
 
 - Verbal Reasoning
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
