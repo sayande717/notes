@@ -121,7 +121,7 @@ Image taken from [here](https://www.sitesbay.com/os/images/process-states-in-ope
 - **Device-related**: We obtain the rights to access and talk to hardware, using these system calls. Example: read, write, reposition, `ioctl`.
 - **Information-related**: We use these system calls when we want to get information about something. Example: `getPid`, attributes, system-wide time & date.
 - **Process control**: These are used for managing processes. Example: `load()`, `execute()`, `abort()`, `fork()`, `nbit`, `signal`, `allocate`. `wait` & `signal` are used for process synchronization.
-- **Communication**: These are used by processes to communicate among themselves. Example: `pipe()`, create/delete connections, `shmget()` [get value of the shared memeory].
+- **Communication**: These are used by processes to communicate among themselves. Example: `pipe()`, create/delete connections, `shmget()` [get value of the shared memory].
 - **Security**: Here, we're mostly concerned with security & permissions. Examples: `chmod`, `chown`, `umask`.
 
 ### chmod (Change mode)
@@ -1189,8 +1189,24 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 - Example:
     - Logical address: |0001|100| = |1|400|
     1. Segment number is 1, and Base Address is $1800$.
-    1. Check if the Size (d) $\leq$ Off-set. $400 \leq 400 = TRUE$
+    1. Check if the Off-set $\leq$ Size (d). $400 \leq 400 = TRUE$
     1. Calculate the range: $1800+400=2200$. So, CPU needs the whole segment in this case.
-    1. If d>off-set, generate a trap/error.
+    1. If Off-set > Size (d), generate a trap/error.
+
+### Overlay
+- A process a process with a size larger than the size of the largest partition of the main memory, can be put into the main memory.
+- Used in embedded systems. Here, a process is divided into independent functions. The independence of the functions is necessary. For example, if $f_1$ is put in main memory, and it depends on something that is in $f_2$ (or outside $f_1$), then CPU will not be able to fetch the data.
+- It is not used in traditional computer systems.
+- Example 0: Consider a 2 pass assembler, Pass 1: 80KB, Pass 2: 90KB. Symbol Table: 30KB, Common Routine: 20KB. At a time only 1 pass is in use, what is the minimum partition size required if overlay driver is 10KB?
+    - Pass 1: 80KB
+    - Pass 2: 90KB
+    - Symbol Table: 30KB
+    - Common Routine: 20KB
+    - Overlay Driver: 10KB
+    1. Maximum size required to accomodate everything: $80+90+30+20+10KB = 230KB$
+    1. Both passes can be used independently.
+    1. Size required to accomodate Pass 1: $80+30+20+10KB=140KB$
+    1. Size required to accomodate Pass 2: $90+30+20+10KB=150KB$
+    1. So, $150KB$ is the minimum amount of memory required.
 
 <!-- Last image: self/25.png | external/0.png -->
