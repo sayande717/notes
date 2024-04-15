@@ -590,6 +590,110 @@ Layer: `Data Link`
 
         <br><img src="../assets/images/Computer-Networks/external/8.png" height="600px" alt="CSMA/CA" />
         <br>Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/44-3.png)
+
+
+### Ethernet Frame Format
+- IEEE 802.3 | Used in Bus Topology
+- Defined in Data Link Layer
+- Types of Ethernet:
+    - 10Base2: 10mbps, Baseband, 200 metre range (Thin)
+    - 10Base5: 10mbps, Baseband, 500 metre range (Thick)
+    - 10BaseT: 10mbps, Baseband, 100 metre range
+    - 100BaseFx: 100mbps, Baseband, Fiber Channel
+    - 10GBaseT: 10Gbps, Baseband, 100 metre range
+    - ...etc
+- Format:
+    |Preamble (7)|SFD (1)|DA (6)|SA (6)|Length (2)|Data (46-1500)|CRC (4)|
+    |-|-|-|-|-|-|-|
+
+    - **Preamble**:
+        - 7 bytes | 56 bits
+        - Constant: 10101010101010101010101010101010101010101010101010101010
+        - Set by the Physical Layer, it is used to alert the receiver that the sender is about to send data.
+    - **SFD**:
+        - 1 byte | 8 bits
+        - Constant: 10101011
+        - Used to alert the receiver that the sender is about to send data.   
+        - Set by the Physical Layer. Initially, only SFD was used because it was assumed that the pattern will never occur within the data, but later Preamble was added.
+    - **Destination MAC Address (DA)**:
+        - 6 bytes | 48 bits
+        - Variable
+        - The function of the data link layer is to make sure the data frame reaches the next node. So, it puts the DA of the next node (hop) here.
+    - **Source MAC Address (SA)**:
+        - 6 bytes | 48 bits
+        - Variable
+        - The MAC Address of the sender is put here.
+    - **Length**:
+        - 2 bytes | 18 bits
+        - Variable
+        - Length of the data frame, that is being sent.
+    - **Data**:
+        - 46 - 1500 bytes | 360 - 12000 bits
+        - The pure data frame that is being sent
+    - **Cyclic Redundancy Check (CRC)**:
+        - 4 bytes | 32 bits
+        - Used for Error Detection
+    - Total Size: ($6+6+2+46+4=64$ bytes) to ($6+6+2+1500+4=1518$ bytes), usually Preamble & SFD are excluded since they're added in the Physical Layer.
+
+### Token Ring
+- IEEE 802.5 | Used in Ring Topology
+- Access Control method used: is **Token Passing**. The token circulates through the ring. If a node wants to send data, it grabs the token, and then sends the data. While the token is held by a node, no other node can transmit data.
+- Types of Token Release:
+    - **Early Release**: Token is released as soon as the sender has finished sending the data.
+    - **Delayed Release**: Sender sends the data, it passes through the ring to all devices, comes back to the sender. After sender receives it, it releases the token.
+- The direction is Unidirectional, either clockwise or anti-clockwise.
+- Data Rate: `4mbps` & `16mbps`
+- Acknowledgement: Piggyback acknowledgment is used. Acknowledgement is sent alongwith the data.
+- Differential Manchester Encoding is used.
+- Variable size framing is used. Data frames are of different sizes.
+- A monitor station is used.
+    - If some data becomes corrupt, then it will keep travelling through the ring and never get accepted by any node. So, monitor station removes it.
+    - It is used for various other purposes.
+- Data Frame Format:
+    |SD (1) | AC (1) | FC (1) | DA (6) | SA (6) | Data | CRC (4) | ED (1) | FS (1) |
+    |-|-|-|-|-|-|-|-|-|
+
+    - **Start-Delimiter (SD)**:
+        - 1 byte | 8 bits
+        - Signals the start of the data frame.
+    - **Access Control (AC)**:
+        - 1 byte | 8 bits
+        - Information related to what bits are present in the frame.
+    - **Frame Control (FC)**:
+        - 1 byte | 8 bits
+        - Type of Frame (Data/Control Frame)
+    - **Destination MAC Address (DA)**:
+        - 6 bytes | 48 bits
+        - Variable
+        - The function of the data link layer is to make sure the data frame reaches the next node. So, it puts the DA of the next node (hop) here.
+    - **Source MAC Address (SA)**:
+        - 6 bytes | 48 bits
+        - Variable
+        - The MAC Address of the sender is put here.
+    - **Data**:
+        - 0 - MAX, depends on Token Holding Time
+        - The pure data the sender wants to send.
+        - Token Holding Time means the maximum amount of time, the node can hold onto the token.
+    - **Cyclic Redundancy Check (CRC)**:
+        - 4 bytes | 32 bits
+        - Used for Error Detection
+    - **End-Delimiter (ED)**:
+        - 1 byte | 8 bits
+        - Signals the end of the data frame.
+    - **Frame Status (FS)**:
+        - 1 byte | 8 bits
+
+- Token Format: SD (1 byte) | AC (1 byte) | ED (1 byte)
+    - **Start-Delimiter (SD)**:
+        - 1 byte | 8 bits
+        - Signals the start of the data frame.
+    - **Access Control (AC)**:
+        - 1 byte | 8 bits
+        - Information related to what bits are present in the frame.
+    - **End-Delimiter (ED)**:
+        - 1 byte | 8 bits
+        - Signals the end of the data frame.
+    
     
 ### Gateway
 ### IDS (Intrusion Detection System)
