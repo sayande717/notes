@@ -92,6 +92,9 @@ git clone https://github.com/sayande717/notes.git
     |Logical Reasoning|Test: 5|1-20|4|08:40|
     |Number Series|Type-1|1-19|1|04:36|
     |Number Series|Type-2|1-20|0|08:31|
+    |Number Series|Type-2|1-20|0|06:14|
+    |Number Series|Type-3|1-20|1|06:38|
+    |Number Series|Type-4|1-15|1|04:57|
 
 - Verbal Reasoning
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
