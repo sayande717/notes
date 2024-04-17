@@ -1209,4 +1209,31 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     1. Size required to accomodate Pass 2: $90+30+20+10KB=150KB$
     1. So, $150KB$ is the minimum amount of memory required.
 
+### Virtual Memory
+- Virtual Memory aims to provide the illusion to the programmer, that a process with a size larger than that of the main memory, can also be executed.
+- Degree of Multi-programming is respected here. We can bring more and more processes in the main memory.
+- How it works:
+    1. Processes are divided into pages and stored in the Logical Address Space (LAS) ie secondary memory.
+    1. When a page is needed, it is Swapped into the main memory. Pages around it may also get swapped in, based on the principle of locality of reference.
+    1. Pages keep getting swapped in and out of the main memory.
+        - Swap In: Secondary memory -> Main memory
+        - Swap Out: Main memory -> Secondary memory
+    1. Various Page Replacement Algorithms are used to regulate the page swapping process.
+- Steps:
+    1. CPU generates a virtual address.
+    1. The Memory Management Unit (MMU) translates the virtual address to a physical address.
+    1. If the required page is not present in physical memory (page fault), the operating system handles the page fault interrupt.
+    1. The operating system determines the required page by consulting the page table.
+    1. The operating system selects a page to evict from physical memory if there are no free frames available.
+    1. If the selected page is dirty, it is written back to disk to update the corresponding page in virtual memory.
+    1. The operating system loads the required page from disk into a free frame in physical memory.
+    1. The page table is updated to reflect the mapping of the virtual page to the physical frame.
+    1. Control is returned to the CPU, and the instruction that caused the page fault is restarted.
+    1. The CPU retries the instruction, and the required data is now present in physical memory.
+- Effective Memory Access Time: p(Page Fault Service Time) + (1-p)(Main Memory Access Time)
+- Main Memory Access Time is usually in nano-seconds, because the CPU is directly connected to Main Memory, and it is very fast.
+- Page Fault Service Time is usually in milli-seconds, because the CPU is not directly connected to Secondary Memory, and it is a lot slower.
+
+
+
 <!-- Last image: self/25.png | external/0.png -->
