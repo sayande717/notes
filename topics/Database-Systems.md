@@ -256,7 +256,7 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
         - We may accidentally delete a tuple whose `Roll No` has been referenced by `Table 2`.
         - Solution:
             1. No action: Do nothing, this is not recommended for obvious reasons.
-            1. $onDeleteCascade()$: When the tuple is deleted, delete the corresponding row on `Table 2`. This can result in loss of data.
+            <!-- 1. $onDeleteCascade()$: When the tuple is deleted, delete the corresponding row on `Table 2`. This can result in loss of data. -->
             1. $onDeleteSetNull()$: When the tuple is deleted, set the `Roll Number` of the corresponding row on `Table 2`, to `null`.
 
 
@@ -599,10 +599,115 @@ Example: Student
     1. Non-Prime attributes: $\{A,B,D,F\}$
     1. Here,because C->F, E->A, we can clearly see the C & E by tehmselves are determining a non-prime attribute. So, table is not in `2-NF`.
 
-# Data Models: ER Model, Relational Model, Object-Oriented Model, Network Model, Hierarchical Model
-# Basics of keys
-# Basics of Keys (especially foreign keys)
-# Normalization
-# Transaction Control & Concurrency: ACID property, R-W W-R W-W locking, Conflict Serializability, Recoverability, 2-Phase locking, timestamp ordering for concurrency
-# SQL & Relational algebra: DDL, DML & DCL commands, constraints of various keys, Aggregate functions, Joins (natural, outer join, inner join), nested query
-# Indexing: single-level (primary, cluster, secondary), multi-level (b-tree, b+ tree)
+## Third Normal form (3-NF)
+- Table must be in Second Normal Form (2-NF).
+- Table must not have any Transitive Dependency. A prime attribute can determine a non-prime attribute, but a non-prime attribute cannot.
+- If AB -> CD, and D -> A:
+    - Candidate Keys: {AB,DB}
+    - Prime Attributes: {A,B,D}
+    - Non-prime Attributes: {C)
+    - Among the Functional Dependencies, none have any Transitive Dependency.
+
+## Boyce Codd Normal Form (BCNF)
+- A special case of 3rd Normal Form.
+- Table must be in Third Normal Form (3-NF).
+- The left hand side of each functional dependency should be a candidate key or super key.
+- 3-NF preserves dependencies, but BCNF does not.
+- However, BCNF ensures Lossless Decomposition.
+- Example 0:
+    - Candidate Keys: {RollNo, VoterID}
+    - Functional Dependencies:
+        - RollNo -> Name
+        - RollNo -> VoterID
+        - VoterID -> Age
+        - VoterID -> RollNo
+    - All are valid, since the LHS attributes are all prime attributes.
+- Example 1: R(ABCD)
+    - AB -> CD
+    - D -> A
+    1. Candidate Keys: {AB,DB}
+    1. Prime Attributes: {A,B,D}
+    1. Non-Prime Attributes: {C}
+    1. Here, in {D -> A}, `D` is not a candidate key. So the table is **not** in BCNF. Let's convert it into BCNF.
+    1. We separate DA since {D -> A} was the problem.
+    1. We also separate BCD.
+    1. So, ABCD -> DA,BCD
+    1. Lossless Decomposition: The attribute that is common to both tables will be the candidate key of the tables individually, or both of them.
+    1. Now, generate the Functional Dependencies: D -> A, BD -> C.
+    1. Here, {AB -> CD} is not preserved. So, the fact that BCNF does not preserve dependencies, is proved.
+
+# Decomposition
+- Lossy Decomposition: Decomposition that leads to inconsistency in data.
+- When Decomposing a table, the common attribute should be the candidate key of either of the tables, or both of them. This ensures Lossless Decomposition.
+- Example 0 (Lossy Decomposition):
+    - Table $R$:
+        |A|B|C|
+        |-|-|-|
+        |1|2|1|
+        |2|2|2|
+        |3|3|2|
+    - Table $R_1$:
+        |A|B|
+        |-|-|
+        |1|2|
+        |2|2|
+        |3|3|
+    - Table $R_2$:
+        |B|C|
+        |-|-|
+        |2|1|
+        |2|2|
+        |3|2|
+    - Question: Find the value of `C` if `A: 1`.
+    - Query: Select $R_2C\ from\ R_2\ NATURAL\ JOIN\ R_1, WHERE\ R_1 A=1$
+    1. First, find the cross product of all rows of the tables.
+        |A|B|B|C|
+        |-|-|-|-|
+        |1|2|2|1|
+        |1|2|2|2|
+        |1|2|3|2|
+        |2|2|2|1|
+        |2|2|2|2|
+        |2|2|3|2|
+        |3|3|2|1|
+        |3|3|2|2|
+        |3|3|3|2|
+    1. Remove the rows where the value of `B` is different.
+        |A|B|B|C|
+        |-|-|-|-|
+        |1|2|2|1|
+        |1|2|2|2|
+        |2|2|2|1|
+        |2|2|2|2|
+        |3|3|3|2|
+    1. The Natural Join table is:
+        | A | B | C |
+        |---|---|---|
+        | 1 | 2 | 1 |
+        | 1 | 2 | 2 |
+        | 2 | 2 | 1 |
+        | 2 | 2 | 2 |
+        | 3 | 3 | 2 |
+    1. We can clearly see that `C` is resolving to 1 & 2 for A=1.
+    1. We can also see that the number of rows is more in this table, compared to the original table `R`.
+    1. The extra tuples are called `Spurious Tuples`.
+- Example 1 (Lossless Decomposition):
+    - Table $R$:
+        |A|B|C|
+        |-|-|-|
+        |1|2|1|
+        |2|2|2|
+        |3|3|2|
+    - Table $R_1$:
+        |A|B|
+        |-|-|
+        |1|2|
+        |2|2|
+        |3|3|
+    - Table $R_2$:
+        |A|C|
+        |-|-|
+        |1|1|
+        |2|2|
+        |3|2|
+    - As we see, there are no `Spurious Tuples` when using `A` as the common attribute, following the above rule.
