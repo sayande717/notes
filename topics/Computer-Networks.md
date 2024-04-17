@@ -694,6 +694,42 @@ Layer: `Data Link`
         - 1 byte | 8 bits
         - Signals the end of the data frame.
     
+## Network Layer
+- While Data Link layer moves data from one node (hop) to the next, Network Layer is responsible for moving data from source to destination, within a network.
+- It uses logical Addressing based on IP addresses.
+- Network Layer uses a variety of routing techniques to route the data, like RIP, OSPF, etc.
+- Routers operate in the Network Layer.
+- **Fragmentation**: If the message size than what an intermediate node can accept (intermediate node's buffer size < message size), then the message is divided into multiple fragments and transmitted further.
+- **Congestion**: We try to limit the amount of data frames that can get transmitted over the network, in order to not overwhelm it.
+
+## Classful IP Addressing
+### <u>Class A</u>
+- Class: IPv4 | 4 bytes | 32 bits | $2^32$ IP Addresses
+- Representation: Dotted Decimel
+- How to identify? If the first octet (1st 8 bits) lies between 0-127, it is a Class A address.
+- Format: |Network ID (8 bits)| Host ID (8+8+8 bits)|
+    1. Network ID:
+        - 1st bit is `0`, ie constant.
+        - length: 7 bits, number of ID's possible: $2^7=128$
+        - Out of 128 addresses, the first and last one as reserved as well.
+        - So, 126 Network ID's are available in total. So, 126 networks are available.
+    1. Host ID:
+        - length: 24 bits, number of ID's possible: $2^{24}=16777216$
+        - Out of 16777216 addresses, the first and last one as reserved as well.
+         - So, 16777214 Network ID's are available in total.
+    - Default Mask: $255.0.0.0$. It is used to find the Network ID.
+
+- Example 0: IP Address=$64.0.0.0$
+    - $64$ is between $0-127$, so it is a Class A address.
+    - $64.0.0.0$ is the `Network ID`. It represents the network.
+    - $64.255.255.255$ is the `Direct Broadcast Address`. If someone wants to broadcast a data packet to all devices on a network, they will send it to this address.
+    - Default Mask: $255.0.0.0$. It is used to find the Network ID from an IP address within the network. <br> **Steps** if IP Address: $64.0.0.8$:
+        1. IP Address: $64.0.0.8=01000000.00000000.00000000.00001000$
+        1. Default Mask: $11111111.00000000.00000000.00000000$
+        1. **Perform an AND Operation**. Result: $01000000.00000000.00000000.00000000=64.0.0.0$, which is the Network ID.
+        
+    
+
     
 ### Gateway
 ### IDS (Intrusion Detection System)
