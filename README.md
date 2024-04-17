@@ -95,6 +95,8 @@ git clone https://github.com/sayande717/notes.git
     |Number Series|Type-2|1-20|0|06:14|
     |Number Series|Type-3|1-20|1|06:38|
     |Number Series|Type-4|1-15|1|04:57|
+    |Logical Reasoning|Test: 6|1-20|5|07:29|
+    |Logical Reasoning|Test: 7|1-20|6|07:00|
 
 - Verbal Reasoning
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
