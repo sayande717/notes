@@ -727,9 +727,6 @@ Layer: `Data Link`
         1. IP Address: $64.0.0.8=01000000.00000000.00000000.00001000$
         1. Default Mask: $11111111.00000000.00000000.00000000$
         1. **Perform an AND Operation**. Result: $01000000.00000000.00000000.00000000=64.0.0.0$, which is the Network ID.
-        
-    
-
     
 ### Gateway
 ### IDS (Intrusion Detection System)
