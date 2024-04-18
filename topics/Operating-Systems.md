@@ -39,6 +39,8 @@ Number of pages = Process size / Page size
 
 # FRL Memory Management
 - If each process consumes 4MB, and there is 8MB of primary memory available, we can accomodate 2 processes in the memory. If it does I/O operations for $K=0.7$ ie $70\%$ of it's time, CPU  Utilization: $1-K^2=1-0.49=0.51$ ie $51\%$.
+- (TLB Paging Scheme) Effective Memory Access Time: (Hit Ratio) * (TLB+x) + (Miss Ratio) * (TLB+x+x) {x = Main Memory Access Time}
+
 
 # Basics
 
@@ -1234,6 +1236,94 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 - Main Memory Access Time is usually in nano-seconds, because the CPU is directly connected to Main Memory, and it is very fast.
 - Page Fault Service Time is usually in milli-seconds, because the CPU is not directly connected to Secondary Memory, and it is a lot slower.
 
+### Translation Look-Aside Buffer
+- Translation Look-Aside Buffer (TLB) aims to reduce the amount of time it takes to resolve the address.
+- The TLB is stored in the cache memory, which is much faster than the main memory.
+- The TLB stores Page Number to Frame Number mapping, just like the Page Table.
+- Let Main Memory Access Time = `x`, and CPU generate a logical address.
+    1. We check the Page Table, which is stored in the main memory. So, Time needed: `x`.
+    1. We find the address in the Page Table, and search for the corresponding frame in the Main Memory. This requires `x` amount of time, again.
+    1. So, in total, we need `2x` amount of time, since we're accessing the Main Memory 2 times.
+    1. If a Multi-level Paging Technique was implemented, we would have to access the Main Memory even more amount of times.
+
+- Steps:
+    1. CPU generates a logical address.
+    1. The address is first searched for in the TLB, which is in cache.
+    1. If a `TLB hit` occurs, the corresponding main memory frame is accessed, and the data is returned to the CPU.
+    1. If a `TLB miss` occurs, then the usual steps of looking for the address in the Page Table happens.
+- Effective Memory Access Time: (Hit Ratio) * (TLB+x) + (Miss Ratio) * (TLB+x+x) {x = Main Memory Access Time}
+    - This is assuming that a Page Fault does not occur.
+- Example 0: A paging Scheme using TLB, TLB access time is `10ns` and main memory access time is `50ns`. What is the effective memory access time (in ns) if the TLB hit ratio is 90% and there is no Page Fault?
+    - TLB Access Time: `10ns`
+    - Main Memory Access Time: `50ns`
+    - Hit Ratio: `90%` ie `0.9` | Miss Ratio: `0.1`
+    - Effective Memory Access Time:
+        - (Hit Ratio) * (TLB+x) + (Miss Ratio) * (TLB+x+x)
+        - $0.9 (10+50) + 0.1 (10+50+50) = 65ns$
+
+### Page Replacement Algorithm
+- If the main memory is full, we have to swap out an existing page, to accomodate a new page whose data is needed by the CPU.
+- Page Replacement Algorithms determine which page will be replaced by the new page.
+
+#### <u>First In First Out</u>:
+- Page that arrives first is replaced first.
+- Example 0:
+    - References: 7,0,1,2,0,3,0,4,2,3,0,3,1,2,0
+    - Total number of References: $15$
+    - Number of frames: 3. 0: Page Fault, 1: Page Hit:
+        | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 |
+        |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+        |7|7|7|2|2|2|2|4|4|4|0|0|0|0|0|
+        |x|0|0|0|0|3|3|3|2|2|2|2|1|1|1|
+        |x|x|1|1|1|1|0|0|0|3|3|3|3|2|2|
+
+    - Hit Ratio: (Number of hits / Total number of References) * 100 = (3/15)*100 = 20%
+    - Miss Ratio: 80%
+- Example 1 (Belady's Anamoly):
+    - References: 1,2,3,4,1,2,5,1,2,3,4,5 
+    - Total number of References: $12$
+    - Number of frames: 3. 0: Page Fault, 1: Page Hit:
+        |0|0|0|0|0|0|0|1|1|0|0|1|
+        |-|-|-|-|-|-|-|-|-|-|-|-|
+        |1|1|1|4|4|4|5|5|5|5|5|5|
+        |x|2|2|2|1|1|1|1|1|3|3|3|
+        |x|x|3|3|3|2|2|2|2|2|4|4|
+        - Number of Page Faults: $9$
+    - Number of frames: 4. 0: Page Fault, 1: Page Hit:
+        |0|0|0|0|1|1|0|0|0|0|0|0|
+        |-|-|-|-|-|-|-|-|-|-|-|-|
+        |1|1|1|1|1|1|5|5|5|5|4|4|
+        |x|2|2|2|2|2|2|1|1|1|1|5|
+        |x|x|3|3|3|3|3|3|2|2|2|2|
+        |x|x|x|4|4|4|4|4|4|3|3|3|
+        - Number of Page Faults: $10$
+    - Logically, with the increase in the number of frames, the number of Page Faults should've decreased. But here, it increases. This is called **Belady's Anamoly**. It occurs only in FIFO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 <!-- Last image: self/25.png | external/0.png -->
