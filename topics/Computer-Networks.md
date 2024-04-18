@@ -591,7 +591,6 @@ Layer: `Data Link`
         <br><img src="../assets/images/Computer-Networks/external/8.png" height="600px" alt="CSMA/CA" />
         <br>Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/44-3.png)
 
-
 ### Ethernet Frame Format
 - IEEE 802.3 | Used in Bus Topology
 - Defined in Data Link Layer
@@ -683,7 +682,9 @@ Layer: `Data Link`
     - **Frame Status (FS)**:
         - 1 byte | 8 bits
 
-- Token Format: SD (1 byte) | AC (1 byte) | ED (1 byte)
+- Token Format:
+    | SD (1 byte) | AC (1 byte) | ED (1 byte) |
+    |-------------|-------------|-------------|
     - **Start-Delimiter (SD)**:
         - 1 byte | 8 bits
         - Signals the start of the data frame.
@@ -704,7 +705,7 @@ Layer: `Data Link`
 
 ## Classful IP Addressing
 ### <u>Class A</u>
-- Class: IPv4 | 4 bytes | 32 bits | $2^32$ IP Addresses
+- Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
 - Representation: Dotted Decimel
 - How to identify? If the first octet (1st 8 bits) lies between 0-127, it is a Class A address.
 - Format: |Network ID (8 bits)| Host ID (8+8+8 bits)|
