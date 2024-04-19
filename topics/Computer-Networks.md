@@ -711,14 +711,17 @@ Layer: `Data Link`
 - Format: |Network ID (8 bits)| Host ID (8+8+8 bits)|
     1. Network ID:
         - 1st bit is `0`, ie constant.
-        - length: 7 bits, number of ID's possible: $2^7=128$
+        - length: 7 bits, number of ID's possible: $2^{7}=128$
+        - Range: $0-128$
         - Out of 128 addresses, the first and last one as reserved as well.
-        - So, 126 Network ID's are available in total. So, 126 networks are available.
+        - So, 126 Network ID's are available in total.
     1. Host ID:
         - length: 24 bits, number of ID's possible: $2^{24}=16777216$
         - Out of 16777216 addresses, the first and last one as reserved as well.
-         - So, 16777214 Network ID's are available in total.
+         - So, 16777214 Host ID's are available in total.
     - Default Mask: $255.0.0.0$. It is used to find the Network ID.
+    - $64.0.0.0$: Exmple Network ID
+    - $64.255.255.255$: Example Broadcast Address
 
 - Example 0: IP Address=$64.0.0.0$
     - $64$ is between $0-127$, so it is a Class A address.
@@ -729,6 +732,82 @@ Layer: `Data Link`
         1. Default Mask: $11111111.00000000.00000000.00000000$
         1. **Perform an AND Operation**. Result: $01000000.00000000.00000000.00000000=64.0.0.0$, which is the Network ID.
     
+### <u>Class B</u>
+- Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
+- Representation: Dotted Decimel
+- How to identify? If the first octet (1st 8 bits) lies between 128-191, it is a Class B address.
+- Format: |Network ID (8+8 bits)| Host ID (8+8 bits)|
+    1. Network ID:
+        - 1st 2 bits is `10`, ie constant.
+        - length: 14 bits, number of ID's possible: $2^{14}=16384$
+        - Range: $128-191$
+        - Out of 16384 addresses, the first and last one as reserved as well.
+        - So, 16382 Network ID's are available in total.
+    1. Host ID:
+        - length: 16 bits, number of ID's possible: $2^{24}=65536$
+        - Out of 65536 addresses, the first and last one as reserved as well.
+         - So, 65534 Host ID's are available in total.
+    - $255.255.0.0$: Default Mask. It is used to find the Network ID.
+    - $128.0.0.0$: Example Network ID
+    - $128.0.255.255$: Example Broadcast address
+- Example 0: IP Address=$130.2.3.4$
+    - $130$ is between $128-191$, so it is a Class B address.
+    - $130.0.0.0$ is the `Network ID`. It represents the network.
+    - $130.255.255.255$ is the `Direct Broadcast Address`.
+    - Default Mask: $255.255.0.0$. It is used to find the Network ID from an IP address within the network. <br> **Steps** if IP Address: $64.0.0.8$:
+        1. IP Address: $130.2.3.4=10000010.00000010.00000011.00000100$
+        1. Default Mask: $255.255.0.0=11111111.11111111.00000000.00000000$
+        1. **Perform an AND Operation**. Result: $10000010.00000010.00000000.00000000=130.2.0.0$, which is the Network ID.
+
+### <u>Class C</u>
+- Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
+- Representation: Dotted Decimel
+- How to identify? If the first octet (1st 8 bits) lies between 192-223, it is a Class C address.
+- Format: |Network ID (8+8+8 bits)| Host ID (8 bits)|
+    1. Network ID:
+        - 1st 3 bits is `110`, ie constant.
+        - length: 14 bits, number of ID's possible: $2^{21}=2097152$
+        - Range: $192-223$
+        - Out of 2097152 addresses, the first and last one as reserved as well.
+        - So, 2077150 Network ID's are available in total.
+    1. Host ID:
+        - length: 8 bits, number of ID's possible: $2^{8}=256$
+        - Out of 256 addresses, the first and last one as reserved as well.
+         - So, 254 Host ID's are available in total.
+    - $255.255.255.0$: Default Mask. It is used to find the Network ID.
+    - $192.0.0.0$: Example Network ID
+    - $192.255.255.255$: Example Broadcast address
+- Example 0: IP Address=$194.2.3.4$
+    - $194$ is between $192-223$, so it is a Class C address.
+    - $194.0.0.0$ is the `Network ID`. It represents the network.
+    - $194.255.255.255$ is the `Direct Broadcast Address`.
+    - Default Mask: $255.255.255.0$. It is used to find the Network ID from an IP address within the network. <br> **Steps** if IP Address: $194.2.3.4$:
+        1. IP Address: $194.2.3.4=11000010.00000010.00000011.00000100$
+        1. Default Mask: $255.255.255.0=11111111.11111111.11111111.00000000$
+        1. **Perform an AND Operation**. Result: $11000010.00000010.00000011.00000000=194.2.3.0$, which is the Network ID.
+
+### <u>Class D</u>
+- Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
+- Representation: Dotted Decimel
+- How to identify? If the first octet (1st 8 bits) lies between 224-239, it is a Class D address.
+- Format: |Static (4 bits)| Reserved (28 bits)|
+    1. Reserved:
+        - 1st 4 bits is `1110`, ie constant.
+        - length: 28 bits, Number of IP Addresses: $2^{28}=238435456$
+        - Range: 224-239$
+        - All these IP Addresses are reserved for Multicasting / Group Email / Broadcast.
+
+### <u>Class E</u>
+- Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
+- Representation: Dotted Decimel
+- How to identify? If the first octet (1st 8 bits) lies between 240-255, it is a Class E address.
+- Format: |Static (3 bits)| Reserved (28 bits)|
+    1. Reserved:
+        - 1st 4 bits is `1111`, ie constant.
+        - length: 28 bits, Number of IP Addresses: $2^{28}=238435456$
+        - Range: 240-255$
+    - All these IP Addresses are reserved for Military Purposes. 
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
