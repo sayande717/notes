@@ -1299,31 +1299,53 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         - Number of Page Faults: $10$
     - Logically, with the increase in the number of frames, the number of Page Faults should've decreased. But here, it increases. This is called **Belady's Anamoly**. It occurs only in FIFO.
 
+#### <u>Optimal Page Replacement</u>:
+- Page that will not be demanded by the CPU for the longest time in the future, is replaced first.
+- Example: 2,7,0,1,2,3,4,5,7: Here, 7 is not being demanded by the CPU for the longest time, after it's first call at instruction 1.
+- Example 0:
+    - References: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+    - Total number of References: $20$
+    - Number of frames: 4. 0: Page Fault, 1: Page Hit:
+        |0|0|0|0|1|0|1|0|1|1|1|1|1|0|1|1|1|0|1|1|
+        |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        |7|7|7|7|7|3|3|3|3|3|3|3|3|1|1|1|1|1|1|1|
+        |x|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+        |x|x|1|1|1|1|1|4|4|4|4|4|4|4|4|4|4|7|7|7|
+        |x|x|x|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|
+    - Hit Ratio: (Number of hits / Total number of References) * 100 = (12/20)*100 = 60%
+    - Miss Ratio: 40%
 
+#### <u>Least Recently Used</u>:
+- Page that was least recently used, ie has not been used for the longest amount of time in the past, is replaced.
+- LRU is slower than FIFO because it has to traverse through past  pages everytime it has to replace a page.
+- Example 0:
+    - References: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+    - Total number of References: $20$
+    - Number of frames: 4. 0: Page Fault, 1: Page Hit:
+        |0|0|0|0|1|0|1|0|1|1|1|1|1|0|1|1|1|0|1|1|
+        |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        |7|7|7|7|7|3|3|3|3|3|3|3|3|3|3|3|3|7|7|7|
+        |x|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+        |x|x|1|1|1|1|1|4|4|4|4|4|4|1|1|1|1|1|1|1|
+        |x|x|x|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|2|
+    - Hit Ratio: (Number of hits / Total number of References) * 100 = (12/20)*100 = 60%
+    - Miss Ratio: 40%
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
+#### <u>Most Recently Used</u>:
+- This algorithm assumes that the page that was used just now, will probably not be called again by the CPU. So it replaces that page.
+- Example: 2,0,1,0,2,7: When trying to insert `7`, MRU assumes that since Frame `2` was just used most recently, it will not be called again. So, it replaces `2` with `7`.
+- MRU is slower than FIFO because it has to traverse through past  pages everytime it has to replace a page.
+- Example 0:
+    - References: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+    - Total number of References: $20$
+    - Number of frames: 4. 0: Page Fault, 1: Page Hit:
+        |0|0|0|0|1|0|1|0|1|1|1|1|1|0|1|1|1|0|1|1|
+        |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+        |7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|7|
+        |x|0|0|0|0|3|0|4|4|4|4|4|4|4|4|4|4|4|4|4|
+        |x|x|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|
+        |x|x|x|2|2|2|2|2|2|3|0|3|2|2|2|0|0|0|0|0|
+    - Hit Ratio: (Number of hits / Total number of References) * 100 = (8/20)*100 = 40%
+    - Miss Ratio: 60%
 
 <!-- Last image: self/25.png | external/0.png -->
