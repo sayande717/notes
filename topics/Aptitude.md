@@ -246,3 +246,13 @@ Which word could mean "playing"?
     - So, $8n+1=1994$, $n=249(+1)$. So, she counts till 1 finger after the thumb, ie the index finger.
 1. What is the product of all the numbers in the dial of a telephone?
     - The digit `0` is included among the dial, so the product is `0`.
+
+## Direction Sense
+1. Golu started from his house towards North. After covering a distance of 8 km. he turned towards left and covered a distance of 6 km. What is the shortest distance now from his house?
+    - The shortest distance is the hypotenuse of the triangle. $\sqrt {8^2+6^2}$
+1. One evening before sunset Rekha and Hema were talking to each other face to face. If Hema's shadow was exactly to the right of Hema, which direction was Rekha facing?
+    - If Hema's shadow was to the right of Hema, it means the sun was on the left of both of them.
+    - Rekha was facing the South direction.
+1. One morning Udai and Vishal were talking to each other face to face at a crossing. If Vishal's shadow was exactly to the left of Udai, which direction was Udai facing?
+    - The sun is to the right of both of them. So this is the east direction.
+    - If Vishal's shadow is to the left of Uday, it can only happen when Uday is facing the North and Vishal is facing the South.

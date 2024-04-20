@@ -122,3 +122,4 @@ git clone https://github.com/sayande717/notes.git
     |Sitting Arrangement|Type 8|1-5|0|02:34|
     |Verification of Truth|Section 1|1-39|3|06:49|
     |Data Sufficiency|Section 1|1-10|4|07:19|
+    |Direction Sense Test|1|1-20|4|16:49|
