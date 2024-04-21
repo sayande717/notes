@@ -191,6 +191,18 @@ Which word could mean "playing"?
 1. ephemeral and immortal are antonyms.
 1. feral and tame are antonyms.
 
+## Logical Games - Discussion
+1. Five roommates Randy, Sally, Terry, Uma, and Vernon each do one housekeeping task mopping, sweeping, laundry, vacuuming, or dusting one day a week, Monday through Friday.
+    - Vernon does not vacuum and does not do his task on Tuesday.
+    - Sally does the dusting, and does not do it on Monday or Friday.
+    - The mopping is done on Thursday.
+    - Terry does his task, which is not vacuuming, on Wednesday.
+    - The laundry is done on Friday, and not by Uma.
+    - Randy does his task on Monday.
+    - What task does Terry do on Wednesday?
+    - Here, Terry does his task on Wesnesday. Sally does the **dusting**, **mopping** is done one Thursday, **laundry** is done on friday, and **Terry does not vacuum**. So, in the end, **only mopping** is left to be done by Terry.
+
+
 # Verbal Reasoning
 ## Syllogism
 ### Type 1
