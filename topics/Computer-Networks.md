@@ -785,6 +785,12 @@ Layer: `Data Link`
         1. IP Address: $194.2.3.4=11000010.00000010.00000011.00000100$
         1. Default Mask: $255.255.255.0=11111111.11111111.11111111.00000000$
         1. **Perform an AND Operation**. Result: $11000010.00000010.00000011.00000000=194.2.3.0$, which is the Network ID.
+- Example 1: IP Address: $201.20.30.40$
+    - Range of the 1st octet: $192-223$. So, it is a Class-C address.
+    - **Network ID**: Here, mask is $255.255.255.0$. Performing an AND operation on Network ID and Mask will give us the network ID. So, ID = $201.20.30.40+255.255.255.0=11001001.10100000.11110000.10100000+11111111.11111111.11111111.00000000=11001001.10100000.11110000.00000000=201.30.40.0$
+    - **4th Host ID**: Host ID starts from $201.20.30.1$ - $201.20.30.254$, so the 4th Host ID is $201.20.30.4$,
+    - **Last Host ID**: Host ID's end at $201.20.30.254$.
+    - **Broadcast Address**: $201.20.30.255$, if a node sends a data packet to this address, it gets broadcasted to all devices connected to the network.
 
 ### <u>Class D</u>
 - Class: IPv4 | 4 bytes | 32 bits | $2^{32}$ IP Addresses
@@ -807,6 +813,18 @@ Layer: `Data Link`
         - length: 28 bits, Number of IP Addresses: $2^{28}=238435456$
         - Range: 240-255$
     - All these IP Addresses are reserved for Military Purposes. 
+
+### Disadvantage of Classful IP Addressing
+1. Wastage of IP addresses & Inconsistency.
+    - Class A has $2^{24}$ hosts per network, but only $2^7-2$ networks available.
+    - Class C has $2^8$ hosts per network, but $2^{21}$ networks available.
+    - So, in some classes, there are too many hosts available while the number of networks is limited, and it's opposite in other classes.
+1. Maintainence is time consuming.
+    - Maintainence is time consuming especially in big networks like in case of Class A.
+    - We can use the concept of `sub-netting` to make maintainence easier.
+1. More prone to errors.
+    - In larger networks, there is a high probability of errors and collisions to take place, if not configured properly.
+
 
 ### Gateway
 ### IDS (Intrusion Detection System)
