@@ -250,6 +250,8 @@ Which word could mean "playing"?
 1. Carbon:Diamond::Corundum:Ruby, is used in making
 1. Eye:Myopia::Teeth:Pyorrhoea, can have disease
 1. Cassock:Priest::Gown:Graduate, is worn by
+1. CEDH:HDEC::????:PNRV, reverse order
+1. DFHJ:LNPR::TVXZ:????, D -> L: +8, while D->F,F->H,H->J: +2. So, move forward 8 steps from T, then keep adding +2.
 
 ## Arithmetic Reasoning
 1. A girl counted in the following way on the fingers of her left hand : She started by calling the thumb 1, the index finger 2, middle finger 3, ring finger 4, little finger 5 and then reversed direction calling the ring finger 6, middle finger 7 and so on. She counted upto 1994. She ended counting on which finger?
