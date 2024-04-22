@@ -1348,4 +1348,52 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Hit Ratio: (Number of hits / Total number of References) * 100 = (8/20)*100 = 40%
     - Miss Ratio: 60%
 
-<!-- Last image: self/25.png | external/0.png -->
+# Disk Architecture
+<br><img src="../assets/images/Operating-Systems/external/1.jpg" height="400px" alt="Parts of a disk">
+<br> Image taken from [here](https://1.bp.blogspot.com/-cUGu-qY2_eI/VWRwrec7PlI/AAAAAAAAAtw/FI0OUV4mXWw/s1600/DiscStructure.JPG)
+
+- Parts of a disk: Platter (0) -> Surface (1) -> Track (2) -> Sector (3) -> Data (4)
+    - Relation: **On every** surface **there are a number of** platters, on every track there are a number of surfaces, etc.
+    - Total Number of Surfaces: Number of Platters * Number of Surfaces
+    - Total Number of Tracks: Number of Platters * Number of Surfaces * Number of Tracks
+    - Total Number of Sectors: Number of Platters * Number of Surfaces * Number of Tracks * Number of Sectors
+- The disk rotates in a clockwise or anti-clockwise direction.
+- Example: If there are 8 platters, 2 surfaces in each platter (default), 256 tracks in each surface, 512 sectors in each track, and 512KB of data in each sector, find the disk size.
+    - Disk Size: $8*2*256*512*512KB=2^3*2^1*2^8*2^9*2^9*2^{10}=2^{40}=1TB$
+    - Number of bits needed to represent disk size: $40$
+
+## Disk Access Time
+- **Seek Time**: Time taken by R/W head to reach desired track.
+- **Rotation Time**: Time taken for 1 full rotation.
+- **Rotational Latency**: Time taken to reach desired sector (half of Rotation time)
+- **Transfer Time**: Data to be transferred $\div$ Transfer Rate
+- **Transfer Rate**: Number of surfaces * Capacity of 1 Track * Number of rotations in 1 second
+- **Controller Time**: The time it takes for the controller to do it's thing.
+- **Queue Time**: If there are too many disk requests, they are stored in a queue and need to wait for their turn..
+- **Disk Access Time**: Seek Time + Rotation Time + Transfer Time + Controller Time (optional) + Queue Time (optional)
+
+## Disk Scheduling Algorithms
+- The goal of any Disk Scheduling algorithms is **to minimize seek time**.
+
+### First Come First Serve (FCFS)
+- Requests are serviced as they arrive.
+- Advantage: There is no starvation in this algorithm. It does not have to wait for a long amount of time, since all requests are serviced as they arrive.
+- Disadvantage: Requests are blindly serviced with no focus on reducing Seek Time.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Total Seek Time: $(82-50)+(170-82)+(170-43)+(140-43)+(140-24)+(24-16)+(190-16)=642$
+    <br><img src="../assets/images/Operating-Systems/self/26.png" height="300px" alt="FCFS Disk Scheduling Algorithm">
+    
+### Shortest Seek Time First (SSTF)
+- Requests, which are closest to the current Read-Write head position, are serviced first.
+- It aims to provide an Optimal result, ie lowest Seek Time.
+- Starvation can occur in this algorithm. A request may have to wait for a long amount of time, especially if it is opposite to the direction being serviced by the head.
+- Additional overhead is required to check which request is closest to the current position of the R/W head.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Total Seek Time: $(50-43)+(43-24)+(24-16)+(82-16)+(140-82)+(170-140)+(190-170)=208$
+    <br><img src="../assets/images/Operating-Systems/self/27.png" height="300px" alt="SSTF Disk Scheduling Algorithm">
+
+<!-- Last image: self/27.png | external/0.png -->
