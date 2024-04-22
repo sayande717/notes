@@ -825,6 +825,55 @@ Layer: `Data Link`
 1. More prone to errors.
     - In larger networks, there is a high probability of errors and collisions to take place, if not configured properly.
 
+### Sub-netting in Classful IP Addressing
+- Dividing the big network into smaller networks.
+- Sub-netting requires internal routers within the network since we're dividing the big network into Independent smaller networks, each with their own Network ID's and Broadcast Addresses.
+- Example: Network ID: $200.10.20.0$.
+    1. If we want to divide it into 2 sub-nets, we reserve $2^1=2$ ie $1$ MSB from the host portion: 200.10.20.**0**0000000 & 200.10.20.**1**0000000. These become the Network ID's of the sub-nets.
+    1. So, the Network ID's are $200.10.20.0$ & $200.10.20.128$.
+    1. Sub-net 1:
+        - Range: $200.10.20.0-200.10.20.127$.
+        - Network ID: $200.10.20.0$
+        - Direct Broadcast Address: $200.10.20.127$
+        - Number of usable host addresses: $128-2=126$
+        - Subnet Mask:
+            - Keep the Network ID bits same, is $255$.
+            - Number of reserved bits: $1$.
+            - Put the reserved bit as 1, and rest 0.
+            - So, Subnet Mask: 255.255.255.**1**0000000=255.255.255.128
+    1. Sub-net 2:
+        - Range: $200.10.20.128-200.10.20.255$.
+        - Network ID: $200.10.20.128$
+        - Direct Broadcast Address: $200.10.20.255$
+        - Number of usable host addresses: $128-2=126$
+        - Subnet Mask is same as that of the other subnets.
+    1. Compared to the original network, there are 2 less host address available ($254<256$). This is because additional IP Addresses will need to be allocated for Network ID and Broadcast Address.
+    1. If an IP Address is $200.10.20.15$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.0$, so the internal router redirects the data packet to `Sub-net 1`.
+    1. If an IP Address is $200.10.20.130$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.128$, so the internal router redirects the data packet to `Sub-net 2`.
+
+## Classless IP Addressing
+- Also known as `Classless Inter-Domain Routing (CIDR)`.
+- There is no classification here, only blocks are used.
+- The IANA (Internet Assigned Numbers Authority) assigns IP Addresses according to blocks, and as per need of the customer.
+- The IP addresses in the range must be contiguous.
+- Number of host addresses in a block shoud be representable by $2^n$.
+- Format: x.y.z.w/n, | Block/Network ID | Host ID |
+    - x.y.z.w: IPv4 address
+    - n: Number of bits in the block/network. Also represents the number of 1's in the subnet mask (in binary).
+- Network ID must be evenly divisible with the size of the block. For example:
+    - In $200.10.20.40/28$, we find below that the network ID is $200.10.20.32$.
+    - Number of Host ID bits: $32-28=4$. So, $2^4=16$ IP Addresses can be represented by these bits.
+    - We now need to check if the last 4 bits in the Network ID are all 0's: 200.10.20.0010**0000**. Here, they are.
+- Example: $200.10.20.40/28$
+    - There are 28 bits in the Block ID, and 4 bits in Host ID.
+    - Network ID:
+        - Method 1:
+            1. Don't tamper with the Network ID. Represent the Host bits as 0: 200.10.20.001**01000** -> 200.10.20.0010**0000**.
+            1. Convert it back to Decimel. This becomes the Network ID: $200.10.20.32/28$.
+        - Method 2:
+            1. Perform an AND of the IP Address with the Mask. Mask: $11111111.11111111.11111111.11110000=255.255.255.240$.
+            1. $255.255.255.11110000+200.10.20.00101000=200.10.20.32/28$
+
 
 ### Gateway
 ### IDS (Intrusion Detection System)
