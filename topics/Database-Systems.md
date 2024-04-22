@@ -1,3 +1,5 @@
+<!-- ID: 1 -->
+
 # Questions
 
 
@@ -563,6 +565,7 @@ Example: Student
 ## Second Normal form (2-NF)
 - Table must be in First Normal Form (1-NF).
 - All the non-prime attributes must be fully functionally dependent on the Candidate Key. They must not be only partially dependent on a part of (ie a proper subset of) the Candidate Key.
+- (AB -> C) should happen.
 - If (AB -> C), AB is a candidate key (prime attribute) while C is a non-prime attribute. If (A -> C) or (B -> C) is true, then the table is not in 2-NF.
 - Example:
     |Customer ID|Store ID|Location|
@@ -635,6 +638,29 @@ Example: Student
     1. Lossless Decomposition: The attribute that is common to both tables will be the candidate key of the tables individually, or both of them.
     1. Now, generate the Functional Dependencies: D -> A, BD -> C.
     1. Here, {AB -> CD} is not preserved. So, the fact that BCNF does not preserve dependencies, is proved.
+
+## 4th Normal Form (4-NF)
+- Table must be in Boyce Codd Normal Form.
+- No multivalued dependencies must be present.
+- Example:
+    - If a person has 3 mobile numbers and 3 E-Mail ID's, this is what the table will look like:
+        |Name|Mobile Number|E-Mail|
+        |----|-------------|------|
+        |John|1111111111|aa@aa.com|
+        |John|1111111111|bb@bb.com|
+        |John|1111111111|cc@cc.com|
+        |John|2222222222|aa@aa.com|
+        |John|2222222222|bb@bb.com|
+        |John|2222222222|cc@cc.com|
+        |John|3333333333|aa@aa.com|
+        |John|3333333333|bb@bb.com|
+        |John|3333333333|cc@cc.com|
+    - Our main with Normalization is to reduce redundancy in the data, so we must not have any multivalued dependency like this.
+
+## 5th Normal Form (5-NF)
+- The Decomposition must be Lossless in nature.
+- If, after joining the tables to get back the original table, we see that the Decomposition was Lossless, we can be sure that the table is in 5-NF.
+- There will be no difference between the tuples in our table and the original table.
 
 # Decomposition
 - Lossy Decomposition: Decomposition that leads to inconsistency in data.
