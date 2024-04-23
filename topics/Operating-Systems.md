@@ -1396,4 +1396,48 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Total Seek Time: $(50-43)+(43-24)+(24-16)+(82-16)+(140-82)+(170-140)+(190-170)=208$
     <br><img src="../assets/images/Operating-Systems/self/27.png" height="300px" alt="SSTF Disk Scheduling Algorithm">
 
-<!-- Last image: self/27.png | external/0.png -->
+### Elevator Algorithm (SCAN)
+- The R/W head moves in a particular direction, and services all requests in that direction. It then switches direction and services the remaining requests.
+- Before switching directions, we need to go till the end of that direction (till 199 in the below example).
+- However, when all requests have been serviced, we do not need to go further. We can stop the R/W head at the last request.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Initial Direction: Towards larger value.
+    - Total Seek Time: $(82-50)+(140-82)+(170-140)+(190-170)+(199-190)+(199-43)+(43-24)+(24-16)=(199-50)+(199-16)=332$
+    - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `332ns`
+    <br><img src="../assets/images/Operating-Systems/self/28.png" height="300px" alt="SCAN Disk Scheduling Algorithm">
+
+### LOOK Algorithm
+- The R/W head moves in a particular direction, and services all requests in that direction. It then switches direction and services the remaining requests.
+- The difference versus the [SCAN algorithm](#elevator-algorithm-scan) is that before switching directions, **we do not need to go till the end of that direction**.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Initial Direction: Towards larger value.
+    - Total Seek Time: $(82-50)+(140-82)+(170-140)+(190-170)+(190-43)+(43-24)+(24-16)=(190-50)+(190-16)=314$
+    - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `314ns`
+    <br><img src="../assets/images/Operating-Systems/self/29.png" height="300px" alt="LOOK Disk Scheduling Algorithm">
+
+### Circular Elevator Algorithm (C-SCAN)
+- The R/W head moves in a particular direction, and services all requests in that direction. It then switches direction and services the remaining requests.
+- The difference versus the [SCAN algorithm](#elevator-algorithm-scan) is that the R/W head will only service requests in one direction. If direction: `->`, then, after switching directions, it will come back to the initial position on LHS, then start servicing requests in `->` direction again.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Initial Direction: Towards larger value.
+    - Total Seek Time: $(82-50)+(140-82)+(170-140)+(190-170)+(199-190)+(199-0)+(16-0)+(24-16)+(43-24)=(199-50)+(199-0)+(43-0)=391$   - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `391ns`
+    <br><img src="../assets/images/Operating-Systems/self/30.png" height="300px" alt="C-SCAN Disk Scheduling Algorithm">
+
+### C-LOOK Algorithm
+- The R/W head moves in a particular direction, and services all requests in that direction. It then switches direction and services the remaining requests.
+- This algorithm is like the [C-SCAN Algorithm](#circular-elevator-algorithm-cscan), except that it does not go till the extreme ends on both sides. It also scans in 1 direction only.
+- Example: Find the total Seek Time.
+    - Request Queue: $82,170,43,140,24,16,190$
+    - Current position of head: $50$
+    - Initial Direction: Towards larger value.
+    - Total Seek Time: $(82-50)+(140-82)+(170-140)+(190-170)+(190-16)+(24-16)+(43-24)=(190-50)+(190-16)+(43-16)=341$
+    - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `314ns`
+    <br><img src="../assets/images/Operating-Systems/self/31.png" height="300px" alt="C-LOOK Disk Scheduling Algorithm">
+
+<!-- Last image: self/31.png | external/0.png -->
