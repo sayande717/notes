@@ -125,4 +125,6 @@ git clone https://github.com/sayande717/notes.git
     |Data Sufficiency|Section 1|1-10|4|07:19|
     |Direction Sense Test|1|1-20|4|16:49|
     |Analogy|Type 2|1-15|3|19:37|
-
+    |Sitting Arrangement|Type 9|1-5|1|04:31|
+    |Sitting Arrangement|Type 10|1-5|1|03:30|
+    |Verbal Reasoning|Test: 1|1-20|3|18:11|
