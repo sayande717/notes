@@ -937,28 +937,30 @@ Layer: `Data Link`
         1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
         1. Mask: **11111111.1111**0000.00000000.00000000 (Number of 1's same as the number of reserved bits).
         1. Network ID: $131.00010111.151.76+255.11110000.0.0=131.16.0.0$.
-        1. The Network ID is in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet can be forwarded** to this interface.
+        1. The Network ID is **NOT** in the same subnet as that of the given IP Address. So, **the packet cannot be forwarded** to this interface.
     - $131.28.0.0/14$
         1. Number of Network ID bits: $14$
         1. Number of Host ID bits: $32-14=18$
         1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
         1. Mask: **11111111.111111**00.00000000.00000000 (Number of 1's same as the number of reserved bits).
         1. Network ID: $131.00010111.151.76+255.11111100.0.0=131.20.0.0$.
-        1. The Network ID is **not** in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet cannot be forwarded** to this interface.
+        1. The Network ID is **NOT** in the same subnet as that of the given IP Address. So, **the packet cannot be forwarded** to this interface.
     - $131.19.0.0/16$
         1. Number of Network ID bits: $16$
         1. Number of Host ID bits: $32-16=16$
         1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
         1. Mask: **11111111.11111111**.00000000.00000000 (Number of 1's same as the number of reserved bits).
         1. Network ID: $131.00010111.151.76+255.11111111.0.0=131.23.0.0$.
-        1. The Network ID is **not** in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet cannot be forwarded** to this interface.
+        1. The Network ID is in the same subnet as that of the given IP Address. So, **the packet can be forwarded** to this interface.
+        1. So, **Answer: Interface `2`**
     - $131.22.0.0/15$
         1. Number of Network ID bits: $15$
         1. Number of Host ID bits: $32-15=17$
         1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
         1. Mask: **11111111.1111111**0.00000000.00000000 (Number of 1's same as the number of reserved bits).
         1. Network ID: $131.00010111.151.76+255.11111110.0.0=131.22.0.0$.
-        1. The Network ID is in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet can be forwarded** to this interface.
+        1. The Network ID is **NOT** in the same subnet as that of the given IP Address. So, **the packet cannot be forwarded** to this interface.
+
 
 
 
