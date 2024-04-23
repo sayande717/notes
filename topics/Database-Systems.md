@@ -604,7 +604,7 @@ Example: Student
 
 ## Third Normal form (3-NF)
 - Table must be in Second Normal Form (2-NF).
-- Table must not have any Transitive Dependency. A prime attribute can determine a non-prime attribute, but a non-prime attribute cannot.
+- Table must not have any Transitive Dependency. For (X->Y), `X` should be a Candidate Key, **or** `Y` should be a prime attribute.
 - If AB -> CD, and D -> A:
     - Candidate Keys: {AB,DB}
     - Prime Attributes: {A,B,D}
@@ -737,3 +737,44 @@ Example: Student
         |2|2|
         |3|2|
     - As we see, there are no `Spurious Tuples` when using `A` as the common attribute, following the above rule.
+
+## Minimal Cover
+- The aim is to reduce or simplify the Functional Dependencies.
+- Example: For the following Functional Dependencies, find the correct Minimal Cover: {A->B,C->B,D->ABC,AC->D}
+    1. Simplify the dependencies: {A->B,C->B,D->A,D->B,D->C,AC->D}
+    1. Remove the functional dependencies one by one, and check if that results in loss of dependencies (false: cannot be removed).
+        1. (A->B), $A^+=A$, false
+        1. (C->B), $C^+=C$, false
+        1. (D->A), $D^+=DBC$, false
+        1. (D->B), $D^+=DABC$, true
+        1. (D->C), $D^+=DAB$, false
+        1. (AC->D), $AC^+=ACB$, false
+    1. Only (D->B) can be removed.
+    1. So, current dependencies: {A->B,C->B,D->A,D->C,AC->D}
+    1. Now, check if the left side of the dependencies can be minimized further. Try to keep only 1 attribute on the LHS, and see if you can get the other attributes in it's closure.
+        1. (AC->D), $A^+=AB$, $C^+=CB$, false
+        1. After removing A, we're trying to get $A$ in $C^+$, and after removing C, we're trying to get $C$ in $A^+$.
+     1. **Minimal list of Dependencies**: {A->B,C->B,D->A,D->C,AC->D}
+
+## Normalization Examples
+- Example 1: $R(ABCDEF)$, Functional Dependencies: $\{AB->C,C->DE,E->F,F->A\}$, **Check the highest Normal Form.**
+    1. Find the Candidate Keys.
+        1. $\{AB^+=ABCDEF\}$, true
+        1. `A` is present in RHS for (F->A). So, $\{FB^+=FBACDE\}$, true
+        1. `F` is present in RHS for (E->F). So, $\{EB^+=EBFACD\}$, true
+        1. `E` is present in RHS for (C->DE). So, $\{CB^+=CBDEFA\}$, true
+        1. `C` is present in RHS for (AB->C), but `AB` has already been defined.
+        1. Candidate Keys: $\{AB,FB,EB,CB\}$
+    1. Note the Prime Attributes: $\{A,B,C,E,F\}$
+    1. Note the Non-Prime Attributes: $\{D\}$
+    1. Check for  Normal Form (1: valid):
+        |Normal Form|AB->C|C->DE|E->F|F->A|
+        |-----------|:---:|:---:|:--:|:--:|
+        |BCNF|1|0|0|0|
+        |3-NF|1|0|1|1|
+        |2-NF|1|0|1|1|
+        |1-NF|1|1|1|1|
+        - Check in reverse order, starting with `BCNF`.
+        - For `1-NF`, whether the attributes are multivalued or not cannot be determined, so we assume that the table is atleast in `1-NF`.
+
+<!-- Last image: self/2.png | external/2.png -->
