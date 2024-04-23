@@ -825,31 +825,7 @@ Layer: `Data Link`
 1. More prone to errors.
     - In larger networks, there is a high probability of errors and collisions to take place, if not configured properly.
 
-### Sub-netting in Classful IP Addressing
-- Dividing the big network into smaller networks.
-- Sub-netting requires internal routers within the network since we're dividing the big network into Independent smaller networks, each with their own Network ID's and Broadcast Addresses.
-- Example: Network ID: $200.10.20.0$.
-    1. If we want to divide it into 2 sub-nets, we reserve $2^1=2$ ie $1$ MSB from the host portion: 200.10.20.**0**0000000 & 200.10.20.**1**0000000. These become the Network ID's of the sub-nets.
-    1. So, the Network ID's are $200.10.20.0$ & $200.10.20.128$.
-    1. Sub-net 1:
-        - Range: $200.10.20.0-200.10.20.127$.
-        - Network ID: $200.10.20.0$
-        - Direct Broadcast Address: $200.10.20.127$
-        - Number of usable host addresses: $128-2=126$
-        - Subnet Mask:
-            - Keep the Network ID bits same, is $255$.
-            - Number of reserved bits: $1$.
-            - Put the reserved bit as 1, and rest 0.
-            - So, Subnet Mask: 255.255.255.**1**0000000=255.255.255.128
-    1. Sub-net 2:
-        - Range: $200.10.20.128-200.10.20.255$.
-        - Network ID: $200.10.20.128$
-        - Direct Broadcast Address: $200.10.20.255$
-        - Number of usable host addresses: $128-2=126$
-        - Subnet Mask is same as that of the other subnets.
-    1. Compared to the original network, there are 2 less host address available ($254<256$). This is because additional IP Addresses will need to be allocated for Network ID and Broadcast Address.
-    1. If an IP Address is $200.10.20.15$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.0$, so the internal router redirects the data packet to `Sub-net 1`.
-    1. If an IP Address is $200.10.20.130$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.128$, so the internal router redirects the data packet to `Sub-net 2`.
+
 
 ## Classless IP Addressing
 - Also known as `Classless Inter-Domain Routing (CIDR)`.
@@ -864,6 +840,7 @@ Layer: `Data Link`
     - In $200.10.20.40/28$, we find below that the network ID is $200.10.20.32$.
     - Number of Host ID bits: $32-28=4$. So, $2^4=16$ IP Addresses can be represented by these bits.
     - We now need to check if the last 4 bits in the Network ID are all 0's: 200.10.20.0010**0000**. Here, they are.
+    - For the Mask, Convert the IP Address to binary. Make the fixed bits `1`, and the host ID bits `0`.
 - Example: $200.10.20.40/28$
     - There are 28 bits in the Block ID, and 4 bits in Host ID.
     - Network ID:
@@ -873,6 +850,117 @@ Layer: `Data Link`
         - Method 2:
             1. Perform an AND of the IP Address with the Mask. Mask: $11111111.11111111.11111111.11110000=255.255.255.240$.
             1. $255.255.255.11110000+200.10.20.00101000=200.10.20.32/28$
+
+## Sub-netting
+### Classful IP Addressing
+- Type: `Classful`
+- Dividing the big network into smaller networks.
+- Sub-netting requires internal routers within the network since we're dividing the big network into Independent smaller networks, each with their own Network ID's and Broadcast Addresses.
+- Example: Network ID: $200.10.20.0$.
+    1. If we want to divide it into 2 sub-nets, we reserve $2^1=2$ ie $1$ MSB from the host portion: 200.10.20.**0**0000000 & 200.10.20.**1**0000000. These become the Network ID's of the sub-nets.
+    1. So, the Network ID's are $200.10.20.0$ & $200.10.20.128$.
+    1. Sub-net 1:
+        - Range: $200.10.20.0-200.10.20.127$.
+        - Network ID: $200.10.20.0$
+        - Direct Broadcast Address: $200.10.20.127$
+        - Number of usable host addresses: $128-2=126$
+        - Subnet Mask:
+            - Number of reserved bits: $28+1=29$.
+            - Put the reserved bits as 1, and rest 0.
+            - So, Subnet Mask: 11111111.11111111.11111111.**1**0000000=255.255.255.128
+    1. Sub-net 2:
+        - Range: $200.10.20.128-200.10.20.255$.
+        - Network ID: $200.10.20.128$
+        - Direct Broadcast Address: $200.10.20.255$
+        - Number of usable host addresses: $128-2=126$
+        - Subnet Mask is same as that of the other subnets.
+    1. Compared to the original network, there are 2 less host address available ($254<256$). This is because additional IP Addresses will need to be allocated for Network ID and Broadcast Address.
+    1. If an IP Address is $200.10.20.15$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.0$, so the internal router redirects the data packet to `Sub-net 1`.
+    1. If an IP Address is $200.10.20.130$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.128$, so the internal router redirects the data packet to `Sub-net 2`.
+
+### Variable Length Subnet Masking (VLSM)
+- Type: `Classful`
+- Network can be divided into variable size Subnets.
+- Example: Network ID: $200.10.20.0$. Divide the network into 3 subnets with atleast 100,50 and 50 hosts.
+    - First divide the network into 2 equal parts.
+    1. Sub-net 1:
+        - Reserved bits: **200.10.20.0**0000000
+        - Network ID: 200.10.20.0**0000000**$=200.10.20.0$
+        - Direct Broadcast Address: 200.10.20.0**1111111**$=200.10.20.127$
+        - Number of hosts: $128-2=126$. This will be our first subnet.
+    1. Intermediate Sub-net 2:
+        - Reserved bits: **200.10.20.1**0000000
+        - Divide this subnet further.
+    1. Sub-net 2:
+        - Reserved bits: **200.10.20.10**000000
+        - Network ID: 200.10.20.10**000000**$=200.10.20.128$
+        - Direct Broadcast Address: 200.10.20.10**111111**$=200.10.20.191$
+        - Number of hosts: $64-2=62$. This will be our second subnet.
+    1. Sub-net 3:
+        - Reserved bits: **200.10.20.11**000000
+        - Network ID: 200.10.20.11**000000**$=200.10.20.192$
+        - Direct Broadcast Address: 200.10.20.11**111111**$=200.10.20.255$
+        - Number of hosts: $64-2=62$. This will be our third subnet.
+    1. Total number of host addresses: $256-(2*3)=250$
+    - We could also divide it in some other way, like dividing `Sub-net 1` further.
+
+### Classless Inter-Domain Routing (CIDR)
+- Type: `Classless`
+- Example: Network ID: $192.10.20.128/26$. Divide the network into 2 subnets.
+    - Number of Network/Block ID bits: $26$
+    - Number of Host ID bits: $32-26=6$
+    - Reserved Bits: **192.10.20.10**000000
+    1. Sub-net 1:
+        - Reserved bits: **192.10.20.100**0000000 (Reserve the MSB of the Host ID).
+        - Number of bits reserved: $27$. The addresses will be postfixed by `/27`.
+        - Network ID: 192.10.20.100**000000**$=192.10.20.128/27$
+        - Direct Broadcast Address: 192.10.20.100**111111**$=192.10.20.159/27$
+        - Number of hosts: $32-2=30$. This will be our first subnet.
+    1. Sub-net 2:
+        - Reserved bits: **192.10.20.101**0000000 (Reserve the MSB of the Host ID).
+        - Number of bits reserved: $27$. The addresses will be postfixed by `/27`.
+        - Network ID: 192.10.20.101**000000**$=192.10.20.160/27$
+        - Direct Broadcast Address: 192.10.20.101**111111**$=192.10.20.191/27$
+        - Number of hosts: $32-2=30$. This will be our second subnet.
+    1. Total number of host addresses: $64-(2*2)=60$
+- Example 1: CIDR receives a packed with address $131.23.151.76$. Find the interface to which the packet will be forwarded. The router's routing table has following entities:
+    |Prefix|Output Interface|
+    |------|----------------|
+    |131.16.0.0/12|3|
+    |131.28.0.0/14|5|
+    |131.19.0.0/16|2|
+    |131.22.0.0/15|1|
+    - Here, the objective is to find the Network ID's of all interfaces. The given packet will be forwarded to the one which has the same network ID as the Prefix Interface Address.
+    - $131.16.0.0/12$
+        1. Number of Network ID bits: $12$
+        1. Number of Host ID bits: $32-12=20$
+        1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
+        1. Mask: **11111111.1111**0000.00000000.00000000 (Number of 1's same as the number of reserved bits).
+        1. Network ID: $131.00010111.151.76+255.11110000.0.0=131.16.0.0$.
+        1. The Network ID is in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet can be forwarded** to this interface.
+    - $131.28.0.0/14$
+        1. Number of Network ID bits: $14$
+        1. Number of Host ID bits: $32-14=18$
+        1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
+        1. Mask: **11111111.111111**00.00000000.00000000 (Number of 1's same as the number of reserved bits).
+        1. Network ID: $131.00010111.151.76+255.11111100.0.0=131.20.0.0$.
+        1. The Network ID is **not** in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet cannot be forwarded** to this interface.
+    - $131.19.0.0/16$
+        1. Number of Network ID bits: $16$
+        1. Number of Host ID bits: $32-16=16$
+        1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
+        1. Mask: **11111111.11111111**.00000000.00000000 (Number of 1's same as the number of reserved bits).
+        1. Network ID: $131.00010111.151.76+255.11111111.0.0=131.23.0.0$.
+        1. The Network ID is **not** in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet cannot be forwarded** to this interface.
+    - $131.22.0.0/15$
+        1. Number of Network ID bits: $15$
+        1. Number of Host ID bits: $32-15=17$
+        1. Given IP Address: $131.23.151.76=131.00010111.151.76$. Perform an AND operation with this IP Address and the Mask.
+        1. Mask: **11111111.1111111**0.00000000.00000000 (Number of 1's same as the number of reserved bits).
+        1. Network ID: $131.00010111.151.76+255.11111110.0.0=131.22.0.0$.
+        1. The Network ID is in the same subnet as that of the prefix IP Address (NOT the given IP Address). So, **the packet can be forwarded** to this interface.
+
+
 
 
 ### Gateway
