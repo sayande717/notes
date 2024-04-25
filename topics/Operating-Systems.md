@@ -359,6 +359,14 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     |$P_3$|2|8|19|17|9|9|
     - Gantt Chart 
     <br><img src="../assets/images/Operating-Systems/self/5.png" height="200px" alt="SRTF Example 1" />
+- Example 2: How many context switches will take place, excluding the start & end time?
+    |Process No.|Arrival Time|Burst Time|
+    |---|:---:|:---:|
+    |$P_1$|0|10|
+    |$P_2$|2|20|
+    |$P_3$|6|30|
+    - A total of 2 context switches will take place.
+    <br><img src="../assets/images/Operating-Systems/self/33.png"> height="200px" alt="SRTF Example 2">
 
 ### Round Robin
 - **Criteria**: Time Quantum | **Mode**: Pre-emptive
@@ -1429,6 +1437,19 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Total Seek Time: $(82-50)+(140-82)+(170-140)+(190-170)+(199-190)+(199-0)+(16-0)+(24-16)+(43-24)=(199-50)+(199-0)+(43-0)=391$   - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `391ns`
     <br><img src="../assets/images/Operating-Systems/self/30.png" height="300px" alt="C-SCAN Disk Scheduling Algorithm">
 
+- Example: Find the total Seek Time.
+    - Request Queue: $95,180,34,119,11,123,62,64$
+    - Current position of head: $50$
+    - Initial Direction: Towards smaller value.
+    - Time taken to move per track: 2ms
+    - Time taken to move from one end to the other: 10ms
+    1. First, we will service $34,11$.
+    1. Next, the R/W head will move from left to right.
+    1. Next, we will service $180,123,119,95,64,62$.
+    1. Total Seek Time: $((50-0)*2)+10+((199-62)*2)=(50*2)+10+(137*2)=384$ms
+    <br><img src="../assets/images/Operating-Systems/self/32.png" height="300px" alt="C-SCAN Disk Scheduling Algorithm">
+
+
 ### C-LOOK Algorithm
 - The R/W head moves in a particular direction, and services all requests in that direction. It then switches direction and services the remaining requests.
 - This algorithm is like the [C-SCAN Algorithm](#circular-elevator-algorithm-cscan), except that it does not go till the extreme ends on both sides. It also scans in 1 direction only.
@@ -1440,4 +1461,32 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Total time taken by the R/W head to move through all the tracks (if it takes 1ms to move from one track to the next): `314ns`
     <br><img src="../assets/images/Operating-Systems/self/31.png" height="300px" alt="C-LOOK Disk Scheduling Algorithm">
 
-<!-- Last image: self/31.png | external/0.png -->
+# File Systems
+- Data is primarily seen by the user in the form of files.
+- User -> Files -> Folders/Directories -> File System
+- When we store data, it is:
+    1. Logically divided into blocks.
+    1. Blocks are stored in the sectors of the disk.
+    1. The file system part of the operating system is responsible for mapping blocks to sectors.
+
+## File
+- A file is a collection of data.
+- File Attributes:
+    - Name
+    - Extension (Type)
+    - Identifier: An Unique ID assigned by the Operating System to identify the file.
+    - Location
+    - Size
+    - Modified date, Creation date
+    - Protection / Permissions
+    - Encryption, Compression status
+- Operations on files:
+    - Create.
+    - Read.
+    - Write.
+    - Delete: Delete File & it's attributes.
+    - Truncate: Delete File only (attributes will remain).
+    - Reposition: Reposition the pointer.
+
+
+<!-- Last image: self/33.png | external/0.png -->
