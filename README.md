@@ -98,6 +98,10 @@ git clone https://github.com/sayande717/notes.git
     |Statement and Conclusion|Type 1|1-35|12|12:06|
     |Statement and Conclusion|Type 1|26-48|4|06:51|
     |Logical Reasoning|Test: 8|1-20|6|09:14|
+    |Logical Reasoning|Test: 9|1-20|6|08:21|
+    |Logical Reasoning|Test: 10|1-20|5|09:00|
+
+
 
 - Verbal Reasoning
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
