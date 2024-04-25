@@ -270,3 +270,11 @@ Which word could mean "playing"?
 1. One morning Udai and Vishal were talking to each other face to face at a crossing. If Vishal's shadow was exactly to the left of Udai, which direction was Udai facing?
     - The sun is to the right of both of them. So this is the east direction.
     - If Vishal's shadow is to the left of Uday, it can only happen when Uday is facing the North and Vishal is facing the South.
+
+# Verbal Ability 
+## Spotting Errors
+1. One of the members expressed doubt **that** the Minister was an atheist.
+1. According to the Bible, it is **the** meek and humble who shall inherit the Earth.
+1. He persisted **in doing it** in spite of my advise.
+1. The reason **why** Ram is absent from his duty is because he is unwell.
+1. May I **please** know who you want to see?
