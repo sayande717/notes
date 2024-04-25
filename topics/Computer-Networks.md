@@ -856,7 +856,7 @@ Layer: `Data Link`
 - Type: `Classful`
 - Dividing the big network into smaller networks.
 - Sub-netting requires internal routers within the network since we're dividing the big network into Independent smaller networks, each with their own Network ID's and Broadcast Addresses.
-- Example: Network ID: $200.10.20.0$.
+- Example: Network ID: $200.10.20.0$, Class C.
     1. If we want to divide it into 2 sub-nets, we reserve $2^1=2$ ie $1$ MSB from the host portion: 200.10.20.**0**0000000 & 200.10.20.**1**0000000. These become the Network ID's of the sub-nets.
     1. So, the Network ID's are $200.10.20.0$ & $200.10.20.128$.
     1. Sub-net 1:
@@ -865,7 +865,7 @@ Layer: `Data Link`
         - Direct Broadcast Address: $200.10.20.127$
         - Number of usable host addresses: $128-2=126$
         - Subnet Mask:
-            - Number of reserved bits: $28+1=29$.
+            - Number of reserved bits: $24+1=25$.
             - Put the reserved bits as 1, and rest 0.
             - So, Subnet Mask: 11111111.11111111.11111111.**1**0000000=255.255.255.128
     1. Sub-net 2:
@@ -874,7 +874,7 @@ Layer: `Data Link`
         - Direct Broadcast Address: $200.10.20.255$
         - Number of usable host addresses: $128-2=126$
         - Subnet Mask is same as that of the other subnets.
-    1. Compared to the original network, there are 2 less host address available ($254<256$). This is because additional IP Addresses will need to be allocated for Network ID and Broadcast Address.
+    1. Compared to the original network, there are 4 less host address available ($252<256$). This is because additional IP Addresses will need to be allocated for Network ID and Broadcast Address.
     1. If an IP Address is $200.10.20.15$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.0$, so the internal router redirects the data packet to `Sub-net 1`.
     1. If an IP Address is $200.10.20.130$, we perform AND with the subnet mask $255.255.255.128$. Result: $200.10.20.128$, so the internal router redirects the data packet to `Sub-net 2`.
 
@@ -961,8 +961,36 @@ Layer: `Data Link`
         1. Network ID: $131.00010111.151.76+255.11111110.0.0=131.22.0.0$.
         1. The Network ID is **NOT** in the same subnet as that of the given IP Address. So, **the packet cannot be forwarded** to this interface.
 
+### VLSM in CIDR (Classless)
+- Type: `Classless`
+- Check [VLSM](#variable-length-subnet-masking-vlsm)
+- Example: Network ID: $245.248.128.0/20$. Divide the network into 3 subnets. 
+    - Network ID Bits: $20$ | Host ID Bits: $32-20=12$
+    - Subnet Mask: $11111111.11111111.11110000.00000000=255.255.240.0$
+    - First divide the network into 2 equal parts.
+    1. Sub-net 1:
+        - Additional Reserved bit: 245.248.1000**0**000.00000000
+        - Network ID: 245.248.10000**000.00000000**$=245.248.128.0/21$
+        - Direct Broadcast Address: 245.248.10000**111.11111111**$=245.248.135.255/21$
+        - Number of hosts: $2^{11}-2=2048-2=2046$. This will be our first subnet.
+        - Subnet Mask: 11111111.11111111.11111000.00000000=255.255.248.0$
+    1. Intermediate Sub-net 2:
+        - Additional Reserved bit: 245.248.1000**1**000.00000000
+        - Divide this subnet further.
+    1. Sub-net 2:
+        - Additional Reserved bit: 245.248.10001**0**00.00000000
+        - Network ID: 245.248.100010**00.00000000**$=245.248.136.0/22$
+        - Direct Broadcast Address: 245.248.100010**11.11111111**$=245.248.139.255/22$
+        - Number of hosts: $2^{10}-2=1024-2=1022$. This will be our second subnet.
+        - Subnet Mask: 11111111.11111111.11111100.00000000=255.255.252.0$
 
-
+    1. Sub-net 3:
+        - Additional Reserved bit: 245.248.10001**1**00.00000000
+        - Network ID: 245.248.100011**00.00000000**$=245.248.140.0/22$
+        - Direct Broadcast Address: 245.248.100011**11.11111111**$=245.248.143.255/22$
+        - Number of hosts: $2^{10}-2=1024-2=1022$. This will be our second subnet.
+        - Subnet Mask: 11111111.11111111.11111100.00000000=255.255.252.0$
+    1. Total number of host addresses: $2^{12}-(2*3)=4096-6=4090$
 
 
 ### Gateway
