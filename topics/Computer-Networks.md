@@ -993,6 +993,69 @@ Layer: `Data Link`
     1. Total number of host addresses: $2^{12}-(2*3)=4096-6=4090$
 
 
+# IPv4 (Internet Protocol Version 4)
+## IPv4 Header
+- Connectionless: A connection is not established before transmitting data.
+- Datagram Service: The data packets can travel through any of the available paths. They can take different paths to reach the destination.
+- Size of Packet, Datagram: Header (20-60 bytes) + Payload (0-65515 bytes)
+- Format: 
+    1. **| VER | HLEN | Type of Service -> DSCP | Total Length |**
+        - VER: 4 bits | IP version(4: 0100 or 6: 0101)
+        - HLEN: 4 bits | Used to determine the size of the header, which will then help determine the size of payload (the actual data).
+            - If header length is shown as ${1010}_2={10}_{10}$ bits, then **the actual size** is $10*4=40$ bytes.
+            - Consequently, header length cannot be any of $0,1,2,3,4$. Till 4, multiplying by 4 will not give the minimum size of 20 bytes for the header.
+        - Type of Service: 8 bits | |P|P|P|D|T|R|C|O|
+            - Precedence: First 3 bits | Defines the priority.
+            - Delay: 4th bit | `1` if minimal delay is important.
+            - Throughput: 5th bit | `1` if we need maximum throughput.
+            - Reliability: 6th bit | `1` if we want maximum reliability and minimum packet drops.
+            - Cost: 7th bit | `1` if we want the packet to follow the shortest and most efficient path.
+            - O: 7th bit | Reserved
+        - DSCP (Differentiated Services Code Point) | 8 bits
+            - This was defined as a successor to ToS.
+            - DSCP: Bits 0-5 | Defines what type of service the packet contains.
+            - ECN: Bits 6,7 | Explicit Congestion Notification, used to notify the sender of congestion in the network.
+        - Total Length: 16 bits | Denotes the total length of the data packet (Header + Payload).
+
+    1. **| Identification Bits | Flag | Fragment Offset |**
+        - Identification Bits: 16 bits | Helps identify the bits.
+        - Flag: 4 bits | | Reserved | DF | MF |
+            - Reserved: 1 bit | Reserved bit, has a constant value of `0`.
+            - Do not Fragment: 1 bit | Packet has already been divided into fragments.
+            - More Fragments?: 1 bit | Denotes whether there are more fragments expected to arrive, after this one.
+        - Fragment Offset: 13 bits | Denotes the number of bytes ahead of this data packet. The value is divided by 8.
+    1. **| Time to Live (TTL) | Protocol | Header Checksum |**
+        - Time to Live: 8 bits | Prevents data packet from getting stuck in a loop forever.
+            - Max value: $2^8=256$. It can travel through 256 nodes max.
+            - Everytime it travels through a node, this value decreases by 1.
+        - Protocol: 8 bits | Signifies if we're using some protocol from higher-up levels.
+        - Header Checksum: 16 bits | Used for error detection.
+    1. **| Source IP Address |**
+        - Source IP Address: 32 bits
+    1. **| Destination IP Address |**
+        - Destination IP Address: 32 bits
+    1. **| Options & Padding |**
+        - Options: 0-40 bytes | 
+            - Record Routing: Records the IP Addresses of all routers the packet passed through. For 40 bytes, we can record a total of `10` IP Addresses. However, we need to store other data too, so we can store `9` IP Addresses in reality. Also, not all networks allow it. So, this option was removed from IPv6.
+            <br><img src="../assets/images/Computer-Networks/self/6.png" height="300px" alt="Record Routing" />
+            - Source Routing: Source defines what routers the data packet will travel through.
+                - Strict Source Routing: The entire path will be strictly defined and followed.
+                - Loose Source Routing: The path will be partially defined, and the missing links will be made as the packet traverses the path.
+            - Padding: If the header size is **not a multiple of 4**, we can add additional bits here.
+
+- Example: A Datagram of 3000B (20B IP Header + 2980B Payload) reached the router, and must be forwarded to link with the MTU of size 500B. How many fragments will be generated? Also write MF,OffsetTotal length for all the data packets.
+    1. An MTU of 500 bytes means that the receiver can only send a maximum of 500 bytes of data per packet.
+    1. The packets are divided into 20B (Header) + 480B (Payload) each.
+    1. A total of 7 packets will need to be transmitted. The last packet will have 20B (Header) + 120B (Payload).
+
+    |Parameter|$P_1$|$P_2$|$P_3$|$P_4$|$P_5$|$P_6$|$P_7$|
+    |---------|-----|-----|-----|-----|-----|-----|-----|
+    |Total Length|$20+480=500$|$20+480=500$|$20+480=500$|$20+480=500$|$20+480=500$|$20+480=500$|$20+100=120$|
+    |More Fragments?|1|1|1|1|1|1|0|
+    |Offset|0|60|120|180|240|300|360|
+
+
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
