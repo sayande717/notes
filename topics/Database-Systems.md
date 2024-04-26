@@ -565,6 +565,7 @@ Example: Student
 ## Second Normal form (2-NF)
 - Table must be in First Normal Form (1-NF).
 - All the non-prime attributes must be fully functionally dependent on the Candidate Key. They must not be only partially dependent on a part of (ie a proper subset of) the Candidate Key.
+- If the RHS is a prime attribute, we do not need to check further.
 - (AB -> C) should happen.
 - If (AB -> C), AB is a candidate key (prime attribute) while C is a non-prime attribute. If (A -> C) or (B -> C) is true, then the table is not in 2-NF.
 - Example:
@@ -757,7 +758,7 @@ Example: Student
      1. **Minimal list of Dependencies**: {A->B,C->B,D->A,D->C,AC->D}
 
 ## Normalization Examples
-- Example 1: $R(ABCDEF)$, Functional Dependencies: $\{AB->C,C->DE,E->F,F->A\}$, **Check the highest Normal Form.**
+- Example 0: $R(ABCDEF)$, Functional Dependencies: $\{AB->C,C->DE,E->F,F->A\}$, **Check the highest Normal Form.**
     1. Find the Candidate Keys.
         1. $\{AB^+=ABCDEF\}$, true
         1. `A` is present in RHS for (F->A). So, $\{FB^+=FBACDE\}$, true
@@ -776,5 +777,59 @@ Example: Student
         |1-NF|1|1|1|1|
         - Check in reverse order, starting with `BCNF`.
         - For `1-NF`, whether the attributes are multivalued or not cannot be determined, so we assume that the table is atleast in `1-NF`.
+- Example 1: $R(ABCDEF)$, Functional Dependencies: $\{AB->C,C->D,C->E,E->F,F->A\}$, Convert the table to BCNF.
+    - Candidate Keys: $\{AB,FB,EB,CB\}$
+    - Prime Attributes: $\{A,B,C,E,F\}$
+    - Non-Prime Attributes: $\{D\}$
+    - Functional Dependencies: $\{AB->C,C->D,C->E,E->F,F->A\}$
+    1. Check for 1-NF: We cannot check for atomicity here, since we need the attribute values to do so. We assume that the table is already in 1-NF.
+    1. Check for 2-NF:
+        - (AB->C): true
+        - (C->D): false
+        - (C->E): true
+        - (E->F): true
+        - (F->A): true
+        - In (C->D), a non-prime attribute is being determined by a part of the candidate key.
+        1. Divide the table into two. Separate the dependency that is causing a problem.
+        1. $R_1=ABEF$, $R_2=CD$
+        1. Here, we need to have atleast 1 variable common.
+        1. In $R_2$, $C^+=CD$ ie C is a candidate key. So, we can use C as a common variable.
+        1. $R_1=ABCEF=\{AB->C,C->E,E->F,F->A\}$, $R_2=CD=\{C->D\}$
+    1. Check for 3-NF:
+        1. $R_1$, Candidate Keys: {AB,FB,EB,CB}:
+            - (AB->C): true
+            - (C->E): true
+            - (E->F): true
+            - (F->A): true
+        1. $R_2$, Candidate Keys: {C}:
+            - (C->D): true 
+    1. Check for BCNF:
+        1. $R_1$, Candidate Keys: {AB,FB,EB,CB}:
+            - (AB->C): true
+            - (C->E): false 
+            - (E->F): false 
+            - (F->A): false 
+        1. $R_2$, Candidate Keys: {C}:
+            - (C->D): true 
+        1. We have to Decompose $R_1$.
+            - $R_3=(AB->C)=ABC$, Candidate Key: {AB} (from existing)
+            - $R_4=(C->E)=CE$, Candidate Key: {C}
+            - $R_5=(E->F)=EF$, Candidate Key: {E}
+            - $R_6=(F->A)=FA$, Candidate Key: {F}
+- Example 2: Which of the following statement is true?
+    - A relation is in `3-NF`, then it is always in `BCNF`.
+    - A relation is in `2-NF`, then it is not in `1-NF`.
+    - **A relation is in `BCNF`, then it is in `2-NF`**.
+    - A relation is in `2-NF`, it contains partial dependencies.
+- Example 3: Relation `R` has 8 attributes, $R=ABCDEFGH$. Functional Dependencies: $\{CH->G,A->BC,B->CFH,E->A,F->EG\}$
+    1. `D` is not present in `RHS`.
+    1. $DA^+=DABCFHGE$ | Candidate Keys: $\{DA\}$
+    1. `A` is on the RHS of (E->A). Check for `E`.
+    1. $DE^+=DEABCFHG$ | Candidate Keys: $\{DA,DE\}$
+    1. `E` is on the RHS of (F->EG). Check for `F`.
+    1. $DF^+=DFEGABCH$ | Candidate Keys: $\{DA,DE,DF\}$
+    1. `F` is on the RHS of (B->CFH). Check for `B`.
+    1. $DB^+=DBCFHEGA$ | Candidate Keys: $\{DA,DE,DF,DB\}$
+    1. So, total number of candidate keys: $4$.
 
 <!-- Last image: self/2.png | external/2.png -->
