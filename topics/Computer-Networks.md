@@ -1041,7 +1041,7 @@ Layer: `Data Link`
             - Source Routing: Source defines what routers the data packet will travel through.
                 - Strict Source Routing: The entire path will be strictly defined and followed.
                 - Loose Source Routing: The path will be partially defined, and the missing links will be made as the packet traverses the path.
-            - Padding: If the header size is **not a multiple of 4**, we can add additional bits here.
+            - Padding: 4 bits | If the header size is **not a multiple of 4**, we can add additional bits here.
 
 - Example: A Datagram of 3000B (20B IP Header + 2980B Payload) reached the router, and must be forwarded to link with the MTU of size 500B. How many fragments will be generated? Also write MF,OffsetTotal length for all the data packets.
     1. An MTU of 500 bytes means that the receiver can only send a maximum of 500 bytes of data per packet.
