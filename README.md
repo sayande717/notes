@@ -140,5 +140,7 @@ git clone https://github.com/sayande717/notes.git
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
     |:---|:---:|:---:|:---:|:---:|
     |Spotting Errors|Section 1|1-40|3|07:59|
+    |Sentence Correction|Section 1|1-25|5|06:13|
+
 
 
