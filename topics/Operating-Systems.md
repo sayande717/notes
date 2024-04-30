@@ -1488,5 +1488,92 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - Truncate: Delete File only (attributes will remain).
     - Reposition: Reposition the pointer.
 
+### File System Allocation
+- A file is *logically* divided into blocks, then stored on *physical* sectors of the disk. The allocation type decides how the blocks will be stored.
+- Contiguous:
+    - We can start storing the blocks from any sector, but subsequent blocks will be stored one after the other.
+    - Directory Table:
+        |File|Start|Length|
+        |----|-----|------|
+        |A|0|3|
+        |B|6|5|
+        |C|14|4|
+    - File `A` starts from sector `0`, and is stored in the `3` subsequent sectors (0,1,2).
+    - Advantages:
+        ```diff
+        + Easy to implement.
+        + Excellent Read performance, both for `sequential` and `direct` read operations.
+        ```
+    - Disadvantages:
+        ```diff
+        - Both internal & external fragmentation can occur.
+        - We may not be able to accomodate the file if it's size increases.
+        ```
 
-<!-- Last image: self/33.png | external/0.png -->
+- Non-contiguous:
+    - We can store the blocks randomly, they do not need to be stored one after the other.
+    1. **Linked List** allocation:
+        - Directory Table only contains the start block address of the particular file.
+        - All the blocks will have the data & a pointer that points to the next block, **| Data | Pointer |**. So, after we reach the first block, we can decipher the address of the next one.
+        - In the last block, the pointer has a value of `-1`.
+    - Advantages:
+        ```diff
+        + No external fragmentation.
+        + Data can be stored anywhere on the disk, so it ensures maximum efficiency.
+        + File can be accomodated if it's size increases.
+        ```
+    - Disadvantages:
+        ```diff
+        - Larger seek time, because data can be located in multiple tracks.
+        - Random access is difficult, we have to traverse the file block-by-block to get to the `nth` block.
+        - Additional overhead of pointers.
+        ```
+    1. **Indexed** allocation:
+        - Directory Table only contains the address where the index is located (index block).
+        - After we reach the `index block`, we will get the addresses of all the blocks.
+        - Each file will have it's own `index block`.
+        - UNIX uses I-Node, which is index-based file allocation system.
+    - Advantages:
+        ```diff
+        + No external fragmentation.
+        + Supports direct access, we can just get to the `index block` and get the address of any block.
+        ```
+    - Disadvantages:
+        ```diff
+        - Additional overhead of pointers.
+        - Blocks need to be reserved as `index block`.
+        - If the size of the `index block` exceeds block size, we need to implement multi-level indexing.
+        ```
+- UNIX Inode Structure:
+    - Format of Inode:
+        |Attributes|
+        |----------|
+        |Direct Blocks|
+        |Single Indirect|
+        |Double Indirect|
+        |Triple Indirect|
+    - **Attributes**: Metadata of the files
+    - **Direct Blocks**: Pointers directly point to the data blocks.
+    - **Single Indirect**: Pointers point to an `index block`, which leads to the data blocks.
+    - **Double Indirect**: Pointers point to an `index block`, which lead to another `index block`, which leads to the data blocks.
+    - **Triple Indirect**: Pointers point to an `index block`, which lead to another `index block`, which lead to another `index block`, which finally leads to the data blocks.
+    - A hybrid approach is used to store & locate the blocks.
+     <br><img src="../assets/images/Operating-Systems/self/34.png"> height="350px" alt="UNIX Inode Structure">   
+    - Example: A file system uses UNIX Inode Data Structure, which contain 8 Direct Block Addresses, 1 Indirect Block, 1 Double Indirect block, 1 Triple Indirect block. The size of each disk block is $128B$, and size of each block address is $8B$. Calculate **the maximum possible file size**.
+        - Number of pointers in 1 Index Block = Size of Disk Block / Size of each Block Address = $128B/8B=2^8/2^4=2^4=16$ 
+        - `Direct Block`: There will be `n` data blocks if there are `n` entries. So, number of data blocks: $8$.
+        - `Single Indirect`: First, we will have an index, which then contains all the pointers. The number of pointers is same as the number of data blocks. Number of pointers in the index = Number of data blocks = $16$
+        - `Double Indirect`: In this case, the first Index Block will contain pointers to the Indexes 1 level below it. The Indexes below it will contain the pointers to the data blocks.
+            1. `1` pointer of the first `Index Block` will point to an index block of $128B/8B=16$ pointers.
+            1. So, if we have $16$ pointers in the first `Index Block`, we will have $16*16=16^{2}$ total pointers, and the same number of data blocks.
+        - `Triple Indirect`: In this case, in the 2nd `Index Block`, each pointer will point to an index block of $16$ pointers.
+        - We already had $16^{2}=16*16$ pointers till the 2nd `Index Block`. The 3rd `Index Block` will result in a total of $16*16*16=16^{3}$ pointers.
+        - We get to the data blocks after the 3rd `Index Block`.
+        - **Maximum possible size**:
+            - $(8+16+16^2+16^3)*128$
+            <br> $=8*(1+2+2*16+2*16*16)*128$
+            <br> $=(1+2+2*16+2*16*16)*128*8$
+            <br> $=(1+2+2*16+2*16*16)*1024$
+            <br> $=547KB$
+
+<!-- Last image: self/34.png | external/0.png -->
