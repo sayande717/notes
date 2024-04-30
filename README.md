@@ -134,7 +134,9 @@ git clone https://github.com/sayande717/notes.git
     |Verbal Reasoning|Test: 1|1-20|3|18:11|
     |Character Puzzles|Type 1|1-11|10|14:30|
     |Verbal Reasoning|Test: 1|1-20|3|13:59|
-
+    |Sitting Arrangement|Type 9|1-5|0|02:30|
+    |Sitting Arrangement|Type 10|1-5|0|02:49|
+    |Sitting Arrangement|Type 11|1-5|0|06:33|
 
 - Verbal Ability
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
