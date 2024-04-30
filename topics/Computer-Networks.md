@@ -995,12 +995,13 @@ Layer: `Data Link`
 
 # IPv4 (Internet Protocol Version 4)
 ## IPv4 Header
+- Number of IP Addresses possible in IPv4: $2^{32}$
 - Connectionless: A connection is not established before transmitting data.
 - Datagram Service: The data packets can travel through any of the available paths. They can take different paths to reach the destination.
 - Size of Packet, Datagram: Header (20-60 bytes) + Payload (0-65515 bytes)
 - Format: 
     1. **| VER | HLEN | Type of Service -> DSCP | Total Length |**
-        - VER: 4 bits | IP version(4: 0100 or 6: 0101)
+        - VER: 4 bits | IP version(4: 0100 or 6: 0110)
         - HLEN: 4 bits | Used to determine the size of the header, which will then help determine the size of payload (the actual data).
             - If header length is shown as ${1010}_2={10}_{10}$ bits, then **the actual size** is $10*4=40$ bytes.
             - Consequently, header length cannot be any of $0,1,2,3,4$. Till 4, multiplying by 4 will not give the minimum size of 20 bytes for the header.
@@ -1010,7 +1011,7 @@ Layer: `Data Link`
             - Throughput: 5th bit | `1` if we need maximum throughput.
             - Reliability: 6th bit | `1` if we want maximum reliability and minimum packet drops.
             - Cost: 7th bit | `1` if we want the packet to follow the shortest and most efficient path.
-            - O: 7th bit | Reserved
+            - O: 8th bit | Reserved
         - DSCP (Differentiated Services Code Point) | 8 bits
             - This was defined as a successor to ToS.
             - DSCP: Bits 0-5 | Defines what type of service the packet contains.
@@ -1054,7 +1055,30 @@ Layer: `Data Link`
     |More Fragments?|1|1|1|1|1|1|0|
     |Offset|0|60|120|180|240|300|360|
 
-
+## IPv6 Header
+- Number of IP Addresses possible in IPv6: $2^{128}$
+- Format: 
+    1. **| VERSION | Priority / Traffic Type | Flow Label |**
+        - VER: 4 bits | IP version (6: 0110)
+        - Priority / Traffic Type: 8 bits | Tells what type of data packet it is, and it's priority.
+        - Flow Label: 20 bits | If it is specified, a Virtual Circuit is created. Packets are transmitted over a single path, over a dedicated virtual connection. It is used for real-time data.
+    1. **| Payload Length | Next Header | Hop Limit |**
+        - Payload Length: 16 bits
+        - Next Header: 8 bits | Contains information about any additional headers we're using.
+        - Hop Limit: 8 bits | Specifies the  maximum number of hops the packet can make, like Time to Live (TTL). Value decreases by 1 each time a hop is made.
+    1. **| Source Address |**
+        - Source IP Address: 128 bits
+    1. **| Destination Address |**
+        - Destination IP Address: 128 bits
+- Format of the data packet: **| Base header | Extension Header 1 | Extension Header 2 | Data |**
+    - Additional extension headers can be specified in the next header field to enhance the functionality of the Data Packet.
+    - Additional extension headers (ID, written in binary):
+        1. Routing Header: (43) | The path that the data packet will take, is specified.
+        1. Hop by Hop: (0) | Used when we want to provide some information to all nodes the data packet hops through.
+        1. Fragmentation: (44) | Used if the data packet is divided into fragments. Intermediate hops cannot fragment the data, only the source can.
+        1. Authentication: (51) | Used for Authentication, Checksum, maintaining data security and integrity, etc.
+        1. Destination: (60) | Used if we want to provide some information for the destination node.
+        1. Encapsulating Security Payload (50): Used to provide information about encryption and decryption.
 
 ### Gateway
 ### IDS (Intrusion Detection System)
