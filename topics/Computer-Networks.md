@@ -1080,6 +1080,152 @@ Layer: `Data Link`
         1. Destination: (60) | Used if we want to provide some information for the destination node.
         1. Encapsulating Security Payload (50): Used to provide information about encryption and decryption.
 
+# Routing Protocol
+- A router is usually connected to multiple networks. When it receives a data packet, it has to decide which path to send it to. The path it chooses is governed by Routing Protocols.
+- A Routing Table contains all information about the paths and their current states.
+    - Static Routing Table: Statically defined by the Network Administrator.
+    - Dynamic Routing Table: Dynamically defined & updated. Routing Protocols help update this type of Table.
+- Types: Intra-Domain & Inter-Domain
+    - Intra-Domain: For communication withing an autonomous system.
+    - Inter-Domain: For communication between Independent autonomous systems.
+
+## Intra-Domain
+
+### Distance Vector (RIP)
+- Each router knows all the other routers in the network system.
+- Each router has knowledge of it's neighbor routers.
+    <br><img src="../assets/images/Computer-Networks/self/6.png" width="500px" alt="Distance Vector Example 0" /> 
+1. Generate the Distance Vector tables:
+    - $N_1$:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|0|$N_1$|
+        |$N_2$|1|$N_2$|
+        |$N_3$|∞|-|
+        |$N_4$|∞|-|
+        |$N_5$|∞|-|
+    - $N_2$:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|1|$N_1$|
+        |$N_2$|0|$N_2$|
+        |$N_3$|6|$N_3$|
+        |$N_4$|∞|-|
+        |$N_5$|3|$N_3$|
+    - $N_3$:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|∞|-|
+        |$N_2$|6|$N_2$|
+        |$N_3$|0|$N_3$|
+        |$N_4$|2|$N_4$|
+        |$N_5$|∞|-|
+    - $N_4$:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|∞|-|
+        |$N_2$|∞|-|
+        |$N_3$|2|$N_3$|
+        |$N_4$|0|$N_4$|
+        |$N_5$|4|$N_5$|
+    - $N_5$:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|∞|-|
+        |$N_2$|3|$N_2$|
+        |$N_3$|∞|-|
+        |$N_4$|4|$N_4$|
+        |$N_5$|0|$N_5$|
+1. Share the information with the neighbouring routers (PASS 1):
+    - The information is **only shared with neighbouring Routers**.
+    - Only the **Distance** information is shared.
+    - $N_1$ -> $N_2=\{1,0,6,∞,3\}$. New Routing Table:
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|0|$N_1$|
+        |$N_2$|1|$N_2$|
+        |$N_3$|7|$N_2$,$N_3$|
+        |$N_4$|∞|-|
+        |$N_5$|4|$N_2$,$N_5$|
+        - When we want to get to $N_3$, we have to first get to $N_2$, then to $N_3$. So, Distance: $1+6=7$
+
+    - $N_2$ -> $N_1$, $N_3$, $N_5$
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|1|$N_1$|
+        |$N_2$|0|$N_2$|
+        |$N_3$|6|$N_3$|
+        |$N_4$|7|$N_5$,$N_4$|
+        |$N_5$|3|$N_5$|
+        - $N_4$: We can get to $N_4$ via $N_5$ & $N_3$. Distances: $N_5=3+4=7$, $N_3=6+2=8$. We will pick the shortest distance.
+    - $N_3$ -> $N_4$, $N_2$
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|7|$N_2$|
+        |$N_2$|6|$N_2$|
+        |$N_3$|0|$N_3$|
+        |$N_4$|2|$N_4$|
+        |$N_5$|6|$N_4$|
+    - $N_4$ -> $N_3$, $N_5$
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|∞|$N_1$|
+        |$N_2$|7|$N_5$|
+        |$N_3$|2|$N_3$|
+        |$N_4$|0|$N_4$|
+        |$N_5$|4|$N_5$|
+    - $N_5$ -> $N_2$, $N_4$
+        |Destination|Distance|Next|
+        |-----------|--------|----|
+        |$N_1$|4|$N_2$|
+        |$N_2$|3|$N_2$|
+        |$N_3$|6|$N_4$|
+        |$N_4$|4|$N_4$|
+        |$N_5$|0|$N_5$|
+1. The tables will keep being shared between neighbouring nodes, and the values will keep getting updated. This is how the routers stay updated on the current state of the network.
+
+- **Count To Infinity problem**:
+- It's a special case where the costs for all nodes will keep increasing infinitely.
+    - Network Diagram: [C] -> [A] -> [B] -> Internet (distance between each node: 1)
+    - Routing Table (Destination: `Internet`):
+        |Pass|C|A|B|
+        |:---|-|-|-|
+        |1|∞|∞|1|
+        |2|∞|2|1|
+        |3|3|2|1|
+        |**4**|3|2|1|
+        |**5**|3|2|∞|
+        |**6**|3|4|3|
+        |7|5|4|5|
+        |8|5|6|5|
+        |9|7|6|7|
+        1. **Pass 4**: The routing table is in stable state.
+        1. **Pass 5**: The link between `B` and `Internet` breaks.
+        1. **Pass 6**:
+            - In case of `B`, it can't directly reach `Internet`. But, `A` is telling it that it can help it reach `Internet` with cost `2`. So, `B` takes the lowest cost, $2+1=3$
+            - In case of `A`, `B` can't help it reach the `Internet`. But, `C` can help it reach it with cost `3`. So, `A` takes the lowest cost, $3+1=4$
+            - In case of `C`, `A` can help it reach `Internet` with cost `2`. So, the cost is $2+1=3$
+        1. **Pass 7**:
+            - This is where the cost keeps increasing in an infinite manner.
+            - In case of `B`, it can't directly reach `Internet`. But, `A` is telling it that it can help it reach `Internet` with cost `4`. So, `B` takes the lowest cost, $4+1=5$.
+            - In case of `A`, both `B` & `C` can help it reach the `Internet`, with cost $3,3$. So, `A` takes the lowest cost, $3+1=4$
+            - In case of `C`, `A` can help it reach `Internet` with cost `4`. So, the cost is $4+1=5$
+        1. **Pass 8**:
+            - In case of `B`, it can't directly reach `Internet`. But, `A` is telling it that it can help it reach `Internet` with cost `4`. So, `B` takes the lowest cost, $4+1=5$.
+            - In case of `A`, both `B` & `C` can help it reach the `Internet`, with cost $5,5$. So, `A` takes the lowest cost, $5+1=6$
+            - In case of `C`, `A` can help it reach `Internet` with cost `4`. So, the cost is $4+1=5$
+        1. **Pass 9**:
+            - In case of `B`, it can't directly reach `Internet`. But, `A` is telling it that it can help it reach `Internet` with cost `6`. So, `B` takes the lowest cost, $6+1=7$.
+            - In case of `A`, both `B` & `C` can help it reach the `Internet`, with cost $5,5$. So, `A` takes the lowest cost, $5+1=6$
+            - In case of `C`, `A` can help it reach `Internet` with cost `6`. So, the cost is $6+1=7$
+        1. So, as we can see, the costs for all nodes will keep increasing infinitely.
+
+### Link State (OSPF)
+
+
+## Inter-Domain
+### Path Vector (BGP)
+
 ### Gateway
 ### IDS (Intrusion Detection System)
 ### Firewall
@@ -1091,4 +1237,4 @@ Layer: `Data Link`
 ### Multiplexing
 ### Encoding
 
-<!-- Last image: self/5.png | external/8.png -->
+<!-- Last image: self/6.png | external/8.png -->
