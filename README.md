@@ -143,6 +143,9 @@ git clone https://github.com/sayande717/notes.git
     |:---|:---:|:---:|:---:|:---:|
     |Spotting Errors|Section 1|1-40|3|07:59|
     |Sentence Correction|Section 1|1-25|5|06:13|
+    |Spotting Errors|Section 1|1-20|5|02:27|
+    |Change of Speech|Section 1|1-17|2|04:59|
+
 
 
 
