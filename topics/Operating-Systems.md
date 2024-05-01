@@ -1576,4 +1576,26 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
             <br> $=(1+2+2*16+2*16*16)*1024$
             <br> $=547KB$
 
+## Linker and Loader
+- This is how a program gets turned into machine code from high-level code:
+    1. **High-Level Code**: This is the code that a programmer writes in a high-level programming language like Python, C++, Java, etc. High-level code is human-readable and is designed to be easily understood by programmers. It contains logical instructions and algorithms to solve a particular problem or perform a specific task.
+    1. **Compiler**: The compiler is a software tool that translates the high-level code written by the programmer into machine code or assembly language. It performs several steps:
+        - Lexical Analysis: It breaks the code into tokens or lexemes.
+        - Syntax Analysis: It checks the syntax of the code for correctness based on the rules of the programming language.
+        - Semantic Analysis: It ensures the meaning of the code is correct and makes sense.
+        - Optimization: It may optimize the code for better performance.
+        - Code Generation: It translates the code into machine code or assembly language.
+    1. **Linker**: In many programming languages, programs are split into multiple source files or modules for better organization and maintainability. The linker is a tool that combines these separate modules into a single executable file. It resolves references between modules, such as function calls and variable accesses, and ensures that all necessary code and data are linked together correctly.
+    1. **Loader**: Once the program is compiled and linked, the loader is responsible for loading the executable file into memory for execution. It allocates memory space for the program, resolves any dynamic linking if necessary, and starts executing the program instructions.
+    1. **Memory**: Memory is where the program's instructions and data reside during execution. When the program is loaded into memory, the operating system allocates memory space for it. The memory is divided into different sections such as code section (for executable instructions), data section (for variables and constants), stack (for function calls and local variables), and heap (for dynamic memory allocation).
+### Object File:
+- Components:
+    - **Header**: Index, specifies what is located where, in the object file.
+    - **Text Section**: The code ie the instructions to be executed.
+    - **Data Section**: Variables, constants, etc.
+    - **BSS Section**: Variables that have not been initialized.
+    - **Symbol Table**: Variable name, function names, all other user-defined identifiers.
+    - **Relocation Information**: Used by the linker during the linking phase to adjust memory addresses and resolve references between different parts of the program.
+    - **Debugging Information**: Also known as debug information or symbols, it is additional metadata generated during the compilation or linking process that aids in debugging and analyzing a program. It contains various pieces of information that help developers understand the program's behavior, identify issues, and diagnose problems during development and debugging phases. 
+
 <!-- Last image: self/34.png | external/0.png -->
