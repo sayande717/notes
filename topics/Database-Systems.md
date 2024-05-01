@@ -451,7 +451,9 @@ Example: Student
     1. VALID, they are different people.
         |Sid|Sname|
         |---|---|
-        |1|Ranjit|
+        |1|Ranjit|n which the left part is a proper subset of a candidate key and the right part is a non prime attribute.
+
+So, for the same reason, if a dependency contains in the left part a proper subset of a candidate key plus a non-prime attribute, this does not fall under the Codd’s definition, meaning that it does not violate such definition.
         |2|Varun|
     1. INVALID, Sid cannot be same for different people.
         |Sid|Sname|
@@ -502,7 +504,9 @@ Example: Student
 - Example 2:
     - R=(ABCDE) | FD = {A->B, BC->D,E->C,D->A}
     1. Check the RHS of the functional dependencies: ${AB,D,C,A}$. `E` is missing, so assume that E will be a part of the candidate key.
-    1. Start check from `A`:
+    1. Start check from `n which the left part is a proper subset of a candidate key and the right part is a non prime attribute.
+
+So, for the same reason, if a dependency contains in the left part a proper subset of a candidate key plus a non-prime attribute, this does not fall under the Codd’s definition, meaning that it does not violate such definition.A`:
         > $AE^+=\{AECBD\}$. Candidate Key Set: $\{AE\}$
     1. Check if `A` or `E` is in RHS: \[D->A\]. Check for `D`:
          > $DE^+=\{DEABC\}$. Candidate Key Set: $\{AE,DE\}$
@@ -565,7 +569,7 @@ Example: Student
 ## Second Normal form (2-NF)
 - Table must be in First Normal Form (1-NF).
 - All the non-prime attributes must be fully functionally dependent on the Candidate Key. They must not be only partially dependent on a part of (ie a proper subset of) the Candidate Key.
-- If the RHS is a prime attribute, we do not need to check further.
+- It's not a problem if both LHS and RHS are non-prime attributes.
 - (AB -> C) should happen.
 - If (AB -> C), AB is a candidate key (prime attribute) while C is a non-prime attribute. If (A -> C) or (B -> C) is true, then the table is not in 2-NF.
 - Example:
@@ -739,6 +743,43 @@ Example: Student
         |3|2|
     - As we see, there are no `Spurious Tuples` when using `A` as the common attribute, following the above rule.
 
+    - Example 1: Check if Functional Dependencies are preserved:
+        - R(ABCD)
+        - Functional Dependencies: { A->B, B->C, C->D, D->B }
+        - R is decomposed into $R_1(AB)$, $R_2(BC)$, $R_1(BD)$.
+        1. Check if any attributes have been left out in the decomposed tables: false, they're intact.
+        1. Check for all possible **non-trivial** dependencies of the decomposed tables, with respect to the original Functional Dependencies: 
+            |$R_1(AB)$|$R_2(BC)$|$R_3(BD)$|
+            |-----|-----|-----|
+            |{A->B}|{B->C}|{B->D}|
+            |~~{B->A}~~|{C->B}|{D->B}|
+        1. So, dependencies are: { A->B, B->C, B->D, C->B, D->B }.
+        1. Now, check if these dependencies include all the ones in the original Functional Dependency.
+            - { A->B }: true 
+            - { B->C }: true
+            - { C->D }: true
+            - { D->B }: true
+        1. So, functional dependencies are preserved.
+    - Example 2: Check if Functional Dependencies are preserved:
+        - R(ABCD)
+        - Functional Dependencies: { AB->CD, D->A }
+        - R is decomposed into $R_1(AD)$, $R_2(BCD)$
+        1. Check if any attributes have been left out in the decomposed tables: false, they're intact.
+        1. Check for all possible **non-trivial** dependencies of the decomposed tables, with respect to the original Functional Dependencies: 
+            |$R_1(AD)$|$R_2(BCD)$|
+            |-----|-----|
+            |~~{A->D}~~|~~{B->C}~~|
+            |{D->A}|~~{C->D}~~|
+            | null |~~{D->B}~~|
+            | null |~~{BC->D}~~|
+            | null |~~{CD->B}~~|
+            | null |{BD->C}|
+        1. So, dependencies are: { D->A, BD->C }
+        1. Now, check if these dependencies include all the ones in the original Functional Dependency.
+            - { AB->CD }: false
+            - { D->A }: true
+        1. So, functional dependencies are not preserved.
+
 ## Minimal Cover
 - The aim is to reduce or simplify the Functional Dependencies.
 - Example: For the following Functional Dependencies, find the correct Minimal Cover: {A->B,C->B,D->ABC,AC->D}
@@ -831,5 +872,81 @@ Example: Student
     1. `F` is on the RHS of (B->CFH). Check for `B`.
     1. $DB^+=DBCFHEGA$ | Candidate Keys: $\{DA,DE,DF,DB\}$
     1. So, total number of candidate keys: $4$.
+- Example 3: Check the highest Normal Forms for these tables:
+    - Schema 1:
+        - Registration (<u>rollno</u>, courses)
+        - Functional Dependencies: {rollno -> courses}
+        1. **BCNF**:
+            - { rollno -> courses }: true
+    - Schema 2:
+        - Registration (<u>rollno</u>, <u>courseid</u>, email)
+        - Functional Dependencies: {rollno, courseid -> email, email -> rollno}
+        1. BCNF:
+            - { rollno,courseid -> email }: true
+            - { email -> rollno }: false
+        1. **3-NF**:
+            - { rollno,courseid -> email }: true
+            - { email -> rollno }: true
+    - Schema 3:
+        - Registration (<u>rollno</u>, <u>courseid</u>, marks, grade)
+        - Functional Dependencies: {rollno,courseid -> marks, grade, marks -> grade}
+        1. BCNF:
+            - { rollno, courseid -> marks, grade }: true
+            - { marks -> grade }: false
+        1. 3-NF:
+            - { rollno, courseid -> marks, grade }: true
+            - { marks -> grade }: false
+        1. **2-NF**:
+            - { rollno, courseid -> marks, grade }: true
+            - { marks -> grade }: true
+    - Schema 4:
+        - Registration (<u>rollno</u>, <u>courseid</u>, credit)
+        - Functional Dependencies: {rollno, courseid -> credit, courseid -> credit}
+        1. BCNF:
+            - { rollno, courseid -> credit }: true
+            - { courseid -> credit }: false
+        1. 3-NF:
+            - { rollno, courseid -> credit }: true
+            - { courseid -> credit }: false
+        1. 2-NF:
+            - { rollno, courseid -> credit }: true
+            - { courseid -> credit }: false
+        1. **1-NF**:
+            - { rollno, courseid -> credit }: true (assumed)
+            - { courseid -> credit }: true (assumed)
+
+    ## Equivalence of Functional Dependency
+    - If the closure of all attributes are same between 2 Functional Dependencies, we can say that they are equivalent to each other.
+    - Example 0:
+        - X = { A->B, B->C}
+        - Y = { A->B, B->C, A->C}
+        1. Take the LHS attributes of `Y` one by one, form the closure from `X`, match with `Y`:
+            - $A^+=ABC$: true
+            - $B^+=BC: true
+        1. Take the LHS attributes of `X` one by one, form the closure from `Y`, match with `X`:
+            - $A^+=ABC$: true
+            - $B^+=BC: true
+        1. Since both match, `X` is equivalent of `Y`.
+    - Example 1:
+        - X = { AB->CD, B->C, C->D }
+        - Y = { AB->C, AB->D,C->D }
+        1. Take the LHS attributes of `Y` one by one, form the closure from `X`, match with `Y`:
+            - $AB^+=ABCD$: true
+            - $C^+=CD$: true
+        1. Take the LHS attributes of `X` one by one, form the closure from `Y`, match with `X`:
+            - $AB^+=ABCD$: true
+            - $B^+=BCD$: false
+            - $C^+=CD$: true
+        1. `X` is not equivalent of `Y`.
+
+
+
+
+
+
+
+
+
+
 
 <!-- Last image: self/2.png | external/2.png -->
