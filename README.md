@@ -137,6 +137,9 @@ git clone https://github.com/sayande717/notes.git
     |Sitting Arrangement|Type 9|1-5|0|02:30|
     |Sitting Arrangement|Type 10|1-5|0|02:49|
     |Sitting Arrangement|Type 11|1-5|0|06:33|
+    |Syllogism|Type 2|1-9|1|05:15|
+    |Syllogism|Type 3|1-9|2|06:37|
+
 
 - Verbal Ability
     |Topic|Sub-Topic|Progress|Mistakes|Time Taken (MM:SS)|
