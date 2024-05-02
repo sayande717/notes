@@ -1588,6 +1588,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     1. **Linker**: In many programming languages, programs are split into multiple source files or modules for better organization and maintainability. The linker is a tool that combines these separate modules into a single executable file. It resolves references between modules, such as function calls and variable accesses, and ensures that all necessary code and data are linked together correctly.
     1. **Loader**: Once the program is compiled and linked, the loader is responsible for loading the executable file into memory for execution. It allocates memory space for the program, resolves any dynamic linking if necessary, and starts executing the program instructions.
     1. **Memory**: Memory is where the program's instructions and data reside during execution. When the program is loaded into memory, the operating system allocates memory space for it. The memory is divided into different sections such as code section (for executable instructions), data section (for variables and constants), stack (for function calls and local variables), and heap (for dynamic memory allocation).
+
 ### Object File:
 - Components:
     - **Header**: Index, specifies what is located where, in the object file.
