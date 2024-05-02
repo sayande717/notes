@@ -939,11 +939,221 @@ So, for the same reason, if a dependency contains in the left part a proper subs
             - $C^+=CD$: true
         1. `X` is not equivalent of `Y`.
 
+# Joins
+## Natural Join / Inner Join
+- Joined table only contains rows **where the primary key & foreign key are equal**.
+- Table `emp`:
+    |Eno|Ename|Address|
+    |---|-----|-------|
+    |1  |Alice|123 Main St|
+    |2  |Bob  |456 Elm St|
+    |3  |Charlie|789 Oak St|    
+    |4  |David|321 Maple St|
+    |5  |Eve|654 Pine St|
+- Table `dept`:
+    |DEPTno|Name   |Eno|
+    |------|-------|---|
+    |101   |Sales  |1  |
+    |102   |HR     |2  |
+    |103   |IT     |3  |
+    |104   |Finance|4  |
+    |105   |Marketing|5|
+- Cross Product (every row of `emp` is multiplied with the whole of `dept`):
+    |Eno|Ename|Address    |DEPTno|Name      |Eno|
+    |---|-----|-----------|------|----------|---|
+    |1  |Alice|123 Main St|101   |Sales     |1  |
+    |1  |Alice|123 Main St|102   |HR        |2  |
+    |1  |Alice|123 Main St|103   |IT        |3  |
+    |1  |Alice|123 Main St|104   |Finance   |4  |
+    |1  |Alice|123 Main St|105   |Marketing |5  |
+    |2  |Bob  |456 Elm St |101   |Sales     |1  |
+    |2  |Bob  |456 Elm St |102   |HR        |2  |
+    |2  |Bob  |456 Elm St |103   |IT        |3  |
+    |2  |Bob  |456 Elm St |104   |Finance   |4  |
+    |2  |Bob  |456 Elm St |105   |Marketing |5  |
+    |3  |Charlie|789 Oak St|101   |Sales     |1  |
+    |3  |Charlie|789 Oak St|102   |HR        |2  |
+    |3  |Charlie|789 Oak St|103   |IT        |3  |
+    |3  |Charlie|789 Oak St|104   |Finance   |4  |
+    |3  |Charlie|789 Oak St|105   |Marketing |5  |
+    |4  |David|321 Maple St|101   |Sales     |1  |
+    |4  |David|321 Maple St|102   |HR        |2  |
+    |4  |David|321 Maple St|103   |IT        |3  |
+    |4  |David|321 Maple St|104   |Finance   |4  |
+    |4  |David|321 Maple St|105   |Marketing |5  |
+    |5  |Eve  |654 Pine St|101   |Sales     |1  |
+    |5  |Eve  |654 Pine St|102   |HR        |2  |
+    |5  |Eve  |654 Pine St|103   |IT        |3  |
+    |5  |Eve  |654 Pine St|104   |Finance   |4  |
+    |5  |Eve  |654 Pine St|105   |Marketing |5  |
+- Example 0: Select Ename from `emp` natural join `dept`
+    - Explanation: Select Ename from emp,dept where emp.Eno=dept.Eno
+    - Values:
+        |Eno|Ename|Address    |DEPTno|Name      |Eno|
+        |---|-----|-----------|------|----------|---|
+        |1  |Alice|123 Main St|101   |Sales     |1  |
+        |2  |Bob  |456 Elm St |102   |HR        |2  |
+        |3  |Charlie|789 Oak St|103   |IT        |3  |
+        |4  |David|321 Maple St|104   |Finance   |4  |
+        |5  |Eve  |654 Pine St|105   |Marketing |5  |
+    - Answer: `Alice, Bob, Charlie, David, Eve`
+
+## Self Join
+- Here, we join a table with itself.
+- Example 0: Select Sid from study as t1, study as t2 where t1.Sid=t2.Sid and t1.Cid < > t2.Cid
+    - Explanation: Select Sid, where student has taken up atleast 2 courses. { < > means not equal }
+    - Table `study`:
+        |Sid|Cid|Since|
+        |---|---|-----|
+        |$S_1$|$C_1$|2016|
+        |$S_2$|$C_2$|2017|
+        |$S_1$|$C_2$|2017|
+
+    - Cross-Product (with itself):
+        |Sid|Cid|Sid|Cid|Since|
+        |---|---|---|---|-----|
+        |$S_1$|$C_1$|$S_1$|$C_1$|2016|
+        |$S_1$|$C_1$|$S_2$|$C_2$|2017|
+        |$S_1$|$C_1$|$S_1$|$C_2$|2017|
+        |$S_2$|$C_2$|$S_1$|$C_1$|2016|
+        |$S_2$|$C_2$|$S_2$|$C_2$|2017|
+        |$S_2$|$C_2$|$S_1$|$C_2$|2017|
+        |$S_1$|$C_2$|$S_1$|$C_1$|2016|
+        |$S_1$|$C_2$|$S_2$|$C_2$|2017|
+        |$S_1$|$C_2$|$S_1$|$C_2$|2017|
+    - Values:
+        |Sid|Cid|Sid|Cid|Since|
+        |---|---|---|---|-----|
+        |$S_1$|$C_1$|$S_1$|$C_2$|2017|
+        |$S_1$|$C_2$|$S_1$|$C_1$|2016|
+    - Answer: `Sid`
+
+## Equi & Non-Equi Join
+- Table `emp`:
+    |Eno|Ename|Address|
+    |---|-----|-------|
+    |1  |Alice|123 Main St|
+    |2  |Bob  |456 Elm St|
+    |3  |Charlie|789 Oak St|    
+    |4  |David|321 Maple St|
+    |5  |Eve|654 Pine St|
+- Table `dept`:
+    |DEPTno|Location    |Eno|
+    |------|------------|---|
+    |101   |123 Main St |1  |
+    |102   |456 Elm St  |2  |
+    |103   |789 Oak St  |3  |
+    |104   |777 Maple St|4  |
+    |105   |654 Pine St |5  |
+
+- Cross Product (every row of `emp` is multiplied with the whole of `dept`):
+    |Eno|Ename  |Address    |DEPTno|Location    |Eno|
+    |---|-------|-----------|------|------------|---|
+    |1  |Alice  |123 Main St|101   |123 Main St |1  |
+    |1  |Alice  |123 Main St|102   |456 Elm St  |2  |
+    |1  |Alice  |123 Main St|103   |789 Oak St  |3  |
+    |1  |Alice  |123 Main St|104   |777 Maple St|4  |
+    |1  |Alice  |123 Main St|105   |654 Pine St |5  |
+    |2  |Bob    |456 Elm St |101   |123 Main St |1  |
+    |2  |Bob    |456 Elm St |102   |456 Elm St  |2  |
+    |2  |Bob    |456 Elm St |103   |789 Oak St  |3  |
+    |2  |Bob    |456 Elm St |104   |777 Maple St|4  |
+    |2  |Bob    |456 Elm St |105   |654 Pine St |5  |
+    |3  |Charlie|789 Oak St |101   |123 Main St |1  |
+    |3  |Charlie|789 Oak St |102   |456 Elm St  |2  |
+    |3  |Charlie|789 Oak St |103   |789 Oak St  |3  |
+    |3  |Charlie|789 Oak St |104   |777 Maple St|4  |
+    |3  |Charlie|789 Oak St |105   |654 Pine St |5  |
+    |4  |David  |321 Maple St|101   |123 Main St |1  |
+    |4  |David  |321 Maple St|102   |456 Elm St  |2  |
+    |4  |David  |321 Maple St|103   |789 Oak St  |3  |
+    |4  |David  |321 Maple St|104   |777 Maple St|4  |
+    |4  |David  |321 Maple St|105   |654 Pine St |5  |
+    |5  |Eve    |654 Pine St |101   |123 Main St |1  |
+    |5  |Eve    |654 Pine St |102   |456 Elm St  |2  |
+    |5  |Eve    |654 Pine St |103   |789 Oak St  |3  |
+    |5  |Eve    |654 Pine St |104   |777 Maple St|4  |
+    |5  |Eve    |654 Pine St |105   |654 Pine St |5  |
+
+- **Equi Join**: Condition checks are for equality.
+    - Query: Select Ename from emp,dept where emp.Eno=dept.Eno and emp.Address=dept.Location
+    - Explanation: Select Ename where the address & locations match in both tables.
+    - Filtered table:
+        |Eno|Ename  |Address    |DEPTno|Location    |Eno|
+        |---|-------|-----------|------|------------|---|
+        |1  |Alice  |123 Main St|101   |123 Main St |1  |
+        |2  |Bob    |456 Elm St |102   |456 Elm St  |2  |
+        |3  |Charlie|789 Oak St |103   |789 Oak St  |3  |
+        |5  |Eve    |654 Pine St |105   |654 Pine St |5  |
+    - Answer: `Alice`, `Bob`, `Charlie`, `Eve`
+
+- **Non-Equi Join**: Condition checks are for in-equality.
+    - Query: Select Ename from emp,dept where emp.Eno=dept.Eno and dept.DEPTno>102
+    - Explanation: Select Ename where the DEPTno is greater than 102.
+    - Filtered table:
+        |Eno|Ename  |Address    |DEPTno|Location    |Eno|
+        |---|-------|-----------|------|------------|---|
+        |3  |Charlie|789 Oak St |103   |789 Oak St  |3  |
+        |4  |David  |321 Maple St|104   |777 Maple St|4  |
+        |5  |Eve    |654 Pine St |105   |654 Pine St |5  |
+
+## Left-Outer, Right-Outer & Full-Outer join
+- Table `emp`:
+    |EMPno|Ename  |DEPTno|
+    |------|-----|------|
+    |101   |Alice |101   |
+    |102   |Bob   |102   |
+    |103   |Charlie|101  |
+    |104   |David |104   |
+- Table `dept`:
+    |DEPTno|Dname     |Loc       |
+    |------|----------|----------|
+    |101   |Sales     |New York  |
+    |102   |HR        |Los Angeles|
+    |103   |IT        |Chicago   |
+    |104   |Finance   |San Francisco|
+    |105   |Marketing |Boston    |
+
+- **Left-Outer Joined Table**:
+    - Keeping the primary & foreign key equal, it gives all the rows in the left table, and corresponding rows in the right table.
+    - Query: Select EMPno, Ename, DEPTno, Dname, Loc from emp left outer join dept on (emp.DEPTno=dept.DEPTno)
+    - Table:
+        |EMPno|Ename  |DEPTno|Dname     |Loc       |
+        |------|-------|------|----------|----------|
+        |101   |Alice  |101   |Sales     |New York  |
+        |102   |Bob    |102   |HR        |Los Angeles|
+        |103   |Charlie|101   |Sales     |New York  |
+        |104   |David  |104   |Finance   |San Francisco|
+- **Right-Outer Joined Table**:
+    - Query: Select EMPno, Ename, DEPTno, Dname, Loc from emp right outer join dept on (emp.DEPTno=dept.DEPTno)
+    - Keeping the primary & foreign key equal, it gives all the rows in the right table, and corresponding rows in the left table.
+    - Table:
+        |DEPTno|Dname     |Loc       |EMPno|Ename  |
+        |------|----------|----------|------|-----|
+        |101   |Sales     |New York  |101|Alice|
+        |101   |Sales     |New York  |103|Charlie|
+        |102   |HR        |Los Angeles|102|Bob|
+        |103   |IT        |Chicago   |null|null|
+        |104   |Finance   |San Francisco|104|David|
+        |105   |Marketing |Boston    |null|null|
+- **Full-Outer Joined Table**:
+    - Query: Select EMPno, Ename, DEPTno, Dname, Loc from emp full outer join dept on (emp.DEPTno=dept.DEPTno)
+    - Table:
+        |EMPno|Ename  |DEPTno|Dname     |Loc       |
+        |------|-----|------|----------|----------|
+        |101   |Alice |101   |Sales|New York|
+        |102   |Bob   |102   |HR|Los Angeles|
+        |103   |Charlie|101  |Sales|New York|
+        |104   |David |104   |Finance|San Francisco|
+        |null|null|103|IT|Chicago|
+        |null|null|105|Marketing|Boston|
+
+
+        
 
 
 
-
-
+    
 
 
 
