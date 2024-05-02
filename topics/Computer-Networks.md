@@ -1220,21 +1220,4 @@ Layer: `Data Link`
             - In case of `C`, `A` can help it reach `Internet` with cost `6`. So, the cost is $6+1=7$
         1. So, as we can see, the costs for all nodes will keep increasing infinitely.
 
-### Link State (OSPF)
-
-
-## Inter-Domain
-### Path Vector (BGP)
-
-### Gateway
-### IDS (Intrusion Detection System)
-### Firewall
-### Modem
-
-### Cables & Connectors
-### Networking hardware
-### Transmission modes
-### Multiplexing
-### Encoding
-
 <!-- Last image: self/6.png | external/8.png -->
