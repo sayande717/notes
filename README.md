@@ -139,6 +139,9 @@ git clone https://github.com/sayande717/notes.git
     |Sitting Arrangement|Type 11|1-5|0|06:33|
     |Syllogism|Type 2|1-9|1|05:15|
     |Syllogism|Type 3|1-9|2|06:37|
+    |Logical Games|Type 1|1-3|0|02:51|
+    |Logical Games|Type 2|1-3|0|02:32|
+    |Logical Games|Type 3|1-3|0|03:23|
 
 
 - Verbal Ability
@@ -148,6 +151,7 @@ git clone https://github.com/sayande717/notes.git
     |Sentence Correction|Section 1|1-25|5|06:13|
     |Spotting Errors|Section 1|1-20|5|02:27|
     |Change of Speech|Section 1|1-17|2|04:59|
+    |Sentence Correctiom|Section 1|26-60|1|06:06|
 
 
 
