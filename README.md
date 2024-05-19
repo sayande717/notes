@@ -142,6 +142,7 @@ git clone https://github.com/sayande717/notes.git
     |Logical Games|Type 1|1-3|0|02:51|
     |Logical Games|Type 2|1-3|0|02:32|
     |Logical Games|Type 3|1-3|0|03:23|
+    |Direction Sense Test|Type 1|1-20|2|15:00|
 
 
 - Verbal Ability
