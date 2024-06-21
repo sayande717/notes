@@ -33,4 +33,39 @@
 #### Circular linked list
 - In a circular linked list, the last node points back to the first node, forming a circular structure. This can simplify certain operations like traversal or insertion at the end of the list.
 
-
+## Graphs
+- Components of a graph:
+    - Node / Vertex
+    - Edge / Ordered pair: Connection between 2 nodes.
+- Terms:
+    - Adjacent node: Nodes connected to the current node.
+    - Degree of a node:
+        - Undirected Graph: Number of nodes we can reach from current node.
+        - Directed Graph:
+            - Indegree: Number of nodes through which we can reach current node.
+            - Outdegree: Number of nodes we can reach from current node.
+    - Path: A Path of length `n` from node `u` to `v` is a sequence of `n+1` nodes.
+    - Isolated node: If the degree of a node is `0`.
+- Types:
+    - Directed: Direction of the edge is defined.
+        - Directed Acryllic Graph: A directed graph with no cycle.
+        - Tree: A DAG, where the additional condition is that a child can only have 1 parent.
+    - Undirected: Direction of the edge is not defined.
+        - Connected: There exists an edge between every pair of nodes. No node is unreachable.
+        - Complete: Every node is connected to every other node. A particular node can be reached from all other nodes.
+        - Bi-connected: A connected graph with no articulation points.
+            - Articulation point: If a node gets removed, the graph gets disconnected.
+        <br><img src="../assets/images/self/0.png" alt="Graphs 0" height="400px" />
+    - Weighted: Edges have some costs associated with them.
+    - Unweighted: Edges don't have costs associated with them.
+    - Bipartite: Given 2 colours, a graph is a bipartite graph if no 2 adjacent nodes have the same colour.
+        - Linear graphs are always bipartite by nature.
+        - Graphs with even cycle length are always bipartite.
+        - Graphs with odd cycle length are never bipartite.
+        <br><img src="../assets/images/self/1.png" alt="Graphs 1" height="400px" />
+    - Sparse: A graph with relatively few edges compared to the number of vertices.
+    - Dense: A graph with relatively few vertices compared to the number of edges.
+    - Finite: A graph with a finite number of vertices and edges.
+    - Infinite: A graph with an infinite number of vertices and edges.
+  
+<!-- Last image: self/-1.png | external/-1.jpg -->

@@ -194,6 +194,14 @@
     - **Non-redundant**: They must not provide solutions which have already been generated in the past.
     - **Informed**: The Generator must have atleast some basic idea which it can use to generate an efficient solution.
 
+# Machine Learning
+- Artificial Intelligence: Aimed at enabling computers to perform human-like tasks and simulate human behaviour.
+- Machine Learning: Tries to solve a specific problem, and makes predictions using data.
+- Data Science: Attempts to find patterns and find insights from data.
+## Types of Machine Learning
+- Supervised: Learning where the model is trained on labeled data (all tuples have a class label associated with them) and learns to make predictions based on examples.
+- Unsupervised: Learning from data without labeled responses, finding patterns and relationships on its own.
+- Reinforcemend: Learning through trial and error, where an agent learns to make decisions by interacting with an environment and receiving feedback (either positive/reward or negative/penalty).
 <!-- Last image: self/2.png | external/-1.jpg -->
 
 
