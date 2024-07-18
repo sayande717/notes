@@ -278,3 +278,21 @@ Which word could mean "playing"?
 1. He persisted **in doing it** in spite of my advise.
 1. The reason **why** Ram is absent from his duty is because he is unwell.
 1. May I **please** know who you want to see?
+
+# Quantative Aptitude
+## Power Cycle: Used to calculate powers of big numbers, like $2369^{456}$
+- In $2369^{456}$, $2369$ is the base number, while $456$ is the exponent (power).
+- Unit digit in base number -> unit digit in result:
+    - 0,1,5,6 -> 0,1,5,6 
+    - 4 -> 4 ($4^1$/odd exponent),6 ($4^2$/even exponent)
+    - 9 -> 9 ($9^1$/odd exponent),1 ($9^2$/even exponent)
+    - 2 -> 2 ($2^1$), 4 ($2^2$), 8 ($2^3$), 6 ($2^4$) and the cycle repeats for 5,6,7,8 ...
+    - 3 -> 3 ($3^1$), 9 ($3^2$), 7 ($3^3$), 1 ($3^4$) and the cycle repeats for 5,6,7,8 ...
+    - 7 -> 7 ($7^1$), 9 ($7^2$), 3 ($7^3$), 1 ($7^4$) and the cycle repeats for 5,6,7,8 ...
+    - 8 -> 8 ($8^1$), 4 ($8^2$), 2 ($8^3$), 6 ($8^4$) and the cycle repeats for 5,6,7,8 ...
+- Example: $2367^{456}$:
+    - The unit digit in the base number is $7$.
+    - $456\%4=0$, which means the unit digit of the result will be $1$.
+- Example: $554^{26}$:
+    - The unit digit in the base number is $4$.
+    - $26$ is even, which means the unit digit of the result will be $6$.

@@ -1,5 +1,20 @@
 # Basic
-- Algorithms: A finite set of steps to solve a problem
+- **What is an algorithm?** It is a sequence of unambiguous instructions for solving a problem ie for obtaining the required output for a legitimate input in a finite amount of time. 
+- Properties of a Computer Algorithm:
+    - **Finiteness**: An algorithm must always terminate after a finite number of steps. It should not run indefinitely.
+    - **Definiteness**: Each step of the algorithm must be precisely defined. The instructions should be clear and unambiguous.
+    - **Input**: An algorithm should have zero or more inputs. These are the values that are fed into the algorithm before it begins processing.
+    - **Output**: An algorithm must produce one or more outputs. These are the results of the algorithm's processing.
+    - **Effectiveness**: The steps of the algorithm must be basic enough to be performed, in principle, by a person using paper and pencil. They should be simple and feasible.
+- Some important terms:
+    - **Precondition**: A precondition is a condition or set of conditions that must be true before a function or a process is executed. It defines the state of the system or the variables before the execution starts. If the precondition is not met, the behavior of the function or process is undefined.
+    - **Assertion**: An assertion is a statement that a certain condition is true at a specific point in the execution of a program. Assertions are used as a debugging aid to check for correctness. If an assertion fails (the condition is not true), it typically results in an error or exception, signaling that something went wrong in the program.
+    - **Postcondition**: A postcondition is a condition or set of conditions that must be true after a function or process has executed. It defines the expected state of the system or the variables after the execution is completed. Postconditions are used to verify that the function or process has correctly performed its task.
+    - **Loop Invariant**:A loop invariant is a condition that holds true before and after each iteration of a loop. Loop invariants are used to reason about the correctness of loops, particularly in the context of program verification and algorithm analysis. They help ensure that the loop is functioning as intended and will lead to the desired postcondition once the loop terminates.
+        - Properties of a Loop Invariant:
+            - **Initialization**: The invariant must be true before the first iteration of the loop starts.
+            - **Maintenance**: If the invariant is true before an iteration of the loop, it must remain true after the iteration.
+            - **Termination**: When the loop terminates, the invariant, combined with the loop's exit condition, should provide a useful property that helps prove the correctness of the algorithm.
 
 ## Algorithm Analysis
 ### The process of comparing two algorithms with respect to time, space, etc.

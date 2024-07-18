@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p 'Subject ID (0-8): ' subjectID
+read -p 'Subject ID (0-9): ' subjectID
 
 subjectList=("Mathematics" \
     "Database-Systems" \
@@ -10,7 +10,8 @@ subjectList=("Mathematics" \
     "Data-Structures" \
     "Aptitude" \
     "Artificial-Intelligence" \
-    "Cloud-Computing")
+    "Cloud-Computing" \
+    "Computer-Architecture-and-Organisation")
 
 subjectName=${subjectList[$((subjectID))]}
 

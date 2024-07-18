@@ -8,6 +8,7 @@
 - **Heuristic**: The term **Heuristic** originates from the Greek word "heuriskein," which means "to discover" or "to find." It is a strategy that helps to efficiently navigate complex situations or tasks, often by simplifying the problem or focusing attention on relevant information.
 
 # Basics
+- With Artificial Intelligence, our goal is to build machines and softare with intelligence similar to humans. These machines will be able to perform thinking, reasoning, decision-making, problem solving, natural language processing, just like humans.
 - The main goals of an artificially intelligent system are:
     - Reasoning
     - Learning
@@ -17,6 +18,28 @@
 - When it comes to solving a problem, you need to represent the problem in such a way that the machine can understand it. Represent:
     - Precisely
     - In such a way that it can be analyzed
+- The major branches of AI are:
+    - Perceptive
+    - Vision
+    - Robotics
+    - Expert Systems: stores knowledge, makes inferences from it
+    - Learning systems
+- Views of AI:
+    |Thinking humanly|Thinking Rationally|
+    |:---:|:---:|
+    |**Acting humanly**|**Acting Rationally**|
+    
+- Things AI Can Do:
+    - **Natural Language Processing (NLP)**: AI can understand, interpret, and generate human language, enabling applications like chatbots and language translation.
+    - **Image and Video Recognition**: AI can analyze and identify objects, faces, and scenes in images and videos, useful in security and medical imaging.
+    - **Predictive Analytics**: AI can analyze historical data to make predictions about future events, aiding decision-making in finance and healthcare.
+    - **Robotics and Automation**: AI can control robots and automate tasks, advancing manufacturing and logistics.
+    - **Recommendation Systems**: AI can personalize content and product recommendations based on user behavior, enhancing experiences on e-commerce sites and streaming services.
+
+- Categories of Artificially Intelligent Systems:
+    - **Narrow AI (Weak AI)**: These are AI systems designed to handle a specific task or a narrow range of tasks. Examples include virtual assistants like Siri and Alexa, recommendation algorithms on Netflix, and image recognition systems.
+    - **General AI (Strong AI)**: This is a theoretical concept where AI possesses the ability to understand, learn, and apply knowledge across a wide range of tasks, much like a human being. General AI can reason, solve problems, and make decisions autonomously in any situation.
+    - **Superintelligence**: This refers to AI that surpasses human intelligence and capabilities. It can perform tasks and solve problems beyond human comprehension, potentially leading to breakthroughs in various fields. Superintelligence is still a hypothetical concept and has not been achieved yet.
 
 ## Searching Techniques
 - Uninformed & Informed Search
