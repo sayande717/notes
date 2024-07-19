@@ -7,7 +7,7 @@ subjectList=("Mathematics" \
     "Digital-Logic" \
     "Algorithms" \
     "Computer-Networks" \
-    "Data-Structures" \
+    "Data-Structures-and-Algorithms" \
     "Aptitude" \
     "Artificial-Intelligence" \
     "Cloud-Computing" \

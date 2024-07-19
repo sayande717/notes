@@ -1,14 +1,7 @@
 # Basics
-- Data Structures intend to organize data, which makes processing easier.
-- 2 Types: 
-    - Linear: Elements are arranged sequentially.
-        > Array, Linked List, Stack, Queue
-    - Non-Linear: Elements are not arranged sequentially. They are stored in multiple levels.
-        > Tree, Graph
-- Algorithms: check [here](./Algorithms.md)
 
-## Linear Data Structures
-### Arrays
+# Linear Data Structures
+## Arrays
 - It's a collection of elements of a particular data type
 - Elements are adjacent to each other.
 - Each partition has 2 neighbours, except 1st and last one.
@@ -18,6 +11,18 @@
 - Implementation: [code](https://github.com/sayande717/code/blob/main/self/Java/initArray.java)
 
 - Resize an array: There is no way to directly resize an array in Java. To do it, create another bigger array, and then copy all elements from the current array to the new array.
+
+### Sentinel Search
+> Sentinel search is a variation of the linear search algorithm used to improve its efficiency by reducing the number of comparisons. It involves placing a sentinel value (a special value) at the end of the data structure to avoid having to check for out-of-bounds conditions during the search.
+- **Steps**:
+    - Before starting the search, add a sentinel value to the end of the list or array. This sentinel value should be greater than any other value in the list, so it will guarantee that the search will eventually find it if the item is not present.
+    - Initialize the search index variable i to 0.
+    - Set the last element of the array to the search key.
+    - While the search key is not equal to the current element of the array (i.e., arr[i]), increment the search index i.
+    - If i is less than the size of the array or arr[i] is equal to the search key, return the value of i (i.e., the index of the search key in the array).
+    - Otherwise, the search key is not present in the array, so return -1 (or any other appropriate value to indicate that the key is not found).
+- The key benefit of the Sentinel Linear Search algorithm is that it eliminates the need for a separate check for the end of the array, which can improve the average case performance of the algorithm. <br>
+- However, it does not improve the worst-case performance, which is still O(n) (where n is the size of the array), as we may need to scan the entire array to find the sentinel value.
 
 ### Linked List
 - A linked list is a linear data structure consisting of a sequence of elements, called nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence.
@@ -55,7 +60,7 @@
         - Complete: Every node is connected to every other node. A particular node can be reached from all other nodes.
         - Bi-connected: A connected graph with no articulation points.
             - Articulation point: If a node gets removed, the graph gets disconnected.
-        <br><img src="../assets/images/self/0.png" alt="Graphs 0" height="400px" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/external/0.png" alt="Graphs 0" height="400px" />
     - Weighted: Edges have some costs associated with them.
     - Unweighted: Edges don't have costs associated with them.
     - Bipartite: Given 2 colours, a graph is a bipartite graph if no 2 adjacent nodes have the same colour.

@@ -41,6 +41,50 @@
     - **General AI (Strong AI)**: This is a theoretical concept where AI possesses the ability to understand, learn, and apply knowledge across a wide range of tasks, much like a human being. General AI can reason, solve problems, and make decisions autonomously in any situation.
     - **Superintelligence**: This refers to AI that surpasses human intelligence and capabilities. It can perform tasks and solve problems beyond human comprehension, potentially leading to breakthroughs in various fields. Superintelligence is still a hypothetical concept and has not been achieved yet.
 
+# AI Agents
+- An AI Agent preceives it's environment using sensors and acts upon it's environment through actuators.
+- An AI agent typically consists of the following parts:
+    - **Sensors**: These are the means through which the agent perceives its environment. Sensors can vary widely depending on the application and can include cameras, microphones, temperature sensors, and more.
+    - **Actuators**: These are the components that the agent uses to interact with and affect its environment. Actuators can include motors, speakers, displays, and other devices that allow the agent to perform actions.
+    - **Perception**: This part involves processing the raw data collected by the sensors to interpret and understand the environment. It may include components for image recognition, speech recognition, and other forms of data analysis. 
+    - **Effectors**: Effectors are components of an AI agent or robotic system that enable it to take actions and interact with its environment. They are the means through which an agent carries out its decisions and plans.
+- Factors for rationality of an AI Agent:
+    - **Performance measure**: Defines the criteria for evaluating the success of the agent's actions.
+    - **Perceptual sequence**: The complete history of everything the agent has perceived so far.
+    - **Agent's knowledge**: The information and understanding the agent has about the environment and itself.
+    - **Actions available**: The possible actions the agent can take in response to its perceptions.
+
+- **PEAS** stands for Performance measure, Environment, Actuators, and Sensors. It is used to define the setting and capabilities of an AI agent:
+    - **Performance measure**: Criteria to evaluate the agent's success.
+    - **Environment**: The surroundings in which the agent operates.
+    - **Actuators**: The mechanisms through which the agent interacts with the environment.
+    - **Sensors**: The tools used by the agent to perceive its environment.
+
+- The types of environments for an AI agent are:
+    - **Fully Observable vs. Partially Observable**:
+        - **Fully Observable**: The agent's sensors provide complete information about the environment.
+        - **Partially Observable**: The agent's sensors provide incomplete or noisy information about the environment.
+
+    - **Deterministic vs. Stochastic**:
+        - **Deterministic**: The next state of the environment is completely determined by the current state and the action executed by the agent.
+        - **Stochastic**: The next state of the environment is not fully predictable and includes randomness.
+
+    - **Episodic vs. Sequential**:
+        - **Episodic**: The agent’s experiences are divided into atomic episodes. Each episode consists of the agent perceiving and then acting. Episodes do not depend on previous episodes.
+        - **Sequential**: The current decision could affect all future decisions. The agent’s experiences are linked.
+
+    - **Static vs. Dynamic**:
+        - **Static**: The environment does not change while the agent is deliberating.
+        - **Dynamic**: The environment can change while the agent is deliberating.
+
+    - **Discrete vs. Continuous**:
+        - **Discrete**: There are a finite number of distinct, clearly defined states, actions, and perceptions.
+        - **Continuous**: The state space, action space, or both are continuous.
+
+    - **Single Agent vs. Multi-Agent**:
+        - **Single Agent**: The environment contains only one agent.
+        - **Multi-Agent**: The environment includes multiple agents which can be competitive or cooperative.
+
 ## Searching Techniques
 - Uninformed & Informed Search
 - Difference: `+`: Informed, `-`: Uninformed
