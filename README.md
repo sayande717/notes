@@ -19,7 +19,7 @@ git clone https://github.com/sayande717/notes.git
 |1| Database Systems | [Markdown](./topics/Database-Systems.md) <br> [**PDF**](./assets/pdf/Database-Systems.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y) | till Lec-43 | `Suspended` |
 |2| Operating Systems | [Markdown](./topics/Operating-Systems.md) <br> [**PDF**](./assets/pdf/Operating-Systems.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p) | all except Lec-8 | `Suspended` |
 |-1| Compiler Design | [Markdown](./topics/Compiler-Design.md) <br> [**PDF**](./assets/pdf/Compiler-Design.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc) | till Lec-3 | `Suspended` |
-|4| Design & Analysis of Algorithms | [Markdown](./topics/Algorithms.md) <br> [**PDF**](./assets/pdf/Algorithms.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `Suspended` |
+|4| Design & Analysis of Algorithms | [Markdown](./topics/Design-and-Analysis-of-Algorithms.md) <br> [**PDF**](./assets/pdf/Design-and-Analysis-of-Algorithms.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa) | till L-2.5 | `Suspended` |
 |3| Digital Logic | [Markdown](./topics/Digital-Logic.md) <br> [**PDF**](./assets/pdf/Digital-Logic.pdf) | [Gate Smashers](https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe) | null | `Completed` |
 |7| Aptitude | [Markdown](./topics/Aptitude.md) <br> [**PDF**](./assets/pdf/Aptitude.pdf) | [IndiaBix](https://www.indiabix.com/) | [link](#aptitude) | `Suspended` |
 

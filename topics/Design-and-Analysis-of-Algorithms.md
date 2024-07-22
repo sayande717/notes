@@ -340,3 +340,30 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $1+log(n^n)$
         - $1+n \log n$
     - $(n \log n)$ is the largest term. So, time complexity: $O(n \log n)$
+
+# Divide & Conquer
+- Divide and Conquer algorithm is a problem-solving strategy that involves breaking down a complex problem into smaller, more manageable parts, solving each part individually, and then combining the solutions to solve the original problem. It is a widely used algorithmic technique in computer science and mathematics.
+- Stages of Divide and Conquer Algorithm:
+    - Divide:
+        - Break down the original problem into smaller subproblems.
+        - Each subproblem should represent a part of the overall problem.
+        - The goal is to divide the problem until no further division is possible.
+    - Conquer:
+        - Solve each of the smaller subproblems individually.
+        - If a subproblem is small enough (often referred to as the “base case”), we solve it directly without further recursion.
+        - The goal is to find solutions for these subproblems independently.
+    - Merge:
+        - Combine the sub-problems to get the final solution of the whole problem.
+        - Once the smaller subproblems are solved, we recursively combine their solutions to get the solution of larger problem.
+        - The goal is to formulate a solution for the original problem by merging the results from the subproblems.
+
+## Karatsuba Multiplication Algorithm
+- This algorithm helps in multiplying 2 large numbers efficiently.
+- Steps (example: $n_1=1234$, $n_2=5678$):
+    1. Divide $n_1$ into $a=12$, $b=34$.
+    1. Divide $n_2$ into $c=56$, $d=78$.
+    1. Find $a*c=672$
+    1. Find $b*d=2652$
+    1. Find $(a+b)(c+d)=6164$
+    1. $[5]-[(4)+(3)]=6164-(2652+672)=2840$
+    2. $[3]*10^{4}+[4]+[6]*10^2=6720000+2652+284000=7006652$
