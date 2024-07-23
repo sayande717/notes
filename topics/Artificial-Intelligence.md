@@ -28,7 +28,7 @@
     |Thinking humanly|Thinking Rationally|
     |:---:|:---:|
     |**Acting humanly**|**Acting Rationally**|
-    
+
 - Things AI Can Do:
     - **Natural Language Processing (NLP)**: AI can understand, interpret, and generate human language, enabling applications like chatbots and language translation.
     - **Image and Video Recognition**: AI can analyze and identify objects, faces, and scenes in images and videos, useful in security and medical imaging.
@@ -84,6 +84,67 @@
     - **Single Agent vs. Multi-Agent**:
         - **Single Agent**: The environment contains only one agent.
         - **Multi-Agent**: The environment includes multiple agents which can be competitive or cooperative.
+
+## Types of AI Agents:
+### Simple Reflex Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/0.webp" alt="Simple Reflex Agent" width="600px" />
+- **Definition**: Simple reflex agents act based solely on the current percept, ignoring the rest of the percept history.
+- **Features**:
+  - Direct mapping from percept to action.
+  - No memory of past percepts.
+  - Works best in fully observable environments.
+- **Example**: A thermostat adjusting temperature based on current readings.
+
+### Model-based Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/1.webp" alt="Model-based Agent" width="600px" />
+- **Definition**: Model-based agents maintain an internal model of the world to handle partially observable environments.
+- **Features**:
+  - Uses a model of the world to keep track of parts of the environment that are not directly observable.
+  - Capable of updating the model based on percepts and actions.
+  - Can plan actions by predicting the outcomes of different sequences of actions.
+- **Example**: A robot navigating through a maze using a map.
+
+### Goal-based Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/2.webp" alt="Goal-based Agent" width="600px" />
+- **Definition**: Goal-based agents act to achieve specific goals, providing a clear criterion for success.
+- **Features**:
+  - Decisions are made by considering future consequences of actions.
+  - Requires goal information to decide the best actions to take.
+  - Involves search and planning to achieve goals.
+- **Example**: A chess-playing AI aiming to checkmate the opponent.
+
+### Utility-based Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/3.webp" alt="Utility-based Agent" width="600px" />
+- **Definition**: Utility-based agents choose actions based on a utility function that ranks alternative outcomes according to their desirability.
+- **Features**:
+  - Uses a utility function to evaluate how desirable a particular state is.
+  - Aims to maximize the utility to achieve the best possible outcome.
+  - Can handle trade-offs between conflicting goals.
+- **Example**: An autonomous car balancing safety, speed, and fuel efficiency.
+
+### Learning Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/4.jpg" alt="Learning Agent" width="600px" />
+- **Definition**: Learning agents improve their performance by learning from experiences.
+- **Features**:
+  - Consists of a learning element that modifies the agent's behavior based on feedback.
+  - Incorporates a performance element, a critic, and a problem generator.
+  - Capable of adapting to new and unforeseen situations.
+- **Example**: A recommendation system improving its suggestions based on user feedback.
+- **Terms**:
+    - **Performance Element**:
+        - Responsible for selecting actions based on the current percept and the agent's knowledge.
+        - Executes the actions that the agent decides to perform.
+        - Implements the agent's behavior in the environment.
+        - Directly interacts with the environment to achieve goals.
+    - **Critic**:
+        - Evaluates the actions taken by the performance element to provide feedback on how well the agent is performing.
+        - Measures the performance of the agent's actions based on a predefined performance standard or goal.
+        - Provides feedback to the learning element about the effectiveness of the actions.
+    - **Problem Generator**:
+        - Suggests exploratory actions that lead the agent to new and informative experiences.
+        - Encourages the agent to try new things and learn from them.
+        - Aids in improving the agent's knowledge and overall performance.
+        - Helps the agent to discover new ways to achieve goals and solve problems.
 
 ## Searching Techniques
 - Uninformed & Informed Search
@@ -269,6 +330,6 @@
 - Supervised: Learning where the model is trained on labeled data (all tuples have a class label associated with them) and learns to make predictions based on examples.
 - Unsupervised: Learning from data without labeled responses, finding patterns and relationships on its own.
 - Reinforcemend: Learning through trial and error, where an agent learns to make decisions by interacting with an environment and receiving feedback (either positive/reward or negative/penalty).
-<!-- Last image: self/2.png | external/-1.jpg -->
+<!-- Last image: self/2.png | external/4.jpg -->
 
 

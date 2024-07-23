@@ -367,3 +367,35 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
     1. Find $(a+b)(c+d)=6164$
     1. $[5]-[(4)+(3)]=6164-(2652+672)=2840$
     2. $[3]*10^{4}+[4]+[6]*10^2=6720000+2652+284000=7006652$
+
+## Strassen's Multiplication of Matrices
+- Usually, multiplying 2 2x2 matrices involves 8 recursive calls.
+    <br>A (row 1): [a b], B (row 1): [e f], AB (row 1): [ae+bg af+bh]
+    <br>A (row 2): [c d], B (row 2): [g h], AB (row 2): [ce+dg cf+dg]
+- Using this algorithm, we can reduce the number of system calls to 7.
+- This results in a reduction of time complexity from $O(n^3)$ to $O(N^{\log 7}))$.
+- Formulae:
+    - First, find $p_1 \to p_7$:
+        - $p_1=a(f-h)$
+        - $p_2=(a+b)h$
+        - $p_3=(c+d)e$
+        - $p_4=d(g-e)$
+        - $p_5=(a+d)(e+h)$
+        - $p_6=(b-d)(g+h)$
+        - $p_7=(a-c)(e+f)$
+    - Next, we derive the final result: 
+        <br> [a b] [e f] = [$p_5+p_4-p_2+p_6$ $p_1+p_2$]
+        <br> [c d] [g h] = [$p_3+p_4$ $p_1+p_5-p_3-p_7$]
+- Example:
+    <br> [1 2] [10 12] = [a b] [e f]
+    <br> [3 4] [14 15] = [c d] [g h]
+    - $p_1=-3$
+    - $p_2=45$     
+    - $p_3=70$        
+    - $p_4=16$
+    - $p_5=125$
+    - $p_6=-58$
+    - $p_7=-44$
+    - Deriving the final results:
+        <br>[38 -42]
+        <br>[86 96]

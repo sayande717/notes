@@ -290,6 +290,10 @@ Which word could mean "playing"?
     - 3 -> 3 ($3^1$), 9 ($3^2$), 7 ($3^3$), 1 ($3^4$ / $3^0$) and the cycle repeats for 5,6,7,8 ...
     - 7 -> 7 ($7^1$), 9 ($7^2$), 3 ($7^3$), 1 ($7^4$ / $7^0$) and the cycle repeats for 5,6,7,8 ...
     - 8 -> 8 ($8^1$), 4 ($8^2$), 2 ($8^3$), 6 ($8^4$ / $8^0$) and the cycle repeats for 5,6,7,8 ...
+- The sum of the first powers of the first 100 natural numbers: $1+2+3+4+5+...+100$
+- The sum of the first powers of the second 100 natural numbers: $1^2+2^2+3^2+4^2+5^2+...+100^2$
+- The sum of the first powers of the third 100 natural numbers: $1^3+2^3+3^3+4^3+5^3+...+100^3$
+    - The unit digit in this case will always be 0, since the result is the unit digit of $1^3+2^3+3^3+4^3+5^3+6^3+7^3+8^3+9^3+10^3 ... * 10$, which will always end with $0$.
 - Example: $2367^{456}$:
     - The unit digit in the base number is $7$.
     - $456\%4=0$, which means the unit digit of the result will be $1$.

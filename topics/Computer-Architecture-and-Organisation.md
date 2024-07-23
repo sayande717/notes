@@ -73,6 +73,10 @@ Modern computers are based on a stored-program concept introduced by John Von Ne
    - Devices that allow data to enter and exit the system (e.g., keyboard, mouse, printer).
 - **System Bus**: 
    - Communication system that transfers data between components, including data bus, address bus, and control bus.
+- **PC (Program Counter)**: Holds the address of the next instruction to be executed.
+- **MAR (Memory Address Register)**: Holds the memory address of the data or instruction to be fetched or stored.
+- **MBR (Memory Buffer Register)**: Temporarily holds the data read from or written to memory.
+- **IR (Instruction Register)**: Holds the current instruction being executed.
 
 ## Limitations
 - **Von Neumann Bottleneck**: The architecture limits the system's throughput by forcing a shared bus for instructions and data, causing a bottleneck as the CPU and memory compete for bus access.
@@ -80,6 +84,29 @@ Modern computers are based on a stored-program concept introduced by John Von Ne
 - **Single Pipeline**: Traditional von Neumann systems execute instructions one at a time, which can limit processing speed compared to parallel processing architectures.
 - **Lack of Parallelism**: Not designed to handle multiple instructions simultaneously, reducing efficiency in handling complex operations.
 - **Security**: Mixing data and instructions in the same memory space can lead to security vulnerabilities, such as buffer overflow attacks.
+
+## Instruction Flow
+1. **Fetch the Instruction**: PC -> MAR -> Memory -> MBR -> IR
+2. **Decode the Instruction**: IR
+3. **Fetch the Operands**: IR -> MAR -> Memory -> MBR -> ALU
+4. **Execute the Instruction**: ALU
+5. **Store the Result**: ALU -> MBR -> MAR -> Memory
+6. **Update the Program Counter**: PC
+7. **Repeat**: Repeat from step 1 until program completion
+
+## Instruction Sets
+| Instruction | Description                     | Format       | Example                  |
+|-------------|---------------------------------|--------------|--------------------------|
+| LOAD        | Load value from memory to register | `LOAD R, M`  | `LOAD R1, 1000`          |
+| STOR        | Store value from register to memory | `STOR R, M`  | `STOR R1, 1000`          |
+| ADD         | Add value from memory/register to register | `ADD R1, R2` | `ADD R1, R2`            |
+| SUB         | Subtract value from memory/register from register | `SUB R1, R2` | `SUB R1, R2`            |
+| MUL         | Multiply value from memory/register by register | `MUL R1, R2` | `MUL R1, R2`            |
+| DIV         | Divide value from memory/register by register | `DIV R1, R2` | `DIV R1, R2`            |
+
+- Example: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
+    - LOAD M(500), ADD M(501) // AC << Y, AC <- AC + Z
+    - STOR M(500)             // M(500) << AC
 
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
