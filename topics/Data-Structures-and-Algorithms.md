@@ -24,6 +24,64 @@
 - The key benefit of the Sentinel Linear Search algorithm is that it eliminates the need for a separate check for the end of the array, which can improve the average case performance of the algorithm. <br>
 - However, it does not improve the worst-case performance, which is still O(n) (where n is the size of the array), as we may need to scan the entire array to find the sentinel value.
 
+## Infix, Prefix & Postfix expressions
+- The conversions are done using `stack` data structure.
+
+### Infix to Postfix:
+- **Rules**:
+    - Scan the infix expression from left to right. 
+    - If the scanned character is an operand, put it in the postfix expression. 
+    - Otherwise, do the following: If the precedence and associativity of the scanned operator are greater than the precedence and associativity of the operator in the stack [or the stack is empty or the stack contains a ‘(‘ ], then push it in the stack. [‘^‘ operator is right associative and other operators like ‘+‘,’–‘,’*‘ and ‘/‘ are left-associative].
+        - Check especially for a condition when the operator at the top of the stack and the scanned operator both are ‘^‘. In this condition, the precedence of the scanned operator is higher due to its right associativity. So it will be pushed into the operator stack. 
+        - In all the other cases when the top of the operator stack is the same as the scanned operator, then pop the operator from the stack because of left associativity due to which the scanned operator has less precedence. 
+    - Else, Pop all the operators from the stack which are greater than or equal to in precedence than that of the scanned operator.
+        - After doing that Push the scanned operator to the stack. (If you encounter parenthesis while popping then stop there and push the scanned operator in the stack.) 
+    - If the scanned character is a ‘(‘, push it to the stack. 
+    - If the scanned character is a ‘)’, pop the stack and output it until a ‘(‘ is encountered, and discard both the parenthesis. 
+    - Repeat steps 2-5 until the infix expression is scanned. 
+    - Once the scanning is over, Pop the stack and add the operators in the postfix expression until it is not empty.
+    - Finally, print the postfix expression.
+- Example:  `a*b+c/d` (Infix) to Postfix:
+    | Symbols | Stack         | Postfix Expression |
+    |---------|---------------|--------------------|
+    | a       |               | a                  |
+    | *       | *             | a                  |
+    | b       | *             | ab                 |
+    | +       | +             | ab*                |
+    | c       | +             | ab*c               |
+    | /       | +/            | ab*c               |
+    | d       | +/            | ab*cd              |
+    |         | +             | ab*cd/             |
+    |         |               | ab*cd/+            |
+
+- Example: `(a*b)+c/d` (Infix) to Postfix:
+    | Symbols | Stack         | Postfix Expression |
+    |---------|---------------|--------------------|
+    | (       | (             |                    |
+    | a       | (             | a                  |
+    | *       | (*            | a                  |
+    | b       | (*            | ab                 |
+    | )       |               | ab*                |
+    | +       | +             | ab*                |
+    | c       | +             | ab*c               |
+    | /       | +/            | ab*c               |
+    | d       | +/            | ab*cd              |
+    |         | +             | ab*cd/             |
+    |         |               | ab*cd/+            |
+
+## Postfix to Infix:
+
+- Algorithm:
+    - While there are input symbols left, read the next symbol from the input.
+    - If the symbol is an operand, push it onto the stack. 
+    - If the symbol is an operator. 
+        - Pop the top 2 values from the stack (**write the values from bottom to top**). 
+        - Put the operator, with the values as arguments and form a string. 
+        - Push the resulted string back to stack. 
+    - If there is only one value in the stack, that value in the stack is the desired infix string. 
+- Example: `ab*c+` -> `(a*b)+c`:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/0.png" alt="Postfix to Infix conversion" width="800px" /><br>
+
 ### Linked List
 - A linked list is a linear data structure consisting of a sequence of elements, called nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence.
 - Unlike arrays, which have a fixed size and store elements in contiguous memory locations, linked lists dynamically allocate memory for each node, allowing for efficient insertion, deletion, and traversal of elements.
@@ -73,4 +131,4 @@
     - Finite: A graph with a finite number of vertices and edges.
     - Infinite: A graph with an infinite number of vertices and edges.
   
-<!-- Last image: self/-1.png | external/-1.jpg -->
+<!-- Last image: self/0.png | external/-1.jpg -->

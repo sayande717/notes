@@ -53,30 +53,34 @@ A computer register is a small, fast storage location within a computer processo
         - **Memory Data Registers (MDR)**: Holds the data that is being transferred to or from memory.
 
 # Von-Neumann Architecture
-
-Modern computers are based on a stored-program concept introduced by John Von Neumann. In this stored-program concept, programs and data are stored in the same memory. This novel idea meant that a computer built with this architecture would be much easier to reprogram.
-
+- Modern computers are based on a stored-program concept introduced by John Von Neumann. In this stored-program concept, programs and data are stored in the same memory. This novel idea meant that a computer built with this architecture would be much easier to reprogram.
+- This architecture is also known as IAS 
 > The Von Neumann architecture is a computer architecture model that describes a system where the CPU runs stored programs located in memory. It was proposed by John von Neumann in 1945 and forms the basis for most modern computer designs.
 
-<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/0.png" alt="Von-Neumann Architecture" height="450px" /><br>
-    Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/basic_structure.png)
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/0.png" alt="Von-Neumann Architecture" width="550px" /><br>
+    Image taken from college notes.
+
+## Memory of the IAS
+- 1000 storage locations called words.
+- Word length - 40 bits.
+- A word may contain:
+    - A number stored as 40 binary digits (bits) – **1 sign bit** + **39 bit** value,
+    <br> **[OR]**
+    - An instruction-pair (2 instructions). Each instruction contains:
+        - An opcode (**8 bits**)
+        - The instruction address (**12 bits**) – designating one of the 1000 words in memory.
+
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/1.png" alt="Instruction Format" width="550px" /><br>
+        Image taken from college notes.
 
 
 ## Components
-- **Central Processing Unit (CPU)**: 
-   - **Control Unit (CU)**: Directs the operation of the processor.
-   - **Arithmetic Logic Unit (ALU)**: Performs arithmetic and logic operations.
-- **Memory Unit**: 
-   - **Primary Memory (RAM)**: Stores data and instructions that the CPU needs.
-   - **Secondary Memory**: Permanent storage (e.g., hard drives, SSDs) not directly addressed by the CPU.
-- **Input/Output (I/O) Devices**: 
-   - Devices that allow data to enter and exit the system (e.g., keyboard, mouse, printer).
-- **System Bus**: 
-   - Communication system that transfers data between components, including data bus, address bus, and control bus.
-- **PC (Program Counter)**: Holds the address of the next instruction to be executed.
-- **MAR (Memory Address Register)**: Holds the memory address of the data or instruction to be fetched or stored.
-- **MBR (Memory Buffer Register)**: Temporarily holds the data read from or written to memory.
-- **IR (Instruction Register)**: Holds the current instruction being executed.
+- **MBR**, Memory Buffer Register[**40 bits**]: Contains the word to be stored in memory or just received from memory.
+- **MAR**, Memory Address Register[**12 bits**]: Specifies the address in memory of the word to be stored or retrieved.
+- **IR**, Instruction Register [**8 bits**] - contains the 8-bit opcode currently being executed.
+- **IBR**, Instruction Buffer Register[**20 bits**]: Temporary store for RHS instruction from word in memory.
+- **PC**, Program Counter[**12 bits**]: Stores Address of next instruction-pair to fetch from memory.
+- **AC**, Accumulator & MQ, Multiplier Quotient [**40 bits**]: Holds operands and results of ALU operations.
 
 ## Limitations
 - **Von Neumann Bottleneck**: The architecture limits the system's throughput by forcing a shared bus for instructions and data, causing a bottleneck as the CPU and memory compete for bus access.
@@ -95,18 +99,37 @@ Modern computers are based on a stored-program concept introduced by John Von Ne
 7. **Repeat**: Repeat from step 1 until program completion
 
 ## Instruction Sets
-| Instruction | Description                     | Format       | Example                  |
-|-------------|---------------------------------|--------------|--------------------------|
-| LOAD        | Load value from memory to register | `LOAD R, M`  | `LOAD R1, 1000`          |
-| STOR        | Store value from register to memory | `STOR R, M`  | `STOR R1, 1000`          |
-| ADD         | Add value from memory/register to register | `ADD R1, R2` | `ADD R1, R2`            |
-| SUB         | Subtract value from memory/register from register | `SUB R1, R2` | `SUB R1, R2`            |
-| MUL         | Multiply value from memory/register by register | `MUL R1, R2` | `MUL R1, R2`            |
-| DIV         | Divide value from memory/register by register | `DIV R1, R2` | `DIV R1, R2`            |
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/2.png" alt="Instruction Set table 0" width="700px" /><br>
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/3.png" alt="Instruction Set table 1" width="700px" /><br>
+    Images taken from college notes.
 
 - Example: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
     - LOAD M(500), ADD M(501) // AC << Y, AC <- AC + Z
     - STOR M(500)             // M(500) << AC
+    - Data Flow:
+        - **Load Y into Accumulator**
+            - Fetch the instruction to load the value of Y from memory location 500 into the accumulator (ACC).
+            - `MAR <- 500` (Memory Address Register is set to 500).
+            - `MBR <- M(MAR)` (Memory Buffer Register fetches the value from memory location 500).
+            - `ACC <- MBR` (Value of Y is loaded into the accumulator).
+
+        - **Load Z into Memory Buffer Register (MBR)**
+            - Fetch the instruction to load the value of Z from memory location 501 into the MBR.
+            - `MAR <- 501` (Memory Address Register is set to 501).
+            - `MBR <- M(MAR)` (Memory Buffer Register fetches the value from memory location 501).
+
+        - **Add Z to the Accumulator (Y + Z)**
+            - Add the value of Z (stored in MBR) to the value of Y (currently in ACC).
+            - `ACC <- ACC + MBR` (ACC now holds the result of Y + Z).
+
+        - **Store the Result in X**
+            - Store the value in the accumulator (ACC) into memory location 502.
+            - `MAR <- 502` (Memory Address Register is set to 502).
+            - `MBR <- ACC` (Memory Buffer Register is loaded with the result from ACC).
+            - `M(MAR) <- MBR` (The result is stored in memory location 502).
+
+        - Component Path in One Line
+            - PC -> MAR -> MBR -> IR -> Y -> ACC -> Z -> ACC + Z -> X
 
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
@@ -132,4 +155,4 @@ Modern computers are based on a stored-program concept introduced by John Von Ne
 
 
 
-<!-- Last image: self/-1.png | external/0.png -->
+<!-- Last image: self/-1.png | external/3.png -->
