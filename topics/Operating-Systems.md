@@ -288,6 +288,9 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 # Process Scheduling
 - Used to move processes from the ready to running state.
 - Important Terms:
+    - **Process Scheduler**: The process scheduler is a component of the operating system responsible for managing the order in which processes are executed. It allocates CPU time to various processes, ensuring fair and efficient use of the CPU, and selects processes from the ready queue based on scheduling algorithms.
+    - **Dispatcher**: The dispatcher is a module within the operating system that transfers control of the CPU to the process selected by the process scheduler. It handles context switching by saving the state of the currently running process and loading the state of the next process to run, facilitating smooth transitions between processes.
+    - **Functional Unit**: A functional unit is a component within the CPU or a computational system designed to perform specific operations, such as arithmetic or logical calculations. Examples include arithmetic logic units (ALUs), floating-point units (FPUs), and memory management units (MMUs), each specialized for particular tasks, contributing to the system's performance and efficiency.
     - Arrival Time: The time at which the process enters the **ready state**.
     - Burst Time: The total time duration needed to execute the process, from start to finish.
     - Completion time: The time at which the process completes execution.

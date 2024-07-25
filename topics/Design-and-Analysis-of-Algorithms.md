@@ -357,6 +357,11 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - Once the smaller subproblems are solved, we recursively combine their solutions to get the solution of larger problem.
         - The goal is to formulate a solution for the original problem by merging the results from the subproblems.
 
+# Dynamic Programming
+- [vs **Greedy Method**] Dynamic programming guarantees finding the globally optimal solution by considering all possible subproblems and their combinations. On the other hand, the greedy method makes a series of choices, each of which looks best at the moment, but it doesn't always guarantee a globally optimal solution because it doesn't reconsider its choices. Thus, dynamic programming is more reliable for complex problems where the greedy method might fail to find the best solution.
+- Dynamic Programming checks all available paths, and chooses the most optimal path. **It always provides the optimal solution.**
+- [vs **Divide & Conquer**] Dynamic programming optimizes recursive algorithms by storing the results of subproblems to avoid redundant computations, which significantly reduces the time complexity. Unlike the divide and conquer approach, which solves subproblems independently and may recompute the same subproblems multiple times, dynamic programming ensures that each subproblem is solved only once and then reused, making it more efficient for problems with overlapping subproblems and optimal substructure.
+
 ## Karatsuba Multiplication Algorithm
 - This algorithm helps in multiplying 2 large numbers efficiently.
 - Steps (example: $n_1=1234$, $n_2=5678$):
