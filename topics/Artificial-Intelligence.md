@@ -95,10 +95,6 @@
   - Works best in fully observable environments.
 - **Example**: A thermostat adjusting temperature based on current readings.
 
-### Model-based Agent
-<br><img src="../assets/images/Artificial-Intelligence/external/1.webp" alt="Model-based Agent" width="600px" />
-- **Definition**: Model-based agents maintain an internal model of the world to handle partially observable environments.
-- **Features**:
   - Uses a model of the world to keep track of parts of the environment that are not directly observable.
   - Capable of updating the model based on percepts and actions.
   - Can plan actions by predicting the outcomes of different sequences of actions.
@@ -235,6 +231,10 @@
     - Sequence: `ACGFBED`
     - Note the implementation of LIFO: Elements are removed from RHS, and inserted from RHS.
    <br><img src="../assets/images/Artificial-Intelligence/self/1.png" alt="Depth-First Search" height="400px" />
+
+### TODO: Depth-Limited Depth First Search
+### TODO: Uniform Cost Search (BFS)
+### TODO: Iterative Deepending Depth First Search
 
 ### Bi-directional Search
 - Type: Depends on algorithm used.

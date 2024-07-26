@@ -367,11 +367,12 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 - Steps (example: $n_1=1234$, $n_2=5678$):
     1. Divide $n_1$ into $a=12$, $b=34$.
     1. Divide $n_2$ into $c=56$, $d=78$.
+    1. Calculate the number of digits of the largest number among the two, $d=max(4,4)=4$
     1. Find $a*c=672$
     1. Find $b*d=2652$
     1. Find $(a+b)(c+d)=6164$
     1. $[5]-[(4)+(3)]=6164-(2652+672)=2840$
-    2. $[3]*10^{4}+[4]+[6]*10^2=6720000+2652+284000=7006652$
+    1. $[3]*10^{d}+[4]+[6]*10^{(d/2)}=6720000+2652+284000=7006652$
 
 ## Strassen's Multiplication of Matrices
 - Usually, multiplying 2 2x2 matrices involves 8 recursive calls.

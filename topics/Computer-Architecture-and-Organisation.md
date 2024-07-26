@@ -103,7 +103,7 @@ A computer register is a small, fast storage location within a computer processo
 <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/3.png" alt="Instruction Set table 1" width="700px" /><br>
     Images taken from college notes.
 
-- Example: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
+- Example 0: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
     - LOAD M(500), ADD M(501) // AC << Y, AC <- AC + Z
     - STOR M(500)             // M(500) << AC
     - Data Flow:
@@ -131,6 +131,56 @@ A computer register is a small, fast storage location within a computer processo
         - Component Path in One Line
             - PC -> MAR -> MBR -> IR -> Y -> ACC -> Z -> ACC + Z -> X
 
+- Example 1: $A=(B*2)/2$, Memory locations: B: 800, A: 801
+    - LOAD M(800), LSH      // AC <- M(800), Multiply by left-shift
+    - RSH, STORE M(801)     // Divide by Right-shift, Store in A 
+    - Data Flow:
+        - PC <- 1
+        - MAR <- PC
+        - MBR <- M(MAR)
+        - IBR <- MBR<20 ... 39> // Right Instruction
+        - // Left Instruction Execution START
+        - IR <- MBR<0 ... 7>    // Left Instruction Opcode
+        - MAR <- MBR<8 ... 19>
+        - MBR <- M(MAR)
+        - AC <- MBR
+        - // Left instruction Execution END
+        - IR <- IBR<0 ... 7>
+        - AC <- LSH(AC)
+        - PC <- PC+1
+        - MAR <- PC
+        - MBR <- M(MAR)
+        - IBR <- MBR<20 ... 39>
+        - IR <- MBR<0 ... 7>
+        - AC <- RSH(AC)
+        - IR <- IBR<0 ... 7>
+        - MAR <- IBR<8 ... 19>
+        - MAR <- AC
+        - M(MAR) <- MBR
+
+# Harvard Architecture
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/4.png" alt="Harvard Architecture" width="500px" /><br>
+    Image taken from college notes.
+> The Harvard architecture is a computer architecture with separate storage and signal pathways for instructions and data. It is often contrasted with the von Neumann architecture, where program instructions and data share the same memory and pathways. This architecture is often used in real-time processing or low-power applications.
+- In a Harvard architecture, there is no need to make the two memories share characteristics. In particular, the word width, timing, implementation technology, and memory address structure can differ. In some systems, instructions for pre-programmed tasks can be stored in read-only memory while data memory generally requires read-write memory. 
+- In some systems, there is much more instruction memory than data memory so instruction addresses are wider than data addresses.
+- Contrast with [Von Neumann Architecture](#von-neumann-architecture):
+    - In a system with a pure von Neumann architecture, instructions and data are stored in the same memory, so instructions are fetched over the same data path used to fetch data. This means that a CPU cannot simultaneously read an instruction and read or write data from or to the memory.
+    - In a computer using the Harvard architecture, the CPU can both read an instruction and perform a data memory access at the same time, even without a cache.
+    - A Harvard architecture machine has distinct code and data address spaces: instruction address zero is not the same as data address zero.
+- Modified Harvard Architecture:
+    - A modified Harvard architecture machine is very much like a Harvard architecture machine, but it relaxes the strict separation between instruction and data while still letting the CPU concurrently access two (or more) memory buses.
+    - The most common modification includes separate instruction and data caches backed by a common address space. While the CPU executes from cache, it acts as a pure Harvard machine. When accessing backing memory, it acts like a von Neumann machine. Example: x86 processors.
+    - Another modification provides a pathway between the instruction memory and the CPU to allow words from the instruction memory to be treated as read-only data. This technique is used in some microcontrollers, including the Atmel AVR.
+- Harvard Architecture vs Von Neumann Architecture:
+    | Feature                        | Von Neumann Architecture                                      | Harvard Architecture                                           |
+    |--------------------------------|---------------------------------------------------------------|---------------------------------------------------------------|
+    | Memory                         | Shared memory for instructions and data.                       | Separate memory for instructions and data.                     |
+    | Data Path                      | Single data path for both instructions and data.               | Separate data paths for instructions and data.                 |
+    | Speed                          | Slower execution due to shared memory bus.                     | Faster execution as instruction and data fetch can occur simultaneously. |
+    | Complexity                     | Simpler hardware design with a single memory and data path.    | More complex hardware design due to separate memory and data paths. |
+    | Examples                       | Used in general-purpose computers, desktops, and laptops.      | Used in embedded systems, microcontrollers.                    |
+
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
 ## Key Features of OpenMP:
@@ -152,7 +202,5 @@ A computer register is a small, fast storage location within a computer processo
 - **Debugging and Maintenance**: Parallel code can be harder to debug and maintain than sequential code. Issues like race conditions, deadlocks, and nondeterministic behavior can make debugging more challenging.
 - **Compiler and Platform Dependency**: The performance and behavior of OpenMP code can vary significantly across different compilers and platforms. This can make it difficult to write portable, high-performance code.
 - **Limited Control Over Threads**: OpenMP provides limited control over thread affinity and scheduling. Advanced users who need fine-grained control over thread behavior may find OpenMP's abstraction too limiting.
-
-
 
 <!-- Last image: self/-1.png | external/3.png -->
