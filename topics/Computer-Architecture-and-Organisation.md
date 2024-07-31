@@ -75,33 +75,7 @@ A computer register is a small, fast storage location within a computer processo
 
 
 ## Components
-- **MBR**, Memory Buffer Register[**40 bits**]: Contains the word to be stored in memory or just received from memory.
-- **MAR**, Memory Address Register[**12 bits**]: Specifies the address in memory of the word to be stored or retrieved.
-- **IR**, Instruction Register [**8 bits**] - contains the 8-bit opcode currently being executed.
-- **IBR**, Instruction Buffer Register[**20 bits**]: Temporary store for RHS instruction from word in memory.
-- **PC**, Program Counter[**12 bits**]: Stores Address of next instruction-pair to fetch from memory.
-- **AC**, Accumulator & MQ, Multiplier Quotient [**40 bits**]: Holds operands and results of ALU operations.
-
-## Limitations
-- **Von Neumann Bottleneck**: The architecture limits the system's throughput by forcing a shared bus for instructions and data, causing a bottleneck as the CPU and memory compete for bus access.
-- **Memory Latency**: Delays due to memory fetches can slow down the execution of instructions.
-- **Single Pipeline**: Traditional von Neumann systems execute instructions one at a time, which can limit processing speed compared to parallel processing architectures.
-- **Lack of Parallelism**: Not designed to handle multiple instructions simultaneously, reducing efficiency in handling complex operations.
-- **Security**: Mixing data and instructions in the same memory space can lead to security vulnerabilities, such as buffer overflow attacks.
-
-## Instruction Flow
-1. **Fetch the Instruction**: PC -> MAR -> Memory -> MBR -> IR
-2. **Decode the Instruction**: IR
-3. **Fetch the Operands**: IR -> MAR -> Memory -> MBR -> ALU
-4. **Execute the Instruction**: ALU
-5. **Store the Result**: ALU -> MBR -> MAR -> Memory
-6. **Update the Program Counter**: PC
-7. **Repeat**: Repeat from step 1 until program completion
-
-## Instruction Sets
-<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/2.png" alt="Instruction Set table 0" width="700px" /><br>
-<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/3.png" alt="Instruction Set table 1" width="700px" /><br>
-    Images taken from college notes.
+- **MBR**, Memory 300pxm college notes.
 
 - Example 0: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
     - LOAD M(500), ADD M(501) // AC << Y, AC <- AC + Z
@@ -181,6 +155,129 @@ A computer register is a small, fast storage location within a computer processo
     | Complexity                     | Simpler hardware design with a single memory and data path.    | More complex hardware design due to separate memory and data paths. |
     | Examples                       | Used in general-purpose computers, desktops, and laptops.      | Used in embedded systems, microcontrollers.                    |
 
+# CISC (Complex Instruction Set Architecture)
+- The main idea is that a single instruction will do all loading, evaluating, and storing operations just like a multiplication command will do stuff like loading data, evaluating, and storing it, hence it’s complex.
+- This approach attempts to minimize the number of instructions per program but at the cost of an increase in the number of cycles per instruction.
+- Example: IBM 370 computer, Digital Equipment Corporation VAX computer.
+- Complex instruction, hence complex instruction decoding.
+- Instructions are larger than one-word size.
+- Instruction may take more than a single clock cycle to get executed.
+- Less number of general-purpose registers as operations get performed in memory itself.
+- Complex Addressing Modes.
+- More Data types.
+- **As an example**, if we have to add two 8-bit numbers, there will be a single command or instruction for this like ADD which will perform the task.
+
+# RISC (Reduced Instruction Set Architecture)
+- The main idea behind this is to make hardware simpler by using an instruction set composed of a few basic steps for loading, evaluating, and storing operations just like a load command will load data, a store command will store the data.
+- This approach aimes to reduce the cycles per instruction at the cost of the number of instructions per program. 
+- Example: The IBM 801, Stanford MIPS, and Berkeley RISC 1 and 2.
+- Simpler instruction, hence simple instruction decoding.
+- Instruction comes undersize of one word.
+- Instruction takes a single clock cycle to get executed.
+- More general-purpose registers.
+- Simple Addressing Modes.
+- Fewer Data types.
+- A pipeline can be achieved.
+- **As an example**, if we have to add two 8-bit numbers, will write the first load command to load data in registers then it will use a suitable operator and then it will store the result in the desired location.
+
+# Multiprocessor Classification
+## Based on Instruction and Data Streams (Flynn's Taxonomy)
+### SISD (Single Instruction Single Data)
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/5.png" alt="SISD" width="400px" /><br>
+    Image taken from college notes.
+- It is also known as a serial(non parallel) computer. This is the oldest and common type of computer.
+- **Single Instruction**: Only one instruction stream is being acted upon by the CPU during any one clock cycle.
+- **Single Data**: Only one data stream is being used as input during any one clock cycle.
+- Examples: Older generation mainframes, Minicomputers and Workstations.
+- Example Instruction:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/6.png" alt="SISD Instruction Example" height="400px" /><br>
+        Image taken from college notes.
+
+### SIMD (Single Instruction Multiple Data)
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/7.png" alt="SIMD" height="400px" width="500px" /><br>
+    Image taken from college notes.
+
+- **Single Instruction**: All processing units execute the same instruction at any given clock cycle
+- **Multiple Data**: each Processing unit can operate on different data elements.
+- It is best suited for specialized problems characterized by a high degree of regularity such as graphic and image processing.
+- Example Instruction:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/8.png" alt="SIMD Instruction Example" height="400px" /><br>
+        Image taken from college notes.
+
+### MISD (Multiple Instruction Multiple Data)
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/9.png" alt="MISD" height="400px" /><br>
+    Image taken from college notes.
+
+- **Multiple Instruction**: Each processing unit operates on the data independently via separate instruction stream.
+- **Single Data**: A single data stream is fed into multiple processing units.
+- Example: Multiple frequency filters operating on a single signal stream, multiple cryptography algorithms attempting to crack a single encoded message.
+- Example Instruction:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/10.png" alt="MISD Instruction Example" height="200px" /><br>
+        Image taken from college notes.
+
+### MIMD (Multiple Instruction Multiple Data)
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/11.png" alt="MIMD" height="400px" /><br>
+    Image taken from college notes.
+- **Multiple Instructions**: Each processors is executing a different instruction.
+- **Multiple Data**: Each processor is working with a different input data stream.
+- Examples: Most current supercomputers and networked parallel computer clusters, multi-core PC's.
+- Example Instruction:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/12.png" alt="MIMD Instruction Example" height="200px" /><br>
+        Image taken from college notes.
+
+## Based on Coupling of the processor
+### Tightly-coupled Multiprocessor
+- Contain multiple CPUs that are connected at the bus level.
+- These CPUs may **either** have access to a central shared memory (Symmetric Multiprocessing, or SMP), **or** may participate in a memory hierarchy with both local and shared memory (Non-Uniform Memory Access, or NUMA).
+- **Example**: IBM p690 Regatta, Chip multiprocessors, also known as multi-core computing.
+
+### Loosely-coupled Multiprocessor
+- These are often referred as clusters 
+- They are based on multiple standalone single or dual processor commodity computers interconnected via a high speed communication system, such as Gigabit Ethernet. 
+- **Example**: Linux Beowulf cluster.
+
+## Based on communication architectures
+### Message Passing Architecture
+- Separate address space for each processor
+- Processors communicate via message passing
+- Processors have private memories
+- Focuses attention on costly non-local operations
+
+### Shared Memory Architecture
+- Processors communicate with shared address space
+- Processors communicate by memory read/write
+- Easy on small-scale machines
+- Lower latency
+- Types: Uniform Memory Access (UMA) or Non-Uniform Memory Access (NUMA)
+    - Uniform Memory Access (UMA):
+    - Diagram:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/13.png" alt="Uniform Memory Access" height="300px" /><br>
+        Image taken from college notes.
+        - Access to all memory occurs at the same speed for all processors.
+        - Example: Bus-based UMA.
+            - Since multiple processors connect to shared memory using a single bus, bus bandwidth can becomes a bottleneck.
+            - Each processor also has it's own cache to reduce the need to access memory.
+            - To further scale the number of processors, each processor is given it's own private local memory.
+    - Non-Uniform Memory Access (NUMA):
+        - Diagram:
+        <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/14.png" alt="Non-Uniform Memory Access" height="300px" /><br>
+            Image taken from college notes.
+        - also known as “Distributed Shared Memory”.
+        - Typically, the type of interconnection is **grid** or **hypercube**.
+        - Each processor's own memory can be addressed by all other processors, but access to a processor’s own local memory is faster than access to another processor’s remote memory.
+        - It looks like a distributed machine, but the interconnection network is usually custom-designed switches and/or buses.
+        - It is harder to program, but scales to more processors.
+
+### Distributed Memory Architecture
+- Diagram:
+<br><img src="../assets/images/Computer-Architecture-and-Organisation/external/15.png" alt="Distributed Memory Architecture" height="450px" /><br>
+    Image taken from college notes.
+- In the distributed memory architecture, each of the processors have their own memory unit or physical memory connected via the input/output (I/O) interface.
+- There is an interconnection network that links and allows the processors to communicate with each other.
+- If a change is made by one of the processors in its local memory this change is not automatically reflected into the memory of the other processors.
+- The programmers will need to explicitly define communication of data between the computing nodes or processors.
+
+
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
 ## Key Features of OpenMP:
@@ -203,4 +300,4 @@ A computer register is a small, fast storage location within a computer processo
 - **Compiler and Platform Dependency**: The performance and behavior of OpenMP code can vary significantly across different compilers and platforms. This can make it difficult to write portable, high-performance code.
 - **Limited Control Over Threads**: OpenMP provides limited control over thread affinity and scheduling. Advanced users who need fine-grained control over thread behavior may find OpenMP's abstraction too limiting.
 
-<!-- Last image: self/-1.png | external/3.png -->
+<!-- Last image: self/-1.png | external/13.png -->
