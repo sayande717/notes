@@ -341,6 +341,14 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $1+n \log n$
     - $(n \log n)$ is the largest term. So, time complexity: $O(n \log n)$
 
+# Greedy Methods
+- Greedy algorithms are a class of algorithms that make locally optimal choices at each step with the hope of finding a global optimum solution. In these algorithms, decisions are made based on the information available at the current moment without considering the consequences of these decisions in the future.
+- We select the best possible choice at each step, leading to a solution that may not always be the most optimal but is often good enough for many problems.
+## Example: Graph Coloring
+- Adjacency Matrix
+    - Each cell in the above table/matrix is represented as $A_{ij}$, where $i$ and $j$ are vertices. The value of $A_{ij}$ is either $1$ or $0$ depending on whether there is an edge from vertex $i$ to vertex $j$.
+        <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/0.png" alt="Graphs 0" height="800px" />
+
 # Divide & Conquer
 - Divide and Conquer algorithm is a problem-solving strategy that involves breaking down a complex problem into smaller, more manageable parts, solving each part individually, and then combining the solutions to solve the original problem. It is a widely used algorithmic technique in computer science and mathematics.
 - Stages of Divide and Conquer Algorithm:
@@ -405,3 +413,5 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
     - Deriving the final results:
         <br>[38 -42]
         <br>[86 96]
+
+<!-- Last image: self/0.png | external/-1.jpg -->

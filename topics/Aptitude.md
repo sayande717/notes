@@ -300,3 +300,44 @@ Which word could mean "playing"?
 - Example: $554^{26}$:
     - The unit digit in the base number is $4$.
     - $26$ is even, which means the unit digit of the result will be $6$.
+
+## Double Factorial
+- Simple factorial: $8!=8*7*6*5*4*3*2*1=40320$
+- **Double Factorial**: $8!!=8*6*4*2=384$
+- To calculate the number of factors of a number:
+    - Example 1: **510**
+        <br><img src="../assets/images/Aptitude/self/3.png" alt="Double Factorial 1" height="500px" />
+    - Example 2: **1024**
+        <br><img src="../assets/images/Aptitude/self/4.png" alt="Double Factorial 2" height="500px" />
+
+## Sum of LCM & HCF
+- For LCM: Product of LCM of numerator / Product of HCF of Denominator
+- For HCF: Product of HCF of numerator / Product of LCM of Denominator
+- Example 1: $5 \div 18, 35 \div 9, 15 \div 63$
+    <br><img src="../assets/images/Aptitude/self/5.png" alt="Sum of HCF & LCM 1-1" height="500px" />
+    <br><img src="../assets/images/Aptitude/self/6.png" alt="Sum of HCF & LCM 1-2" height="560px" />
+
+## Least Perfect Square divisible by a,b,c, etc
+- For finding the least perfect squares divisible by multiple numbers,
+    1. Take the LCM of those numbers.
+    1. Explore the multiples of the LCM.
+    1. One of the multiples will be a partial square.
+    1. If it is a partial square, try appending it with $0$ to make it a perfect square.
+    <br><img src="../assets/images/Aptitude/self/7.png" alt="Least Perfect Square" height="500px" />
+
+## Least x digit number divisible by a,b,c, with remainder/s
+- For finding the smallest $x$ digit number divisible by multiple numbers, and leaves a remainder of $n$,
+    1. Find the LCM of the numbers.
+    2. **Add** $x$ to the LCM.
+    1. Example 0: 
+    <br><img src="../assets/images/Aptitude/self/8.png" alt="Least number 0" height="400px" />
+
+- For finding the smallest number divisible by 3 numbers, and leaves a remainder of a,b & c,
+    1. Find the LCM of the numbers.
+    2. Check the difference of the numbers with the remainders.
+        - If the difference is same for all, **subtract** the difference to get the result.
+        - If the difference is different for all, find the LCM of the differences, and **subtract** that LCM.
+    3. Example 1: 
+        <br><img src="../assets/images/Aptitude/self/9.png" alt="Least Number 1" height="500px" />
+
+<!-- Last image: self/4.png | external/9.png -->
