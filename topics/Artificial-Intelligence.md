@@ -156,27 +156,24 @@
     - Examples include depth-first search, breadth-first search, and uniform-cost search.
     ```
 - Types of Problems:
-    - Toy Problems: Simplified, abstract problems designed to illustrate and test the fundamental principles of search algorithms. Examples include puzzles like the 8-puzzle, tic-tac-toe, and the traveling salesman problem. They are generally small-scale, with well-defined rules and clear objectives, making them ideal for educational purposes and for testing algorithm performance in controlled environments.
-    - Real-World Problems: Complex, large-scale problems that occur in practical applications, often characterized by incomplete information, dynamic environments, and higher levels of unpredictability. Examples include route planning for autonomous vehicles, supply chain optimization, and natural language processing. Solving real-world problems requires robust algorithms that can handle diverse scenarios, scalability, and adaptability to changing conditions.
-- Terms: 
-    - Initial State: The starting point of the search algorithm from where the search begins.
-    - Goal State: The desired end state that the search algorithm aims to reach.
-    - Current State: The state in which the search algorithm is presently located during its execution.
-    - Successor Function: A function that generates possible next states (successors) from the current state.
-    - Path Cost: The total cost incurred to reach a particular state from the initial state, often used to evaluate the efficiency of a path.
-    - State Space: The set of all possible states that can be reached from the initial state by any sequence of actions.
-    - Search Tree: A tree representation of the state space where nodes represent states and edges represent actions leading to successor states.
-    - Transition Model: A model that defines the rules for moving from one state to another, specifying the result of applying an action to a state.
-    - Solution: A sequence of actions that leads from the initial state to the goal state.
-    - Optimal Solution: The best possible solution that achieves the goal state with the least path cost or highest efficiency.
-- Properties of a Search Algorithm:
+    - **Toy Problems**: Simplified, abstract problems designed to illustrate and test the fundamental principles of search algorithms. Examples include puzzles like the 8-puzzle, tic-tac-toe, and the traveling salesman problem. They are generally small-scale, with well-defined rules and clear objectives, making them ideal for educational purposes and for testing algorithm performance in controlled environments.
+    - **Real-World Problems**: Complex, large-scale problems that occur in practical applications, often characterized by incomplete information, dynamic environments, and higher levels of unpredictability. Examples include route planning for autonomous vehicles, supply chain optimization, and natural language processing. Solving real-world problems requires robust algorithms that can handle diverse scenarios, scalability, and adaptability to changing conditions.
+- **Terms**: 
+    - **Initial State**: The starting point of the search algorithm from where the search begins.
+    - **Goal State**: The desired end state that the search algorithm aims to reach.
+    - **Current State**: The state in which the search algorithm is presently located during its execution.
+    - **Successor Function**: A function that generates possible next states (successors) from the current state.
+    - **Path Cost**: The total cost incurred to reach a particular state from the initial state, often used to evaluate the efficiency of a path.
+    - **State Space**: The set of all possible states that can be reached from the initial state by any sequence of actions.
+    - **Search Tree**: A tree representation of the state space where nodes represent states and edges represent actions leading to successor states.
+    - **Transition Model**: A model that defines the rules for moving from one state to another, specifying the result of applying an action to a state.
+    - **Solution**: A sequence of actions that leads from the initial state to the goal state.
+    - **Optimal Solution**: The best possible solution that achieves the goal state with the least path cost or highest efficiency.
+    - **Properties of a Search Algorithm**:
     - **Completeness**: A property indicating whether a search algorithm is guaranteed to find a solution if one exists.
     - **Optimality**: A measure of whether the search algorithm finds the best possible solution with the lowest cost or highest efficiency.
     - **Time Complexity**: The amount of time a search algorithm takes to find a solution, usually expressed as a function of the size of the input.
     - **Space Complexity**: The amount of memory a search algorithm requires to find a solution, typically measured in terms of the number of nodes stored in memory.
-
-### Toy Problems
-### Real-World Problems
 
 ### State-Space Search
 - State-Space: The set of all possible states.
@@ -232,9 +229,19 @@
     - Note the implementation of LIFO: Elements are removed from RHS, and inserted from RHS.
    <br><img src="../assets/images/Artificial-Intelligence/self/1.png" alt="Depth-First Search" height="400px" />
 
-### TODO: Depth-Limited Depth First Search
+### Depth-Limited Depth First Search
+- Type: Uninformed Search.
+- Based on: LIFO (Stack).
+- Time complexity: $O(b^l)$
+    - b: Branch factor, maximum number of children of a node.
+    - l: Depth limit, maximum depth to which the search is allowed to go.
+- Not Optimal, may not provide the best solution.
+- Not Complete, may not provide a solution.
+- Example 0 (Start: A, Goal: O, Depth Limit: 2):
+    <br><img src="../assets/images/Artificial-Intelligence/self/3.png" alt="Depth-Limited Depth First Search" height="600px" />
+    - Sequence: `A->B->F->G->C->H->D->I->M->J->N->E`
+   
 ### TODO: Uniform Cost Search (BFS)
-### TODO: Iterative Deepending Depth First Search
 
 ### Bi-directional Search
 - Type: Depends on algorithm used.
@@ -352,6 +359,7 @@
 - Supervised: Learning where the model is trained on labeled data (all tuples have a class label associated with them) and learns to make predictions based on examples.
 - Unsupervised: Learning from data without labeled responses, finding patterns and relationships on its own.
 - Reinforcemend: Learning through trial and error, where an agent learns to make decisions by interacting with an environment and receiving feedback (either positive/reward or negative/penalty).
-<!-- Last image: self/2.png | external/4.jpg -->
+
+<!-- Last image: self/3.png | external/4.jpg -->
 
 

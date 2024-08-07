@@ -81,10 +81,69 @@
 - Example: `ab*c+` -> `(a*b)+c`:
     <br><img src="../assets/images/Data-Structures-and-Algorithms/self/0.png" alt="Postfix to Infix conversion" width="800px" /><br>
 
-## TODO: Stack
-## TODO: Queue
-### TODO: Circular Queue
-### TODO: Double-Ended Queue
+## Stack // [Code](https://github.com/sayande717/code/blob/main/platform/College-1/data-structure-and-algorithms/2-1.c)
+- A stack is a linear data structure that follows the **Last-In-First-Out (LIFO)** principle.
+- It is an ordered collection of elements where the insertion and deletion of elements can only be performed at one end, called the top of the stack.
+- The element that is inserted last is the first one to be removed.
+- The operations performed on a stack are:
+    - **Push()**: Adds an element to the top of the stack.
+    - **Pop()**: Removes and returns the top element from the stack.
+    - **Peek/Top()**: Returns the top element without removing it.
+    - **isEmpty()**: Checks if the stack is empty.
+    - **Size()**: Returns the number of elements in the stack.
+- Stack can be implemented using arrays or linked lists.
+- It is used in various applications such as expression evaluation, function call management, backtracking, and more.
+- The time complexity of stack operations is O(1).
+- How a stack works:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/1.png" alt="Stack" height="300px" />
+
+## Queue // [Code](https://github.com/sayande717/code/blob/main/platform/College-1/data-structure-and-algorithms/3-1.c)
+- A queue is a linear data structure that follows the **First-In-First-Out (FIFO)** principle.
+- It is an ordered collection of elements where the insertion of elements is done from the front, and the removal of elements is done from the rear. Subsequently, elements can be inserted from the rear and removed from the front too.
+- The element that is inserted first is the first one to be removed.
+- The operations performed on a queue are:
+    - **Enqueue()**: Adds an element to the rear of the queue.
+    - **Dequeue()**: Removes and returns the element from the front of the queue.
+    - **Peek()/Front()**: Returns the element at the front without removing it.
+    - **isEmpty()**: Checks if the queue is empty.
+    - **Size**: Returns the number of elements in the queue.
+- Queue can be implemented using arrays or linked lists.
+- It is used in various applications such as job scheduling, breadth-first search, and more.
+The time complexity of queue operations is O(1).
+- How a Linear Queue works:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/2.png" alt="Linear Queue" height="600px" />
+
+### Circular Queue // [Code](https://github.com/sayande717/code/blob/main/platform/College-1/data-structure-and-algorithms/3-2.c)
+- A circular queue is a variation of the queue data structure where the last element points back to the first element, forming a circular structure.
+- In a circular queue, the front and rear pointers wrap around to the beginning of the queue when they reach the end, allowing for efficient space utilization.
+- Differences from a regular queue:
+    - The rear pointer can move to the beginning of the queue when it reaches the end, creating a circular structure.
+    - The front and rear pointers can be equal, indicating that the queue is full.
+    - The queue can be implemented using an array or a linked list.
+- Circular queues are commonly used in scenarios where elements are continuously added and removed, such as in scheduling algorithms or buffer management.
+- The time complexity of enqueue and dequeue operations in a circular queue is $O(1)$.
+- The first end can be inserted anywhere, but all subsequent elements are inserted in order after it.
+- Consequently, front doesn't have to be index 0. So, when checking for isFull(), we need to check if *front is **just after** *rear, instead of checking if the index of *rear is length of queue - 1.
+- How a Circular Queue works:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/3.png" alt="Circular Queue" height="600px" />
+
+### Double-Ended Queue
+- A double-ended queue, also known as a deque, is a linear data structure that allows insertion and deletion of elements from both ends.
+- In a double-ended queue, elements can be added or removed from either the front or the rear end, providing flexibility in implementing various algorithms.
+- Operations supported by a double-ended queue:
+    - **InsertFront()**: Adds an element to the front of the deque.
+    - **InsertRear()**: Adds an element to the rear of the deque.
+    - **DeleteFront()**: Removes and returns the element from the front of the deque.
+    - **DeleteRear()**: Removes and returns the element from the rear of the deque.
+    - **GetFront()**: Returns the element at the front of the deque without removing it.
+    - **GetRear()**: Returns the element at the rear of the deque without removing it.
+    - **isEmpty()**: Checks if the deque is empty.
+    - **Size()**: Returns the number of elements in the deque.
+- Double-ended queues can be implemented using arrays or linked lists.
+- They are used in scenarios where efficient insertion and deletion operations are required at both ends, such as in implementing deque-based algorithms or data structures like priority queues.
+- The time complexity of deque operations depends on the implementation, but commonly, it is O(1) for most operations.
+- How a Double-Ended Queue works:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/4.png" alt="Double-Ended" height="600px" />
 
 ## Linked List
 - A linked list is a linear data structure consisting of a sequence of elements, called nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence.
@@ -122,7 +181,7 @@
         - Complete: Every node is connected to every other node. A particular node can be reached from all other nodes.
         - Bi-connected: A connected graph with no articulation points.
             - Articulation point: If a node gets removed, the graph gets disconnected.
-        <br><img src="../assets/images/Data-Structures-and-Algorithms/external/0.png" alt="Graphs 0" height="400px" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/external/0.wbbp" alt="Graphs 0" height="400px" />
     - Weighted: Edges have some costs associated with them.
     - Unweighted: Edges don't have costs associated with them.
     - Bipartite: Given 2 colours, a graph is a bipartite graph if no 2 adjacent nodes have the same colour.
@@ -135,4 +194,4 @@
     - Finite: A graph with a finite number of vertices and edges.
     - Infinite: A graph with an infinite number of vertices and edges.
   
-<!-- Last image: self/0.png | external/-1.jpg -->
+<!-- Last image: self/4.png | external/-1.jpg -->

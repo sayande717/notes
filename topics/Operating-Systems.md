@@ -78,6 +78,15 @@ Number of pages = Process size / Page size
 - It ensures that no process has to wait for a very long amount of time to execute itself. All processes are executed within a reasonable amount of time, and no process is left out.
 - It results in more responsiveness, compared to a Multi-programming OS.
 
+### Hard Real Time computing: 
+- In hard real-time computing, tasks have strict deadlines that must be met. 
+- Failure to meet these deadlines can result in catastrophic consequences. 
+- The scheduling algorithm used in hard real-time systems must guarantee that all tasks meet their deadlines.
+
+### Soft Real Time computing: 
+- Soft real-time computing systems have tasks with deadlines, but missing a deadline does not have severe consequences. 
+- The scheduling algorithm used in soft real-time systems aims to maximize the number of tasks that meet their deadlines, but it does not guarantee that all tasks will meet their deadlines.
+
 ## Process States
 
 <img src="../assets/images/Operating-Systems/external/0.png" height="350px" />
@@ -245,6 +254,12 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - \[+\] Process
     - \[-\] User-level Thread
 
+- Types of Processes:
+    - **Parent & Child**: In Linux, a parent process is one that creates another process, called a child process. The child process is a duplicate of the parent process but has a unique process ID (PID). Parent and child processes can run concurrently, and the child process inherits some attributes from the parent.
+    - **Zombie**: A zombie process is a child process that has completed execution but still has an entry in the process table. This occurs because the parent process has not yet read the exit status of the child process, thus not allowing the kernel to remove the process entry.
+    - **Orphan**: An orphan process is a child process whose parent process has terminated or finished execution. When a parent process dies, orphaned child processes are adopted by the `init` process (PID 1), which becomes their new parent.
+    - **Daemon**: A daemon process is a background process that is not attached to a terminal session and typically runs continuously, performing tasks such as handling system requests or running services. Daemons are often started at boot time and are detached from the controlling terminal to run independently in the background.
+
 ```diff
 + System call `fork()` is used to create a child process.
 - No system calls involved.
@@ -308,6 +323,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     + Require additional overhead to manage context switching and ensure fairness among processes.
     - Are simpler to implement and may be more suitable for real-time systems where predictability and determinism are crucial.
     ```
+
 ## Non Pre-emptive Scheduling Algorithms
 
 ### FCFS (First Come First Serve)
@@ -446,7 +462,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     <br><img src="../assets/images/Operating-Systems/self/9.png" height="500px" alt="Multi-level Feedback Queue 0" />
 
 ## Process Synchronization
-- **Co-operative process**: Processes whose execution affects other processes. Usually, this is because they share memory, code, variables, resources like scanner, printer, etc. with each other.
+- **Co-dependent process**: Processes whose execution affects other processes. Usually, this is because they share memory, code, variables, resources like scanner, printer, etc. with each other.
 - **Independent processes**: Processes which run independently of each other.
 - If co-operative processes are not synchronized properly, they can create conflicts or deadlock in the system.
 - This problem is called `Race condition`.
@@ -531,7 +547,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. The file name is stored in position `in` ie `0`, in the spooler directory.
         1. Register $R_i$ is incremented from `0` to `1`
         1. $in$ is updated to `1`.
-    - **Case 2**: **2 co-operative processes, $P_1$ & $P_2$**, want to print documents. The spooler directory already contains 3 documents to print.
+    - **Case 2**: **2 co-dependent processes, $P_1$ & $P_2$**, want to print documents. The spooler directory already contains 3 documents to print.
         1. $P_1$ executes first. Initially, in = 3. It is loaded onto the register.
         1. The file name is stored in position `in` ie `3`, in the spooler directory.
         1. Register $R_i$ is incremented from `3` to `4`
@@ -544,8 +560,8 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. CPU goes back and executes the remainder of $P_2$. $in = 4$. Process Terminates.
         - In this case, only $P_2$'s document will be printed. Data loss occurs for $P_1$.
 
-## Critical Section
-- The portion of the program where shared resources are accessed by various co-operative processes.
+### Critical Section
+- The portion of the program where shared resources are accessed by various co-dependent processes.
 - If 1 program is executing it's Critical Section, no other program cannot execute their Critical Sections.
 - Code syntax:
     ```
@@ -567,6 +583,24 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
 1. **Progress**: If no process is executing in its critical section and some processes wish to enter their critical sections, then the selection of the next process to enter the critical section cannot be postponed indefinitely. In other words, progress ensures that processes do not remain indefinitely blocked, allowing eventual entry into their critical sections. This happens when the `Entry Section` of a program contains code that prevents other co-operative processes from executing, even at a time when the process itself is not in it's `Critical Section`.
 1. **Bounded Wait**: There exists a limit on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted. This rule prevents a process from being indefinitely postponed in favor of other processes.
 1. **No dependency on hardware, specifications, etc.**: The solution to the synchronization problem should be applicable to a wide range of hardware and system configurations. It should not rely on specific assumptions about the speed of execution, number of processes, or other hardware-related characteristics. This ensures portability and generality of the synchronization mechanism.
+
+### Methods for achieving Process Synchronization
+#### Semaphore
+- A synchronization primitive used in concurrent programming to control access to shared resources.
+- It is an integer variable that can be accessed by multiple processes.
+- Provides two main operations: `P` (wait) and `V` (signal).
+- `P` operation decreases the value of the semaphore by 1 and blocks the process if the value becomes negative.
+- `V` operation increases the value of the semaphore by 1 and unblocks a waiting process if the value becomes non-negative.
+- Used to solve critical section problems and prevent race conditions.
+
+#### Monitor
+- A high-level synchronization construct that allows multiple threads to safely access shared resources.
+- Provides mutual exclusion and condition synchronization.
+- Ensures that only one thread can execute a monitor procedure at a time.
+- Allows threads to wait for a certain condition to be satisfied before proceeding.
+- Provides methods like `wait`, `signal`, and `broadcast` for thread coordination.
+- Simplifies the implementation of concurrent programs by encapsulating synchronization mechanisms.
+- Used to prevent data corruption and ensure thread safety.
 
 ### Solutions for achieving Process Synchronization
 #### LOCK variable
