@@ -244,9 +244,7 @@ Which word could mean "playing"?
     - Milli ($10^{-3}$)
     - Micro ($10^{-6}$)
     - Nano ($10^{-9}$)
-    - Pico ($10^{-12}$)
-
-## Analogy
+    - Pico ($10^{-12}$)- 
 1. Carbon:Diamond::Corundum:Ruby, is used in making
 1. Eye:Myopia::Teeth:Pyorrhoea, can have disease
 1. Cassock:Priest::Gown:Graduate, is worn by
@@ -340,4 +338,43 @@ Which word could mean "playing"?
     3. Example 1: 
         <br><img src="../assets/images/Aptitude/self/9.png" alt="Least Number 1" height="500px" />
 
-<!-- Last image: self/4.png | external/9.png -->
+## Highest Power
+- Find the highest power of $y$ in $x!$
+    - If $y$ is a prime number, LCM $x$ using $y$.
+    - If $y$ is a non-prime number, simplify it into prime numbers ($12=4*3=2*2*3$).
+        - If the prime factors are all different, choose the highest one for the LCM.
+        - If the prime factors are same ($x^y$), choose $x$ for the LCM. Later, divide the result (sum of all prime factors) by $y$.
+
+- Example 0: Highest power of $2$ in $100!$
+    <br><img src="../assets/images/Aptitude/self/10.png" alt="Highest Power 0" height="300px" />
+- Example 1: Highest power of $12$ in $80!$
+    <br><img src="../assets/images/Aptitude/self/11.png" alt="Highest Power 1" height="300px" />
+- Example 2: Highest power of $11$ in $1000!/500!$
+    <br><img src="../assets/images/Aptitude/self/12.png" alt="Highest Power 2" height="300px" />
+
+## Remainder Finding
+- Dividend / Divisor = Quotient | Dividend % Divisor = Remainder
+- Dividend = Divisor (Q) + Remainder
+- Formulae:
+    - $(a^n+b^n)$ is divisible by $(a+b)$, when $n$ is `odd`.
+    - $(a^n-b^n)$ is divisible by $(a+b)$, when $n$ is `even`.
+    - $(a^n-b^n)$ is divisible by $(a-b)$, for all values of $n$.
+    - If the dividend is less than the divisor, the dividend becomes the remainder.
+    - If the relation can be simplified to the form $(qx \plusmn 1)^{n} \div qx$, then $qx$ becomes perfectly divisible by the divisor. In this case, proceed to evaluate $\plusmn 1^{n}$.
+    - For $(-1)^n$,
+        - If $n$ is odd, result is $-1$.
+        - If $n$ is even, result is $1$.
+        - When the result is (-)ve, add the divisor to the result.
+    - In the product of multiple numbers as part of the dividend, if one of the numbers is perfectly divisible by the divisor, the remainder is $0$.
+- Example 0: Find the remainder in: $(75*8+81*30) \div 25$
+    <br><img src="../assets/images/Aptitude/self/13.png" alt="Remainder 0" height="300px" />
+- Example 1: Find the remainder in: $(98*42*31*86*34*31) \div 17$
+    <br><img src="../assets/images/Aptitude/self/14.png" alt="Remainder 1" height="300px" />
+- Example 2: Find the remainder in: $321^{5687} \div 8$
+    <br><img src="../assets/images/Aptitude/self/15.png" alt="Remainder 2" height="300px" />
+- Example 3: Find the remainder in: $319^{5687} \div 8$
+    <br><img src="../assets/images/Aptitude/self/16.png" alt="Remainder 3" height="300px" />
+- Example 4: Find the remainder if $1!+2!+3!+4!+...+99!+100!$ is divisible by the first 7 natural numbers.
+    <br><img src="../assets/images/Aptitude/self/17.png" alt="Remainder 4" height="500px" />
+
+<!-- Last image: self/17.png | external/9.png -->
