@@ -277,6 +277,39 @@ A computer register is a small, fast storage location within a computer processo
 - If a change is made by one of the processors in its local memory this change is not automatically reflected into the memory of the other processors.
 - The programmers will need to explicitly define communication of data between the computing nodes or processors.
 
+# Moore's Law
+- Moore's Law is an observation made by Gordon Moore, co-founder of Intel, in 1965. According to Moore's Law, the number of transistors on a microchip doubles approximately every two years.
+- This observation has held true for several decades and has been a driving force behind the rapid advancement of technology.
+
+## Limitations of Moore's Law
+- As transistor sizes continue to shrink, we are approaching the physical limits of silicon-based technology.
+- The increasing complexity of manufacturing smaller transistors poses significant challenges in terms of cost and feasibility.
+- Heat dissipation becomes a major issue as more transistors are packed into a smaller space, leading to power consumption and thermal management challenges.
+- The performance gains from doubling the number of transistors may not always translate into proportional improvements in overall system performance.
+- The economic feasibility of sustaining Moore's Law in the long term is uncertain, as the cost of research and development for advanced manufacturing processes continues to rise.
+
+# Multi-Processor - Terms
+- **Multithreading**: Multithreading is a programming concept where multiple threads of execution run concurrently within a single process. Each thread represents an independent flow of control, allowing for parallel execution of tasks and improved performance.
+- **Multiprocessing**: Multiprocessing refers to the use of multiple processors or cores in a computer system to execute multiple tasks simultaneously. It involves dividing a program into smaller parts that can be executed independently on different processors, enabling faster and more efficient processing.
+- **Multicomputers**: Multicomputers are computer systems that consist of multiple independent computers connected together, often through a network. These computers work together to solve complex problems by distributing the workload across multiple machines, resulting in improved performance and scalability.
+- **Multicore**: Multicore refers to a computer processor that contains multiple independent processing units, known as cores, on a single chip. Each core can execute instructions independently, allowing for parallel processing and improved performance in multi-threaded applications.
+
+# Cycles Per Instruction
+- Instruction Execution Rate: Refers to the number of instructions that a processor can execute per unit of time. It is a measure of the processor's performance and is typically expressed in terms of **instructions per second (IPS)** or **millions of instructions per second (MIPS)**.
+- Processor Time: Also known as CPU time, it is the amount of time that a processor spends executing a program or a specific task. It represents the actual time that the processor is actively working on processing instructions.
+- Clock Time: This is the duration of 1 clock cycle. It is measured in **seconds per cycle**.
+- Frequency: This is the number of cycles a processor can execute per second, measured in Hertz (Hz). It is measured in **cycles per second**.
+- MIPS (Million Instructions Per Second): MIPS is a measure of the performance of a computer system or processor. It represents the number of millions of instructions that a processor can execute per second.
+- MFLOPS (Million Floating Point Operations Per Second): MFLOPS is a measure of the performance of a computer system or processor in executing floating-point operations. It represents the number of millions of floating-point operations that a processor can perform per second.
+- Benchmark Programs: Benchmark programs are standardized programs or sets of tasks that are used to evaluate the performance of computer systems or processors. They provide a way to compare the performance of different systems or processors under the same workload.
+- Formulae:
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/0.png" alt="CPI Legend" height="300px" /><br>
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/1.png" alt="CPI Formulae" height="600px" /><br>
+## Speed-up
+- Speed-up is a measure of the performance improvement achieved by parallelizing a program or task. It quantifies how much faster a parallel version of the program executes compared to a sequential version.
+- A speed-up value greater than 1 indicates that the parallel version of the program is faster than the sequential version. The higher the speed-up value, the more efficient the parallelization.
+- Formulae (Amdahl's Law)
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/2.png" alt="Speed Up (Amdahl's Law)" height="400px" /><br>
 
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
@@ -300,4 +333,4 @@ A computer register is a small, fast storage location within a computer processo
 - **Compiler and Platform Dependency**: The performance and behavior of OpenMP code can vary significantly across different compilers and platforms. This can make it difficult to write portable, high-performance code.
 - **Limited Control Over Threads**: OpenMP provides limited control over thread affinity and scheduling. Advanced users who need fine-grained control over thread behavior may find OpenMP's abstraction too limiting.
 
-<!-- Last image: self/-1.png | external/13.png -->
+<!-- Last image: self/0.png | external/13.png -->
