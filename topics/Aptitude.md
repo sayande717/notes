@@ -277,7 +277,7 @@ Which word could mean "playing"?
 1. The reason **why** Ram is absent from his duty is because he is unwell.
 1. May I **please** know who you want to see?
 
-# Quantative Aptitude
+# Qualitative Aptitude
 ## Power Cycle: Used to calculate powers of big numbers, like $2369^{456}$
 - In $2369^{456}$, $2369$ is the base number, while $456$ is the exponent (power).
 - Unit digit in base number -> unit digit in result:
@@ -326,7 +326,7 @@ Which word could mean "playing"?
 ## Least x digit number divisible by a,b,c, with remainder/s
 - For finding the smallest $x$ digit number divisible by multiple numbers, and leaves a remainder of $n$,
     1. Find the LCM of the numbers.
-    2. **Add** $x$ to the LCM.
+    2. **Add** $n$ to the LCM.
     1. Example 0: 
     <br><img src="../assets/images/Aptitude/self/8.png" alt="Least number 0" height="400px" />
 
@@ -367,14 +367,14 @@ Which word could mean "playing"?
         - When the result is (-)ve, add the divisor to the result.
     - In the product of multiple numbers as part of the dividend, if one of the numbers is perfectly divisible by the divisor, the remainder is $0$.
 - Example 0: Find the remainder in: $(75*8+81*30) \div 25$
-    <br><img src="../assets/images/Aptitude/self/13.png" alt="Remainder 0" height="300px" />
+    <br><img src="../assets/images/Aptitude/self/13.png" alt="Remainder 0" height="800px" />
 - Example 1: Find the remainder in: $(98*42*31*86*34*31) \div 17$
     <br><img src="../assets/images/Aptitude/self/14.png" alt="Remainder 1" height="300px" />
 - Example 2: Find the remainder in: $321^{5687} \div 8$
-    <br><img src="../assets/images/Aptitude/self/15.png" alt="Remainder 2" height="300px" />
+    <br><img src="../assets/images/Aptitude/self/15.png" alt="Remainder 2" height="400px" />
 - Example 3: Find the remainder in: $319^{5687} \div 8$
-    <br><img src="../assets/images/Aptitude/self/16.png" alt="Remainder 3" height="300px" />
+    <br><img src="../assets/images/Aptitude/self/16.png" alt="Remainder 3" height="800px" />
 - Example 4: Find the remainder if $1!+2!+3!+4!+...+99!+100!$ is divisible by the first 7 natural numbers.
-    <br><img src="../assets/images/Aptitude/self/17.png" alt="Remainder 4" height="500px" />
+    <br><img src="../assets/images/Aptitude/self/17.png" alt="Remainder 4" height="800px" />
 
 <!-- Last image: self/17.png | external/9.png -->

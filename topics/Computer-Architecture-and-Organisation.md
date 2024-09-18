@@ -67,8 +67,8 @@ A computer register is a small, fast storage location within a computer processo
     - A number stored as 40 binary digits (bits) – **1 sign bit** + **39 bit** value,
     <br> **[OR]**
     - An instruction-pair (2 instructions). Each instruction contains:
-        - An opcode (**8 bits**)
-        - The instruction address (**12 bits**) – designating one of the 1000 words in memory.
+        - Opcode (**8 bits**)
+        - Operand (**12 bits**) – designating one of the 1000 words in memory.
 
     <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/1.png" alt="Instruction Format" width="550px" /><br>
         Image taken from college notes.
@@ -113,13 +113,14 @@ A computer register is a small, fast storage location within a computer processo
         - MAR <- PC
         - MBR <- M(MAR)
         - IBR <- MBR<20 ... 39> // Right Instruction
-        - // Left Instruction Execution START
+        // Left Instruction Execution START
         - IR <- MBR<0 ... 7>    // Left Instruction Opcode
         - MAR <- MBR<8 ... 19>
         - MBR <- M(MAR)
         - AC <- MBR
-        - // Left instruction Execution END
+        // Left instruction Execution END
         - IR <- IBR<0 ... 7>
+        // We're not doing MAR <- IBR<8 ... 19> here because LSH edits the data in-place.
         - AC <- LSH(AC)
         - PC <- PC+1
         - MAR <- PC
@@ -294,7 +295,9 @@ A computer register is a small, fast storage location within a computer processo
 - **Multicomputers**: Multicomputers are computer systems that consist of multiple independent computers connected together, often through a network. These computers work together to solve complex problems by distributing the workload across multiple machines, resulting in improved performance and scalability.
 - **Multicore**: Multicore refers to a computer processor that contains multiple independent processing units, known as cores, on a single chip. Each core can execute instructions independently, allowing for parallel processing and improved performance in multi-threaded applications.
 
-# Cycles Per Instruction
+# Instruction Level Parallelism
+
+## Cycles Per Instruction
 - Instruction Execution Rate: Refers to the number of instructions that a processor can execute per unit of time. It is a measure of the processor's performance and is typically expressed in terms of **instructions per second (IPS)** or **millions of instructions per second (MIPS)**.
 - Processor Time: Also known as CPU time, it is the amount of time that a processor spends executing a program or a specific task. It represents the actual time that the processor is actively working on processing instructions.
 - Clock Time: This is the duration of 1 clock cycle. It is measured in **seconds per cycle**.
@@ -303,13 +306,36 @@ A computer register is a small, fast storage location within a computer processo
 - MFLOPS (Million Floating Point Operations Per Second): MFLOPS is a measure of the performance of a computer system or processor in executing floating-point operations. It represents the number of millions of floating-point operations that a processor can perform per second.
 - Benchmark Programs: Benchmark programs are standardized programs or sets of tasks that are used to evaluate the performance of computer systems or processors. They provide a way to compare the performance of different systems or processors under the same workload.
 - Formulae:
-    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/0.png" alt="CPI Legend" height="300px" /><br>
-    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/1.png" alt="CPI Formulae" height="600px" /><br>
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/0.png" alt="CPI Legend" height="400px" /><br>
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/1.png" alt="CPI Formulae" height="800px" /><br>
+
+## Instruction Throughput
+- Throughput refers to the number of instructions that can be executed per unit of time. It is a measure of the processing speed or efficiency of a system.
+- Formula for instruction throughput is: Throughput = Instructions Executed / Time
+    - `Instructions Executed` : Total number of instructions executed during a specific time period.
+    - `Time` is the duration of that time period.
+- Formula for increase in throughput:
+    $\frac{(Final\ Throughput - Initial\ Throughput)}{Initial\ Throughput} * 100\%$
+
 ## Speed-up
 - Speed-up is a measure of the performance improvement achieved by parallelizing a program or task. It quantifies how much faster a parallel version of the program executes compared to a sequential version.
 - A speed-up value greater than 1 indicates that the parallel version of the program is faster than the sequential version. The higher the speed-up value, the more efficient the parallelization.
-- Formulae (Amdahl's Law)
-    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/2.png" alt="Speed Up (Amdahl's Law)" height="400px" /><br>
+- Formulae (Amdahl's Law):
+    <br><img src="../assets/images/Computer-Architecture-and-Organisation/self/2.png" alt="Speed Up (Amdahl's Law)" height="350px" /><br>
+
+## Instruction Pipeline Hazards
+
+In an instruction pipeline, there are several types of hazards that can occur, leading to performance degradation and potential incorrect results. These hazards include:
+
+- **Structural** Hazards: These occur when the hardware resources required by multiple instructions overlap in time. For example, if two instructions require the same functional unit at the same time, a structural hazard can occur.
+- **Data** Hazards: These occur when there are dependencies between instructions that prevent them from executing in the desired order. There are three types of data hazards:
+    - **Read-after-Write (RAW)** Hazard: Occurs when an instruction depends on the result of a previous instruction that has not yet produced the result.
+    - **Write-after-Read (WAR)** Hazard: Occurs when an instruction writes to a register or memory location that is later read by a subsequent instruction.
+    - **Write-after-Write (WAW)** Hazard: Occurs when two instructions write to the same register or memory location.
+    - **Read-after-Read (RAR)** Hazard: Occurs when two instructions read the same register or memory location. **This isn't really a hazard, because data integrity isn't lost when this happens.**
+- **Control** Hazards: These occur when the flow of instructions is altered due to conditional branches or jumps. There are two types of control hazards:
+    - **Branch** Hazards: Occur when the branch instruction is not resolved until later in the pipeline, causing a delay in fetching the correct instructions.
+    - **Jump** Hazards: Occur when a jump instruction changes the program counter, causing a potential delay in fetching the correct instructions.
 
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.

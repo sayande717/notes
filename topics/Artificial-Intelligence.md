@@ -88,6 +88,7 @@
 ## Types of AI Agents:
 ### Simple Reflex Agent
 <br><img src="../assets/images/Artificial-Intelligence/external/0.webp" alt="Simple Reflex Agent" width="600px" />
+Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240513180031/ai3-1.webp)
 - **Definition**: Simple reflex agents act based solely on the current percept, ignoring the rest of the percept history.
 - **Features**:
   - Direct mapping from percept to action.
@@ -100,8 +101,21 @@
   - Can plan actions by predicting the outcomes of different sequences of actions.
 - **Example**: A robot navigating through a maze using a map.
 
+### Model-based Agent
+<br><img src="../assets/images/Artificial-Intelligence/external/1.webp" alt="Simple Reflex Agent" width="600px" />
+Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240423162150/Model-Based-Reflex-Agents.webp)
+
+- **Definition**: A model-based agent maintains an internal model of the world and uses it to make decisions and plan actions.
+- **Features**:
+    - Utilizes a representation of the world to simulate and predict outcomes of actions.
+    - Keeps track of the current state of the world and updates it based on percepts and actions.
+    - Uses the internal model to reason about the effects of different actions and select the best course of action.
+- **Example**: A self-driving car that uses a detailed map and sensor data to navigate and make decisions on the road.
+
 ### Goal-based Agent
 <br><img src="../assets/images/Artificial-Intelligence/external/2.webp" alt="Goal-based Agent" width="600px" />
+Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240423162301/Goal-Based-Agents.webp)
+
 - **Definition**: Goal-based agents act to achieve specific goals, providing a clear criterion for success.
 - **Features**:
   - Decisions are made by considering future consequences of actions.
@@ -111,6 +125,8 @@
 
 ### Utility-based Agent
 <br><img src="../assets/images/Artificial-Intelligence/external/3.webp" alt="Utility-based Agent" width="600px" />
+Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240423162501/Utility-Based-Agents.webp)
+
 - **Definition**: Utility-based agents choose actions based on a utility function that ranks alternative outcomes according to their desirability.
 - **Features**:
   - Uses a utility function to evaluate how desirable a particular state is.
@@ -120,6 +136,8 @@
 
 ### Learning Agent
 <br><img src="../assets/images/Artificial-Intelligence/external/4.jpg" alt="Learning Agent" width="600px" />
+Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240420014900/Untitled-drawing-(5)-660.jpg)
+
 - **Definition**: Learning agents improve their performance by learning from experiences.
 - **Features**:
   - Consists of a learning element that modifies the agent's behavior based on feedback.
@@ -193,18 +211,10 @@
 - Optimal, provides the best solution, if costs of all nodes is the same.
 - Complete, always provides a solution.
 
-- Example 0 (Start: A, Goal: G):
-    1. A
-    1. ~~A~~BCD
-    1. ~~B~~CDEF
-    1. ~~C~~DEFGH
-    1. ~~D~~EFGHI
-    1. ~~E~~FGHIJK
-    1. ~~F~~GHIJK
-    1. ~~G~~HIJKL
-    - `G` was found. Result: `ACG`.
-    - Note the implementation of FIFO: Elements are removed from LHS, and inserted from RHS.
-   <br><img src="../assets/images/Artificial-Intelligence/self/0.png" alt="Breadth-First Search Example 0" height="500px" />
+- Example 0 (Start: 1, Goal: 5):
+        - Sequence: `1->2->3->6->5->4`
+            - Note the implementation of FIFO (queue): Elements are inserted to RHS, and removed from LHS.
+           <br><img src="../assets/images/Artificial-Intelligence/self/0.png" alt="Breadth-First Search Example 0" height="500px" />
 
 ### Depth-First Search
 - Type: Uninformed Search.
@@ -215,21 +225,13 @@
 - Not Optimal, may not provide the best solution.
 - Not Complete, may not provide a solution.
 
-- Example 0 (Start: A, Goal: D):
-    1. A
-    1. ~~A~~BC
-    1. B~~C~~FG
-    1. BF~~G~~
-    1. B~~F~~
-    1. ~~B~~DE
-    1. D~~E~~
-    1. ~~D~~
-    - `D` was found. Result: `ACG`
-    - Sequence: `ACGFBED`
-    - Note the implementation of LIFO: Elements are removed from RHS, and inserted from RHS.
-   <br><img src="../assets/images/Artificial-Intelligence/self/1.png" alt="Depth-First Search" height="400px" />
+- Example 0 (Start: A, Goal: M):
+    - Sequence: `A->B->E->J->K->N->F->C->G->L->H->D->I->M`
+        - Note the implementation of LIFO (stack): Elements are inserted to LHS, and removed from LHS.
+       <br><img src="../assets/images/Artificial-Intelligence/self/1.png" alt="Depth-First Search 0-0" height="400px" />
+       <br><img src="../assets/images/Artificial-Intelligence/self/2.png" alt="Depth-First Search 0-1" height="400px" />
 
-### Depth-Limited Depth First Search
+### Depth-Limited Depth First Search \[!CORRECT\]
 - Type: Uninformed Search.
 - Based on: LIFO (Stack).
 - Time complexity: $O(b^l)$
@@ -241,7 +243,9 @@
     <br><img src="../assets/images/Artificial-Intelligence/self/3.png" alt="Depth-Limited Depth First Search" height="600px" />
     - Sequence: `A->B->F->G->C->H->D->I->M->J->N->E`
    
-### TODO: Uniform Cost Search (BFS)
+### TODO: Uniform Cost Search (UCS)
+
+### TODO: Iterative Deepening Depth First Search (IDS / IDDFS)
 
 ### Bi-directional Search
 - Type: Depends on algorithm used.
@@ -250,7 +254,7 @@
     - b: Branch factor, maximum number of children of a node.
     - d: Depth: Maximum Level of the tree, root node is at Level 0.
 - Complete only in case of Breadth-First Search.
-<br><img src="../assets/images/Artificial-Intelligence/self/2.png" alt="Bi-directional Search" height="300px" />
+<br><img src="../assets/images/Artificial-Intelligence/self/4.png" alt="Bi-directional Search" width="600px" />
 
 ### 8-Puzzle Problem without Heuristic
 - Type: Blind / Uninformed Search.

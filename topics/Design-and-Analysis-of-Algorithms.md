@@ -48,7 +48,7 @@
     - $(2n^2+n) \leq 3n^2$, which is **true**.
     - So, $n \leq n^2$ or $n \geq 1$.
     - This means that for all values of $n \geq 1$ & $c=3$, the condition will hold true.
-- Little o: f(n) = O g(n), f(n) **<** c.g(n)$.
+- Little o: $f(n) = O g(n), f(n) **<** c.g(n)$.
 
 ### Big-Omega (Ω)
 - Best-case | Lower Bound
@@ -99,7 +99,7 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 | Linearithmic    | $O(n \log n)$ | $132877$                       |
 | Quadratic       | $O(n^2)$ | $100000000$                         |
 | Cubic           | $O(n^3)$ | $10000000000000$                    |
-| Polynomial      | $O(n^k)$ | null                                |
+| Polynomial      | $O(n^k)$ | Very large number                                |
 | Exponential     | $O(2^n)$ | Very large number                   |
 | Factorial       | $O(n!)$  | Very large number                   |
 | Double Exponential | $O(2^{2^n})$ | Very large number            |
@@ -169,7 +169,7 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 | Bubble Sort         |   $O(n)$   |     $O(n^2)$    |   $O(n^2)$    |
 | Heap Sort           | $O(n \log n)$ |   $O(n \log n)$  | $O(n \log n)$  |
 | Selection Sort      |  $O(n^2)$  |     $O(n^2)$    |   $O(n^2)$    |
-|Height of Complete Binary Tree| $O(\log n)$ | $O(\log n)$ | $O(\log n)$ |
+| Height of Complete Binary Tree| $O(\log n)$ | $O(\log n)$ | $O(\log n)$ |
 | Insert in Heap      |  $O(\log n)$  |    $O(\log n)$   |   $O(\log n)$  |
 | Construct Heap      |   $O(n)$   |      $O(n)$     |     $O(n)$    |
 | Delete from Heap    |  $O(\log n)$  |    $O(\log n)$   |   $O(\log n)$  |
@@ -217,6 +217,68 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $f_4=n^{\log_{2} n}=n^k$, which is greater than $f_2$.
         - So, $f_3<f_2<f_4<f_1$
 
+### Loops
+- $O(1)$:
+    ```c
+    for (int i = 0; i < 1; i++) {
+        // Constant time operation
+    }
+    ```
+- $O(n)$:
+    ```c
+    for (int i = 0; i < n; i++) {
+        // Linear time operation
+    }
+    ```
+- $O(n)$:
+    ```c
+    for (int i = 1; i < n/2; i++) {
+        // Linear time operation
+    }
+    ```
+- $O(n^2)$:
+    ```c
+    for (int i = 0; i < n; i++) {
+       for (int j = 0; j < n; j++) {
+            // Quadratic time operation
+        }   
+    }
+    ```
+- $O(n^3)$:
+    ```c
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                // Cubic time operation
+            } 
+        }
+    }
+    ```
+- $O(\log n)$:
+    ```c
+    for (int i = 1; i < n; i = i * 2) {
+        // Logarithmic time operation
+    }
+    ```
+- $O(2^n)$:
+    ```c
+    void exponentialFunction(int n) {
+        if (n == 0) return;
+        exponentialFunction(n - 1);
+        exponentialFunction(n - 1);
+    }
+    ```
+- $O(n!)$:
+    ```c
+    void factorialFunction(int n) {
+        if (n == 0) return;
+        for (int i = 0; i < n; i++) {
+            factorialFunction(n - 1);
+        }
+    }
+    ```
+
+
 ## Recurrence Relation
 - Example:
     ```javascript
@@ -262,9 +324,9 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
             - $T(n/8)+3c$
             > $T(n/2^3)+3c$
         - After k times, $T(n/2^k)+kc$
-    - We need to make $T(n/2^k)=T(1)$. So, let $n/2^k=1$.
-        - $n/2^k=1$
-        - $n=2^k$
+    - To make $T(n/2^k)=T(1)$, we need to make **$2^k=n$**. Then, the equation will be $T(n/n)+kc=T(1)+kc=1+kc$
+    - We have to find the $k$ in $1+kc$. We already assumed $2^k=n$. So,
+        - $n=2^k$w
         - $\log n = \log {2^k}$
         - $\log_2 n = k \log_2 2$
         - $log n = k$ or $k = \log n$
@@ -285,11 +347,11 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $T(n)=n*(n-1)*[(n-2)*T(n-3)] = n*(n-1)*(n-2)*T(n-3)$
         - We see a pattern here.
         - So, after `k` iterations, $n*(n-1)*(n-2)*(n-3)...*T(n-k)$
-    - Step 3: Try to get $(n-k)=1$, so that the equation can be terminated
-        - Equation: $n*(n-1)*(n-2)*(n-3)...*T(n-k)$. If we take $k=(n-1)$,
-        - $T(n-(n-1))=T(n-n+1)=T(1)=1$
+    - Step 3: Assume $(n-k)=1$, so that the equation can be terminated.
+        - Equation: $n*(n-1)*(n-2)*(n-3)...*T(n-k)$.
+        - $(n-k)=1$, $k=(n-1)$, ie we need to run the equation for $(n-1)$ iterations to get to $T(1)$.
         - So, $T(n)=n*(n-1)*(n-2)*(n-3)* ... *3*2*1$
-    - Step 4: Simplify the equation
+    - Step 5: Simplify the equation
         - $T(n)=n*(n-1)*(n-2)*(n-3)* ... *3*2*1$
         - $n*n(n-1/n)*n(n-2/n)*n(n-3/n)* ... *n(3/n)*n(2/n)*n(1/n)$
         - $n^{n}*(n-1/n)*(n-2/n)*(n-3/n)* ... * (3/n) * (2/n) * (1/n)$
@@ -340,6 +402,23 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - $1+log(n^n)$
         - $1+n \log n$
     - $(n \log n)$ is the largest term. So, time complexity: $O(n \log n)$
+
+### Master Theorem
+- The Master Theorem is applicable to a specific class of recursive algorithms and may not be applicable to all recursive algorithms.
+- If a recursive algorithm can be expressed in the form:
+    <br> $T(n) = a * T(n/b) + f(n)$, $a \geq 1$, $b>1$, where:
+    - $T(n)$ is the time complexity of the algorithm for a problem of size n
+    - $a$ is the number of recursive subproblems
+    - $n/b$ is the size of each subproblem
+    - $f(n)$ is the time complexity of the work done outside of the recursive calls
+    - **Extra conditions**: $a \geq 1$, $b>1$
+- The solution is: $T(n) = n^{\log_ba} * [U(n)]$
+    - $U(n)$ depends on $h(n)$.
+    - $h(n) = \frac{f(n)}{\log_b a}$
+    - Relation b/w $h(n)$ & $U(n)$:
+        - If $h(n)=n^r,n>0$, $U(n)=O(n^r)$
+        - If $h(n)=n^r,n<0$, $U(n)=O(1)$
+        - If $h(n)=({\log n}^{i}, i \geq 0$, $U(n)=\frac{{\log_2 n}^{i+1}}{i+1})$
 
 # Greedy Methods
 - Greedy algorithms are a class of algorithms that make locally optimal choices at each step with the hope of finding a global optimum solution. In these algorithms, decisions are made based on the information available at the current moment without considering the consequences of these decisions in the future.
@@ -413,5 +492,8 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
     - Deriving the final results:
         <br>[38 -42]
         <br>[86 96]
+
+## String Matching Algorithm
+### Kruth Morris Pratt Algorithm
 
 <!-- Last image: self/0.png | external/-1.jpg -->
