@@ -493,7 +493,205 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         <br>[38 -42]
         <br>[86 96]
 
+## Job Sequencing Problem
+### Greedy Approach
+- Each job consumes 1 unit of time.
+- Deadline: 2 means this job must be completed by 2 months (if duration = months).
+- Example (Deadline: 2):
+    | Job   | Profit | Deadline |
+    |-------|--------|----------|
+    | $j_1$ | 50     | 2        |
+    | $j_2$ | 15     | 1        |
+    | $j_3$ | 10     | 2        |
+    | $j_4$ | 25     | 1        |
+- Steps (!optimal):
+    1. Sort the jobs in decreasing order of profits.
+    1. We're at time unit $1$. $j_1$ has max profit ($50$), Deadline is 2, so $j_1$ is scheduled.
+    Timeline:
+        | 1 | 2 |
+        |---|---|
+        |$j_1$||
+    1. Now, we're at time unit $2$. We can choose between $j_4$, $j_2$ & $j_1$. But $j_4$ & $j_2$ should've been completed by time slot 1 i.e. they're past the deadline.
+    1. So, we choose $j_3$.
+        Timeline:
+        | 1 | 2 |
+        |---|---|
+        |$j_1$|$j_3$|
+    1. Total Profit: $50+10=60$
+- Steps (optimal):
+    1. Sort the jobs in decreasing order of profits.
+    1. $j_1$ has max profit ($50$), Deadline is 2. Put $j_1$ as near as possible to the deadline, i.e. at time slot $2$ in this case.
+    Timeline:
+        | 1 | 2 |
+        |---|---|
+        ||$j_1$|
+    1. Now, we can choose between $j_4$, $j_2$ & $j_1$. Both $j_2$ & $j_4$ need to be completed by deadline 1. We choose the one with maximum profit, $j_4$. Put it in time slot $1$.
+    1. So, we choose $j_3$.
+        Timeline:
+        | 1 | 2 | 
+        |---|---|
+        |$j_4$|$j_1$|
+    1. Total Profit: $25+50=75$
+### Branch and Bound
+- Algorithm:
+    1. Initialize Variables:
+        - cost_matrix: A 2D list representing the cost of assigning each worker to each job.
+        - n: The number of workers (or jobs) which is the length of cost_matrix.
+        - min_cost: A variable to store the minimum cost, initialized to sys.maxsize.
+        - assigned_jobs: A list to keep track of the job assigned to each worker, initialized to -1 for all workers.
+        - visited: A list to keep track of whether a job has been assigned, initialized to False for all jobs.
+    1. Define Recursive Function calculate_cost(worker, current_cost):
+        - If worker equals n (all workers have been assigned jobs):
+            - Update min_cost to the minimum of min_cost and current_cost.
+            - Return from the function.
+            - For each job in the range n:
+                - If the job has not been visited:
+                    - Mark the job as visited.
+                    - Assign the job to the current worker.
+                    - Recursively call calculate_cost with the next worker and the updated current cost.
+                    - Backtrack by unmarking the job as visited and resetting the assignment for the current worker.
+    1. Invoke the Recursive Function:
+        - Call calculate_cost(0, 0) to start the recursive process with the first worker and a current cost of 0.
+    1. Return the Result:
+        - The function calculate_min_cost returns the min_cost which is the minimum cost of assigning jobs.
+    1. Main Execution:
+        - Define the cost_matrix.
+        - Call calculate_min_cost(cost_matrix) to get the minimum cost.
+        - Print the result.
+
 ## String Matching Algorithm
+### Rabin Karp Algorithm
+- Algorithm:
+    1. Initialize Variables:
+        - `text`: The text string in which to search for the pattern.
+        - `pattern`: The pattern string to search for in the text.
+        - `n`: The length of the text.
+        - `m`: The length of the pattern.
+        - `d`: The number of characters in the input alphabet (256 for extended ASCII).
+        - `q`: A prime number used for hashing (101 in this case).
+        - `h`: A variable to store the value of d^(m-1) % q, initially set to 1.
+        - `p`: The hash value for the pattern, initially set to 0.
+        - `t`: The hash value for the text, initially set to 0.
+        - `result`: A list to store the starting indices of pattern matches in the text.
+    1. Precomputation:
+        - Compute the value of h as d^(m-1) % q using a loop.
+        - Compute the initial hash values for the pattern (p) and the first window of text (t) using a loop.
+
+    1.Pattern Matching:
+        - Slide the pattern over the text one by one using a loop from 0 to n - m:
+            - If the hash values of the current text window (t) and the pattern (p) match:
+                - Check the characters one by one to confirm the match.
+                - If a match is found, append the starting index to the result list.
+            - If the current window is not the last one, update the hash value for the next window of text:
+                - Remove the hash value contribution of the outgoing character.
+                - Add the hash value contribution of the incoming character.
+                - Ensure the updated hash value is non-negative by adjusting with q if necessary.
+    1. Return the Result:
+        - Return the result list containing the starting indices of all occurrences of the pattern in the text.
+    1. Main Execution:
+        - Define the text and pattern.
+        - Call rabin_karp(text, pattern) to find the pattern occurrences.
+        - Print the result.
+
 ### Kruth Morris Pratt Algorithm
+- Algorithm:
+    1. Compute Longest Prefix Suffix Array (LPS):
+        - Initialize Variables:
+            - `pattern`: The pattern string to search for in the text.
+            - `m`: The length of the pattern.
+            - `LPS`: An array of size m to store the longest prefix suffix values for the pattern, initialized to all zeros.
+            - `length`: Length of the previous longest prefix suffix, initialized to 0.
+            - `i`: An index variable, initialized to 1.
+        - Iterate through the Pattern:
+            - While i is less than m:
+                - If pattern[i] is equal to pattern[length]:
+                    - Increment length.
+                    - Set LPS[i] to length.
+                    - Increment i.
+                - Else:
+                    - If length is not zero:
+                        - Set length to LPS[length - 1].
+                    - Else:
+                        - Set LPS[i] to 0.
+                        - Increment i.
+        - Return the LPS Array:
+            - The computeLPS function returns the LPS array.
+
+    1. KMP Search for Pattern in Text:
+        - Initialize Variables:
+            - `text`: The text string in which to search for the pattern.
+            - `pattern`: The pattern string to search for in the text.
+            - `n`: The length of the text.
+            - `m`: The length of the pattern.
+            - `LPS`: The longest prefix suffix array for the pattern, computed using `computeLPS(pattern)`.
+            - `i`: An index variable for the text, initialized to 0.
+            - `j`: An index variable for the pattern, initialized to 0.
+            - `indexList`: A list to store the starting indices of pattern matches in the text.
+        - Iterate through the Text:
+            - While `i` is less than `n`:
+                - If `text[i]` is equal to `pattern[j]`:
+                    - Increment `i` and `j`.
+                    - If `j` equals `m` (pattern found):
+                        - Append `i - j` to `indexList`.
+                        - Set `j` to `LPS[j - 1]`.
+                - Else:
+                    - If `j` is not zero:
+                        - Set `j` to `LPS[j - 1]`.
+                    - Else:
+                        - Increment `i`.
+        - Return the Result:
+            - The `KMPSearch` function returns the `indexList` containing the starting indices of all occurrences of the pattern in the text.
+        - Main Execution:
+            - Define the text and pattern strings.
+            - Call `KMPSearch(text, pattern)` to find the pattern occurrences.
+            - Print the result.
+
+## Find Maximum flow in a graph
+### Ford-Fulkerson Algorithm
+- Algorithm
+    1. Breadth-First Search (BFS) to find an augmenting path:
+        - Initialize Variables:
+            - `residual_graph`: The residual graph where `residual_graph[u][v]` indicates the remaining capacity of the edge from `u` to `v`.
+            - `source`: The source vertex.
+            - `sink`: The sink vertex.
+            - `parent`: An array to store the path from source to sink.
+            - `visited`: A list to keep track of visited vertices, initialized to `False`.
+            - `queue`: A queue initialized with the source vertex.
+        - BFS Loop:
+            - While the `queue` is not empty:
+                - Dequeue a vertex `u`.
+                - For each vertex `v` adjacent to `u`:
+                    - If `v` is not visited and the capacity from `u` to `v` is greater than 0:
+                        - Mark `v` as visited.
+                        - Set `parent[v]` to `u`.
+                        - If `v` is the sink, return `True` indicating an augmenting path has been found.
+                        - Enqueue `v`.
+            - Return `False` if no augmenting path is found.
+
+    1. Ford-Fulkerson Method to compute the maximum flow:
+        - Initialize Variables:
+            - `graph`: The original capacity graph.
+            - `source`: The source vertex.
+            - `sink`: The sink vertex.
+            - `residual_graph`: A copy of the graph to represent residual capacities.
+            - `parent`: An array to store the path from source to sink, initialized to `-1`.
+            - `max_flow`: Variable to store the maximum flow, initialized to `0`.
+        - Main Loop:
+            - While there is an augmenting path from source to sink (using BFS):
+                - Find the minimum residual capacity (`path_flow`) of the augmenting path:
+                    - Initialize `path_flow` to infinity.
+                    - Trace the path from sink to source using the `parent` array and update `path_flow` to the minimum capacity in the path.
+                - Update residual capacities of the edges and reverse edges along the path:
+                    - Trace the path from sink to source again.
+                    - For each edge in the path, subtract `path_flow` from the capacity of the edge and add `path_flow` to the reverse edge.
+                - Add `path_flow` to `max_flow`.
+            - Return the `max_flow` as the maximum flow from source to sink.
+
+    1. Main Execution:
+        - Define the graph representing capacities between vertices.
+        - Define the source and sink vertices.
+        - Call `ford_fulkerson(graph, source, sink)` to compute the maximum flow.
+        - Print the result.
+
 
 <!-- Last image: self/0.png | external/-1.jpg -->

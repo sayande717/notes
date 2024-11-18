@@ -337,6 +337,38 @@ In an instruction pipeline, there are several types of hazards that can occur, l
     - **Branch** Hazards: Occur when the branch instruction is not resolved until later in the pipeline, causing a delay in fetching the correct instructions.
     - **Jump** Hazards: Occur when a jump instruction changes the program counter, causing a potential delay in fetching the correct instructions.
 
+# Memory Systems
+## Key Characteristics
+- Location:
+    - CPU: Registers
+    - Internal (Primary): RAM, ROM, etc.
+    - External (Secondary): Hard Disk, SSD, etc.
+- Capacity:
+    - Size: The amount of data a memory system can store. Measured in bytes, kilobytes (KB), megabytes (MB), gigabytes (GB), etc.
+    - Addressability: The smallest unit of memory that can be addressed. Typically, it's a byte or a word.
+- Speed:
+    - Access Time: The average time it takes to read or write a data item from or to memory. Measured in nanoseconds.
+    - Cycle Time: The minimum time interval between two consecutive memory accesses.
+- Volatility:
+    - Volatile: Memory loses its contents when the power is turned off. Examples include RAM and cache memory.
+    - Non-volatile: Memory retains its contents even when the power is off. Examples include ROM, flash memory, and hard disk drives.
+- Cost: The cost of storing a single bit of data.
+    - Hard disks are slower but can store larger volumes of data compared to what they cost.
+    - SSD's are faster but can store smaller volumes of data compared to what they cost.
+- Technology:
+    - Static RAM (SRAM): Faster but more expensive than DRAM.
+    - Dynamic RAM (DRAM): Slower but less expensive than SRAM.
+    - ROM (Read-Only Memory): Non-volatile memory used for storing programs and data that don't need to be modified.
+    - Flash Memory: Non-volatile memory that can be erased and reprogrammed.
+- Organization:
+    - Sequential Access: Data is accessed sequentially, like on a tape drive.
+    - Direct Access: Data can be accessed directly by specifying its address.
+    - Associative Access: Data is accessed based on its content rather than its address.
+- Cache Memory: Faster and smaller than main memory, used to store frequently accessed data.
+    - Level 1 (L1): This is the fastest and smallest cache, typically located directly on the processor chip. It has the shortest access time, but also the smallest capacity.
+    - Level 2 (L2): Larger than L1 cache, it's often shared by multiple processor cores. Access times are slightly longer than L1, but still much faster than main memory.
+    - Level 3 (L3): The largest and slowest cache, usually shared by all cores on a processor. It's used to store less frequently accessed data that's still more likely to be reused than data in main memory.
+
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
 ## Key Features of OpenMP:
@@ -358,5 +390,63 @@ In an instruction pipeline, there are several types of hazards that can occur, l
 - **Debugging and Maintenance**: Parallel code can be harder to debug and maintain than sequential code. Issues like race conditions, deadlocks, and nondeterministic behavior can make debugging more challenging.
 - **Compiler and Platform Dependency**: The performance and behavior of OpenMP code can vary significantly across different compilers and platforms. This can make it difficult to write portable, high-performance code.
 - **Limited Control Over Threads**: OpenMP provides limited control over thread affinity and scheduling. Advanced users who need fine-grained control over thread behavior may find OpenMP's abstraction too limiting.
+
+## Functions & Constructs
+### Functions
+- `omp_get_num_threads()` -> int: This routine returns the number of threads in the current team.
+- `omp_get_max_threads()` -> int: This routine returns the maximum number of threads available in the system.
+- `omp_get_thread_num()` -> int: This routine returns the thread number (ID) of the currently running thread. 
+- `omp_get_num_procs()` -> int: This routine returns the number of processor cores available to the program.
+- `omp_set_num_threads(numberOfThreads)` -> boolean: This routine sets the number of threads to be executed within the parallel scope of the program. 
+- `omp_in_parallel()` -> boolean: This routine returns `true` if the call to the routine is enclosed by an active parallel region; otherwise, it returns `false`. 
+- `omp_get_wtime()` -> double: Returns the current time.
+- `omp_set_schedule(schedule_type,chunk_size)` -> omp_sched_t: This routine sets the scheduling clause & the chunk size, incase the scheduling clause is `runtime`. Values can be: `omp_sched_static`, `omp_sched_dynamic`, `omp_sched_guided`, `omp_sched_auto`.
+
+### Constructs
+- `#pragma omp parallel {...}`: This fundamental construct starts parallel execution. 
+- `#pragma omp parallel for` {...}: The parallel loop construct is a shortcut for specifying a parallel construct containing one or more associated loops and no other statements. 
+- `# pragma omp parallel for reduction(+:sum) if (parallelize) {...}`: Perform reduction on the variable `sum` only if (parallelize) is `1`/`true`.
+- `# pragma omp parallel sections {...}`: Only parallelize code within the `# pragma omp section {...}`.
+- `#pragma omp parallel private (tid) shared (numt)`: The scope of the variables `tid` & `numt` are defined.
+- `#pragma omp parallel for schedule(static, chunkSize)`: Use static scheduling clause, with specified chunk size.
+- `#pragma omp parallel for schedule(dynamic, chunkSize)`: Use dynamic scheduling clause, with specified chunk size.
+- `#pragma omp parallel for schedule(guided, chunkSize)`: Use guided scheduling clause, with specified chunk size.
+- `#pragma omp parallel for schedule(auto)`: Compiler & runtime system determines the scheduling clause automatically
+- `#pragma omp parallel for schedule(runtime)`: Scheduling clause is decided during runtime, and `omp_set_schedule(schedule_type,chunk_size)` can be used to set the schedule.
+- Thread Synchronization mechanisms:
+    - `#pragma omp critical`: Critical section , only 1 thread can execute at a time.
+    - `#pragma omp atomic`: Does the same task as critical, but only used for simple updates. This is more efficient than using a critical section, in this specific case.
+    - `#pragma omp barrier`: A barrier is used to synchronize all threads in a team. When a thread reaches a barrier, it stops execution until all other threads in the team also reach the barrier. Once all threads reach the barrier, they can all proceed.
+    - `#pragma omp single`: Only a single thread can execute this code segment, at a time.
+    - `#pragma omp master`: Only the master thread can execute this code segment.
+
+## Scope of a variable
+- In OpenMP, the scope of a variable refers to the set of threads that can access the variable in a parallel block.
+- Scopes:
+    1. **shared**: The variable can be accessed by all the threads in the team.
+    1. **private**: The variable can only be accessed by a single thread. A copy of the variable is created for each thread, and there's no connection between the copies.
+    1. **firstprivate**: Same as private, but the initial value is copied from the main copy.
+    1. **lastprivate**: Same as private, but the final value is copied back to the main copy.
+
+## Scheduling Clause
+- Scheduling clauses are used to control how iterations of loops are distributed among threads in a parallel region. These clauses help optimize the performance of parallel loops by specifying the strategy for assigning loop iterations to threads.
+- Types of clauses:
+    - **Static**: Divides the iterations into chunks of a specified size and assigns each chunk to a thread, in a Round Robin fashion. If no chunk size is specified, the iterations are divided evenly among the threads.
+    - **Dynamic**: Assigns a chunk of iterations to a thread, and when a thread finishes its chunk, it is assigned the next available chunk. This can help balance the load if iterations take varying amounts of time.
+    - **Guided**: Similar to dynamic, but the chunk size starts large and decreases exponentially with each successive chunk. This can reduce overhead compared to dynamic while still balancing the load. 
+    - **Auto**: Leaves the decision of scheduling to the compiler and runtime system, which can choose the most appropriate scheduling strategy.
+    - **Runtime**: The scheduling decision is deferred until runtime, and the schedule can be set using the `omp_set_schedule()` environment variable.
+
+## Reduction Clause
+- The reduction clause is used to perform a reduction operation on variables across multiple threads.
+- Process:
+    1. Each thread gets a private copy of `sum`
+    1. The threads compute the result independently.
+    1. All the values are combined using the specified operator `+`. </li>
+- Allowed operators:
+    - Arithmetic: (`+`,`-`,`*`)
+    - Bitwise: (`&`, `|`, `^`)
+    - Logical: (`&&`,`||`)
+    - Intrinsic Functions: (`max`,`min`,`land`,`ior`,`ieor`)
 
 <!-- Last image: self/0.png | external/13.png -->

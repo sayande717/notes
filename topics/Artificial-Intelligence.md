@@ -355,6 +355,95 @@ Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240
     - **Non-redundant**: They must not provide solutions which have already been generated in the past.
     - **Informed**: The Generator must have atleast some basic idea which it can use to generate an efficient solution.
 
+# Knowledge Based Systems
+- Knowledge: Understanding of a subject area.
+- Different Types of knowledge:
+    - **Procedural**: Knowledge about how to do something. It's represented as a set of rules, algorithms, or procedures. Example: A recipe for baking a cake.
+    - **Declarative**: It describes facts about objects, and relationships between various objects. Example: The capital of France is Paris.
+    - **Meta-knowledge**: Knowledge about knowledge itself (metadata about the object). It's used to reason about the reliability, relevance, and certainty of other knowledge.
+    - **Heuristic / Shallow**: Knowledge based on experience or rule of thumb. It's used to make approximate or educated guesses.
+    - **Structural**: Represents the relationships between objects or entities.
+
+## Propositional Logic
+- A Propositional Logic is the simplest form of logic where all the statements are made by propositions.
+- It is a declarative statement which is either `true` or `false`.
+- It is also called Booladn Logic as it works on 0 and 1.
+- Propositions can be either true or false, but cannot be both.
+- Propositional logic consists of:
+    - An object.
+    - Relations or function.
+    - Logical connectives (also called logical operators).
+- **Tautology**: A proposition formula which is always True. It is also called a valid sentence.
+- **Contradiction**: A proposition formula which is always False.
+- Examples:
+    - Today is Sunday. (True)
+    - The Sun rises in the West. (False)
+- Types of Propositions:
+    - **Atomic**: Simple propositions, consisting of a single proposition symbol. Example: 2+2=4.
+    - **Compound**: Constructed by combining simpler or atomic propositions, using parenthesis and logical connectives. Example: It is raining today, and the street is wet.
+- Logical Connectives:
+    - **Negation (`¬`)**: Returns the Negation of the proposition.
+        - `P`: Peter can play tennis.
+        - `¬`P`: Peter cannot play tennis.
+    - **Conjunction (`∧`)**: Returns true only if both propositions are true.
+        - `P`: It is raining.
+        - `Q`: The streets are wet.
+        - `P∧Q`: It is raining & the streets are wet.
+    - **Disjunction (`∨`)**: Returns true if at least one proposition is true.
+        - `P`: DEF is a doctor. 
+        - `Q`: DEF is an engineer.
+        - `P∨Q`: DEF is a doctor or an engineer.
+    - **Implication (`P→Q`)**: Returns false only if the antecedent is true and the consequent is false.
+        - `P`: It is raining.
+        - `Q`: The streets are wet.
+        - `P→Q`: If it is raining, then the streets are wet.
+    - **Biconditional (`P↔Q`)**: Returns true if both propositions have the same truth value.
+        - `P`: I am breathing.
+        - `Q`: I am alive.
+        - `P↔Q`: If I am breathing, I am alive; If I am alive, then I am breathing.
+    - Truth Table:
+        | P | Q | ¬P (Negation) | P ∧ Q (Conjunction) | P ∨ Q (Disjunction) | P → Q (Implication) | P ↔ Q (Biconditional) |
+        |---|---|---|---|---|---|---|
+        | T | T | F | T | T | T | T |
+        | T | F | F | F | T | F | F |
+        | F | T | T | F | T | T | F |
+        | F | F | T | F | F | T | T |
+    - **Properties** of Logical Connectives:
+        - **Commutative:**
+            - Conjunction: `P ∧ Q ≡ Q ∧ P`
+            - Disjunction: `P ∨ Q ≡ Q ∨ P`
+        - **Associative:**
+            - Conjunction: `(P ∧ Q) ∧ R ≡ P ∧ (Q ∧ R)`
+            - Disjunction: `(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R)`
+        - **Identity Element:**
+            - Conjunction: `P ∧ True ≡ P`
+            - Disjunction: `P ∨ False ≡ P`
+        - **Distributive:**
+            - Distribution of ∧ over ∨: `P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)`
+            - Distribution of ∨ over ∧: `P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R)`
+        - **De Morgan's Laws:**
+           - `¬(P ∧ Q) ≡ ¬P ∨ ¬Q`
+           - `¬(P ∨ Q) ≡ ¬P ∧ ¬Q`
+        - **Double Negation Elimination:** `¬¬P ≡ P`
+- **Inference Rules**: These are the templates for generating valid arguments. They are applied to derive proofs in Artificial Intelligence.
+    1. **Implication:**: `P` -> `Q`
+    1. **Converse:** `Q` -> `P`
+    1. Inverse (*Negation of **Implication***): `¬P` ->`¬Q`
+    1. Contrapositive (*Negation of **Converse***): `¬Q` ->`¬P`
+    - Types of Inference Rules:
+        1. **Modus Ponens:** If P implies Q, and P is true, then Q is true, ie `P → Q, P` -> `Q`
+        1. **Modus Tollens:** If P implies Q, and Q is false, then P is false, ie, `P → Q, ¬Q` -> `¬P`
+        1. **Hypothetical Syllogism:** If P implies Q, and Q implies R, then P implies R, ie `P → Q, Q → R` -> `P → R`
+        1. **Disjunctive Syllogism:** If P or Q is true, and P is false, then Q is true, ie `P ∨ Q, ¬P` -> `Q`
+        1. **Addition:** If P is true, then P or Q is true for any Q, ie `P` -> `P ∨ Q`
+        1. **Resolution:** If P ∨ Q and ¬P ∨ R are true, then Q ∨ R is true, ie `P ∨ Q, ¬P ∨ R` -> `Q ∨ R`
+        1. **Simplification:** If P and Q are true, then P is true, ie `P ∧ Q` -> `P`
+        1. **Conjunction:** If P is true and Q is true, then P and Q are true, ie `P, Q` -> `P ∧ Q`
+- **Limitations of Propositional (First-Order) Logic**:
+    1. **Expressiveness:** It is not expressive enough to represent certain concepts, such as infinite sets, real numbers, and higher-order properties.
+    1. **Computational Complexity:** Reasoning with it can be computationally expensive, especially for complex domains.
+    1. **Knowledge Representation:** It can be cumbersome and inefficient for representing large-scale knowledge bases, especially when dealing with uncertainty or vagueness.
+
 # Machine Learning
 - Artificial Intelligence: Aimed at enabling computers to perform human-like tasks and simulate human behaviour.
 - Machine Learning: Tries to solve a specific problem, and makes predictions using data.

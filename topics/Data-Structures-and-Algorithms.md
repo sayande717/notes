@@ -7,12 +7,44 @@
 - Each partition has 2 neighbours, except 1st and last one.
 - Size of the box is fixed, and cannot be modified.
 - The positions are indexed, and we can find an element by it's index.
-
 - Implementation: [code](https://github.com/sayande717/code/blob/main/self/Java/initArray.java)
-
 - Resize an array: There is no way to directly resize an array in Java. To do it, create another bigger array, and then copy all elements from the current array to the new array.
 
-### Linear Search
+# Medians & Order Statistics
+-  These are concepts in statistics and computer science that deal with the ranking and ordering of elements within a dataset.
+## Median
+- The median is the middle value in a list of numbers.
+- If the list has an odd number of entries, the median is the number in the middle. Example: In $\{1, 3, 3, 6, 7, 8, 9\}$, $median=6$.
+- If the list has an even number of entries, the median is the average of the two middle numbers. Example: In $\{1, 2, 3, 4, 5, 6, 8, 9\}$, $median = (4+5)/2 = 4.5$.
+
+## Order Statistics
+- Order statistics are statistics that provide information about the values at specific positions in a dataset when it is sorted in ascending or descending order.
+- The k-th order statistic of a dataset is the k-th smallest element in the sorted order.
+- Example: In $\{1,2,3,4,5,6\}$, $n=6$; $1$ is the first order statistic, $2$ is the 2nd order statistic ... and $6$ is the $n^{th}$ order statistic.
+- Median:
+    - If $n$ is odd, the median is the $\frac{n+1}{2}$-th order statistic.
+    - If $n$ is even, the median is the average of the $\frac{n}{2}$-th and $\frac{n}{2}+1$-th order statistics.
+- Finding the median and order statistics:
+    - **Selection Algorithms**: These algorithms are used to find the k-th smallest (or largest) element in an unordered list. Examples include Quickselect and the Median of Medians algorithm.
+    - **Sorting Algorithms**: These algorithms sort the entire dataset, after which the median or any order statistic can be directly accessed. Examples include Quick Sort, Merge Sort, and Heap Sort.
+    - **Median of Medians Algorithm**: This is a deterministic selection algorithm that guarantees a linear time complexity. It works by dividing the list into smaller groups, finding the median of each group, and then recursively finding the median of the medians.
+
+# Linear Time Selection
+## Expected Linear Time Selection
+- **Quickselect**: This is a randomized algorithm that works by partitioning the array around a pivot element. The pivot is chosen randomly, and the algorithm recursively searches the appropriate subarray. Time complexity = O(n).
+- **Introselect**: This is a hybrid of quicksort and heapsort. It uses quicksort as long as it performs well, and switches to heapsort if the performance degrades. This guarantees a worst-case linear time complexity.
+## Worst Case Linear Time Selection
+- **Median of Medians algorithm**:
+    - This algorithm divides the array into groups of five elements, finds the median of each group, and then recursively finds the median of the medians. This median is used as the pivot for partitioning.
+    - Time Complexity = $O(n)$
+    - Example: $Array = \{2,5,1,7,3,9,4,8,6\}$
+        1. Divide into groups: $\{2,5,1\},\{7,3,9\},\{4,8,6\}$
+        2. Sort each group: $\{1,2,5\},\{3,7,9\},\{4,6,8\}$
+        3. Find the median of each group: $2,7,6$
+        4. Find the median of the medians: $Median = 6$. This is the median of the original array.
+
+### Searching
+#### Linear Search
 > Linear search is a simple searching algorithm that sequentially checks each element in a list until a match is found or the end of the list is reached.
 - **Steps**:
     1. Start from the first element of the list.
@@ -23,7 +55,7 @@
 - Time Complexity: $O(n)$.
 - It can work on both sorted and unsorted data.
 
-### Sentinel Search
+#### Sentinel Search
 > Sentinel search is a variation of the linear search algorithm used to improve its efficiency by reducing the number of comparisons. It involves placing a sentinel value (a special value) at the end of the data structure to avoid having to check for out-of-bounds conditions during the search.
 - **Steps**:
     - Before starting the search, add a sentinel value to the end of the list or array. This sentinel value should be greater than any other value in the list, so it will guarantee that the search will eventually find it if the item is not present.
@@ -35,7 +67,7 @@
 - The key benefit of the Sentinel Linear Search algorithm is that it eliminates the need for a separate check for the end of the array, which can improve the average case performance of the algorithm. <br>
 - However, it does not improve the worst-case performance, which is still  $O(n)$ (where n is the size of the array), as we may need to scan the entire array to find the sentinel value.
 
-### Interpolation Search
+#### Interpolation Search
 > Interpolation search is an algorithm for searching for a specific value in a sorted array that uses interpolation to estimate the position of the target value. It is an improvement over binary search for uniformly distributed data.
 
 - **Steps**:
@@ -54,7 +86,296 @@
 
 - Interpolation search can be used for both sorted and uniformly distributed data, but it may not perform well for data with unevenly distributed values or when the array is not sorted.
 
-### Exponential Search
+#### TODO: Exponential Search
+
+### Sorting
+#### Insertion Sort
+- It is a stable sorting algorithm.
+- It is efficient for small lists and nearly sorted lists.
+- Steps (\$array = \{9,8,7,6,5,4,3,2,1,0\}$\)
+    - Assume array at index 0 is sorted.
+    - **PASS 1**: Index 1
+        1. **Target (key)** = array[1] = 8.
+        2. Compare \$8\$ with range \{9\}, and insert it: \{8,9\}
+        3. Array: \{8,9,7,6,5,4,3,2,1,0\}
+    - **PASS 2**: Index 2
+        1. **Target (key)** = array[2] = 7.
+        2. Compare \$7\$ with range \{8,9\}, and insert it: \{7,8,9\}
+        3. Array: \{7,8,9,6,5,4,3,2,1,0\}
+    - **PASS 3**: Index 3
+        1. **Target (key)** = array[3] = 6.
+        2. Compare \$6\$ with range \{7,8,9\}, and insert it: \{6,7,8,9\}
+        3. Array: \{6,7,8,9,5,4,3,2,1,0\}
+    - **PASS 4**: Index 4
+        1. **Target (key)** = array[4] = 5.
+        2. Compare \$5\$ with range \{6,7,8,9\}, and insert it: \{5,6,7,8,9\}
+        3. Array: \{5,6,7,8,9,4,3,2,1,0\}
+    - **PASS 5**: Index 5
+        1. **Target (key)** = array[5] = 4.
+        2. Compare \$4\$ with range \{5,6,7,8,9\}, and insert it: \{4,5,6,7,8,9\}
+        3. Array: \{4,5,6,7,8,9,3,2,1,0\}
+    - **PASS 6**: Index 6
+        1. **Target (key)** = array[6] = 3.
+        2. Compare \$3\$ with range \{4,5,6,7,8,9\}, and insert it: \{3,4,5,6,7,8,9\}
+        3. Array: \{3,4,5,6,7,8,9,2,1,0\}
+    - **PASS 7**: Index 7
+        1. **Target (key)** = array[7] = 2.
+        2. Compare \$2\$ with range \{3,4,5,6,7,8,9\}, and insert it: \{2,3,4,5,6,7,8,9\}
+        3. Array: \{2,3,4,5,6,7,8,9,1,0\}
+    - **PASS 8**: Index 8
+        1. **Target (key)** = array[8] = 1.
+        2. Compare \$1\$ with range \{2,3,4,5,6,7,8,9\}, and insert it: \{1,2,3,4,5,6,7,8,9\}
+        3. Array: \{1,2,3,4,5,6,7,8,9,0\}
+    - **PASS 9**: Index 9
+        1. **Target (key)** = array[9] = 0.
+        2. Compare \$0\$ with range \{1,2,3,4,5,6,7,8,9\}, and insert it: \{0,1,2,3,4,5,6,7,8,9\}
+        3. Array: \{0,1,2,3,4,5,6,7,8,9\}
+    - **Sorted Array**: $\{0,1,2,3,4,5,6,7,8,9\}$
+- Algorithm:
+    ```c
+    void insertionSort(int* arr) {
+        // arr[0] is assumed to be sorted.
+        for(int iter=1;iter<maxArrSize;iter++) {
+            int target = arr[iter];
+            int jter = iter-1;
+            // Here, we compare the target with array elements [1 to (i-1)], and put the key in it's proper position.
+            while(jter>=0 && arr[jter]>=target) {
+                // The target gets overwritten in the array.
+                arr[jter+1] = arr[jter];
+                jter = jter - 1;
+            }
+            // Restore the target.
+            // WARN: j is either -1, or 1 index before the target here.
+            arr[jter+1] = target;
+        }
+    }
+    ```
+
+#### Bubble Sort
+- It is a stable sorting algorithm.
+- Steps (\$array = \{9,8,7,6,5,4,3,2,1,0\}$\)
+    - **PASS 1**: Traverse range = $\{9,8,7,6,5,4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{8,7,6,5,4,3,2,1,0,9\}$.
+        3. The last element is at it's proper position.
+    - **PASS 2**: Traverse range = $\{8,7,6,5,4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{7,6,5,4,3,2,1,0,8,9\}$.
+        3. The last 2 elements are at their proper positions.
+    - **PASS 3**: Traverse range = $\{7,6,5,4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{6,5,4,3,2,1,0,7,8,9\}$.
+        3. The last 3 elements are at their proper positions.
+    - **PASS 4**: Traverse range = $\{6,5,4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{5,4,3,2,1,0,6,7,8,9\}$.
+        3. The last 4 elements are at their proper positions.
+    - **PASS 5**: Traverse range = $\{5,4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{4,3,2,1,0,5,6,7,8,9\}$.
+        3. The last 5 elements are at their proper positions.
+    - **PASS 6**: Traverse range = $\{4,3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{3,2,1,0,4,5,6,7,8,9\}$.
+        3. The last 6 elements are at their proper positions.
+    - **PASS 7**: Traverse range = $\{3,2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{2,1,0,3,4,5,6,7,8,9\}$.
+        3. The last 7 elements are at their proper positions.
+    - **PASS 8**: Traverse range = $\{2,1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{1,0,2,3,4,5,6,7,8,9\}$.
+        3. The last 8 elements are at their proper positions.
+    - **PASS 9**: Traverse range = $\{1,0\}$.
+        1. If $array[iter] > array[iter+1]$, swap them.
+        2. After all swaps, array: $\{0,1,2,3,4,5,6,7,8,9\}$.
+        3. All 9 elements are at their proper positions.
+    - **Sorted Array**: $\{0,1,2,3,4,5,6,7,8,9\}$
+    - As an enhancement:
+        - Check if any swap has taken place in the current pass.
+        - *If yes*, continue.
+        - *If not*, then you can safely assume the array at that point is already sorted, stop processing it further.
+- Algorithm:
+    ```c
+    void bubbleSort(int* arr) {
+        // Outer loop gives the limit till which the array is traversed.
+        // The limit starts at (arr.length-1), and ends at 1.
+        for(int iter=maxArrSize-1;iter>0;iter--) {
+            bool isSwapped = false;
+            // The array is traversed in this loop.
+            // Pass 1: We traverse from 0 to (arr.length-2). In the end, the last element is sorted.
+            // Pass 2: We traverse from 0 to (arr.length-3). In the end, the last 2 elements are sorted.
+            // Pass 3: We traverse from 0 to (arr.length-4). In the end, the last 3 elements are sorted.
+
+            for(int jter=0;jter<iter;jter++) {
+                if(arr[jter]>arr[jter+1]) {
+                    isSwapped = true;
+                    int temp = arr[jter];
+                    arr[jter] = arr[jter+1];
+                    arr[jter+1] = temp;
+                }
+            }
+
+            // If no swap occurs in the current pass, it means the array is sorted.
+            if(!isSwapped) {
+                break;
+            }
+        }
+    }
+    ```
+
+#### Cocktail Sort
+- Recommended for small to medium-sized arrays, typically up to a few thousand elements.
+- It is a stable sorting algorithm.
+- Steps (\$array = \{9,8,7,6,5,4,3,2,1,0\}$\)
+    - **PASS 1**:
+        - Forward:
+            1. Traverse range = $\{9,8,7,6,5,4,3,2,1,0\}$.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{8,7,6,5,4,3,2,1,0,9\}$.
+            4. The last element is at its proper position.
+        - Backward:
+            1. Traverse range = $\{8,7,6,5,4,3,2,1\}$, in a backward manner.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,8,7,6,5,4,3,2,1,9\}$.
+            4. The first element is at its proper position.
+    - **PASS 2**:
+        - Forward:
+            1. Traverse range = $\{8,7,6,5,4,3,2,1\}$.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,7,6,5,4,3,2,1,8,9\}$.
+            4. The second last element is at its proper position.
+        - Backward:
+            1. Traverse range = $\{7,6,5,4,3,2,1\}$, in a backward manner.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,7,6,5,4,3,2,8,9\}$.
+            4. The second element is at its proper position.
+    - **PASS 3**:
+        - Forward:
+            1. Traverse range = $\{7,6,5,4,3,2\}$.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,6,5,4,3,2,7,8,9\}$.
+            4. The third last element is at its proper position.
+        - Backward:
+            1. Traverse range = $\{6,5,4,3,2\}$, in a backward manner.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,2,6,5,4,3,7,8,9\}$.
+            4. The third element is at its proper position.
+    - **PASS 4**:
+        - Forward:
+            1. Traverse range = $\{6,5,4,3\}$.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,2,5,4,3,6,7,8,9\}$.
+            4. The fourth last element is at its proper position.
+        - Backward:
+            1. Traverse range = $\{5,4,3\}$, in a backward manner.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,2,3,5,4,6,7,8,9\}$.
+            4. The fourth element is at its proper position.
+    - **PASS 5**:
+        - Forward:
+            1. Traverse range = $\{5,4\}$.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,2,3,4,5,6,7,8,9\}$.
+            4. The fifth last element is at its proper position.
+        - Backward:
+            1. Traverse range = $\{4\}$, in a backward manner.
+            2. If $array[iter] > array[iter+1]$, swap them.
+            3. After all swaps, array: $\{0,1,2,3,4,5,6,7,8,9\}$.
+            4. The fifth element is at its proper position.
+    - **PASS 6**: start = end, so we break out.
+    - **Sorted Array**: $\{0,1,2,3,4,5,6,7,8,9\}$
+
+#### TODO: Merge Sort
+#### Bitonic Sort
+- It is a sorting algorithm that works by recursively dividing the array into smaller bitonic sequences and then merging them in a way that maintains the bitonic property.
+- A bitonic sequence is a sequence of numbers that is first monotonically increasing and then monotonically decreasing, or vice versa.
+- The size of the array should be in the order of $2^n$.
+- It is a stable sorting algorithm.
+- Bitonic Sequence: Given an index $i$,
+    - All elements to the left of i $\leq i$, while all elements to the right are $\geq i$.
+    <br> [OR]
+    - All elements to the left of i $\geq i$, while all elements to the right are $\leq i$.
+    - Examples:
+        1. $\{1,2,3,4,5,6,7,6,5,4,3,2,1\}$ \| $index=6$
+        1. $\{2,3,19,72,603,101,57,18\}$ \| $index=4$
+        1. $\{9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9\}$ \| $index=8$
+- Steps \($array = \{19,2,72,3,18,57,603,10\}$\):
+    1. Form the bitonic sequence, if needed:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/27.png" alt="Bitonic Sequence" />
+    2. Sort the array:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/28.png" alt="Bitonic Sort" />
+
+#### Counting Sort
+- Counting Sort is a non-comparative sorting algorithm that works well for sorting integers (or objects that can be mapped to an integer) when the range of the input data (i.e., the maximum and minimum values) is small.
+- It's a stable sorting algorithm, which means the relative position of same elements are maintained.
+- Steps \($array = \{2,5,3,0,2,3,0,3\}$\):
+    - Find max of all elements: $5$
+    - Create count arrray with length=$5+1=6$, filled with 0's: $count=[0,0,0,0,0,0]$
+    - Store the count of each unique elements in their respective indices.
+        - For $2$, frequency(count) = $2$, so store $2$ at index $2$.
+        - For $5$, frequency(count) = $1$, so store $1$ at index $5$.
+    - Finally, $count=[2,0,2,3,0,1]$
+    - Store the cummulative sum of count[], in count[]: count[i] = count[i-1]+count[i].
+    - Finally, $count=[2,2,4,7,7,8]$
+    - Iterate from right to left of the array.
+        1. Start with $arr[7]=3$.
+            1. Go to index $3$ of count. $count[3]=7$.
+            2. Decrement $count[3]$ by 1, $count[3]=7-1=6$.
+            3. Store $3$ in index $6$ of the output array.
+        2. Next, we have $arr[6]=0$.
+            1. Go to index $0$ of count. $count[0]=2$.
+            2. Decrement $count[0]$ by 1, $count[0]=2-1=1$.
+            3. Store $0$ in index $1$ of the output array.
+        3. Next, we have $arr[5]=3$.
+            1. Go to index $3$ of count. $count[3]=6$.
+            2. Decrement $count[3]$ by 1, $count[3]=6-1=5$.
+            3. Store $3$ in index $5$ of the output array.
+        4. Next, we have $arr[4]=2$.
+            1. Go to index $2$ of count. $count[2]=4$.
+            2. Decrement $count[2]$ by 1, $count[2]=4-1=3$.
+            3. Store $2$ in index $3$ of the output array.
+        5. Next, we have $arr[3]=0$.
+            1. Go to index $0$ of count. $count[0]=1$.
+            2. Decrement $count[0]$ by 1, $count[0]=1-1=0$.
+            3. Store $0$ in index $0$ of the output array.
+        6. Next, we have $arr[2]=3$.
+            1. Go to index $3$ of count. $count[3]=5$.
+            2. Decrement $count[3]$ by 1, $count[3]=5-1=4$.
+            3. Store $3$ in index $4$ of the output array.
+        7. Next, we have $arr[1]=5$.
+            1. Go to index $5$ of count. $count[5]=8$.
+            2. Decrement $count[5]$ by 1, $count[5]=8-1=7$.
+            3. Store $5$ in index $7$ of the output array.
+        8. Finally, we have $arr[0]=2$.
+            1. Go to index $2$ of count. $count[2]=3$.
+            2. Decrement $count[2]$ by 1, $count[2]=3-1=2$.
+            3. Store $2$ in index $2$ of the output array.
+    - Finally,
+        $outArr = [0,0,2,2,3,3,3,5]$
+        $count = [0,2,2,4,7,7]$
+    - Representation:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/16.png" alt="Counting Sort 1" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/17.png" alt="Counting Sort 2" />
+
+#### Radix Sort
+- It's a stable sorting algorithm.
+- It works by sorting the elements based on their individual digits.
+- It's a non-comparative sorting algorithm, meaning it doesn't compare elements directly with each other.
+- Steps (\$array = \{170,45,75,90,802,24,2,66\}$\)
+    - Find the maximum element: $802$, which has $3$ digits. So, we need to iterate $3$ times over the array.
+    - Iterations:
+        1. Sort based on least significant (unit) digit:
+            - Current array = \{17**0**,4**5**,7**5**,9**0**,80**2**,2**4**,**2**,6**6**\}
+            - Sorted array = \{170,90,802,2,24,45,75,66\}
+        2. Sort based on 2nd least significant (tens) digit:
+            - Current array = \{1**7**0,**9**0,8**0**2,**0**2,**2**4,**4**5,**7**5,**6**6\}
+            - Sorted array = \{802,2,24,45,66,170,75,90\}
+        3. Sort based on 3rd least / most significant (hundreds) digit:
+            - Current array = \{**8**02,**0**2,**0**24,**0**45,**0**66,1**7**0,**0**75,**0**90\}
+            - Sorted array = \{2,24,45,66,75,90,170,802\}
+    - **Sorted Array**: $\{2,24,45,66,75,90,170,802\}$
+- TODO: Algorithm
 
 ## Infix, Prefix & Postfix expressions
 - The conversions are done using `stack` data structure.
@@ -242,7 +563,7 @@ The time complexity of queue operations is O(1).
         1. Continue till the entire tree is generated.
         - Solution:
             <br><img src="../assets/images/Data-Structures-and-Algorithms/self/11.png" alt="Tree Generation from Preorder, Inorder" />
-    - Postrder, Inorder:
+    - Postorder, Inorder:
         1. Root of the tree = **Last** node in the Postorder Traversal.
         1. For the root of the left sub-tree: Check which of the possible elements $(9,5,1,7,2,12)$ occur **last** in the Postorder list. Here, it's $5$.
         1. Check the nodes to the left and right of $5$ in the Inorder list. $L=(9)$, $R=(1,7,2,12)$. These will be the elements of the left & right sub-trees of $5$.
@@ -273,12 +594,12 @@ The time complexity of queue operations is O(1).
     - Preorder, Postorder (Fast Method)
         1. Root of the tree = **First** node in the Preorder Traversal = **Last** node in the Postorder Traversal = $F$
         1. Start from the next right node in the Preorder list: $B$.
-        1. **If the next element is to the left of current node, then it is a child of current node.**
-        1. $B$, the next element, is to the left of $F$. So, it is a child of $F$. Since $F$ has no children, put $B$ as the left-most child of $F$.
+        1. In the Postorder list, **if the next element is to the left of current node, then it is a child of current node.**
+        1. In the Postorder list, $B$, the next element, is to the left of $F$. So, it is a child of $F$. Since $F$ has no children, put $B$ as the left-most child of $F$.
         1. Continue to the next right node in the Preorder list: $A$.
-        1. Among $(B,F)$, $A$ is to the left of $B$ before it is to the left of $F$. So, it is a child of $B$.
+        1. In the Postorder list, among $(B,F)$, $A$ is to the left of $B$ before it is to the left of $F$. So, it is a child of $B$.
         1. Continue to the next right node in the Preorder list: $D$.
-        1. Among $(F,B,A)$, $D$ is to the left of $B$. So, it is a child of $B$.
+        1. In the Postorder list, among $(F,B,A)$, $D$ is to the left of $B$. So, it is a child of $B$.
         1. Continue till the entire tree is generated.
         - Solution:
             <br><img src="../assets/images/Data-Structures-and-Algorithms/self/14.png" alt="Tree Generation from Preorder, Postorder" />
@@ -293,8 +614,14 @@ The time complexity of queue operations is O(1).
     <br><img src="../assets/images/Data-Structures-and-Algorithms/self/15.png" alt="Binary Search Tree" />
 
 ### B-Tree
+- Diagram:
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/16.png" alt="B-Tree" />
 - It is a balanced m-way tree. (m=Order of the tree)
+- Order of a B-Tree = Maximum number of children a node can have.
+- A B-Tree is based on multi-level indexing.
+- 
 - In constrast to a Binary Search Tree, a node can have more than 1 key, & more than 2 children.
+- It follows the order property of the Binary Search Tree, elements to the left of current node are smaller than current node, while elements to the right of current node are larger.
 - All leaf nodes are at the same level.
 - A B-Tree of Order $m$ has these properties:
     - Root node has:
@@ -307,6 +634,145 @@ The time complexity of queue operations is O(1).
         - Maximum children: $m$
         - Minimum keys: $\lceil \frac {m}{2} \rceil - 1$
         - Minimum children: $\lceil \frac {m}{2} \rceil$
+    - In 1 data location, we have a key & it's corresponding block/record pointer.
+- Terms:
+    - Key: Data. It is stored in a sorted order in the B-Tree.
+    - Record Pointer: Points to the memory location of the data item.
+    - Block Pointer: Points to the children of a node.
+- **Insert** Nodes: $1,2,3,4,5,6,7,8,9,10$ \| $Order=3$
+    1. Insert 1,2,3 in the root node.
+    1. Insert 4. Node gets overflowed, so it must be split from the middle.
+    1. The middle elements are 2 & 3. Choose either 2 (left-ordering) or 3 (right-ordering). Maintain the ordering till the end of the tree. Here, we choose 2 (left-middle).
+    1. Move 2 one level up. 1 goes to the left of 2, 3 & 4 go to the right of 2.
+    1. Insert 5,6. After inserting 6, node gets overflowed.
+    1. Move 4 one level up, to the right of 2. 3 goes to the left of 4, 5 & 6 to the right of 4.
+    1. Insert 7,8. After inserting 8, node gets overflowed.
+    1. Continue till the tree is generated.
+    - Steps:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/17.png" alt="B-Tree Insertion 1" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/18.png" alt="B-Tree Insertion 2" />
+
+- **Delete** Nodes: 64,23,72,65,20
+    1. Original Tree:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/19.png" alt="B-Tree Deletion 0" />
+    1. Delete 64. Node still has the minimum number of keys.
+    1. Delete 23. Node does not have the minimum number of keys (underflow).
+        - Node can borrow a key from it's immediate left or right node (sibling), on the condition that the immediate node has more than the minimum number of keys.
+        - Here, there is no immediate right node. We borrow from the immediate left node.
+        - First, the **maximum** key from the left node (16) displaces the key of the parent node (20), then the displaced node is moved in place of the deleted node, 23.
+    1. Delete 72. Node does not have the minimum number of keys (underflow).
+        - Node cannot borrow from immediate left sibling, as it does not satisfy the condition. However, it can borrow from it's right sibling.
+        - First, the **minimum** key from the right node (77) displaces the key of the parent node (75), then the displaced node is moved in place of the deleted node, 72.
+    1. Delete 65. Node does not have the minimum number of keys (underflow).
+        - None of the immediate left or right siblings satisfy the condition, so key cannot be borrowed from either of them.
+        - In this case, the node is merged with it's immediate left or right node.
+            - Merge with immediate left node: The minimum key of the parent is taken, and merged in addition to merging the concerned nodes. The resultant node is: 51,52,60,68.
+            - Merge with immediate right node: The maximum key of the parent is taken, and merged in addition to merging the concerned nodes. The resultant node is: 68,73,75,77.
+    1. Delete 20. Node does not have the minimum number of keys (underflow).
+        - None of the immediate left or right siblings satisfy the condition, so key cannot be borrowed from either of them.
+        - In this case, the node is merged with it's immediate left node. The minimum key of the parent is taken, and merged in addition to merging the concerned nodes. The resultant node is: 14,15,16,27.
+        - Now, the parent node does not have the minimum number of keys (underflow).
+        - So, the node is merged with it's immediate right node, and the minimum key is taken from it's parent.
+        - Refactor the existing nodes.
+- Delete intermediate nodes: 70
+    1. Delete 70. Node still has the minimum number of keys. However, deleting it just like that is not possible since there are nodes connected to this intermediate node.
+        - We have to choose the key that is just less than 70 i.e. inorder predecessor (the maximum element of the left sub-tree) or more than 70 i.e. inorder successor (the minimum element of the right sub-tree).
+        - Before removing the key from the respective node, we will check if that node will still have the minimum number of keys or not, after the removal.
+        - Here, the key can only be borrowed from the left child.
+    1. Delete 95.
+        - In this case, we have to take the inorder successor key, from the right child.
+    1. Delete 77.
+        - In this case, we can't take either the inorder predecessor or successor key, because condition isn't satisfied in either case.
+        - So, we merge the concerned nodes which contain the keys, i.e. the left and right children.
+    1. Delete 80.
+        - Here, we can replace 80 with it's inorder predecessor, which is the maximum value of the left sub-tree.
+    1. Delete 100.
+        - Here, the nodes which contain the inorder predecessor and inorder successor, both fail to provide the node, since they will not contain the minimum number of keys if the keys are borrowed from them.
+        - So, we merge both the concerned nodes.
+        - Now, the node with 90 has less than the minimum number of keys.
+        - So, we have to borrow a key from the immediate left or right sibling. we borrow from the left sibling, because it satisfies the condition, and also the right sibling doesn't exist.
+        - The borrowing occurs through the parent. 68 gets transferred to parent, 79 gets transferred to the current node (with 90).
+        - Refactor: Nodes initially at the right of 68 will get moved to the right of the parent node, BUT to the leftmost available space of the (79,90) node.
+
+    1. Delete 6,27, 60,16.
+        - These nodes can be removed directly.
+    1. Delete 50.
+        - Since we can't get a key from the concerned nodes of both the left and right sub-tree, we merge the concerned nodes.
+        - After merging, the parent has only 1 key (10).
+        - This node cannot get a key from it's immediate right node.
+        - So, the children nodes of (68) merge with each other.
+    - Finally, we see that the height of the B-Tree has decreased. This is known as shrinking of the B-Tree.
+    - Steps:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/20.png" alt="B-Tree Deletion 1" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/21.png" alt="B-Tree Deletion 2" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/22.png" alt="B-Tree Deletion 3" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/23.png" alt="B-Tree Deletion 4" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/24.png" alt="B-Tree Deletion 5" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/25.png" alt="B-Tree Deletion 6" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/26.png" alt="B-Tree Deletion 7" />
+
+### B+ Tree
+- Differences, compared to [B-Tree](#b-tree):
+    - Data is only stored in leaf nodes, not internal nodes.
+    - Searching & deleting keys (data) is faster.
+    - The internal nodes only contain the key & block pointer.
+    - The leaf nodes contain the key (a copy of all keys in the internal nodes), data pointer, and a block pointer that points to the next leaf node.
+    - The leaf nodes are linked together, like in a linked list.
+    - Diagram:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/29.png" alt="B+ Tree" />
+- **Insert** Nodes: $1,4,7,10,17,21,31$ \| $Order=4$
+    1. When splitting the node, check for the middle element (s).
+     - If the number of nodes is odd, there will be 1 middle element.
+     - If the number of nodes is even, there will be 2 middle elements. Choose the left-middle (left biased) or right-middle (right biased) element.
+     - Move the node to it's parent, and re-factor accordingly. 
+    1. Process:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/30.png" alt="B+ Tree Insertion" />
+- **Delete** Nodes: $21,31,20,10,7,25,42$ \| $Order=4$
+    1. Original Tree:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/31.png" alt="B+ Tree Deletion 0" />
+    1. Delete $21$.
+        - It's a leaf node, and removing it doesn't make the node property invalid. So, simply delete it.
+    1. Delete $31$.
+        - Leaf node: Still has minimum number of keys, after deleting $31$. So, delete it.
+        - Index node: Still has minimum number of keys, after deleting $31$. So, delete it.
+        - Take the minimum value from the right child of index node ($42$), and move it to it's parent.
+    1. Delete $20$.
+        - Leaf node: Removing the key will break any property of B+ Tree.
+            1. Borrow a key either from the left or right sibling, given that they can still hold the property of B+ Tree after donating the key. Here, we choose the right sibling.
+            1. Borrow the minimum value ($25$), through the parent. Remove $25$ from both the node and the parent, and put it into the leaf node.
+        - Now, the parent node may satisfy any property, but still has siblings to be taken care of. So, we take the minimum of the right sibling ($28$) and place it there.
+        - Index (Root) node: Removing the key will break any property of B+ Tree.
+            1. Borrow the minimum key from it's siblings (in the leaf nodes, since this is a B+ Tree and only these nodes actually have the keys), $25$. Place it in the root node.
+    1. Delete $10$.
+        - Leaf node: Removing it doesn't break any property, so do it.
+    1. Delete $7$.
+        - Index node: Removing it breaks the property, but we'll sort it in the next section.
+        - Leaf node: Removing it breaks the property.
+            1. We can borrow a key from both left and right sibling. We borrow from the left one, this time.
+            1. We borrow $4$ through the parent. Remove $7$ in the index node, put $4$ in the parent, then insert it in place of $7$.
+    1. Delete $25$.
+        - Leaf node: Removing it breaks the property.
+            1. We cannot borrow anything from either the left or right sibling. So, we have to merge the node.
+            1. **When merging nodes, the key between those nodes, $28$, is deleted.** So, only $42$ remains.
+            1. To the left of $42$, we have $28$. To the right, we have $42$.
+        - Index node: Removing it breaks the property.
+            1. Take the minimum value from the leaf-node siblings, and insert it. Here, we insert $28$.
+    1. Delete $42$.
+        - Leaf node: Removing it breaks the property.
+        - Index node: Removing it breaks the property.
+            1. First, let's do the index node. Here, we can borrow 17 from the left sibling, through the root.
+            1. Root now contains $17$, and we place $28$ after removing $42$.
+            1. Nodes to the right of 17, $(17,19)$ come to the left of $28$.
+        - Here, we had to perform operations on the index node first, instead of merging the leaf nodes. At the end, we could maintain the property B+ Tree while deleting the concerned key.
+    1. Delete $4$.
+        - Leaf node: Removing it breaks the property.
+        - Index node: Removing it breaks the property.
+            1. First, we have to merge the leaf nodes, so we create a new merged node with $(1)$ in it.
+            1. Next, we have to merge the index nodes too. But here, **since the parent of this index node is the root node, we can't delete the root.** We marge $(17,28)$, and the height of the tree decreases.
+    - Steps:
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/32.png" alt="B+ Tree Deletion 1" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/33.png" alt="B+ Tree Deletion 2" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/34.png" alt="B+ Tree Deletion 3" />
 
 ## Graph
 - Components of a graph:
@@ -343,4 +809,4 @@ The time complexity of queue operations is O(1).
     - Finite: A graph with a finite number of vertices and edges.
     - Infinite: A graph with an infinite number of vertices and edges.
   
-<!-- Last image: self/15.png | external/-1.jpg -->
+<!-- Last image: self/30.png | external/-1.jpg -->

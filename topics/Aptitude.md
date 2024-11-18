@@ -377,4 +377,10 @@ Which word could mean "playing"?
 - Example 4: Find the remainder if $1!+2!+3!+4!+...+99!+100!$ is divisible by the first 7 natural numbers.
     <br><img src="../assets/images/Aptitude/self/17.png" alt="Remainder 4" height="800px" />
 
+## Percentage
+- Increasing a number (n) by $x%$, $result  = n * ({\frac {100+r}{100}})$
+- Decreasing a number (n) by $x%$, $result  = n * ({\frac {100-r}{100}})$
+- Change in percentage: ${\frac{new\ value - old\ value}{old\ value}} * 100$
+
+
 <!-- Last image: self/17.png | external/9.png -->
