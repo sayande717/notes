@@ -774,6 +774,51 @@ The time complexity of queue operations is O(1).
         <br><img src="../assets/images/Data-Structures-and-Algorithms/self/33.png" alt="B+ Tree Deletion 2" />
         <br><img src="../assets/images/Data-Structures-and-Algorithms/self/34.png" alt="B+ Tree Deletion 3" />
 
+## Heap
+- If we want to get the smallest number in an array in $O(1)$ time, we have to sort it everytime we insert a new element. The insertion process will take atmost $O(n \log n)$ time.
+- So, we use a heap to reduce this insertion time further.
+- Formal Definition: Given a collection of items and a condition, a heap will:
+  - Find the item in $O(1)$ time
+  - Insert an item in $O(\log n)$ time.
+  - Delete an item in $O(\log n)$ time.
+- Properties:
+  - Heaps are represented as a Complete Binary Tree.
+  - In Data Structures, they are represented as an array, with 1-based Indexing.
+  - Min Heap:
+    - Every node value is greater than it's parent.
+    - The root element is the minimum.
+  - Max Heap:
+    - Every node value is lesser than it's parent.
+    - The root element is the maximum.
+- The entire array representation of a heap may not be ordered, but the property of Max & Min heap will be maintained.
+- For 1-based indexing:
+    - root -> $i=1$
+    - $parent (i) = i/2$
+    - $left\ child (i) = (2i)$
+    - $right\ child (i) = (2i+1)$
+    - $height=\log n$
+- For 0-based indexing:
+    - root -> $i=0$
+    - $parent (i) = (i-1)/2$
+    - $left\ child (i) = (2i+1)$
+    - $right\ child (i) = (2i+2)$
+    - $height=\log n$
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/35.png" alt="Max Heap Example" height="400px" />
+- Inserting a node (Min Heap):
+  - Whenever a new node is inserted, we check if it violates the heap property.
+    - Min Heap: Is the current node lesser than it's parent?
+    - Max Heap: Is the current node greater than it's parent?
+  - If these answers are false, we need to swap the current node's value with that of it's parent. This process is called **Heapify**.
+  - Once a violation is detected, keep checking the values of the current node & parent, till it is resolved.
+  <br><img src="../assets/images/Data-Structures-and-Algorithms/self/36.png" alt="Max Heap Insert 1" height="400px" />
+  <br><img src="../assets/images/Data-Structures-and-Algorithms/self/37.png" alt="Max Heap Insert 2" height="400px" />
+- Deleting a node (Min Heap):
+  - Put the last element in it's place.
+  - Heapify.
+    - Check if left child is smaller, if yes, swap.
+    - Check if right child is smaller, if yes, swap.
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/38.png" alt="Min Heap Delete" height="400px" />
+
 ## Graph
 - Components of a graph:
     - Node / Vertex
@@ -796,17 +841,15 @@ The time complexity of queue operations is O(1).
         - Complete: Every node is connected to every other node. A particular node can be reached from all other nodes.
         - Bi-connected: A connected graph with no articulation points.
             - Articulation point: If a node gets removed, the graph gets disconnected.
-        <br><img src="../assets/images/Data-Structures-and-Algorithms/external/0.wbbp" alt="Graphs 0" height="400px" />
     - Weighted: Edges have some costs associated with them.
     - Unweighted: Edges don't have costs associated with them.
     - Bipartite: Given 2 colours, a graph is a bipartite graph if no 2 adjacent nodes have the same colour.
         - Linear graphs are always bipartite by nature.
         - Graphs with even cycle length are always bipartite.
         - Graphs with odd cycle length are never bipartite.
-        <br><img src="../assets/images/self/1.png" alt="Graphs 1" height="400px" />
     - Sparse: A graph with relatively few edges compared to the number of vertices.
     - Dense: A graph with relatively few vertices compared to the number of edges.
     - Finite: A graph with a finite number of vertices and edges.
     - Infinite: A graph with an infinite number of vertices and edges.
   
-<!-- Last image: self/30.png | external/-1.jpg -->
+<!-- Last image: self/34.png | external/-1.jpg -->
