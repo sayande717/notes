@@ -23,7 +23,7 @@
     - We count the number of times a line of code executes.
     - Preferred, because it has an uniform value.
     - We use Asymptotic notation, like Big O to denote the time complexity.
-- Posterior Analysis:
+- Posteriori Analysis:
     - Analyzing after execution, is dependent on hardware.
     - We determine the amount of time an algorithm takes to execute on a particular hardware platform.
 
@@ -423,11 +423,38 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
 # Greedy Methods
 - Greedy algorithms are a class of algorithms that make locally optimal choices at each step with the hope of finding a global optimum solution. In these algorithms, decisions are made based on the information available at the current moment without considering the consequences of these decisions in the future.
 - We select the best possible choice at each step, leading to a solution that may not always be the most optimal but is often good enough for many problems.
-## Example: Graph Coloring
+
+## Job Sequencing Problem
+- Each job consumes 1 unit of time.
+- Deadline: 2 means this job must be completed by 2 months (if duration = months).
+- Example (Deadline: 3):
+    |  Jobs   | $J_1$ | $J_2$ | $J_3$ | $J_4$ | $J_5$ |
+    |---------|-------|-------|-------|-------|-------|
+    | Profits |  20   |  15   |  10   |   5   |   1   |
+    |Deadlines|   2   |   2   |   1   |   3   |   3   |
+    
+- Steps (!optimal):
+    1. Sort the jobs in decreasing order of profits (here, it's already done).
+    2. Available slots: $|0-1|1-2|2-3|$
+    3. Start with the job with the highest profit, $J_1$. Deadline = 2. Assign it the last available slot, honoring the deadling: 1-2.
+       > Slots: | _ | $J_1$ | _ |
+    4. Now, choose $J_2$. Slot 1-2 is already full, so assign the next best slot: 0-1.
+       > Slots: | $J_2$ | $J_1$ | _ |
+    5. Now, choose $J_3$. Since deadline is 1, it can't be accomodated. Discard it.
+    6. Now, choose $J_4$. Deadline is 3. Assign the slot 2-3 to $J_4$.
+       > Slots: | $J_2$ | $J_1$ | $J_4$ |
+    7. Now, choose $J_5$. Deadline is 3. It cannot be accomodated in any of the slots.
+    8. Sequence: $\{J_2,J_1,J_4\}$. Total Profit: $20+15+5=40$
+
+## Graph Coloring
+- The problem is the find the minimum number of colors it takes to color all nodes in a graph.
+- The condition is that no 2 adjacent nodes (vertices) can have the same colour.
 - Adjacency Matrix
     - Each cell in the above table/matrix is represented as $A_{ij}$, where $i$ and $j$ are vertices. The value of $A_{ij}$ is either $1$ or $0$ depending on whether there is an edge from vertex $i$ to vertex $j$.
         <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/0.png" alt="Graphs 0" height="800px" />
-
+- Steps:
+  - List all vertices (nodes).
+  - Color each vertex with the 1st valid color, keeping in mind the condition.
 # Divide & Conquer
 - Divide and Conquer algorithm is a problem-solving strategy that involves breaking down a complex problem into smaller, more manageable parts, solving each part individually, and then combining the solutions to solve the original problem. It is a widely used algorithmic technique in computer science and mathematics.
 - Stages of Divide and Conquer Algorithm:
@@ -444,10 +471,66 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         - Once the smaller subproblems are solved, we recursively combine their solutions to get the solution of larger problem.
         - The goal is to formulate a solution for the original problem by merging the results from the subproblems.
 
+# Backtracking
+- Backtracking is a problem-solving technique used in algorithms to find solutions by exploring all possible options and then backtracking, or reversing, when a solution path is deemed incorrect or unfeasible.
+- It's particularly useful for problems that require searching through a large set of possible configurations, such as puzzles, optimization problems, and combinatorial problems.
+- Typical Steps:
+  - Choose an option.
+  - Check if the current path leads to a solution.
+    - If yes, continue recursively exploring the path further.
+    - If no, undo the choice (backtrack) and try another option.
+
+## Graph Coloring
+- We color all nodes in a graph in such a way, that no 2 adjacent vertices have the same colour.
+- Steps:
+  1. Order available colours: R, G, B
+  2. Select a vertex: Choose the 1st colour: R
+  3. Check if this color is used by any adjacent vertex.
+  4. If it is, choose the next colour, and re-check.
+  5. Once you find a colour that isn't used by adjacent vertices, colour the node with that colour.
+  6. Repeat for all other nodes.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/8.png" alt="Graphs Coloring" height="800px" />
+
+## Subset Sum
+- Given a target sum, find the combination of elements that lead to it. There may be more than 1 combination of elements.
+- Steps:
+  - For every element of the set, you can either take or or not ignore it.
+  - Take each element one by one, until the total sum matches or exceeds the target sum.
+    - If matched, it's a possible combination of elements.
+    - If exceeded, backtrack and try other combinations.
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/9.png" alt="Subset Sum" height="800px" />
+
+# Branch & Bound
+
+## A-Star
+
+## LIFO
+
+## FIFO
+
+
 # Dynamic Programming
-- [vs **Greedy Method**] Dynamic programming guarantees finding the globally optimal solution by considering all possible subproblems and their combinations. On the other hand, the greedy method makes a series of choices, each of which looks best at the moment, but it doesn't always guarantee a globally optimal solution because it doesn't reconsider its choices. Thus, dynamic programming is more reliable for complex problems where the greedy method might fail to find the best solution.
-- Dynamic Programming checks all available paths, and chooses the most optimal path. **It always provides the optimal solution.**
 - [vs **Divide & Conquer**] Dynamic programming optimizes recursive algorithms by storing the results of subproblems to avoid redundant computations, which significantly reduces the time complexity. Unlike the divide and conquer approach, which solves subproblems independently and may recompute the same subproblems multiple times, dynamic programming ensures that each subproblem is solved only once and then reused, making it more efficient for problems with overlapping subproblems and optimal substructure.
+- Example of repetitive calculations in the Fibonacci Sequence:
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/1.png" alt="Dynamic Programming" height="400px"/>
+- Solution:
+  - In this method, once a problem is solved, the result is stored in a data structure like an array. Next time the same problem needs to be solved, the result is simply retrieved from this array.
+  - In this way, it's more efficient than a brute force method. No same problem is solved more than once.
+  - The process of storing the results is called **memoization**.
+- [vs **Greedy Method**] Dynamic programming guarantees finding the globally optimal solution by considering all possible subproblems and their combinations. On the other hand, the greedy method makes a series of choices, each of which looks best at the moment, but it doesn't always guarantee a globally optimal solution because it doesn't reconsider its choices. Thus, dynamic programming is more reliable for complex problems where the greedy method might fail to find the best solution.
+- It checks all available paths, and chooses the most optimal path. **It always provides the optimal solution.**
+
+## Matrix Chain Multiplication
+- Here, we need to find the minimum number of scalar multiplications needed to multiply a chain of matrices.
+- Example: `Matrix ID = Rows x Columns`
+  - $A_1=5x4$
+  - $A_2=4x6$
+  - $A_3=6x2$
+  - $A_4=2x7$
+  - Steps:
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/2.png" alt="Matrix Chain Multiplication 1" height="1000px" />
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/3.png" alt="Matrix Chain Multiplication 2" height="1000px" />
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/4.png" alt="Matrix Chain Multiplication 3" height="1000px" />
 
 ## Karatsuba Multiplication Algorithm
 - This algorithm helps in multiplying 2 large numbers efficiently.
@@ -458,15 +541,15 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
     1. Find $a*c=672$
     1. Find $b*d=2652$
     1. Find $(a+b)(c+d)=6164$
-    1. $[5]-[(4)+(3)]=6164-(2652+672)=2840$
-    1. $[3]*10^{d}+[4]+[6]*10^{(d/2)}=6720000+2652+284000=7006652$
+    1. $[6]-[(4)+(5)]=6164-(672+2652)=2840$
+    1. $[4]*10^{d}+[5]+[7]*10^{(d/2)}=672*10^{4}+2652+2840*10^{2}=6720000+2652+284000=7006652$
 
 ## Strassen's Multiplication of Matrices
 - Usually, multiplying 2 2x2 matrices involves 8 recursive calls.
     <br>A (row 1): [a b], B (row 1): [e f], AB (row 1): [ae+bg af+bh]
-    <br>A (row 2): [c d], B (row 2): [g h], AB (row 2): [ce+dg cf+dg]
+    <br>A (row 2): [c d], B (row 2): [g h], AB (row 2): [ce+dg cf+dh]
 - Using this algorithm, we can reduce the number of system calls to 7.
-- This results in a reduction of time complexity from $O(n^3)$ to $O(N^{\log 7}))$.
+- This results in a reduction of time complexity from $O(n^3)$ to $O(n^{\log 7}))$.
 - Formulae:
     - First, find $p_1 \to p_7$:
         - $p_1=a(f-h)$
@@ -493,205 +576,115 @@ $c/1 < \log (\log (n)) < \log (n) < n < n \log (n) < n^2 < n^3 < n^k < 2^n < n! 
         <br>[38 -42]
         <br>[86 96]
 
-## Job Sequencing Problem
-### Greedy Approach
-- Each job consumes 1 unit of time.
-- Deadline: 2 means this job must be completed by 2 months (if duration = months).
-- Example (Deadline: 2):
-    | Job   | Profit | Deadline |
-    |-------|--------|----------|
-    | $j_1$ | 50     | 2        |
-    | $j_2$ | 15     | 1        |
-    | $j_3$ | 10     | 2        |
-    | $j_4$ | 25     | 1        |
-- Steps (!optimal):
-    1. Sort the jobs in decreasing order of profits.
-    1. We're at time unit $1$. $j_1$ has max profit ($50$), Deadline is 2, so $j_1$ is scheduled.
-    Timeline:
-        | 1 | 2 |
-        |---|---|
-        |$j_1$||
-    1. Now, we're at time unit $2$. We can choose between $j_4$, $j_2$ & $j_1$. But $j_4$ & $j_2$ should've been completed by time slot 1 i.e. they're past the deadline.
-    1. So, we choose $j_3$.
-        Timeline:
-        | 1 | 2 |
-        |---|---|
-        |$j_1$|$j_3$|
-    1. Total Profit: $50+10=60$
-- Steps (optimal):
-    1. Sort the jobs in decreasing order of profits.
-    1. $j_1$ has max profit ($50$), Deadline is 2. Put $j_1$ as near as possible to the deadline, i.e. at time slot $2$ in this case.
-    Timeline:
-        | 1 | 2 |
-        |---|---|
-        ||$j_1$|
-    1. Now, we can choose between $j_4$, $j_2$ & $j_1$. Both $j_2$ & $j_4$ need to be completed by deadline 1. We choose the one with maximum profit, $j_4$. Put it in time slot $1$.
-    1. So, we choose $j_3$.
-        Timeline:
-        | 1 | 2 | 
-        |---|---|
-        |$j_4$|$j_1$|
-    1. Total Profit: $25+50=75$
-### Branch and Bound
-- Algorithm:
-    1. Initialize Variables:
-        - cost_matrix: A 2D list representing the cost of assigning each worker to each job.
-        - n: The number of workers (or jobs) which is the length of cost_matrix.
-        - min_cost: A variable to store the minimum cost, initialized to sys.maxsize.
-        - assigned_jobs: A list to keep track of the job assigned to each worker, initialized to -1 for all workers.
-        - visited: A list to keep track of whether a job has been assigned, initialized to False for all jobs.
-    1. Define Recursive Function calculate_cost(worker, current_cost):
-        - If worker equals n (all workers have been assigned jobs):
-            - Update min_cost to the minimum of min_cost and current_cost.
-            - Return from the function.
-            - For each job in the range n:
-                - If the job has not been visited:
-                    - Mark the job as visited.
-                    - Assign the job to the current worker.
-                    - Recursively call calculate_cost with the next worker and the updated current cost.
-                    - Backtrack by unmarking the job as visited and resetting the assignment for the current worker.
-    1. Invoke the Recursive Function:
-        - Call calculate_cost(0, 0) to start the recursive process with the first worker and a current cost of 0.
-    1. Return the Result:
-        - The function calculate_min_cost returns the min_cost which is the minimum cost of assigning jobs.
-    1. Main Execution:
-        - Define the cost_matrix.
-        - Call calculate_min_cost(cost_matrix) to get the minimum cost.
-        - Print the result.
+## Longest Common Subsequence
+- Given 2 strings, the goal is to find a sequential / non-sequential subsequence that's common to both the substrings.
+- Example 0:
+  - String 1: `abdace`
+  - String 2: `babce`
+  - Subsequences:
+      - `bace`
+      - `abce`
+  - Longest Common Subsequence: `bace` or `abce`
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/5.png" alt="Longest Common Subsequence 0" />
+- In Dynamic Programming, these are the rules we use to generate the table:
+  ```c
+  // LCS[i,j] = Memoization Table
+  // String 1: Across i
+  // String 2: Across j
+  if(A[i] == B[j]) {
+    LCS[i,j] = 1 + LCS[i-1,j-1];
+  } else {
+    LCS[i,j] = max(LCS[i-1,j],LCS[i,j-1]);
+  }
+  ```
+  - Put an arrow towards the element you derived the current element from.
+  - To find the subsequence, trace back the arrows. Pick the base elements of the diagonal arrows.
+- Example 1:
+  - String 1: `bd`
+  - String 2: `abcd`
+  - Longest Common Subsequence: `GTAB`
+  - Steps:
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/6.png" alt="Longest Common Subsequence 1" />
+- Example 2:
+  - String 1: `stone`
+  - String 2: `longest`
+  - Longest Common Subsequence: `one`
+  - Steps:
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/7.png" alt="Longest Common Subsequence 2" />
 
 ## String Matching Algorithm
-### Rabin Karp Algorithm
-- Algorithm:
-    1. Initialize Variables:
-        - `text`: The text string in which to search for the pattern.
-        - `pattern`: The pattern string to search for in the text.
-        - `n`: The length of the text.
-        - `m`: The length of the pattern.
-        - `d`: The number of characters in the input alphabet (256 for extended ASCII).
-        - `q`: A prime number used for hashing (101 in this case).
-        - `h`: A variable to store the value of d^(m-1) % q, initially set to 1.
-        - `p`: The hash value for the pattern, initially set to 0.
-        - `t`: The hash value for the text, initially set to 0.
-        - `result`: A list to store the starting indices of pattern matches in the text.
-    1. Precomputation:
-        - Compute the value of h as d^(m-1) % q using a loop.
-        - Compute the initial hash values for the pattern (p) and the first window of text (t) using a loop.
-
-    1.Pattern Matching:
-        - Slide the pattern over the text one by one using a loop from 0 to n - m:
-            - If the hash values of the current text window (t) and the pattern (p) match:
-                - Check the characters one by one to confirm the match.
-                - If a match is found, append the starting index to the result list.
-            - If the current window is not the last one, update the hash value for the next window of text:
-                - Remove the hash value contribution of the outgoing character.
-                - Add the hash value contribution of the incoming character.
-                - Ensure the updated hash value is non-negative by adjusting with q if necessary.
-    1. Return the Result:
-        - Return the result list containing the starting indices of all occurrences of the pattern in the text.
-    1. Main Execution:
-        - Define the text and pattern.
-        - Call rabin_karp(text, pattern) to find the pattern occurrences.
-        - Print the result.
+### Naive String Matching
+- Given a string & a pattern, check if the pattern exists in the string. Return the starting index of the pattern, if it does.
+- Steps:
+  - Take a part of the string equal to the length of the pattern (from index 0, initially).
+  - Match the characters one by one.
+    - If a match occurs, continue matching from the next character onwards.
+    - If a match does not occur, stop matching further, and move the window to the next part (from index 1).
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/10.png" alt="Naive String Matching" />
 
 ### Kruth Morris Pratt Algorithm
-- Algorithm:
-    1. Compute Longest Prefix Suffix Array (LPS):
-        - Initialize Variables:
-            - `pattern`: The pattern string to search for in the text.
-            - `m`: The length of the pattern.
-            - `LPS`: An array of size m to store the longest prefix suffix values for the pattern, initialized to all zeros.
-            - `length`: Length of the previous longest prefix suffix, initialized to 0.
-            - `i`: An index variable, initialized to 1.
-        - Iterate through the Pattern:
-            - While i is less than m:
-                - If pattern[i] is equal to pattern[length]:
-                    - Increment length.
-                    - Set LPS[i] to length.
-                    - Increment i.
-                - Else:
-                    - If length is not zero:
-                        - Set length to LPS[length - 1].
-                    - Else:
-                        - Set LPS[i] to 0.
-                        - Increment i.
-        - Return the LPS Array:
-            - The computeLPS function returns the LPS array.
+- Given a string & a pattern, check if the pattern exists in the string. Return the starting index of the pattern, if it does.
+- Steps (Example String: `abcdabeabf`):
+  - Generate the LPS (Longest Pattern Subsequence):
+    1. First, generate the prefix & suffix.
+       - Prefix: a, ab, abc, abcd ... etc.
+       - Suffix: f, bf, abf, eabf ... etc.
+    2. Start with the first prefix, `a`. Denote each occurence of `a` by `1` (except the 1st occurence).
+    3. Select the next prefix, `ab`. Denote each occurence by `1 2` (except 1st occurence).
+    4. Continue for other occurences. Stop when the selected prefix doesn't occur even once.
+    5. Put `0` for all other indices.
+    <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/11.png" alt="Calculating LPS in KMP" />
+- Example 1 (String: `ababcabcabababd` | Pattern: `ababd`):
+  1. START 2 pointers, $i$ for string and $j$ for pattern. $i=0$,$j=1$.
+  2. Compare $String[i]$ with $Pattern[j]$.
+     - If they match, $i++$ & $j++$.
+     - If they don't match, $j=LPS[j]$, i.e. bring $j$ to the index same as the LPS value at $j$. Leave $i$ as-is.
+     - Keep moving $i$ after every iteration, but $j$ moves according to the above conditions.
+     - If $j=length(pattern)$ then string match has occured, $index=i$.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/12.png" alt="KMP 1" />
 
-    1. KMP Search for Pattern in Text:
-        - Initialize Variables:
-            - `text`: The text string in which to search for the pattern.
-            - `pattern`: The pattern string to search for in the text.
-            - `n`: The length of the text.
-            - `m`: The length of the pattern.
-            - `LPS`: The longest prefix suffix array for the pattern, computed using `computeLPS(pattern)`.
-            - `i`: An index variable for the text, initialized to 0.
-            - `j`: An index variable for the pattern, initialized to 0.
-            - `indexList`: A list to store the starting indices of pattern matches in the text.
-        - Iterate through the Text:
-            - While `i` is less than `n`:
-                - If `text[i]` is equal to `pattern[j]`:
-                    - Increment `i` and `j`.
-                    - If `j` equals `m` (pattern found):
-                        - Append `i - j` to `indexList`.
-                        - Set `j` to `LPS[j - 1]`.
-                - Else:
-                    - If `j` is not zero:
-                        - Set `j` to `LPS[j - 1]`.
-                    - Else:
-                        - Increment `i`.
-        - Return the Result:
-            - The `KMPSearch` function returns the `indexList` containing the starting indices of all occurrences of the pattern in the text.
-        - Main Execution:
-            - Define the text and pattern strings.
-            - Call `KMPSearch(text, pattern)` to find the pattern occurrences.
-            - Print the result.
+### Rabin Karp Algorithm
+- Given a string & a pattern, check if the pattern exists in the string. Return the starting index of the pattern, if it does.
+- Steps with Example:
+  1. Generate a hash table containing ALL the characters in the pattern & string. ASCII values are generally used for this, though you can also use your own values.
+  2. Calculate the hash value for the pattern, $421$.
+  3. Start comparing the string from the beginning (index=0). First compare range 0-2: $3*10^{2}+3*10^{1}+3*10^{0}=331$. It didn't match.
+  4. Now, slide to range 1-3. To compare:
+     1. Remove $3*10^{2}$ from the previous equation.
+     2. Multiply $10$ with result of $3*10^{1}+3*10^{0}, $(3*10^{1}+3*10^{0})*10=31*10=310$.
+     3. Add the last character's hash to it: $310+3*10^0=313$.
+  5. The hash codes for the range $10-12$ will match, which signals that the pattern has matched.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/13.png" alt="Rabin-Karp 1" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/14.png" alt="Rabin-Karp 2" />
 
 ## Find Maximum flow in a graph
 ### Ford-Fulkerson Algorithm
-- Algorithm
-    1. Breadth-First Search (BFS) to find an augmenting path:
-        - Initialize Variables:
-            - `residual_graph`: The residual graph where `residual_graph[u][v]` indicates the remaining capacity of the edge from `u` to `v`.
-            - `source`: The source vertex.
-            - `sink`: The sink vertex.
-            - `parent`: An array to store the path from source to sink.
-            - `visited`: A list to keep track of visited vertices, initialized to `False`.
-            - `queue`: A queue initialized with the source vertex.
-        - BFS Loop:
-            - While the `queue` is not empty:
-                - Dequeue a vertex `u`.
-                - For each vertex `v` adjacent to `u`:
-                    - If `v` is not visited and the capacity from `u` to `v` is greater than 0:
-                        - Mark `v` as visited.
-                        - Set `parent[v]` to `u`.
-                        - If `v` is the sink, return `True` indicating an augmenting path has been found.
-                        - Enqueue `v`.
-            - Return `False` if no augmenting path is found.
+- This is used to find the the maximum capacity in a network graph, using DFS (Depth-First Search) to find Augmenting Paths.
+- Augmenting Path: Possible Path from source to sink (start to end).
+- Residual Graph **[TODO: Rectify Diagram]**: This shows how much flow we can push forward / backward in the graph.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/15.png" alt="Network Residual Graph" />
+- Steps:
+  1. We're given the total capacity per edge in the graph. We start with current flow $0$ for all of them.
+  2. We identify the source & sink (S,T in this case).
+  3. Randomly select an augmenting path: S -> A -> D -> T. The bottleneck, the path with the least current capacity, is $8$. Add the flow to all the chosen edges.
+  4. Continue for other edges. Note: We can also choose **Backward Edges** as part of the path. In this case, the current flow of the edge will reduce by n, if the bottleneck is n.
+  5. The algorithm terminates when there is no edge with:
+     - Available flow in an intermediate edge.
+     - $>0$ flow in a probable backward edge.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/16.png" alt="Ford Fulkerson 1" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/17.png" alt="Ford Fulkerson 2" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/18.png" alt="Ford Fulkerson 3" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/19.png" alt="Ford Fulkerson 4" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/20.png" alt="Ford Fulkerson 5" />
 
-    1. Ford-Fulkerson Method to compute the maximum flow:
-        - Initialize Variables:
-            - `graph`: The original capacity graph.
-            - `source`: The source vertex.
-            - `sink`: The sink vertex.
-            - `residual_graph`: A copy of the graph to represent residual capacities.
-            - `parent`: An array to store the path from source to sink, initialized to `-1`.
-            - `max_flow`: Variable to store the maximum flow, initialized to `0`.
-        - Main Loop:
-            - While there is an augmenting path from source to sink (using BFS):
-                - Find the minimum residual capacity (`path_flow`) of the augmenting path:
-                    - Initialize `path_flow` to infinity.
-                    - Trace the path from sink to source using the `parent` array and update `path_flow` to the minimum capacity in the path.
-                - Update residual capacities of the edges and reverse edges along the path:
-                    - Trace the path from sink to source again.
-                    - For each edge in the path, subtract `path_flow` from the capacity of the edge and add `path_flow` to the reverse edge.
-                - Add `path_flow` to `max_flow`.
-            - Return the `max_flow` as the maximum flow from source to sink.
+### Edmonds Karp Algorithm
+- This is used to find the the maximum capacity in a network graph, using BFS (Breath-First Search) to find Augmenting Paths.
+- Steps:
+  1. Check [Ford-Fulkerson](#ford-fulkerson-algorithm) for the general steps.
+  2. The only difference between Ford-Fulkerson and this one is that here we don't randomly choose the possible augmenting paths, rather we use BFS to choose the shortest one to the sink.
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/21.png" alt="Edmonds Karp 1" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/22.png" alt="Edmonds Karp 2" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/23.png" alt="Edmonds Karp 3" />
+  <br><img src="../assets/images/Design-and-Analysis-of-Algorithms/self/24.png" alt="Edmonds Karp 4" />
 
-    1. Main Execution:
-        - Define the graph representing capacities between vertices.
-        - Define the source and sink vertices.
-        - Call `ford_fulkerson(graph, source, sink)` to compute the maximum flow.
-        - Print the result.
-
-
-<!-- Last image: self/0.png | external/-1.jpg -->
+<!-- Last image: self/24.png | external/-1.jpg -->

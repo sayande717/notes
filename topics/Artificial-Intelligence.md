@@ -291,6 +291,51 @@ Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240
     1. Step 4: Puzzle **3** is the Goal State.
     - At every step, all valid moves are executed for all states, and all resultant states are determined.
 
+# Global Optimization Problems
+- Global optimization problems are a branch of applied mathematics and numerical analysis that focus on finding the global minimum or maximum of a function over a given set. Unlike local optimization, which seeks local minima or maxima, global optimization aims to identify the best possible solution across the entire search space.
+## Genetic Algorithms
+- We solve complex problems, with exponential ($2*n$) time complexity, using this algorithm.
+- Steps:
+  1. **Initial Population:** Get all possible solutions to the problem.
+  2. **Fitness Function:** Calculate the fitness level of each solution.
+     - Example:
+       - Target: `Make`.
+       - Here we can calculate how many alphabets are similar, to find out how close the solution is to the target.
+       - Solution 1: `Take` -> Fitness=3
+       - Solution 2: `Cake` -> Fitness=3
+       - Solution 3: `Hide` -> Firness=1
+  3. **Selection:** Select the best 2 `parents` i.e. solutions out of the generated ones, i.e. 1 & 2 here.
+  4. **Crossover:** We cross over some parts of the solutions we selected. Our aim is to increase the value of the fitness function. Example of `1-Point` method:
+     - Let the crossover point be after the 3rd alphabet.
+     - `abcde` -> `abchi`
+     - `efghi` -> `efgde`
+  5. **Mutation:** This is another way to generate solutions to possibly increase the value of the fitness function. Examples are swap and bit-flip.
+  6. **Stopping Criteria:** We stop running the algorithm when the optimal solution has been reached, otherwise we continue runnint **Steps 3-5**.
+
+## Ant Colony Optimisation
+- Here's how ants find the shortest path to the food, when there are multiple paths:
+  - Whenever ants move, they leave a Pheromone (chemical) trace that other ants can detect.
+  - The Pheromone trace will evaporate away over time, but how much of it evaporates is what matters.
+    - As ants cross the longer path, less of the Pheromone trace remains when then return, since the time taken by them to cross the path is more.
+    - As ants cross the shortest path, more of the Pheromone trace remains when then return, since the time taken by them to cross the path is less.
+    - The overall intensity of Pheromone will be the highest in the shortest path.
+  - At first, the group of ants will equally divide themselves and take all available paths.
+  - As they cross the paths, the intensity of Pheromone will be equivalent to the lengths of the paths.
+  - Over time, all of them will choose the path that has the highest intensity of Pheromone, i.e. the shortest path to the food.
+- Steps in the algorithm:
+  1. **Initialization**: A number of artificial ants are placed on a graph, where nodes represent points of interest, such as cities in the Traveling Salesman Problem (TSP).
+  2. **Ant Movement**: Each ant moves from node to node, guided by two main factors:
+     - Pheromone Trails: Ants leave behind pheromone trails as they move. The intensity of the pheromone trail influences the probability of future ants following the same path.
+     - Heuristic Information: This could be the distance between nodes or other problem-specific metrics that guide the ant's decision.
+  3. **Pheromone Update**: After all ants have constructed their solutions, the pheromone levels are updated. This involves:
+     - Pheromone Evaporation: Reducing the intensity of all pheromone trails to simulate the natural evaporation process.
+     - Pheromone Deposition: Adding pheromones to the paths taken by the ants, with better solutions receiving more pheromone.
+  4. **Iteration**: The process is repeated for a number of iterations, with ants gradually converging on the optimal solution as the pheromone trails guide them more effectively over time.
+- We can solve complex graph problems (source -> sink) using this algorithm. Example:
+     - **Travelling Salesman**: Finding the shortest route to visit a set of cities.
+     - **Vehicle Routing Problem**: Optimizing routes for a fleet of vehicles.
+     - **Scheduling**: Allocating resources and scheduling tasks in an optimal way.
+
 # Heuristic in Artificial Intelligence
 - The term "heuristic" originates from the Greek word "heuriskein," which means "to discover" or "to find." It is a strategy that helps to efficiently navigate complex situations or tasks, often by simplifying the problem or focusing attention on relevant information.
 - We use heuristic functions when we want to convert non-polynomial problems to polynomial problems (NP➡P).

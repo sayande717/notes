@@ -54,7 +54,7 @@ A computer register is a small, fast storage location within a computer processo
 
 # Von-Neumann Architecture
 - Modern computers are based on a stored-program concept introduced by John Von Neumann. In this stored-program concept, programs and data are stored in the same memory. This novel idea meant that a computer built with this architecture would be much easier to reprogram.
-- This architecture is also known as IAS 
+- This architecture is also known as IAS (Instruction Set Architecture).
 > The Von Neumann architecture is a computer architecture model that describes a system where the CPU runs stored programs located in memory. It was proposed by John von Neumann in 1945 and forms the basis for most modern computer designs.
 
 <br><img src="../assets/images/Computer-Architecture-and-Organisation/external/0.png" alt="Von-Neumann Architecture" width="550px" /><br>
@@ -77,7 +77,7 @@ A computer register is a small, fast storage location within a computer processo
 ## Components
 - **MBR**, Memory 300pxm college notes.
 
-- Example 0: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 500
+- Example 0: X=Y+Z, Memory locations: Y: 500, Z: 501, X: 502
     - LOAD M(500), ADD M(501) // AC << Y, AC <- AC + Z
     - STOR M(500)             // M(500) << AC
     - Data Flow:
@@ -165,6 +165,7 @@ A computer register is a small, fast storage location within a computer processo
 - Instruction may take more than a single clock cycle to get executed.
 - Less number of general-purpose registers as operations get performed in memory itself.
 - Complex Addressing Modes.
+- Variable length Instruction Format.
 - More Data types.
 - **As an example**, if we have to add two 8-bit numbers, there will be a single command or instruction for this like ADD which will perform the task.
 
@@ -177,6 +178,7 @@ A computer register is a small, fast storage location within a computer processo
 - Instruction takes a single clock cycle to get executed.
 - More general-purpose registers.
 - Simple Addressing Modes.
+- Single length Instruction Format.
 - Fewer Data types.
 - A pipeline can be achieved.
 - **As an example**, if we have to add two 8-bit numbers, will write the first load command to load data in registers then it will use a suitable operator and then it will store the result in the desired location.
@@ -296,6 +298,14 @@ A computer register is a small, fast storage location within a computer processo
 - **Multicore**: Multicore refers to a computer processor that contains multiple independent processing units, known as cores, on a single chip. Each core can execute instructions independently, allowing for parallel processing and improved performance in multi-threaded applications.
 
 # Instruction Level Parallelism
+## Instruction Pipeline
+- A pipeline is a set of data processing elements connected in series.
+  - Stages in a 5-stage pipeline:
+    1. **Instruction Fetch**: The processor retrieves the next instruction to be executed from memory.
+    2. **Instruction Decode**: The fetched instruction is decoded to determine the operation to be performed and the operands involved.
+    3. **Instruction Execute**: The processor performs the operation specified by the instruction.
+    4. **Memory Access**: If the instruction involves accessing memory, the processor reads from or writes to the specified memory location.
+    5. **Write Back**: The result of the instruction execution is written back to the appropriate register or memory location.
 
 ## Cycles Per Instruction
 - Instruction Execution Rate: Refers to the number of instructions that a processor can execute per unit of time. It is a measure of the processor's performance and is typically expressed in terms of **instructions per second (IPS)** or **millions of instructions per second (MIPS)**.
@@ -368,6 +378,61 @@ In an instruction pipeline, there are several types of hazards that can occur, l
     - Level 1 (L1): This is the fastest and smallest cache, typically located directly on the processor chip. It has the shortest access time, but also the smallest capacity.
     - Level 2 (L2): Larger than L1 cache, it's often shared by multiple processor cores. Access times are slightly longer than L1, but still much faster than main memory.
     - Level 3 (L3): The largest and slowest cache, usually shared by all cores on a processor. It's used to store less frequently accessed data that's still more likely to be reused than data in main memory.
+
+## Cache Memory
+- A cache memory is a smaller, faster memory that stores most frequently accessed memory locations.
+### Terms
+- Cache Hit: Occurs when the data requested by the CPU is found in the cache memory.
+- Cache Miss: Occurs when the data requested by the CPU is not found in the cache memory and must be fetched from the main memory / secondary memory.
+- Hit Ratio: The percentage of memory accesses that result in a cache hit.
+- Miss Ratio: The percentage of memory accesses that result in a cache miss.
+- Latency: The time it takes to access data from memory.
+- Bandwidth: The amount of data that can be transferred in a given amount of time.
+- Blocks: The smallest unit of data that can be transferred between cache and main memory.
+- Block Frame / Cache Line: A fixed-size block of memory that is used to store data in the cache.
+
+### Block Placement
+1. Direct Mapping
+    - In direct mapping, each block of main memory maps to exactly one cache line. The mapping is determined by the memory address.
+    - The cache line is chosen using the formula:
+        $\text{Cache Line} = (\text{Block Address}) \% (\text{Number of Cache Lines})$
+    - Direct mapping is simple and fast but can lead to conflicts if multiple blocks map to the same cache line. This type of mapping is also known as one-to-one mapping.
+
+1. Set-Associative Mapping
+    - In set-associative mapping, the cache is divided into several sets, and each set contains multiple lines. A block of main memory maps to a specific set, but can be placed in any line within that set.
+    - The set is chosen using the formula:
+        $\text{Set} = (\text{Block Address}) \% (\text{Number of Sets})$
+    - Set-associative mapping provides a balance between direct and associative mapping, reducing conflicts while keeping the hardware complexity manageable.
+    - $N$ way set-associative cache: There are $N$ blocks present in $1$ set.
+
+2. Fully Associative Mapping
+    - In fully associative mapping, a block of main memory can be placed in any line of the cache. There are no restrictions on where a block can be placed.
+    - This mapping is determined by searching the entire cache to find an empty line or to replace an existing line.
+    - Fully associative mapping provides the highest flexibility and reduces conflicts, but it requires more complex hardware to search the entire cache for each memory access.
+
+### Locality of Reference:
+- **Temporal**: If the same storage location is accessed multiple times. Example: Accessing & Incrementing a counter variable.
+- **Spatial**: Spatial locality of reference refers to the tendency of a program to access data locations that are close to each other within a short period of time. This principle is based on the observation that programs often access memory addresses that are sequential or near each other. Example: Accessing array elements in succession.
+
+### Cache Update Policies
+- **Read Policies**:
+    - **Look Aside**: 
+      - Steps:
+        1. The Application first checks the cache for the requested data.
+        2. If the data is not found in the cache (cache miss), the Application fetches the data from the main memory.
+        3. The fetched data is then placed in the cache for future accesses.
+      - The application needs to handle cache consistency.
+    - **Look Through**:
+      - Steps:
+        1. The CPU checks the cache for the requested data.
+        2. If the data is not found in the cache (cache miss), the CPU fetches the data from the main memory.
+        3. The fetched data is directly used by the CPU and also placed in the cache for future accesses.
+      - The cache consistency is handled by the CPU internally, the application doesn't need to handle it.
+
+- **Write Policies**:
+    - **Write Through**: In this policy, data is written to both the cache and the main memory simultaneously. This ensures data consistency between the cache and the main memory but can result in slower write operations.
+    - **Write Back**: In this policy, data is written only to the cache initially. The modified data is written back to the main memory only when it is evicted from the cache. This can improve write performance but requires additional mechanisms to ensure data consistency.
+    - **Write Around**: In this policy, data is written directly to the main memory, bypassing the cache. This can be useful for write-intensive applications where caching write operations may not provide significant performance benefits.
 
 # OpenMP
 - (Open Multi-Processing) is an API (Application Programming Interface) that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It is designed for parallel programming, enabling developers to write code that can run efficiently on multi-core and multiprocessor systems. OpenMP uses a set of compiler directives, library routines, and environment variables to specify parallelism in the code.
@@ -448,5 +513,66 @@ In an instruction pipeline, there are several types of hazards that can occur, l
     - Bitwise: (`&`, `|`, `^`)
     - Logical: (`&&`,`||`)
     - Intrinsic Functions: (`max`,`min`,`land`,`ior`,`ieor`)
+
+# nVidia CUDA
+- nVidia CUDA is a parallel computing platform and application programming interface (API) model created by NVIDIA.
+- CUDA allows developers to use nVidia GPUs for general purpose processing, an approach known as GPGPU i.e. General-Purpose computing on Graphics Processing Units.
+- Terms:
+  - **Thread**: A Thread is the smallest unit of execution in CUDA. Each thread executes a single instance of a kernel funciton.
+  - **Block**: A Block is a group of threads, all of which execute the same kernel function.
+  - **Grid**: A Grid is a group of blocks, all of which execute the same kernel function.
+- Functions:
+  - `cudaMalloc(&memPtr, size)`: This function is used to allocate memory on the GPU.
+      - **&memPtr**: Pointer to the allocated GPU memory.
+      - **size**: Number of bytes to allocate.
+  - `cudaMemcpy(dst, src, size, cudaMemcpyKind)`: This function is used to copy data between host and device.
+      - **dst**: Destination (pointer) where the data will be copied to.
+      - **src**: Source (pointer) where the data will be copied from.
+      - **size**: Number of bytes to copy.
+      - **cudaMemcpyKind**: Type of transfer. Types:
+        - `cudaMemcpyHostToDevice`
+        - `cudaMemcpyDeviceToHost`
+        - `cudaMemcpyDeviceToDevice`
+        - `cudaMemcpyHostToHost`.
+  - `cudaFree(memPtr)`: This function is used to free the allocated memory on the GPU.
+      - **memPtr**: Pointer to the GPU memory to be freed.
+  - `dim3 grid_size(x,y,z)`:
+    - `x`: Number of blocks in the x-dimension.
+    - `y`: (optional) Number of blocks in the y-dimension.
+    - `z`: (optional) Number of blocks in the z-dimension.
+    - `dim3 grid_size(10)`: 
+  - `dim3 block_size(x,y,z)`:
+    - `x`: Number of blocks in the x-dimension.
+    - `y`: (optional) Number of blocks in the y-dimension.
+    - `z`: (optional) Number of blocks in the z-dimension.
+    - `dim3 block_size(10)`: Creates a 1D block with 10 blocks.
+  - `kernel_function<<<grid_size, block_size>>>(device_array, num_elements)`: This function is used to launch a CUDA kernel on the GPU. This specific function is related to an array.
+      - **grid_size**: Number of blocks in each grid.
+      - **block_size**: Number of threads in each block.
+      - **device_array**: Pointer to the array on the GPU.
+      - **num_elements**: Number of elements in the array.
+  - CUDA Events: Used to time & synchronise CUDA programs.
+    ```cpp
+    // Create the start & stop event.
+    cudaEvent_t start,stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop;
+
+    // Start count here
+    cudaEventRecord(start,0);
+    
+    // CODE HERE
+
+    // Waits for above code to complete, then records it.
+    cudaEventSynchronize(stop);
+    
+    // Record the elapsed time, and store it in the float variable.
+    cudaEventElapsedTime(&elapsedTime, start, stop);
+
+    // Finally, FREE the event memory.
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
+    ```
+
 
 <!-- Last image: self/0.png | external/13.png -->

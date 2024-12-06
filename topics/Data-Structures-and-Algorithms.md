@@ -774,6 +774,34 @@ The time complexity of queue operations is O(1).
         <br><img src="../assets/images/Data-Structures-and-Algorithms/self/33.png" alt="B+ Tree Deletion 2" />
         <br><img src="../assets/images/Data-Structures-and-Algorithms/self/34.png" alt="B+ Tree Deletion 3" />
 
+### Minimum Spanning Tree
+- A Spanning Tree is a tree with N nodes, N-1 edges, and all nodes are reachable from each other.
+- A Minimum Spanning Tree is a Spanning Tree with the minimum weight.
+  <br><img src="../assets/images/Data-Structures-and-Algorithms/self/50.png" alt="MST Definition" />
+- Algorithms for finding Minimum Spanning Tree:
+  - Reverse Delete Algorithm:
+    1. Delete the largest edge.
+    2. Check if all the nodes are still connected.
+       - If yes, continue, till the number of edges = vertices - 1.
+       - If no, undo the deletion, and continue for other edges.
+    - Example:
+      - We cannot delete the 2nd 6 (D-E), because the nodes will no longer be connected. So, we undo it.
+    <br><img src="../assets/images/Data-Structures-and-Algorithms/self/51.png" alt="MST Reverse Delete Algorithm" />
+   - Boruvka's Algorithm:
+     1. Choose a vertex (say A).
+     2. Check all the outgoing edges from A.
+     3. Choose the one with the minimum weight (1 here).
+     4. Now, come to B. The minimum weight (1) has already been chosen. So, come to C.
+     5. The minimum weight for C is (4). So, we choose that. Next, we come to D, where we choose (2).
+     6. Continue till you connect the minimum edges for all the vertices.
+     7. Next, if there are disconnected trees, then do these:
+        - Take 2 pairs. Figure out ALL valid ways to connect them.
+        - Choose the edge with the minimum weight.
+     8. Finally, the MST is formed.
+     <br><img src="../assets/images/Data-Structures-and-Algorithms/self/52.png" alt="MST Boruvka's Algorithm 1" />
+     <br><img src="../assets/images/Data-Structures-and-Algorithms/self/53.png" alt="MST Boruvka's Algorithm 2" />
+     <br><img src="../assets/images/Data-Structures-and-Algorithms/self/54.png" alt="MST Boruvka's Algorithm 2" />
+
 ## Heap
 - If we want to get the smallest number in an array in $O(1)$ time, we have to sort it everytime we insert a new element. The insertion process will take atmost $O(n \log n)$ time.
 - So, we use a heap to reduce this insertion time further.
@@ -851,5 +879,65 @@ The time complexity of queue operations is O(1).
     - Dense: A graph with relatively few vertices compared to the number of edges.
     - Finite: A graph with a finite number of vertices and edges.
     - Infinite: A graph with an infinite number of vertices and edges.
-  
-<!-- Last image: self/34.png | external/-1.jpg -->
+
+### Shortest Path Algorithms
+- These algorithms help to find the shortest distance between 2 vertices, in a graph.
+- The paths may have intermediate vertices between the source & the destination.
+
+#### Dijkstra's Algorithm
+- Here, at every step, we calculate the direct distance between all nodes. We take the shortest among them, as the intermediate step.
+- The process of updating the distance values for the vertices, is called Relaxation.
+- Formulae (Relaxation):
+  ```c
+  if(d[u]+c[u,v]<d[v]) {
+      d[v] = d[u]+c[u,v];
+  }
+  ```
+- Steps:
+    - If the vertices can't be reached directly, the value for the vertex is ∞.
+    - Perform Relaxation:
+        1. Whenever you choose a new node, check all nodes that can be reached from that node.
+        2. Calculate all the distance values for these nodes.
+        3. If any distance value is lesser than the existing value for that node, replace it with the newly calculated value.
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/39.png" alt="Dijkstra 1" height="400px" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/40.png" alt="Dijkstra 2" height="400px" />
+        <br><img src="../assets/images/Data-Structures-and-Algorithms/self/41.png" alt="Dijkstra 3" height="400px" />
+        - Table:
+            | Vertex | Distance ($d[v]$) |
+            |--------|-------------------|
+            | 2      | 2                 |
+            | 3      | 3                 |
+            | 4      | 8                 |
+            | 5      | 6                 |
+            | 6      | 9                 |
+- Another Example:
+  <br><img src="../assets/images/Data-Structures-and-Algorithms/self/42.png" alt="Dijkstra 1" height="400px" />
+- Dijkstra's Algorithm may or may not work if the graph contains negative edges.
+
+#### Floyd-Warshall Algorithm
+- This algorithm is also used to calculate the shortest distance between 2 vertices, but the approach is different compared to [Dijkstra's Algorithm](#dijkstras-algorithm).
+- Here, we calculate the shortest distances from each vertex to all other vertices. For example, if there are 4 vertices = [1,2,3,4]:
+  - 1 -> 2,3,4
+  - 2 -> 1,3,4
+  - 3 -> 1,2,4
+  - 4 -> 1,2,3
+- Formulae:
+  <br>$A^k[i,j] = min(A^{k-1}[i,k],A^{k-1}[k,j])$
+- Steps (Vertices = [1,2,3,4]):
+    1. Generate $A^0$. This is the initial matrix, containing the distances between each vertex.
+    2. Start with $A^1$, for vertex 1.
+       - Fill the rows & columns for Vertex 1 from $A^0$, because these distances will remain unchanged.
+       - Fill all the diagonals (1-1,2-2,3-3,4-4) with 0.
+       - Example: For calculating $A^1[2,3]$, we need to check both the direct path ($A^0[2,3]$) & the indirect path via 1 ($A^0[2,1]+A^0[1,3]$). So, $A^1[2,3]=min(A^0[2,3],A^0[2,1]+A^0[1,3])$
+     3. Continue to $A^2$. Generate it from $A^1$.
+       - Fill the rows & columns for Vertex 1 from $A^1$, because of the reason stated above.
+     4. The last matrix, $A^4$, gives the shortest distances between all the vertices.
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/43.png" alt="Floyd-Warshall 1" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/44.png" alt="Floyd-Warshall 2" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/45.png" alt="Floyd-Warshall 3" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/46.png" alt="Floyd-Warshall 4" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/47.png" alt="Floyd-Warshall 5" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/48.png" alt="Floyd-Warshall 6" height="600px" />
+   <br><img src="../assets/images/Data-Structures-and-Algorithms/self/49.png" alt="Floyd-Warshall 7" height="600px" />
+
+<!-- Last image: self/54.png | external/-1.jpg -->

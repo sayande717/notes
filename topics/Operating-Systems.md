@@ -111,7 +111,7 @@ Image taken from [here](https://www.sitesbay.com/os/images/process-states-in-ope
 - There are **5 main states** & 2 suspend states: **New**, **Ready**, Suspend Ready, **Running**, **Wait/Block**, Suspend Wait, **Terminated**.
 - New <-> **Long-Term Scheduler (LTS)** <-> Ready
 - Ready <-> **Short-Term Scheduler (STS)** <-> Running
-- Ready / Wait <-> **Medium-Term Scheduler (MTS)** <-> Suspend Ready / Suspend wait
+- Ready / Wait <-> **Medium-Term Scheduler (MTS)** <-> Suspended Ready / Suspended wait
 
 - **New**: At first, a new process is created.
 - **Ready**:
@@ -757,7 +757,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         }
         // Exit Section
         Up(Semaphore S) {
-            if(suspend list is empty) {
+            if(S.value==0) {
                 S.value=1;
             } else {
                 // select process from suspended list
@@ -909,6 +909,89 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
         1. $rc=1$, $mutex=0$ then $mutex=1$, $db=0$. $P_1$ enters critical section.
         1. Now, $P_3$ wants to enter. $rc=2$, $mutex=0$ then $mutex=1$, $db=0$. Since, $rc \neq 1$, $down(db)$ is not executed. $P_3$ can enter the critical section, too.
         1. So, in this case, all processes that want to read data can do so. It will not cause any problems. Mutual Exclusion doesn't need to be maintained.
+
+- Example 2 (Peterson's Solution):
+  - This solution allows 2 processes to share a single-use resource without conflicts.
+  - Code:
+    ```c
+    // Shared variables
+    int flag[2] = {0, 0}; // Flags to indicate if a process wants to enter the critical section
+    int turn = 0; // Variable to indicate whose turn it is
+
+    // Process 1
+    void process1() {
+        while (true) {
+            flag[0] = 1; // Indicate that process 1 wants to enter the critical section
+            turn = 1; // Give turn to process 2
+            while (flag[1] && turn == 1); // Wait until process 2 finishes its critical section
+
+            // Critical section
+            // ...
+
+            flag[0] = 0; // Indicate that process 1 has finished its critical section
+        }
+    }
+
+    // Process 2
+    void process2() {
+        while (true) {
+            flag[1] = 1; // Indicate that process 2 wants to enter the critical section
+            turn = 0; // Give turn to process 1
+            while (flag[0] && turn == 0); // Wait until process 1 finishes its critical section
+
+            // Critical section
+            // ...
+
+            flag[1] = 0; // Indicate that process 2 has finished its critical section
+        }
+    }
+    ```
+- Example 3 (Bakery Algorithm):
+  - The Bakery Algorithm, also known as Lamport's Bakery Algorithm, isi a mutual exclusion algorithm designed by Leslie Lamport.
+  - It ensures that multipe processes can access a shared resource without conflicts, following a First Come First Serve principle.
+    - How it works:
+        1. Each process is assigned a unique number (like a ticket) when it wants to enter the critical section.
+        2. The process with the smallest number gets to enter the critical section first.
+        3. If two processes have the same number, the process with the smaller ID goes first.
+    - Code:
+        ```c
+        #define N 10 // Number of processes
+        int choosing[N];
+        int number[N];
+
+        void lock(int i) {
+                choosing[i] = 1;
+                number[i] = 1 + max(number[0], number[1], ..., number[N-1]);
+                choosing[i] = 0;
+                for (int j = 0; j < N; j++) {
+                        while (choosing[j]);
+                        while (number[j] != 0 && (number[j] < number[i] || (number[j] == number[i] && j < i)));
+                }
+        }
+
+        void unlock(int i) {
+                number[i] = 0;
+        }
+
+        void critical_section() {
+                // Critical section code
+        }
+
+        void process(int i) {
+                while (true) {
+                        lock(i);
+                        critical_section();
+                        unlock(i);
+                        // Remainder section
+                }
+        }
+        ```
+        - `choosing[]`: Indicates if a process is in the process of choosing a number.
+        - `number[]`: Stores the ticket number for each process.
+        - `lock(int i)`: Assigns a ticket number to process `i` and ensures mutual exclusion.
+        - `unlock(int i)`: Resets the ticket number for process `i` after it exits the critical section.
+        - `critical_section()`: Represents the critical section code that needs mutual exclusion.
+        - `process(int i)`: Represents the code for each process, including the critical section and remainder section.
 
 ## Deadlock
 - This situation occurs when 2 processes are waiting for some event, which will never happen.
@@ -1618,7 +1701,7 @@ lseek(n,5,SEEK_SET)  # pointer is set at the position 5, ie at `5`.
     - **Double Indirect**: Pointers point to an `index block`, which lead to another `index block`, which leads to the data blocks.
     - **Triple Indirect**: Pointers point to an `index block`, which lead to another `index block`, which lead to another `index block`, which finally leads to the data blocks.
     - A hybrid approach is used to store & locate the blocks.
-     <br><img src="../assets/images/Operating-Systems/self/34.png"> height="350px" alt="UNIX Inode Structure">   
+     <br><img src="../assets/images/Operating-Systems/self/34.png" height="800px" alt="UNIX Inode Structure">   
     - Example: A file system uses UNIX Inode Data Structure, which contain 8 Direct Block Addresses, 1 Indirect Block, 1 Double Indirect block, 1 Triple Indirect block. The size of each disk block is $128B$, and size of each block address is $8B$. Calculate **the maximum possible file size**.
         - Number of pointers in 1 Index Block = Size of Disk Block / Size of each Block Address = $128B/8B=2^8/2^4=2^4=16$ 
         - `Direct Block`: There will be `n` data blocks if there are `n` entries. So, number of data blocks: $8$.

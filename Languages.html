@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>General Notes</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="general-notes">General Notes</h1>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>10</mn></msub><mn>1234</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\log_{10} 1234+1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1234</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> gives us the number of digits in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1234</mn></mrow><annotation encoding="application/x-tex">1234</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1234</span></span></span></span>.</li>
+</ul>
+<h1 id="c">C++</h1>
+<ul>
+<li>Install: <code>pacman -S gcc clang</code></li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>
+<p>&lt;iostream&gt; components:</p>
+<ul>
+<li>std::cout :- Print data to the Terminal/Console</li>
+<li>std::cin :- Read data from the Terminal (without spaces). Space is used as an escape character.</li>
+<li>std::getline(std::cin,var) :- Read data with spaces, from the Terminal.</li>
+<li>std::string :- String data type</li>
+<li>std::cerr :- Print errors to the Terminal/Console</li>
+<li>std::clog :- Print log messages to the Terminal/Console
+<blockquote>
+<p>Errors &amp; Logs are printed regardless of the occurence of an error. They are just used to format the message according to it's type.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Define variables:</p>
+<pre><code class="language-cpp"><span class="hljs-type">int</span> firstNumber {<span class="hljs-number">3</span>};
+<span class="hljs-type">int</span> secondNumber = <span class="hljs-number">4</span>;
+</code></pre>
+</li>
+</ul>
+<h2 id="how-a-program-runs">How a program runs</h2>
+<ul>
+<li>Sample code:</li>
+</ul>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">addNumbers</span><span class="hljs-params">(<span class="hljs-type">int</span> number1, <span class="hljs-type">int</span> number2)</span> </span>{
+    <span class="hljs-keyword">return</span> (number1+number2);
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-type">int</span> first_number {<span class="hljs-number">3</span>};  <span class="hljs-comment">// Variable 1</span>
+    <span class="hljs-type">int</span> second_number {<span class="hljs-number">7</span>}; <span class="hljs-comment">// Variable 2</span>
+    <span class="hljs-type">int</span> c;
+    
+    std::cout &lt;&lt; <span class="hljs-string">&quot;First number: &quot;</span> &lt;&lt; first_number &lt;&lt; std::endl;
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Second number: &quot;</span> &lt;&lt; second_number &lt;&lt; std::endl;
+    c = <span class="hljs-built_in">addNumbers</span>(a,b);
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Sum: &quot;</span> &lt;&lt; <span class="hljs-built_in">sumFunc</span>(first_number,second_number) &lt;&lt; std::endl;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p><br><img src="file:////mnt/d/serve/Development/Personal/assets/images/TIL-Coding/external/0.png">
+Image taken from <a href="https://youtu.be/8jLOx1hD3_o">here</a></p>
+<ul>
+<li>Steps:
+<ol>
+<li>The program is converted to binary, after compilation.</li>
+<li>When the binary is executed, it is copied to RAM line-by-line.</li>
+<li>For the function <code>addNumbers(a,b)</code> and input variables, it assigns a separate memory location on RAM.</li>
+<li>For Variable 1, it assigns a memory location with value <code>3</code> and points <code>first_number</code> to it.</li>
+<li>Same goes for <code>second_number</code>.</li>
+<li>Since <code>c</code> doesn't have a value, the CPU fills the location with garbage data.</li>
+<li>It prints the 2 strings.</li>
+<li>Next, it has to run the function <code>addNumbers(a,b)</code>. Before going to the function, it stores the current memory address of the code binary, so it can return to it once it's done executing the function.</li>
+<li>It goes ahead and runs the function.</li>
+<li>It takes the output of the function and returns back to same location it left.</li>
+<li>It prints the rest of the strings.</li>
+<li>Program execution is over.</li>
+</ol>
+</li>
+</ul>
+<h2 id="terms">Terms:</h2>
+<ul>
+<li><strong>Core Features</strong>: The features that govern the functionality C++ provices, and the rules that we need to follow when using them.
+<blockquote>
+<p>data types, function definition, etc.</p>
+</blockquote>
+</li>
+<li><strong>Standard Library</strong>: A set of specialized reusable components that are ready to use, and provide added functionality to the program.
+<blockquote>
+<p>iostream, string (imported using <code>#include</code>)</p>
+</blockquote>
+</li>
+<li><strong>STL</strong>: A part of Standard Library. It is a collection of container types.
+<blockquote>
+<p>iterators</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="number-systems">Number Systems</h2>
+<h3 id="binary">Binary</h3>
+<ul>
+<li>Base 2</li>
+<li>If we have <code>n</code> digits, we can represent a total of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{n-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> decimel numbers.</li>
+<li>Examples:
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100101</mn><mo>=</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>0</mn><mn>4</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>0</mn></msup><mo>=</mo><mn>37</mn></mrow><annotation encoding="application/x-tex">100101=1*2^5+1*0^4+0*2^3+1*2^2+0*2^1+1*2^0=37</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100101</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">37</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10010</mn><mo>=</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>0</mn></msup><mo>=</mo><mn>18</mn></mrow><annotation encoding="application/x-tex">10010=1*2^4+0*2^3+0*2^2+1*2^1+0*2^0=18</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10010</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">18</span></span></span></span></li>
+</ul>
+</li>
+<li>We add <code>Ob</code> in front to specify that it is a octal number. Example: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>b</mi><mn>00110101</mn></mrow><annotation encoding="application/x-tex">0b00110101</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">0</span><span class="mord mathnormal">b</span><span class="mord">00110101</span></span></span></span></li>
+</ul>
+<h3 id="decimel">Decimel</h3>
+<ul>
+<li>Base 10</li>
+<li>Examples:
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2371</mn><mo>=</mo><mn>2</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>3</mn></msup><mo>+</mo><mn>3</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>2</mn></msup><mo>+</mo><mn>7</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">2371=2*10^3+3*10^2+7*10^1+1*10^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2371</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>924</mn><mo>=</mo><mn>9</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mo>+</mo><mn>4</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">924=9*10^2+2*10^1+4*10^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">924</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="hexadecimel">Hexadecimel</h3>
+<ul>
+<li>Base 16</li>
+<li>A Binary number is grouped to groups of 4 from the right, and then converted to hexadecimel.</li>
+<li>Example: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>x</mi><mn>6</mn><mi>E</mi><mn>30</mn><mi>F</mi><mn>13</mn><mi>F</mi></mrow><annotation encoding="application/x-tex">0x6E30F13F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">6</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord">30</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord">13</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span></span></li>
+<li>1-9 is represented as usual, and 10-15 is represented by A-F.</li>
+<li>Padding: When grouping numbers, if there are some missing digits in the left-most group, we add <code>0</code> to the missing places.</li>
+<li>We add <code>Ox</code> in front to specify that it is a hexadecimel number.</li>
+</ul>
+<h3 id="octal">Octal</h3>
+<ul>
+<li>Base 8</li>
+<li>A Binary number is grouped to groups of 3 from the right, and then converted to octal.</li>
+<li>Example: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>015614170477</mn></mrow><annotation encoding="application/x-tex">015614170477</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">015614170477</span></span></span></span></li>
+<li>We add <code>O</code> in front to specify that it is a octal number.</li>
+</ul>
+<h2 id="data-types">Data Types</h2>
+<ul>
+<li>sizeof(int): Prints the size in bytes</li>
+<li>Modifiers:
+<ul>
+<li>Signed, Un-signed: Allows negative numbers, doesn't allow negative numbers.</li>
+<li>short, long: reduce size by half, increase size by 2x</li>
+<li>{123u}: Un-signed</li>
+<li>{123ul}: Un-signed long</li>
+<li>{123ll}: long long</li>
+</ul>
+</li>
+<li>Int:
+<ul>
+<li>Integers</li>
+<li>Size: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span> bytes</li>
+<li>Signed: allows negative, 0, and positive integers</li>
+<li>Un-signed: allows only 0 &amp; positive integers</li>
+</ul>
+</li>
+<li>Fractional:
+<ul>
+<li>Float: 4 bytes, Double: 8 bytes, Long Double: 16 bytes</li>
+<li>Initialization:
+<ul>
+<li>float var12 {1.12345f};</li>
+<li>double var13 {1.12345};</li>
+<li>long double var14 {1.12345678L};</li>
+</ul>
+</li>
+<li>Precision: The number of digits that will be printed, including the ones in LHS of decimel. Set: <code>std::cout &lt;&lt; std::setprecision(20)</code>.</li>
+<li>Infinity: 1.5 / 0 (positive), -1.5/0 (negative)</li>
+<li>NaN: 0.0/0.0 or 0/0</li>
+</ul>
+</li>
+<li>Boolean
+<ul>
+<li>bool: true (1) &amp; false (0)</li>
+<li>Size: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> byte</li>
+<li>std::cout prints in notation: 1 &amp; 0, by default. To print true &amp; false, set <code>std::cout &lt;&lt; std::boolalpha</code>.</li>
+</ul>
+</li>
+<li>Character
+<ul>
+<li>Size: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> byte</li>
+<li>Can be encoded in ASCII.
+<ul>
+<li>0-9: 48-57, A-Z: 65-90, a-z: 97-122.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mn>2</mn><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a+2=c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span>
+<img src="https://www.asciitable.com/asciifull.gif" alt="ASCII"></li>
+<li><code>static_cast&lt;int&gt;('a')</code> prints <code>97</code>: this tells the compiler to interpret the input as an integer.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Auto
+<ul>
+<li>auto var1 {12.05f}</li>
+<li>Tells compiler to automatically determine the data type</li>
+<li>Once type is deduced during Initialization, the variable will only accept values of that type during further assignments.
+Example:<pre><code class="language-cpp"><span class="hljs-keyword">auto</span> var1 {<span class="hljs-number">123u</span>};
+<span class="hljs-keyword">auto</span> var1 {<span class="hljs-number">56u</span>}; <span class="hljs-comment">// possible</span>
+<span class="hljs-keyword">auto</span> var1 {<span class="hljs-number">-22</span>}; <span class="hljs-comment">// not possible</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="operations-on-data">Operations on Data</h2>
+<ul>
+<li>Precedence: Which operation to do first</li>
+<li>Associativity: The direction to execute operations in.</li>
+<li>Check <a href="https://en.cppreference.com/w/cpp/language/operator_precedence">here</a> for the complete list.</li>
+<li>Basic: +,-,*,/,%</li>
+<li>Increment: ++ | Decrement: --</li>
+<li>Compound Assignment: +=, -=, *=, /=, %=</li>
+<li>Relational: &lt;,&lt;=,&gt;,&gt;=,==,!=</li>
+<li>Logical: &amp;&amp;,||,!</li>
+<li>Increment: Add 1 to the value.</li>
+<li>Decrement: Subtract 1 from the value.<pre><code class="language-cpp"><span class="hljs-type">int</span> value = <span class="hljs-number">29</span>;
+std::cout &lt;&lt; value++ &lt;&lt; std::endl;    <span class="hljs-comment">// Postfix: Print first, then Increment.</span>
+std::cout &lt;&lt; ++value &lt;&lt; std::endl;    <span class="hljs-comment">// Prefix: Increment first, then Print.</span>
+std::cout &lt;&lt; value-- &lt;&lt; std::endl;    <span class="hljs-comment">// Postfix: Print first, then Decrement.</span>
+std::cout &lt;&lt; --value &lt;&lt; std::endl;    <span class="hljs-comment">// Prefix: Decrement first, then Print.</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="output-formatting">Output formatting</h2>
+<ul>
+<li>Headers: iomanip, ios</li>
+<li>Check <a href="https://en.cppreference.com/w/cpp/io/manip">here</a> for the complete list.</li>
+<li>Formatters:
+<ul>
+<li><code>std::endl</code>, &quot;\n&quot;: Prints a new line</li>
+<li><code>std::cout</code>: First puts the string in a buffer, then prints it all at once</li>
+<li><code>std::flush</code>: Prints the string directly, without involving a buffer.</li>
+<li><code>std::setw(10)</code>: Set width of the text of the field, in which the string is printed. Measured in characters.</li>
+<li><code>std::setfill('-')</code>: Used in conjunction with <code>set::setw()</code>. Sets the fill character to something other than ' '.</li>
+<li><code>std::right</code>: Set right alignment <em>for following outputs</em>.</li>
+<li><code>std::internal</code>: Set internal justified. In <code>-122.2</code>, <code>-</code> is left justified, while <code>122.2</code> is default justified.</li>
+<li><code>std::boolalpha</code>: Force boolean output as <code>true</code> or <code>false</code> <em>for following outputs</em>.</li>
+<li><code>std::noboolalpha</code>: Disable it.</li>
+<li><code>std::showpos</code>: Prefix positive numbers with <code>+</code>, Example <code>+23</code>, <em>for following outputs</em>.</li>
+<li><code>std::noshowpos</code>: Disable it.</li>
+<li><code>std::showpoint</code>: Show the point (even if output is <code>12</code> -&gt; <code>12.0</code>, <code>13.1</code> -&gt; <code>13.1000</code> etc), <em>for following outputs</em>.</li>
+<li><code>std::noshowpoint</code>: Show the point when needed (default), <em>for following outputs</em>.</li>
+<li><code>std::showbase</code>: Show the base notation for the number systems, <em>for following outputs</em>.</li>
+<li><code>std::uppercase</code>: show the base notation in uppercase, <em>for following outputs</em>.</li>
+<li><code>std::nouppercase</code>: Disable it.</li>
+<li><code>std::dec</code>: Show number as decimel.</li>
+<li><code>std::hex</code>: Show number as hexadecimel.</li>
+<li><code>std::oct</code>: Show number as octal.</li>
+<li><code>std::fixed</code>: Show fixed numbers (don't use E+10,E-10, etc), <em>for following outputs</em>.</li>
+<li><code>std::scientific</code>: Show scientific notation (default), <em>for following outputs</em>.</li>
+<li><code>std::setprecision(10)</code>: Show 10 digits after decimel, <em>for following outputs</em>.</li>
+</ul>
+</li>
+</ul>
+<h1 id="go">Go</h1>
+<ul>
+<li>
+<p>Install: <code>pacman -S go</code></p>
+</li>
+<li>
+<p>Go was designed to run on multiple cores and built to support concurrency. It is cheap and easy.</p>
+</li>
+<li>
+<p>We use Go to write performant back-end server-side applications.</p>
+</li>
+<li>
+<p>Go compiles code into single binary (machine code), that can run cross-platform.</p>
+</li>
+<li>
+<p>Get started:</p>
+<ul>
+<li>Create a new directory for the project, and cd to it.</li>
+<li>Initialize the Go project with <code>go mod init package-name</code>.</li>
+<li>Main file: <code>main.go</code>.</li>
+<li>Inside the main file, define the entry-point, the point where the execution starts: <code>func main() {}</code>.</li>
+<li>Run program with <code>go run main.go</code>.</li>
+</ul>
+</li>
+<li>
+<p>Functions:</p>
+<ul>
+<li>
+<p>Functions aren't executed unless called.</p>
+</li>
+<li>
+<p>All user-defined functions must be written after <code>func main()</code>.</p>
+</li>
+<li>
+<p><code>func something() { //code }</code></p>
+<ul>
+<li>Call this function by: <code>something()</code></li>
+</ul>
+</li>
+<li>
+<p><code>func something(parameter1 string, parameter2 int) { // code}</code></p>
+<ul>
+<li>Call this function by: <code>something(parameter1, parameter2)</code></li>
+</ul>
+</li>
+<li>
+<p><code>func something(parameter1 string) int { return 10 }</code></p>
+<ul>
+<li>Call this function by: <code>const num = something(parameter1)</code></li>
+<li>function takes string as input, returns an integer.</li>
+</ul>
+</li>
+<li>
+<p>Every program mandatorily has the main function: <code>func main() {}</code></p>
+</li>
+<li>
+<p><code>func validateUser(parameter1 string, parameter2 string, parameter3 uint) (bool,uint,int) { return parameter1,parameter2,parameter3}</code></p>
+<ul>
+<li>Call this function by: <code>var1,var2,var3 := something(parameter1, parameter2, parameter3)</code> OR <code>var1 var2 var3 bool</code>, <code>var1,var2,var3 = something(parameter1, parameter2, parameter3)</code></li>
+</ul>
+</li>
+<li>
+<p>If we want to use a function imported from another package, we have to explicitely export the function.</p>
+<ul>
+<li>Typical function: <code>func funcName() { }</code></li>
+<li>Exported function: <code>func FuncName() { }</code></li>
+<li>Capitalizing the first letter exports the function, and we can then use it from a different package.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Miscellaneous info:</p>
+<ul>
+<li>Put <code>_</code> in place of a variable you don't want to use.</li>
+<li>Errors:
+<ul>
+<li>To prevent dead code, we need to use every variable / method we have defined, otherwise it'll throw a compile error.</li>
+<li>Go detects errors at compile time what other programming languages would only detect at runtime.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Packages:</p>
+<ul>
+<li>Files are organized in Go, into packages.</li>
+<li>Multiple files can belong to the same package.</li>
+<li>Multiple packages can be defined to organize the code further. The standard practice is to create folders for each user-defined package.
+<ul>
+<li>But, in this case, we need to import this package in the main file, since Go does not know it's location.</li>
+<li>file1.go: <code>package temppkg</code></li>
+<li>main.go: <code>import &quot;project-name/temppkg&quot;</code></li>
+</ul>
+</li>
+<li>If we want to use a function imported from another package, we have to explicitely export the function.
+<ul>
+<li>Typical function: <code>func funcName() { }</code></li>
+<li>Exported function: <code>func FuncName() { }</code></li>
+<li>Capitalizing the first letter exports the function, and we can then use it from a different package.</li>
+<li>The same is true for variables.</li>
+</ul>
+</li>
+<li>The default package is usually named <code>main</code>.</li>
+<li>Put the file in a package: <code>package name</code></li>
+<li>Once we have multiple packages in our Go project, we need to tell go to execute all of them when running the main function.
+<ul>
+<li><code>go run main.go file1.go file2.go</code>: Run these particular files.</li>
+<li><code>go run .</code>: Run all files in the project.</li>
+</ul>
+</li>
+<li>Common pre-defined packages:
+<ol>
+<li><code>fmt</code>:
+<ul>
+<li>All available <a href="https://pkg.go.dev/fmt">formats</a>.</li>
+<li><code>Print</code>: Print the output.</li>
+<li><code>Println</code>: Print the output, then move to a new line.</li>
+<li><code>Printf</code>: Print the output in a specific format.</li>
+<li><code>Scan</code>: Take a value as input.</li>
+</ul>
+</li>
+<li><code>strings</code>:
+<ul>
+<li>Fields(str): Splits the string into a slice, with whitespace as the separator.</li>
+<li>Contains(str,char): Checks if string str contains character char.</li>
+</ul>
+</li>
+<li><code>strconv</code>
+<ul>
+<li>FormatUint(uint64(25),10): Format the Un-signed integer (10: Decimel type) to a string.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>When printing variables with a string, spaces will get added on both sides of the variable automatically.</p>
+</li>
+<li>
+<p>Variable:</p>
+<pre><code class="language-go"><span class="hljs-keyword">var</span> temp = <span class="hljs-number">20</span>
+temp := <span class="hljs-number">20</span>
+<span class="hljs-keyword">var</span> temp <span class="hljs-type">int</span> = <span class="hljs-number">20</span>
+<span class="hljs-keyword">var</span> temp <span class="hljs-type">int</span>
+</code></pre>
+</li>
+<li>
+<p>Constant:</p>
+<pre><code class="language-go"><span class="hljs-keyword">const</span> temp = <span class="hljs-string">&quot;20&quot;</span>
+<span class="hljs-keyword">const</span> temp <span class="hljs-type">string</span>
+</code></pre>
+</li>
+<li>
+<p>Global variables cannot be defined like <code>temp := 20</code></p>
+</li>
+<li>
+<p>Minimal definition: <code>temp := 20</code></p>
+<ul>
+<li>Define the variable, guess &amp; define it's type.</li>
+<li>The variable type cannot be changed, but value can.</li>
+<li>Constants cannot be defined in this way.</li>
+</ul>
+</li>
+<li>
+<p>Variables have 3 scopes: <code>Local</code>, <code>Package</code> &amp; <code>Global</code>.</p>
+<ul>
+<li>Local:
+<ul>
+<li><code>var temp = 20</code></li>
+<li><code>temp := 20</code></li>
+</ul>
+</li>
+<li>Package:
+<ul>
+<li><code>var temp = 20</code></li>
+</ul>
+</li>
+<li>Global:
+<ul>
+<li><code>var Temp = 20</code> (notice the Capitalized letter)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Formatters:</p>
+<ul>
+<li>%v: value</li>
+<li>%T: data type</li>
+</ul>
+</li>
+<li>
+<p>Data types:</p>
+<ul>
+<li>string: String</li>
+<li>int: Integers</li>
+<li>uint: Un-signed integer, only acccepts positive numbers and 0.</li>
+<li>float: Floating point numbers</li>
+<li><code>userData[&quot;userTickets&quot;] = strconv.FormatUint(uint64(userTickets),10)</code> // Type: UInt64, Base 10 ie Decimel number.</li>
+</ul>
+</li>
+<li>
+<p>Data Structures:</p>
+<ul>
+<li>Arrays (lists with fixed size):<pre><code class="language-go"><span class="hljs-keyword">var</span> test0 = [<span class="hljs-number">10</span>]<span class="hljs-type">string</span>{<span class="hljs-string">&quot;AAA&quot;</span>,<span class="hljs-string">&quot;BBB&quot;</span>,<span class="hljs-string">&quot;CCC&quot;</span>}
+<span class="hljs-keyword">var</span> test [<span class="hljs-number">50</span>]<span class="hljs-type">int</span>
+test[<span class="hljs-number">0</span>] = <span class="hljs-number">20</span>
+test[<span class="hljs-number">1</span>] = <span class="hljs-number">30</span>
+
+fmt.Printf(test)      | [<span class="hljs-number">20</span>,<span class="hljs-number">30</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.</span>..]
+fmt.Printf(<span class="hljs-built_in">len</span>(test)) | &gt; <span class="hljs-number">50</span>
+</code></pre>
+</li>
+<li>Slices (lists with dynamic size):<pre><code class="language-go"><span class="hljs-keyword">var</span> test = []<span class="hljs-type">string</span>
+test = <span class="hljs-built_in">append</span>(test, <span class="hljs-string">&quot;AAA&quot;</span>)
+test = <span class="hljs-built_in">append</span>(test, <span class="hljs-string">&quot;BBB&quot;</span>)
+fmt.Printf(test)      | [AAA BBB]
+fmt.Printf(<span class="hljs-built_in">len</span>(test)) | &gt; <span class="hljs-number">2</span>
+</code></pre>
+</li>
+<li>Maps:<pre><code class="language-go"><span class="hljs-keyword">var</span> maps = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-type">int</span>]<span class="hljs-type">string</span>)
+<span class="hljs-comment">// Create a map with string:integer key:value pairs.</span>
+<span class="hljs-comment">// Length will dynamically increase as we add more data to it.</span>
+<span class="hljs-comment">// Inserting values</span>
+userData[<span class="hljs-number">10</span>] = somestring
+
+<span class="hljs-comment">// Create a list which contains maps. Initial length is 0, and it will dynamically increase (property of [] list) as data gets added.</span>
+<span class="hljs-keyword">var</span> listWithMapInside = <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>,<span class="hljs-number">0</span>)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Pointers: A pointer is a special variable that points to the memory address of another variable.</p>
+<pre><code class="language-go">fmt.Scan(&amp;user)    <span class="hljs-comment">// Takes the value for `user` as input, stores in in the memory address.</span>
+fmt.Println(&amp;user) <span class="hljs-comment">// Prints the memory address of `user`</span>
+</code></pre>
+</li>
+<li>
+<p>Loops:</p>
+<ul>
+<li><code>for</code> loop is used for checking the condition repeatedly, <code>if-else</code> is used for checking it once.</li>
+<li>for:
+<ul>
+<li>Infinite: <code>for { // statements }</code> or <code>for (true) { // statements }</code></li>
+</ul>
+</li>
+<li>for-each:
+<ul>
+<li><code>for index,value := range list { //statements }</code></li>
+<li><code>index</code>: The index (0,1,2,etc)</li>
+<li><code>value</code>: The value at each index</li>
+<li><code>list</code>: The list we intend to iterate through</li>
+</ul>
+</li>
+<li>finite for:
+<ul>
+<li><code>for (condition) || (condition) { //statements }</code></li>
+</ul>
+</li>
+<li>if-else:
+<ul>
+<li><code>if(condition) { //statements } else { //statements }</code></li>
+<li><code>if(condition) { //statements } else if(condition) { //statements}</code></li>
+</ul>
+</li>
+<li>switch:<pre><code class="language-go"><span class="hljs-keyword">switch</span> (num) {
+    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+        <span class="hljs-comment">// single match</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>,<span class="hljs-number">3</span>:
+        <span class="hljs-comment">// multiple match</span>
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-comment">// code run when none of the conditions match.</span>
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Breaking a loop:</p>
+<ul>
+<li><code>break</code>: End all the loops.</li>
+<li><code>continue</code>: Ignore all remaining statements in the loop and continue with the next iteration.</li>
+</ul>
+</li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
