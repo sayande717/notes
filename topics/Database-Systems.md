@@ -293,7 +293,7 @@ Image taken from [here](https://www.tutorialandexample.com/wp-content/uploads/20
 
 # Data Models
 - Before implementing a database, we need to draw a logical design for the end-product. This design is called a data model.
-- 
+
 ## Entity Relationship Model
 - Entity: Object which has some attributes.
 - Relationship: Relationships among the entities.

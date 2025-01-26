@@ -467,30 +467,35 @@ Layer: `Data Link`
         |11|10|9|8|7|6|5|4|3|2|1|
         |-|-|-|-|-|-|-|-|-|-|-|
         |$D_6$|$D_5$|$D_4$|$P_3$|$D_3$|$D_2$|$D_1$|$P_2$|$D_0$|$P_1$|$P_0$|
-    - **Example**: Let data word (7 bits) be 1010:
+    - **Example**: Let data word (7 bits) be 1011 (Even Parity):
         |7|6|5|4|3|2|1|
         |-|-|-|-|-|-|-|
-        |$1$|$0$|$1$|$P_2$|$0$|$P_1$|$P_0$|
+        |$1$|$0$|$1$|$P_4$|$1$|$P_2$|$P_1$|
 1. Calculating parity bits:
-    - For $P_0$:
-        - $2^0=1$. Start from 1. Take 1 bit, leave the next 1 bit, take the next 1 bit, etc.
-        - Take positions $1,3,5,7$, etc.
-        - $P_0=0⊕1⊕1=0$
     - For $P_1$:
-        - $2^1=2$. Start from 2. Take 2 bits, leave the next 2 bits, take the next 2 bits, etc.
-        - Take positions $2,3,6,7,10,11$, etc.
-        - $P_1=0⊕0⊕1=1$
+        - $2^0=1$. Start from 1. Take 1 bit, leave the next 1 bit, take the next 1 bit, etc.
+        - Take positions $1,3,5,7$, ie $1,1,1$.
+        - For even parity, we need to make $P_1$ as $1$ to maintain even number of 1's, so $P_1=1$
     - For $P_2$:
+        - $2^1=2$. Start from 2. Take 2 bits, leave the next 2 bits, take the next 2 bits, etc.
+        - Take positions $2,3,6,7$, ie $1,1,0$
+        - For even parity, we need to make $P_2$ as $0$ to maintain even number of 1's, so $P_2=0$
+    - For $P_4$:
         - $2^2=4$. Start from 4. Take 4 bits, leave the next 4 bits, take the next 4 bits, etc.
-        - Take positions $4,5,6,7,12,13,14,15$, etc.
-        - $P_2=1⊕0⊕1=0$
-1. When the receiver receives it, it calculates the parity bits too. If they match with that of the sender, there is no error.
-1. **Example of error**:
-    - Sent data: $10011100101$
-    - Received data: $10111100101$
-    1. For sender, $P_0=1⊕0⊕1⊕0⊕1=1$
-    1. For receiver, $P_0=1⊕1⊕1⊕0⊕1=0$
-    - Clearly, the parity bit is different, so the error is detected.
+        - Take positions $4,5,6,7$, ie $1,0,1$.
+        - For even parity, we need to make $P_4$ as $0$ to maintain even number of 1's, so $P_4=0$
+2. When the receiver receives it, it calculates the parity bits too. If they match with that of the sender, there is no error.
+3. **Example of error** (Even Parity):
+    - Received data: $1110101$
+    - Calculating Parity Bits:
+        - $P_1=(1,1,1)=1$, matched.
+        - $P_2=(1,1,1)=1$, not matched.
+        - $P_4=(1,1,1)=1$, not matched.
+    - For finding the error bit, we need to take Parity Bit=0 if they matched, otherwise 1.
+        - $P_1=0$
+        - $P_2=1$
+        - $P_4=1$
+        - Location: $(011)_2=(6)_{10}$, ie the 6th bit is the error bit (1-based indexing).
 
 ## Error Control
 ### MAC: Multiple Access Control
