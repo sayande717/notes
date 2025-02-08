@@ -467,7 +467,7 @@ Layer: `Data Link`
         |11|10|9|8|7|6|5|4|3|2|1|
         |-|-|-|-|-|-|-|-|-|-|-|
         |$D_6$|$D_5$|$D_4$|$P_3$|$D_3$|$D_2$|$D_1$|$P_2$|$D_0$|$P_1$|$P_0$|
-    - **Example**: Let data word (7 bits) be 1011 (Even Parity):
+    - **Example**: Let data word (4 bits) be 1011 (Even Parity):
         |7|6|5|4|3|2|1|
         |-|-|-|-|-|-|-|
         |$1$|$0$|$1$|$P_4$|$1$|$P_2$|$P_1$|
