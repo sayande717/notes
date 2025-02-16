@@ -498,6 +498,18 @@ Image taken from [here](https://media.geeksforgeeks.org/wp-content/uploads/20240
 - Unsupervised: Learning from data without labeled responses, finding patterns and relationships on its own.
 - Reinforcemend: Learning through trial and error, where an agent learns to make decisions by interacting with an environment and receiving feedback (either positive/reward or negative/penalty).
 
+## Neural Networks
+- Neural Networks work based on structured data. If we want to work on data which is represented in the form of a graph, we should use [Graph Neural Networks](#graph-neural-networks-gnn).
+- Neural Networks need a measurable objective, ie what to learn from the data it is given.
+- This objective is known as the loss function, and the purpose of the Neural Network is to minimise it.
+### Graph Neural Networks (GNN)
+- GNN consists of nodes and edges.
+- Steps:
+    1. The GNN summarises the information of the nodes into a numeric representation. Similar nodes are closer to each other. We call this representation Node Embedding, and the space is termed Embedding Space.
+    2. Initially, the neural network learns the patterns and then converts the nodes into a numeric representation. Then, the loss is calculated. This is Forward Propagation.
+    3. Then, we Back Propagate to find where we went wrong, change some parameters, improve the patterns, then again numerically represent the nodes.
+    4. After enough iterations (epochs), the loss will be low enough that we can take it as a good enough prediction.
+
 <!-- Last image: self/3.png | external/4.jpg -->
 
 

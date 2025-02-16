@@ -442,19 +442,19 @@ Layer: `Data Link`
         - If given in binary, $11001$, then Number of digits to append = 1 less than the length of the Divisor = $4$
     1. Divide: 1010101010**0000** $\div 11011$
         - $10101⊕11001=01100$
-        - $01100\ 0⊕11001=00001$ Start with the leading 1, add the same number of bits as needed to make it equal to $11001$
-        - $00001\ 1010⊕11001=00011$
-        - $00011\ 000⊕11001=000010$, Remainder$=000010$.
-    1. Append 4 bits from the Remainder, starting from the last. So, add $0010$ to $1010101010$ to make it $10101010100010$.
-    1. When we send these 14 bits to the receiver, the receiver divides this same number with the same Divisor.
-    1. Receiver receives: $1010101010\ 0010$
-    1. Divide: 10101010100010 $\div 11011$
+        - $1100\ 0⊕11001=00001$ Start from the leading $1$. The number is $1100$, and we need to carry over another bit from dividend to make it $11000$.
+        - $1\ 1010⊕11001=00011$ The number is $1$ with leading 1, so we need to carry over 4 bits from dividend, to make it $11010$.
+        - $11\ 000⊕11001=000010$, Remainder$=10$.
+    2. Append 4 bits from the Remainder, starting from the last. So, add $0010$ to $1010101010$ to make it $10101010100010$.
+    3. When we send these 14 bits to the receiver, the receiver divides this same number with the same Divisor.
+    4. Receiver receives: $1010101010\ 0010$
+    5. Divide: 10101010100010 $\div 11011$
         - $10101⊕11001=01100$
-        - $01100\ 0⊕11001=00001$
-        - $00001\ 1010⊕11001=00011$
-        - $00011\ 001⊕11001=000000$
-    1. **The Remainder will always be 0 for the receiver. But, if there's an error, it will be a non-zero value.**
-    1. Efficiency: $10/14*100=71.42\%$
+        - $1100\ 0⊕11001=00001$
+        - $1\ 1010⊕11001=00011$
+        - $11\ 001⊕11001=000000$
+    6. **The Remainder will always be 0 for the receiver. But, if there's an error, it will be a non-zero value.**
+    7. Efficiency: $10/14*100=71.42\%$
 
 ### Hamming Code
 1. Data-word:
